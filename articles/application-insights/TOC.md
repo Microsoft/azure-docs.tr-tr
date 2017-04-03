@@ -111,7 +111,7 @@
 ### [Fiyatlandırma ve kota yönetimi](app-insights-pricing.md)
 ### [SCOM için Application Insights kullanarak uygulama performansı izleme](app-insights-scom.md)
 
-##Dışarı Aktarma
+## Dışarı Aktarma
 ### [Sürekli dışarı aktarma](app-insights-export-telemetry.md)
 ### [Veri modelini dışarı aktarma](app-insights-export-data-model.md)
 ### [Power BI’a aktarma](app-insights-export-power-bi.md)
@@ -159,10 +159,5 @@
 ### [Destek](app-insights-get-dev-support.md)
 
 ## [Videolar](https://azure.microsoft.com/documentation/videos/index/?services=application-insights)
-
-
-
-
-<!--HONumber=Feb17_HO1-->
 
 
