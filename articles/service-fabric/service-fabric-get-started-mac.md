@@ -15,9 +15,9 @@ ms.workload: NA
 ms.date: 12/27/2016
 ms.author: saysa
 translationtype: Human Translation
-ms.sourcegitcommit: 24d86e17a063164c31c312685c0742ec4a5c2f1b
-ms.openlocfilehash: fc73eedae7ec9664da714567f47a543e625cd023
-ms.lasthandoff: 03/11/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: e5d14eb0a656d67030f4c0d3d510aec0e9cafae7
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -38,17 +38,20 @@ Service Fabric, OS X üzerinde yerel olarak çalışmaz. Yerel bir Service Fabri
 * [VirtualBox](http://www.virtualbox.org/wiki/Downloads)
 
 >[!NOTE]
->  Birbirini destekleyen Vagrant ve VirtualBox sürümleri kullanmanız gerekir. Vagrant desteklenmeyen bir VirtualBox sürümünde kararsız davranabilir.
+> Birbirini destekleyen Vagrant ve VirtualBox sürümleri kullanmanız gerekir. Vagrant desteklenmeyen bir VirtualBox sürümünde kararsız davranabilir.
 >
 
 ## <a name="create-the-local-vm"></a>Yerel sanal makine oluşturma
 5 düğümlü Service Fabric kümesini içeren yerel bir sanal makine oluşturmak için aşağıdaki adımları uygulayın:
 
-1. **Vagrantfile** deposunu kopyalayın
+1. `Vagrantfile` deposunu kopyalama
 
     ```bash
     git clone https://github.com/azure/service-fabric-linux-vagrant-onebox.git
     ```
+    Bu adımlar VM yapılandırması ile birlikte VM’nin indirildiği konumu içeren `Vagrantfile` dosyasını getirir.
+
+   
 2. Deponun yerel kopyasına gidin
 
     ```bash
@@ -61,7 +64,7 @@ Service Fabric, OS X üzerinde yerel olarak çalışmaz. Yerel bir Service Fabri
    * 3 GB ayrılmış bellek
    * Mac ana bilgisayarından trafik geçişini sağlayan 192.168.50.50 numaralı IP’de yapılandırılmış özel ana bilgisayar ağı
 
-     Bu ayarların her birini değiştirebilir veya Vagrantfile içinde sanal makineye başka bir yapılandırma ekleyebilirsiniz. Yapılandırma seçeneklerinin tam listesi için bkz. [Vagrant belgeleri](http://www.vagrantup.com/docs).
+     Bu ayarların her birini değiştirebilir veya `Vagrantfile` içinde VM’ye başka bir yapılandırma ekleyebilirsiniz. Yapılandırma seçeneklerinin tam listesi için bkz. [Vagrant belgeleri](http://www.vagrantup.com/docs).
 4. Sanal makine oluşturma
 
     ```bash
@@ -72,19 +75,24 @@ Service Fabric, OS X üzerinde yerel olarak çalışmaz. Yerel bir Service Fabri
 
     ![Sanal makine hazırlama sonrasında başlayan küme ayarı][cluster-setup-script]
 
+>[!TIP]
+> VM’yi indirmek uzun sürüyorsa, wget veya curl kullanarak ya da bir tarayıcı üzerinden `Vagrantfile` dosyasındaki **config.vm.box_url** tarafından belirtilen bağlantıya giderek indirebilirsiniz. Yerel olarak indirdikten sonra, `Vagrantfile` öğesini, görüntüyü indirdiğiniz yerel yolu işaret edecek şekilde düzenleyin. Örneğin, görüntüyü /home/users/test/azureservicefabric.tp8.box dizinine indirdiyseniz, **config.vm.box_url** öğesini bu yola ayarlayın.
+>
+
 5. http://192.168.50.50:19080/Explorer adresinde (varsayılan özel ağ IP’sini tuttuğunuzu varsayarak) Service Fabric Explorer’a giderek kümenin doğru ayarlanıp ayarlanmadığını sınayın.
 
     ![Ana Mac bilgisayarından görüntülenen Service Fabric Explorer][sfx-mac]
 
 ## <a name="install-the-service-fabric-plugin-for-eclipse-neon"></a>Eclipse Neon için Service Fabric eklentisini yükleme
 
-Service Fabric, **Java IDE için Eclipse Neon** için Java hizmetlerini oluşturma, derleme ve dağıtmayı kolaylaştırabilen bir eklenti sağlar. Service Fabric Eclipse eklentisini yükleme veya güncelleştirme hakkındaki bu genel [belgede](service-fabric-get-started-eclipse.md#install-or-update-service-fabric-plugin-on-eclipse-neon) bahsedilen yükleme adımlarını izleyebilirsiniz.
+Service Fabric, **Java IDE için Eclipse Neon** için Java hizmetlerini oluşturma, derleme ve dağıtmayı kolaylaştırabilen bir eklenti sağlar. Service Fabric Eclipse eklentisini yükleme veya güncelleştirme hakkındaki bu genel [belgede](service-fabric-get-started-eclipse.md#install-or-update-the-service-fabric-plug-in-in-eclipse-neon) bahsedilen yükleme adımlarını izleyebilirsiniz.
 
 ## <a name="using-service-fabric-eclipse-plugin-on-mac"></a>Mac bilgisayarda Service Fabric Eclipse eklentisini kullanma
 
-[Service Fabric Eclipse eklentisi belgelerindeki](service-fabric-get-started-eclipse.md) adımları uyguladığınızdan emin olun. Bir Mac ana bilgisayarda vagrant-guest kapsayıcısını kullanarak Service Fabric Java uygulaması oluşturma, derleme ve dağıtma için adımlar, aşağıda bahsedilen birkaç önemli nokta dışında genel belgelerdekiyle aynıdır -
-* Service Fabric Java uygulamanızın başarıyla derlenmesi için Service Fabric kitaplıkları gerekli olacağından, Eclipse projesinin paylaşılan bir yolda oluşturulması gerekir. Varsayılan olarak, ana bilgisayarınızda ``Vagrantfile`` öğesinin bulunduğu yoldaki içerikler, konuktaki ``/vagrant`` yolu ile paylaşılır.
-* Basitçe belirtmek gerekirse, bir yolda (örneğin ``~/home/john/allprojects/``) ``Vagrantfile`` varsa, ``MyActor`` service-fabric projenizi ``~/home/john/allprojects/MyActor`` konumunda oluşturmanız gerekir ve Eclipse çalışma alanınızın yolu ``~/home/john/allprojects`` olur.
+[Service Fabric Eclipse eklentisi belgelerindeki](service-fabric-get-started-eclipse.md) adımları uyguladığınızdan emin olun. Bir Mac ana bilgisayarda vagrant-guest kapsayıcısını kullanarak Service Fabric Java uygulaması oluşturma, derleme ve dağıtma adımları, aşağıdaki öğeler dışında genel belgelerdekiyle aynıdır:
+
+* Service Fabric Java uygulamanız için Service Fabric kitaplıkları gerekli olacağından, Eclipse projesinin paylaşılan bir yolda oluşturulması gerekir. Varsayılan olarak, ana bilgisayarınızda ``Vagrantfile`` öğesinin bulunduğu yoldaki içerikler, konuktaki ``/vagrant`` yolu ile paylaşılır.
+* Bir yolda (örneğin ``~/home/john/allprojects/``) ``Vagrantfile`` varsa, ``MyActor`` Service Fabric projenizi ``~/home/john/allprojects/MyActor`` konumunda oluşturmanız gerekir ve Eclipse çalışma alanınızın yolu ``~/home/john/allprojects`` olur.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 <!-- Links -->

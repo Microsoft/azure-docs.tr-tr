@@ -1,6 +1,6 @@
 ---
-title: "Azure Service Fabric için Eclipse Eklentisi ile Çalışmaya Başlama | Microsoft Belgeleri"
-description: "Azure Service Fabric için Eclipse Eklentisi ile Çalışmaya Başlama."
+title: "Eclipse için Azure Service Fabric eklentisi | Microsoft Docs"
+description: "Eclipse için Service Fabric eklentisini kullanmaya başlayın."
 services: service-fabric
 documentationcenter: java
 author: sayantancs
@@ -15,124 +15,130 @@ ms.workload: NA
 ms.date: 12/27/2016
 ms.author: saysa
 translationtype: Human Translation
-ms.sourcegitcommit: 24d86e17a063164c31c312685c0742ec4a5c2f1b
-ms.openlocfilehash: 891df38aa685cac7bbfecb71b15c88d557ac493b
-ms.lasthandoff: 03/11/2017
+ms.sourcegitcommit: 6d749e5182fbab04adc32521303095dab199d129
+ms.openlocfilehash: 0407eab7e70649999ba07730425366b7b62e4e7a
+ms.lasthandoff: 03/22/2017
 
 
 ---
 
-# <a name="getting-started-with-eclipse-plugin-for-service-fabric-java-application-development"></a>Service Fabric Java uygulama geliştirme için Eclipse Eklentisi ile çalışmaya başlama
-Eclipse, Java Geliştiricileri için en fazla kullanılan IDE’lerden biridir. Bu makalede, Service Fabric ile çalışmak için Eclipse geliştirme ortamınızı ayarlama işlemi ele alınmaktadır. Bu makale, eklentiyi kurmanıza, Service fabric uygulamaları oluşturup Service Fabric uygulamanızı yerel veya uzak bir Service Fabric kümesine dağıtmanıza yardımcı olur.
+# <a name="service-fabric-plug-in-for-eclipse-java-application-development"></a>Eclipse Java uygulama geliştirmesi için Service Fabric eklentisi
+Eclipse, Java geliştiricileri için en yaygın kullanılan tümleşik geliştirme ortamlarından (IDE’ler) biridir. Bu makalede, Azure Service Fabric ile çalışmak için Eclipse geliştirme ortamınızı ayarlama işlemi ele alınmaktadır. Service Fabric eklentisini kurma, Service fabric uygulamaları oluşturup Service Fabric uygulamanızı yerel veya Eclipse Neon’daki uzak bir Service Fabric kümesine dağıtma hakkında bilgi edinin yardımcı olur.
 
-## <a name="install-or-update-service-fabric-plugin-on-eclipse-neon"></a>Eclipse Neon’da Service Fabric Eklentisi yükleme veya güncelleştirme
-Service Fabric, **Java Geliştiricileri için Eclipse IDE**’ye yönelik Java hizmetlerini derleyip dağıtmayı kolaylaştırabilen bir eklenti sağlar.
+## <a name="install-or-update-the-service-fabric-plug-in-in-eclipse-neon"></a>Eclipse Neon’da Service Fabric eklentisi yükleme veya güncelleştirme
+Eclipse'te Service Fabric eklentisi yükleyebilirsiniz. Eklenti, Java hizmetleri oluşturup dağıtma işlemini kolaylaştırmaya yardımcı olur.
 
-1. En yeni Eclipse **Neon** ve en yeni Buildship sürümü (1.0.17) veya sonraki bir sürümün yüklü olduğundan emin olun. ``Help => Installation Details`` öğesini seçerek yüklü bileşenlerin sürümlerini denetleyebilirsiniz. Buildship'i güncelleştirmek için [buradaki][buildship-update] yönergeleri kullanabilirsiniz. Eclipse Neon’un en son sürümde olup olmadığını denetlemek ve sürümü güncelleştirmek için ``Help => Check for Updates`` sayfasına gidebilirsiniz.
+1.  En son Eclipse Neon sürümüne sahip olduğunuzdan ve en son Buildship sürümünün (1.0.17 veya sonraki bir sürüm) yüklü olduğundan emin olun:
+    -   **Yardım** > **Yükleme Ayrıntıları**’nı seçerek Eclipse Neon’da yüklü bileşenlerin sürümlerini denetleyebilirsiniz.
+    -   Buildship’i güncelleştirmek için bkz. [Eclipse Buildship: Gradle için Eclipse Eklentileri][buildship-update].
+    -   Eclipse Neon güncelleştirmelerini denetleyip yüklemek için **Yardım** > **Güncelleştirmeleri Denetle** menüsüne gidin.
 
-2. Service Fabric eklentisini yüklemek için ``Help => Install New Software...`` öğesini seçin.
-  1. "Birlikte çalış" metin kutusuna şunu girin: ``http://dl.windowsazure.com/eclipse/servicefabric``.
-  2. Ekle'ye tıklayın.
+2.  Service Fabric eklentisini yüklemek için, Eclipse Neon’da **Yardım** > **Yeni Yazılım Yükle**’ye gidin.
+  1.    **Birlikte çalış** kutusuna **http://dl.windowsazure.com/eclipse/servicefabric** girin.
+  2.    **Ekle**'ye tıklayın.
+    ![Eclipse Neon için Service Fabric eklentisi][sf-eclipse-plugin-install]
+  3.    Service Fabric eklentisini seçip **İleri**’ye tıklayın.
+  4.    Yükleme adımlarını tamamlayın ve ardından Microsoft Yazılım Lisans Koşulları’nı kabul edin.
 
-  ![Service Fabric için Eclipse Neon eklentisi][sf-eclipse-plugin-install]
-
-  3. Service Fabric eklentisini seçin ve İleri’ye tıklayın.
-  4. Yükleme işlemine devam edin ve son kullanıcı lisans sözleşmesini kabul edin.
-
-Service Fabric Eclipse eklentisi zaten yüklüyse, en yeni sürümü kullandığınızdan emin olun. ``Help => Installation Details`` konumuna giderek daha fazla güncelleştirilebilir olup olmadığını kontrol edebilirsiniz. Daha sonra yüklenen eklentiler listesinde Service Fabric’i arayın ve Güncelleştir’e tıklayın. Bekleyen bir güncelleştirme varsa alınır ve yüklenir.
+Service Fabric eklentisi zaten yüklüyse, en yeni sürümü kullandığınızdan emin olun. Kullanılabilir güncelleştirmeleri denetlemek için **Yardım** > **Yükleme Ayrıntıları**’na gidin. Yüklü eklentiler listesinde Service Fabric’i seçip **Güncelleştir**’e tıklayın. Kullanılabilir güncelleştirmeler yüklenir.
 
 > [!NOTE]
-> Eclipse programında Service Fabric Eclipse eklentisinin yüklenmesi veya güncelleştirilmesi uzun sürüyorsa, bunun nedeni Eclipse’in Eclipse örneğinize kaydedilmiş tüm güncelleştirme sitelerinde gerçekleşen tüm yeni değişikliklere ait meta verileri getirmeye çalışmasıdır. Bu nedenle, işlemi hızlandırmak için şu küçük ipucunu kullanabilirsiniz: `Available Software Sites` sayfasına gidip `http://dl.windowsazure.com/eclipse/servicefabric` Service Fabric eklenti konumunu işaret eden dışındaki tüm işaretleri kaldırın.
->
+> Service Fabric eklentisi yavaş yükleniyor veya güncelleştiriliyorsa, bunun nedeni bir Eclipse ayarı olabilir. Eclipse, Eclipse örneğinize kaydedilmiş siteleri güncelleştirmek üzere tüm değişikliklere ait meta verileri toplar. Bir Service Fabric eklenti güncelleştirmesini denetleme ve yükleme işlemini hızlandırmak için **Kullanılabilir Yazılım Siteleri** bölümüne gidin. Service Fabric eklenti konumunu (http://dl.windowsazure.com/eclipse/servicefabric) işaret eden site dışındaki tüm sitelerin onay kutularını temizleyin.
 
-## <a name="create-service-fabric-application-using-eclipse"></a>Eclipse kullanarak Service Fabric uygulaması oluşturma
+## <a name="create-a-service-fabric-application-in-eclipse"></a>Eclipse’te Service Fabric uygulaması oluşturma
 
-1. ``File => New => Other`` kısmına gidin. ``Service Fabric Project`` öğesini seçin. ``Next`` öğesine tıklayın.
+1.  Eclipse Neon’da **Dosya** > **Yeni** > **Diğer** öğesine gidin. **Service Fabric Projesi**’ni seçip **İleri**’ye tıklayın.
 
-    ![Service Fabric Yeni Proje Sayfa 1][create-application/p1]
+    ![Service Fabric Yeni Proje sayfa 1][create-application/p1]
 
-2. Projenize bir ad verin. ``Next`` öğesine tıklayın.
+2.  Projeniz için bir ad girip **İleri**’ye tıklayın.
 
-    ![Service Fabric Yeni Proje Sayfa 2][create-application/p2]
+    ![Service Fabric Yeni Proje sayfa 2][create-application/p2]
 
-3. Kullanılabilir şablon kümesinden Hizmet Şablonunu seçin (Aktör, Durum Bilgisiz, Kapsayıcı veya Konuk tarafından yürütülebilir). ``Next`` öğesine tıklayın.
+3.  Şablonlar listesinde **Hizmet Şablonu**’nu seçin. Hizmet şablonu türünüzü (Aktör, Durum Bilgisi Olmayan, Kapsayıcı veya Konuk İkili) seçip **İleri**’ye tıklayın.
 
-    ![Service Fabric Yeni Proje Sayfa 3][create-application/p3]
+    ![Service Fabric Yeni Proje sayfa 3][create-application/p3]
 
-4. Bu sayfaya Hizmet Adı ve/veya ilgili Hizmet ayrıntılarını girip ``Finish`` öğesine tıklayın.
+4.  Hizmet adını ve hizmet ayrıntılarını girip **Son**’a tıklayın.
 
-    ![Service Fabric Yeni Proje Sayfa 4][create-application/p4]
+    ![Service Fabric Yeni Proje sayfa 4][create-application/p4]
 
-5. İlk Service Fabric projenizi oluşturduğunuzda, Service Fabric perspektifini ayarlamak isteyip istemediğiniz sorulur; devam etmek için lütfen ``yes`` öğesini seçin.
+5. İlk Service Fabric projenizi oluşturduktan sonra, **İlişkili Perspektifi Aç** iletişim kutusunda **Evet**’e tıklayın.
 
-    ![Service Fabric Yeni Proje Sayfa 5][create-application/p5]
+    ![Service Fabric Yeni Proje sayfa 5][create-application/p5]
 
-6. Başarılı bir şekilde oluşturulduktan sonra proje şu şekilde görünür -
+6.  Yeni projeniz şöyle görünür:
 
-    ![Service Fabric Yeni Proje Sayfa 6][create-application/p6]
+    ![Service Fabric Yeni Proje sayfa 6][create-application/p6]
 
-## <a name="build-and-deploy-the-service-fabric-application-using-eclipse"></a>Eclipse kullanarak Service Fabric uygulaması derleme ve dağıtma
+## <a name="build-and-deploy-a-service-fabric-application-in-eclipse"></a>Eclips’te Service Fabric uygulaması derleme ve dağıtma
 
-* Yukarıda yeni oluşturduğunuz Service Fabric uygulamasına sağ tıklayın. Bağlam menüsünden ``Service Fabric`` seçeneğini belirleyin. Bunun yapılması, birden fazla seçenek içeren bir alt menü getirir. şunun gibi görünür -
+1.  Yeni Service Fabric uygulamanıza sağ tıklayın ve ardından **Service Fabric**’i seçin.
 
-    ![Service Fabric Sağ Tıklama Menüsü][publish/RightClick]
+    ![Service Fabric sağ tıklama menüsü][publish/RightClick]
 
-  Derleme, yeniden derleme ve temizleme seçeneklerine tıkladıktan sonra istediğiniz eylemleri gerçekleştirir.
-  - ``Build Application`` uygulamayı temizlemeden derler
-  - ``Rebuild Application`` uygulamanın temiz-derlemesini gerçekleştirir
-  - ``Clean Application`` uygulamayı derlenen yapıtlardan temizler
+2. Alt menüde istediğiniz seçeneği belirleyin:
+    -   Uygulamayı temizlemeden derlemek için **Uygulamayı Derle**’ye tıklayın.
+    -   Uygulamanın temiz bir derlemesini gerçekleştirmek için **Uygulamayı Yeniden Derle**’ye tıklayın.
+    -   Derlenen yapıtları uygulamadan temizlemek için **Uygulamayı Temizle**’ye tıklayın.
 
+3.  Bu menüden ayrıca uygulamanızı dağıtabilir, dağıtımını kaldırabilir ve yayımlayabilirsiniz:
+    -   Yerel kümenize dağıtmak için **Uygulamayı Dağıt**’a tıklayın.
+    -   **Uygulamayı Yayımla** iletişim kutusunda bir yayımlama profili seçin:
+        -  **Local.json**
+        -  **Cloud.json**
 
-* Bu menüden uygulamanızı dağıtmayı, dağıtımını kaldırmayı ve yayımlamayı da seçebilirsiniz.
-  - ``Deploy Application`` yerel kümenize dağıtır
-  - ``Publish Application...``, ``Local.json`` ile ``Cloud.json`` arasından seçmek istediğiniz yayımlama profilini sorar. Bu JSON dosyaları, yerel veya bulut (Azure) kümesine bağlanmak için gereken bilgileri (örneğin, bağlantı uç noktaları ve güvenlik bilgileri) depolamak için kullanılır.
+     Bu JavaScript Nesne Gösterimi (JSON) dosyaları, yerel veya bulut (Azure) kümenize bağlanmak için gereken bilgileri (bağlantı uç noktaları ve güvenlik bilgileri gibi) depolar.
 
-  ![Service Fabric Sağ Tıklama Menüsü][publish/Publish]
+  ![Service Fabric Yayımla menüsü][publish/Publish]
 
-* Service Fabric uygulamanızı Eclipse Çalıştırma Yapılandırmaları kullanarak dağıtabileceğiniz alternatif bir yöntem mevcuttur.
+Service Fabric uygulamanızı dağıtmanın alternatif bir yolu, Eclipse çalıştırma yapılandırmalarının kullanılmasıdır.
 
-  1. ``Run => Run Configurations`` öğesini seçin. ``Grade Project`` altındaki ``ServiceFabricDeployer`` çalıştırma yapılandırmasını seçin.
-  2. Sağ bölmedeki ``Arguments`` sekmesinin altında ``publishProfile`` olarak **yerel** veya **bulut** seçeneğini belirtin. Varsayılan olarak **yerel** seçilidir. Uzak/bulut kümeye dağıtmak için **bulut** seçeneğini belirleyin.
-  3. Duruma göre `Local.json` veya `Cloud.json` öğesine düzenleyerek yayımlama profillerine, varsa uç nokta bilgileri ve güvenlik kimlik bilgileri ile birlikte doğru bilgilerin eklendiğinden emin olun.
-  4. ``Grade Project`` altındaki sağ bölmede bulunan ``Working Directory`` öğesinin, dağıtmak istediğiniz uygulamayı işaret ettiğinden emin olun. Aksi durumda, yalnızca ``Workspace...`` düğmesine tıklayın ve istediğiniz uygulamayı seçin.
-  5. **Uygula** ve **Çalıştır**’a tıklayın.
+  1.    **Çalıştır** > **Çalıştırma Yapılandırmaları** öğesine gidin.
+  2.    **Grade Projesi** altındaki **ServiceFabricDeployer** çalıştırma yapılandırmasını seçin.
+  3.    Sağ bölmedeki **Bağımsız Değişkenler** sekmesinde **publishProfile** için **yerel** veya **bulut** seçeneğini belirtin.  Varsayılan seçenek **yerel**’dir. Uzak kümeye veya bulut kümesine dağıtmak için **bulut** seçeneğini belirleyin.
+  4.    Yayımlama profillerine doğru bilgilerin doldurulduğundan emin olmak için **Local.json** veya **Cloud.json** dosyasını gereken şekilde düzenleyin. Uç nokta bilgilerini ve güvenlik kimlik bilgilerini ekleyebilir ya da güncelleştirebilirsiniz.
+  5.    **Çalışma Dizini** öğesinin, dağıtmak istediğiniz uygulamayı işaret ettiğinden emin olun. Uygulamayı değiştirmek için, **Çalışma Alanı** düğmesine tıklayın ve istediğiniz uygulamayı seçin.
+  6.    **Uygula** ve ardından **Çalıştır** seçeneğine tıklayın.
 
-Uygulamanız birkaç dakika içinde derlenip dağıtılır. Durumunu Service Fabric Explorer’dan izleyebilirsiniz.  
+Uygulamanız birkaç dakika içinde derlenip dağıtılır. Dağıtım durumunu Service Fabric Explorer’dan izleyebilirsiniz.  
 
-## <a name="add-new-service-fabric-service-to-your-service-fabric-application"></a>Service Fabric uygulamanıza yeni Service Fabric hizmeti ekleme
+## <a name="add-a-service-fabric-service-to-your-service-fabric-application"></a>Service Fabric uygulamanıza Service Fabric hizmeti ekleme
 
-Aşağıdaki adımlar kullanılarak, mevcut bir Service Fabric uygulamasına yeni bir Service Fabric hizmeti eklenebilir:
+Var olan bir Service Fabric uygulamasına Service Fabric hizmeti eklemek için aşağıdaki adımları uygulayın:
 
-1. Hizmet eklemek istediğiniz projeye sağ tıklayarak bağlam menüsünü açın ve 'Service Fabric' seçeneğini belirleyin. Bunun yapılması, birden fazla seçenek içeren bir alt menü getirir.
+1.  Hizmet eklemek istediğiniz projeye sağ tıklayın ve ardından **Service Fabric**’e tıklayın.
 
     ![Service Fabric Hizmet Ekleme sayfa 1][add-service/p1]
 
-2. `Add ServiceFabric Service` seçeneğini belirlediğinizde, sizi projeye hizmet eklemek için sonraki adımlara yönlendirir.
-3. Projenize eklemek istediğiniz Hizmet şablonunu seçip 'İleri'’ye tıklayın.
+2.  **Service Fabric Hizmeti Ekle**’ye tıklayın ve projeye bir hizmet eklemek için adımları tamamlayın.
+3.  Projenize eklemek istediğiniz hizmet şablonunu seçip **İleri**’ye tıklayın.
 
     ![Service Fabric Hizmet Ekleme sayfa 2][add-service/p2]
 
-4. Hizmet Adı (ve gerektiğinde diğer gerekli bilgileri) giriş aşağıdaki "Hizmet Ekle" düğmesine tıklayın.  
+4.  Hizmet adını (ve gereken diğer ayrıntıları) girip **Hizmet Ekle** düğmesine tıklayın.  
 
     ![Service Fabric Hizmet Ekleme sayfa 3][add-service/p3]
 
-5. Hizmet başarıyla eklendikten sonra tüm proje yapısı aşağıdaki gibi görünür -
+5.  Hizmet eklendikten sonra projenizin genel yapısı aşağıdaki projeye benzer:
 
     ![Service Fabric Hizmet Ekleme sayfa 4][add-service/p4]
 
 ## <a name="upgrade-your-service-fabric-java-application"></a>Service Fabric Java uygulamanızı yükseltme
 
-Service Fabric Eclipse eklentinizi kullanarak ``App1`` projesini oluşturduğunuzu ve uygulama türü ``App1AppicationType``, uygulama sürümü 1.0 olan ``fabric:/App1Application`` bir uygulama oluşturmak üzere eklentiyi kullanarak dağıttığınızı varsayalım. Şimdi de uygulamanızı kesinti olmadan yükseltmek istiyorsunuz.
+Bir yükseltme senaryosu için, Eclips’te Service Fabric eklentisini kullanarak **App1** projesini oluşturduğunuzu varsayalım. **fabric:/App1Application** adlı bir uygulama oluşturmak için eklentiyi kullanarak projeyi dağıttınız. Uygulama türü **App1AppicationType**, uygulama sürümü ise 1.0’dır. Şimdi de uygulamanızı kesinti olmadan yükseltmek istiyorsunuz.
 
-Uygulamanızda değişikliği yapın ve değiştirilen hizmeti yeniden derleyin.  Değiştirilen hizmetin bildirim dosyasını (``ServiceManifest.xml``) hizmetin güncel sürümleriyle (ve uygun olan Kod veya Yapılandırma ya da Veriler ile) güncelleştirin. Uygulamanın bildirim dosyasını (``ApplicationManifest.xml``), uygulamanın ve değiştirilen hizmetin güncel sürüm numarasıyla da değiştirin.  
+İlk olarak, uygulamanızda değişiklikleri yapın ve değiştirilen hizmeti yeniden derleyin. Değiştirilen hizmetin bildirim dosyasını (ServiceManifest.xml) hizmetin güncel sürümleriyle (ve uygun olan Kod, Yapılandırma ya da Veriler ile) güncelleştirin. Uygulamanın bildirim dosyasını (ApplicationManifest.xml), uygulamanın ve değiştirilen hizmetin güncel sürüm numarasıyla da değiştirin.  
 
-Eclipse kullanarak uygulamanızı yükseltmek için, yinelenen bir çalıştırma yapılandırması oluşturabilir ve aşağıdaki adımları uygulayarak gerektiğinde uygulamanızı yükseltmek için bu yapılandırmayı kullanabilirsiniz -
-1. ``Run => Run Configurations`` öğesini seçin. Sol bölmedeki ``Grade Project`` öğesinin sol tarafında bulunan küçük oka tıklayın.
-2. ``ServiceFabricDeployer`` öğesine sağ tıklayıp ``Duplicate`` öğesini seçin. Bu yapılandırmaya yeni bir ad verip ``ServiceFabricUpgrader`` deyin.
-3. Sağ paneldeki ``Arguments`` sekmesi altında ``-Pconfig='deploy'`` değerini ``-Pconfig=upgrade`` ile değiştirip ``Apply`` öğesine tıklayın.
-4. Bu durumda, istediğinizde ``Run`` yapabileceğiniz bir çalıştırma yapılandırması oluşturup uygulamanızı yükseltmek için kaydettiniz. Bu işlem, en son güncelleştirilmiş uygulama türü sürümünü uygulama bildirim dosyasından alır.
+Eclipse Neon kullanarak uygulamanızı yükseltmek için, yinelenen bir çalıştırma yapılandırma profili oluşturabilirsiniz. Ardından, uygulamanızı gereken şekilde yükseltmek için bu profili kullanın.
 
-Bundan böyle uygulama yükseltmesini Service Fabric Explorer’dan izleyebilirsiniz. Birkaç dakika içinde uygulamanız güncelleştirilmiş olur.
+1.  **Çalıştır** > **Çalıştırma Yapılandırmaları** öğesine gidin. Sol bölmede, **Grade Projesi** öğesinin sol tarafında bulunan küçük oka tıklayın.
+2.  **ServiceFabricDeployer**’a sağ tıklayıp **Yinelenen**’i seçin. Bu yapılandırma için **ServiceFabricUpgrader** gibi yeni bir ad girin.
+3.  Sağ paneldeki **Bağımsız Değişkenler** sekmesinde **-Pconfig='deploy'** değerini **-Pconfig='upgrade'** olarak değiştirip **Uygula**’ya tıklayın.
+
+Bu işlem, uygulamanızı yükseltmek için dilediğiniz zaman kullanabileceğiniz bir çalıştırma yapılandırma profili oluşturup kaydeder. Ayrıca, en son güncelleştirilmiş uygulama türü sürümünü uygulama bildirim dosyasından alır.
+
+Uygulama yükseltmesi birkaç dakika sürer. Uygulama yükseltme işlemini Service Fabric Explorer’dan izleyebilirsiniz.
 
 <!-- Images -->
 

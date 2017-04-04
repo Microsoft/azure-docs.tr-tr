@@ -1,6 +1,6 @@
 ---
-title: "ExpressRoute yönlendirmesini en iyi duruma getirme | Microsoft Belgeleri"
-description: "Bu sayfa, bir müşteri Microsoft ve müşterinin şirket ağı arasında bağlanan birden fazla ExpressRoute bağlantı hattına sahip olduğunda yönlendirmenin nasıl iyileştirileceği hakkında ayrıntılı bilgi sağlar."
+title: "ExpressRoute yönlendirmesini en iyi duruma getirme: Azure | Microsoft Docs"
+description: "Bu sayfa, Microsoft ve şirket ağınız arasında bağlanan birden fazla ExpressRoute devresine sahip olduğunda yönlendirmenin nasıl iyileştirileceği hakkında ayrıntılı bilgi sağlar."
 documentationcenter: na
 services: expressroute
 author: charwen
@@ -12,11 +12,12 @@ ms.devlang: na
 ms.topic: get-started-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/27/2017
+ms.date: 03/24/2017
 ms.author: charwen
 translationtype: Human Translation
-ms.sourcegitcommit: 1b26e82f862a3b2149024d863b907899e14e7d86
-ms.openlocfilehash: 404929cf0def75d92d8bb6de8b41be3aecced458
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: f03099391600bc3b918eb3a8c866c16a02052b7a
+ms.lasthandoff: 03/25/2017
 
 
 ---
@@ -24,19 +25,24 @@ ms.openlocfilehash: 404929cf0def75d92d8bb6de8b41be3aecced458
 Birden çok ExpressRoute bağlantı hattına sahip olduğunuzda, Microsoft'a bağlanmak için birden fazla yolunuz vardır. Sonuç olarak, yetersiz yönlendirme olabilir, diğer bir deyişle, trafiğinizin Microsoft’a ulaşması ve Microsoft’un ağınıza ulaşması daha uzun bir yol alabilir. Ne kadar uzun ağ yolu, o kadar yüksek gecikme. Gecikmenin uygulama performansı ve kullanıcı deneyimi üzerinde doğrudan etkisi vardır. Bu makale, bu sorunu gösterir ve standart yönlendirme teknolojilerini kullanarak yönlendirmenin nasıl iyileştirileceğini açıklar.
 
 ## <a name="suboptimal-routing-from-customer-to-microsoft"></a>Müşteriden Microsoft’a yetersiz yönlendirme
-Bir örnekle yönlendirme problemine daha yakından bir bakalım. Biri Los Angeles ve diğeri New York’ta olmak üzere ABD’de iki ofisiniz olduğunu düşünün. Ofisleriniz, kendi omurga ağınız veya hizmet sağlayıcınızın IP VPN’i olabilen bir Geniş Alan Ağı (WAN) üzerine bağlıdır. Ayrıca, WAN’da bağlı biri ABD Batı ve diğeri ABD Doğu’da olmak üzere iki ExpressRoute bağlantı hattınız vardır. Belli ki, Microsoft ağına bağlanmak için iki yolunuz vardır. Şimdi, hem ABD Batı hem de ABD Doğu’da Azure dağıtımına (örneğin, Azure App Service) sahip olduğunuzu düşünün. Hizmet yöneticiniz en iyi deneyimler için her ofisteki kullanıcıların yakınlardaki Azure hizmetlerine erişimini tanıttığından, amacınız Los Angeles’taki kullanıcılarınızı Azure ABD Batı’ya ve New York’taki kullanıcılarınızı Azure ABD Doğu’ya bağlamaktır. Ne yazık ki, doğu yakası kullanıcıları için plan yolunda giderken batı yakası kullanıcıları için yolunda değildir. Sorunun nedeni aşağıda verilmiştir. Her bir ExpressRoute bağlantı hattında, hem Azure ABD Doğu (23.100.0.0/16) hem de Azure ABD Batı’daki (13.100.0.0/16) önekini size tanıtırız. Hangi önekin hangi bölgeden olduğunu bilmiyorsanız, farklı şekilde ele almanız mümkün değildir. WAN ağınız her iki önekin de ABD Batı’dan daha çok ABD Doğu’ya yakın olduğunu düşünebilir ve bu nedenle, iki ofis kullanıcılarını da ABD Doğu’daki ExpressRoute bağlantı hattına yönlendirebilir. Sonunda, Los Angeles ofisinde birçok mutsuz kullanıcınız olacaktır.
+Bir örnekle yönlendirme problemine daha yakından bir bakalım. Biri Los Angeles ve diğeri New York’ta olmak üzere ABD’de iki ofisiniz olduğunu düşünün. Ofisleriniz, kendi omurga ağınız veya hizmet sağlayıcınızın IP VPN’i olabilen bir Geniş Alan Ağı (WAN) üzerine bağlıdır. Ayrıca, WAN’da bağlı biri ABD Batı ve diğeri ABD Doğu’da olmak üzere iki ExpressRoute bağlantı hattınız vardır. Belli ki, Microsoft ağına bağlanmak için iki yolunuz vardır. Şimdi, hem ABD Batı hem de ABD Doğu’da Azure dağıtımına (örneğin, Azure Uygulama Hizmeti) sahip olduğunuzu düşünün. Hizmet yöneticiniz en iyi deneyimler için her ofisteki kullanıcıların yakınlardaki Azure hizmetlerine erişimini tanıttığından, amacınız Los Angeles’taki kullanıcılarınızı Azure ABD Batı’ya ve New York’taki kullanıcılarınızı Azure ABD Doğu’ya bağlamaktır. Ne yazık ki, doğu yakası kullanıcıları için plan yolunda giderken batı yakası kullanıcıları için yolunda değildir. Sorunun nedeni aşağıda verilmiştir. Her bir ExpressRoute bağlantı hattında, hem Azure ABD Doğu (23.100.0.0/16) hem de Azure ABD Batı’daki (13.100.0.0/16) önekini size tanıtırız. Hangi önekin hangi bölgeden olduğunu bilmiyorsanız, farklı şekilde ele almanız mümkün değildir. WAN ağınız her iki önekin de ABD Batı’dan daha çok ABD Doğu’ya yakın olduğunu düşünebilir ve bu nedenle, iki ofis kullanıcılarını da ABD Doğu’daki ExpressRoute bağlantı hattına yönlendirebilir. Sonunda, Los Angeles ofisinde birçok mutsuz kullanıcınız olacaktır.
 
-![](./media/expressroute-optimize-routing/expressroute-case1-problem.png)
+![ExpressRoute Vaka 1 sorunu: Müşteriden Microsoft’a yetersiz yönlendirme](./media/expressroute-optimize-routing/expressroute-case1-problem.png)
 
 ### <a name="solution-use-bgp-communities"></a>Çözüm: BGP Toplulukları’nı kullanın
 Her iki ofis kullanıcıları için yönlendirmeyi en iyi hale getirmek için, hangi önekin Azure Batı ABD ve Azure Doğu ABD olduğunu bilmeniz gerekir. Bu bilgileri [BGP Topluluğu değerlerini](expressroute-routing.md) kullanarak kodlarız. Her bir Azure bölgesine benzersiz bir BGP Topluluğu değeri atadık, örneğin Doğu ABD için "12076:51004", Batı ABD için "12076:51006". Artık hangi önekin hangi Azure bölgesinden olduğunu bildiğinize göre, tercih edilmesi gereken ExpressRoute bağlantı hattını yapılandırabilirsiniz. Yönlendirme bilgilerinin değişimi için BGP kullandığımızdan, yönlendirmeyi etkilemek için BGP'nin Yerel Tercihini kullanabilirsiniz. Bizim örneğimizde, ABD Batı’daki 13.100.0.0/16 için ABD Doğu’dan daha yüksek bir yerel tercih değeri atayabilir ve benzer şekilde, ABD Doğu’daki 23.100.0.0/16 için ABD Batı’dan daha yüksek bir yerel tercih değeri atayabilirsiniz. Bu yapılandırma her iki Microsoft yolunun da kullanılabilir olduğunda, New York’taki kullanıcılarınız ABD Doğu’dan Azure ABD Doğu’ya ExpressRoute bağlantı hattını kullanırken Los Angeles’taki kullanıcılarınızın Azure ABD Batı’ya bağlanması için ABD Batı’daki ExpressRoute bağlantı hattının kullanıldığından emin olacaktır. Her iki tarafta da yönlendirme en iyi duruma getirilmiştir. 
 
-![](./media/expressroute-optimize-routing/expressroute-case1-solution.png)
+![ExpressRoute Vaka 1 çözümü: BGP Toplulukları’nı kullanın](./media/expressroute-optimize-routing/expressroute-case1-solution.png)
+
+> [!NOTE]
+> Yerel Tercih kullanılarak aynı teknik müşteriden Azure Sanal Ağına yönlendirme için uygulanabilir. BGP Topluluğu değeri, Azure’dan ağınıza tanıtılan ön eklere etiketlenmez. Ancak, ofisinize en yakın Sanal Ağ dağıtımını siz bildiğiniz için, bir ExpressRoute devresini diğerine tercih etmek üzere yönlendiricilerinizi yapılandırabilirsiniz.
+>
+>
 
 ## <a name="suboptimal-routing-from-microsoft-to-customer"></a>Microsoft'tan müşteriye yetersiz yönlendirme
 Burada Microsoft bağlantılarının ağınıza ulaşmasına için daha uzun bir yol aldığı başka bir örnek gösterilmektedir. Bu durumda, [karma bir ortamda](https://technet.microsoft.com/library/jj200581%28v=exchg.150%29.aspx) şirket içi Exchange sunucularını ve Exchange Online kullanın. Ofisleriniz bir WAN’a bağlıdır. İki ExpressRoute bağlantı hattı aracılığıyla her iki ofisinizdeki şirket için sunucuların öneklerini Microsoft’a tanıtırsınız. Exchange Online, posta kutusu geçişi gibi durumlarda şirket içi sunuculara bağlantılar başlatır. Ne yazık ki, Los Angeles ofisinizin bağlantısı batı yakasına dönerken tüm kıtadan geçmeden önce ABD Doğu’daki ExpressRoute bağlantı hattına yönlendirilir. Sorunun nedeni birinciye benzemektedir. Herhangi bir ipucu olmadan, Microsoft ağı hangi müşteri önekinin ABD Doğu'ya veya ABD Batı’ya yakın olduğunu bildiremez. Los Angeles’taki ofisiniz için yanlış yolu seçmiş olabilirsiniz.
 
-![](./media/expressroute-optimize-routing/expressroute-case2-problem.png)
+![ExpressRoute Vaka 2: Microsoft'tan müşteriye yetersiz yönlendirme](./media/expressroute-optimize-routing/expressroute-case2-problem.png)
 
 ### <a name="solution-use-as-path-prepending"></a>Çözüm: AS YOLU eklenmesini kullanın
 Bu sorunun iki çözümü vardır. Birinci yol Los Angeles ofisiniz için ABD Batı’daki ExpressRoute bağlantı hattındaki 177.2.0.0/31 şirket içi öneki ve New York ofisiniz için ABD Doğu’daki ExpressRoute bağlantı hattındaki 177.2.0.2/31 şirket içi önekini tanıtmanızdır. Sonuç olarak, Microsoft’un ofislerinizin her birine bağlanması için yalnızca bir yol vardır. Belirsizlik olmaz ve yönlendirme en iyi duruma getirilir. Bu tasarımla, yük devretme stratejinizi düşünmeniz gerekir. ExpressRoute aracılığıyla Microsoft yolunun bozuk olması durumunda, Exchange Online’ın yine de şirket içi sunucularına bağlandığından emin olmanız gerekir. 
@@ -48,16 +54,24 @@ Bu sorunun iki çözümü vardır. Birinci yol Los Angeles ofisiniz için ABD Ba
 > 
 > 
 
-![](./media/expressroute-optimize-routing/expressroute-case2-solution.png)
+![ExpressRoute Vaka 2 çözümü: AS YOLU eklenmesini kullanın](./media/expressroute-optimize-routing/expressroute-case2-solution.png)
 
-> [!IMPORTANT]
+> [!NOTE]
 > Burada verilen örnekler Microsoft ve Ortak eşlemelere yöneliktir, ancak Özel eşleme için de aynı özellikleri destekleriz. Ayrıca AS Yolu ekleme, birincil ve ikincil yolların seçimini etkilemek için tek bir ExpressRoute devresi içinde çalışır.
 > 
 > 
 
+## <a name="suboptimal-routing-between-virtual-networks"></a>Sanal ağlar arasında yetersiz yönlendirme
+ExpressRoute ile Sanal Ağdan Sanal Ağa (aynı zamanda "VNet" olarak bilinir) iletişimi bir ExpressRoute devresine bağlayarak etkinleştirebilirsiniz. Birden fazla ExpressRoute devresine bağladığınızda, sanal ağlar arasında yetersiz yönlendirme gerçekleşebilir. Bir örnek düşünelim. Biri ABD Batı ve diğeri ABD Doğu’da olmak üzere iki ExpressRoute devreniz vardır. Her bölgede, iki sanal ağınız vardır. Web sunucularınız bir sanal ağa, uygulama sunucularınız diğerine dağıtılmaktadır. Artıklık için her bölgedeki iki sanal ağı hem yerel ExpressRoute devresine hem de uzak ExpressRoute devresine bağlarsınız. Aşağıda görülebileceği gibi, her sanal ağdan diğer sanal ağa iki yol vardır. Sanal ağlar, hangi ExpressRoute devresinin yerel, hangisinin uzak olduğunu bilmez. Sonuç olarak, sanal ağlar arası yük dengelemesi için Eşit Maliyetli Çoklu Yol (ECMP) yönlendirmesi yaptıkları için, bazı trafik akışları daha uzun yoldan gider ve uzak ExpressRoute devresine yönlendirilir.
 
+![ExpressRoute Vaka 3: Sanal ağlar arasında yetersiz yönlendirme](./media/expressroute-optimize-routing/expressroute-case3-problem.png)
 
+### <a name="solution-assign-a-high-weight-to-local-connection"></a>Çözüm: yerel bağlantıya yüksek ağırlık atayın
+Çözüm basittir. Sanal ağların ve bağlantı hatlarının nerede olduğunu bildiğiniz için, her bir sanal ağın hangi yolu tercih etmesi gerektiğini siz belirleyebilirsiniz. Özellikle bu örnek için, yerel bağlantıya atadığınız ağırlık, uzak bağlantıya atadığınız ağırlıktan daha yüksek olmalıdır. Bir sanal ağ, birden fazla bağlantıda diğer sanal ağın ön ekini alırsa, bu ön eki hedefleyen trafiği göndermek için ağırlık değeri en fazla olan bağlantıyı tercih eder.
 
-<!--HONumber=Jan17_HO4-->
+![ExpressRoute Vaka 3 çözümü - yerel bağlantıya yüksek ağırlık atayın](./media/expressroute-optimize-routing/expressroute-case3-solution.png)
 
-
+> [!NOTE]
+> Ayrıca, birden fazla ExpressRoute devreniz varsa, yukarıdaki örnekte açıklanan AS YOLU eklenme tekniğini uygulamak yerine ağırlığı yapılandırarak sanal ağınızdan şirket içi ağınıza yönlendirmeyi etkileyebilirsiniz. Her ön ek için, trafiğin nasıl gönderileceğine karar verirken AS Yolu uzunluğundan önce mutlaka bağlantı ağırlığına bakmanız gerekir.
+>
+>

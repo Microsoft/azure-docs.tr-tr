@@ -1,6 +1,6 @@
 ---
-title: "Azure Farklı Çalıştır Hesabını Yapılandırma | Microsoft Belgeleri"
-description: "Eğitici, Azure Automation’da güvenlik temel elemanı kimlik doğrulaması oluşturulması, test edilmesi ve örneklerinde size yol göstermektedir."
+title: "Azure Farklı Çalıştır Hesabını Yapılandırma | Microsoft Docs"
+description: "Bu öğretici, Azure Otomasyonu’nda güvenlik temel elemanı kimlik doğrulaması oluşturulması, test edilmesi ve örneklerinde size yol göstermektedir."
 services: automation
 documentationcenter: 
 author: mgoedtel
@@ -16,188 +16,272 @@ ms.topic: get-started-article
 ms.date: 03/27/2017
 ms.author: magoedte
 translationtype: Human Translation
-ms.sourcegitcommit: 2c9877f84873c825f96b62b492f49d1733e6c64e
-ms.openlocfilehash: 6f2a3880c6cd307282020a689ddd4e22a95c17b0
-ms.lasthandoff: 03/15/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: fbca3d195290551d37606e231b997a40a602351f
+ms.lasthandoff: 03/28/2017
 
 
 ---
-# <a name="authenticate-runbooks-with-azure-run-as-account"></a>Azure Farklı Çalıştır hesabıyla Kimlik Doğrulaması Runbook’ları
-Bu konu başlığında, Azure Resource Manager veya Azure Service Management'ta kaynakları yöneten runbook'ların kimliğini doğrulamak üzere Farklı Çalıştır hesap özelliği kullanılarak Azure portalından bir Otomasyon hesabının nasıl yapılandırılacağı gösterilecektir.
 
-Azure portalında yeni bir Otomasyon hesabı oluşturduğunuzda otomatik olarak şunlar oluşturulur:
+# <a name="authenticate-runbooks-with-an-azure-run-as-account"></a>Azure Farklı Çalıştır hesabıyla kimlik doğrulaması runbook’ları
+Bu makalede, Azure portalında bir Azure Otomasyonu hesabını yapılandırma işlemi gösterilmektedir. Bunu yapmak için, Farklı Çalıştır hesabı özelliğini kullanarak Azure Resource Manager veya Azure Service Management’ta kaynakları yöneten runbook’ların kimliğini doğrulayın.
 
-* Azure Active Directory’de yeni bir hizmet sorumlusu ve bir sertifika oluşturan ve Katkı Yapana runbook’lar kullanılarak Resource Manager kaynaklarını yönetmek için kullanılacak rol tabanlı erişim denetimi (RBAC) atayan Farklı Çalıştır hesabı.   
-* Azure Service Management’ı ya da runbook kullanan klasik kaynakları yönetmek için kullanılacak bir yönetim sertifikasını karşıya yükleyen Klasik Farklı Çalıştır hesabı.  
+Azure portalında bir Otomasyon hesabı oluşturduğunuzda otomatik olarak iki hesap oluşturursunuz:
 
-İşlemi sizin için basitleştirir ve otomasyon gerekliliklerini desteklemek için runbook’ları oluşturmaya ve dağıtmaya hemen başlamanıza yardımcı olur.      
+* Bir Farklı Çalıştır hesabı. Bu hesap, Azure Active Directory'de (Azure AD) bir hizmet sorumlusu ve bir sertifika oluşturur. Ayrıca, runbook kullanarak Resource Manager kaynaklarını yöneten Katkıda Bulunan rol tabanlı erişim denetimi (RBAC) iznini atar.
+* Klasik Farklı Çalıştır hesabı. Bu hesap, runbook kullanarak Service Management’ı ya da klasik kaynakları yönetmek için kullanılan bir yönetim sertifikasını karşıya yükler.
 
-Farklı Çalıştır ve Klasik Farklı Çalıştır hesabını kullanarak şunları yapabilirsiniz:
+Bir Otomasyon hesabının oluşturulması, işlemi sizin için basitleştirir ve otomasyon gerekliliklerini desteklemek için runbook’ları oluşturmaya ve dağıtmaya hemen başlamanıza yardımcı olur.
 
-* Azure portalındaki runbook’lardan Azure Resource Manager veya Azure Service Management kaynakları yönetilirken Azure ile kimlik doğrulaması için standartlaştırılmış bir yol sağlama.  
-* Azure Uyarıları’nda yapılandırılmış genel runbook'ların kullanımını otomatikleştirin.
+Farklı Çalıştır ve Klasik Farklı Çalıştır hesapları ile şunları yapabilirsiniz:
+
+* Azure portalındaki runbook’lardan Resource Manager veya Service Management kaynakları yönetilirken Azure ile kimlik doğrulaması için standartlaştırılmış bir yol sağlama.
+* Azure Uyarıları’nda yapılandırabileceğiniz genel runbook'ların kullanımını otomatikleştirme.
 
 > [!NOTE]
-> Otomasyon Genel Runbook’larına sahip Azure [Uyarı tümleştirme özelliği](../monitoring-and-diagnostics/insights-receive-alert-notifications.md) için Farklı Çalıştır ve Klasik Farklı Çalıştır hesabıyla yapılandırılmış bir Otomasyon hesabı gerekir. Farklı Çalıştır ve Klasik Farklı Çalıştır hesabı zaten tanımlanmış bir Otomasyon hesabı seçebilir ya da yeni bir tane de oluşturabilirsiniz.
+> Otomasyon genel runbook’larına sahip Azure [Uyarı tümleştirme özelliği](../monitoring-and-diagnostics/insights-receive-alert-notifications.md) için Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabıyla yapılandırılmış bir Otomasyon hesabı gerekir. Farklı Çalıştır ve Klasik Farklı Çalıştır hesabı zaten tanımlanmış bir Otomasyon hesabı seçebilir ya da yeni bir Otomasyon hesabı oluşturmayı seçebilirsiniz.
 >  
 
-Otomasyon hesabının Azure portalından oluşturulması, bir Otomasyon hesabının PowerShell kullanılarak güncelleştirilmesi, hesap yapılandırmasının yönetilmesi ve runbook’larınızda kimlik doğrulamasının nasıl yapılacağı size gösterilecektir.
+Bu makalede, Otomasyon hesabının Azure portalından oluşturulması, bir Otomasyon hesabının Azure PowerShell kullanılarak güncelleştirilmesi, hesap yapılandırmasının yönetilmesi ve runbook’larınızda kimlik doğrulamasının nasıl yapılacağı gösterilir.
 
-Bunu yapmadan önce anlamanız ve göz önünde bulundurmanız gereken birkaç nokta vardır.
+Bir Otomasyon hesabı oluşturmaya başlamadan önce aşağıdakileri anlayın ve göz önünde bulundurun:
 
-1. Bu durum klasik veya Resource Manager dağıtım modelinde daha önce oluşturulmuş var olan Otomasyon hesaplarını etkilemez.  
-2. Bu özellik yalnızca Azure portalından oluşturulan Otomasyon hesapları için çalışır.  Klasik portaldan bir hesap oluşturulmaya çalışıldığında Farklı Çalıştır hesabının yapılandırması çoğaltılmaz.
-3. Şu anda klasik kaynakları yönetmek için daha önce oluşturulmuş runbook’lara ve varlıklara (zamanlamalar, değişkenler vb.) sahipseniz ve bu runbook’ların yeni Klasik Farklı Çalıştır hesabıyla kimlik doğrulamasını yapmak istiyorsanız Farklı Çalıştır Hesabı Yönetme adımlarını kullanarak Klasik Farklı Çalıştır Hesabı oluşturmanız veya var olan hesabınızı aşağıdaki PowerShell komut dosyasıyla güncelleştirmeniz gerekir.  
-4. Yeni Farklı Çalıştır hesabını ve Klasik Farklı Çalıştır Otomasyon hesabını kullanarak kimlik doğrulamak için var olan runbook’larınızı aşağıdaki örnek kod ile değiştirmeniz gerekir.  Farklı Çalıştır hesabının sertifika tabanlı hizmet sorumlusu kullanan Resource Manager kaynaklarına göre kimlik doğrulamasına, Klasik Farklı Çalıştır hesabının ise yönetim sertifikasına sahip Service Management kaynaklarına göre kimlik doğrulamasına yönelik olduğunu **lütfen unutmayın**.     
+* Bir Otomasyon hesabının oluşturulması, klasik veya Resource Manager dağıtım modelinde daha önce oluşturmuş olabileceğiniz Otomasyon hesaplarını etkilemez.
+* İşlem yalnızca Azure portalında oluşturduğunuz Otomasyon hesapları için geçerli olur. Klasik Azure portalından bir hesap oluşturulmaya çalışıldığında Farklı Çalıştır hesabının yapılandırması çoğaltılmaz.
+* Klasik kaynakları yönetmek için kullandığınız runbook’lar ve varlıklar (zamanlamalar veya değişkenler) zaten varsa ve yeni Klasik Farklı Çalıştır hesabında runbook’ların kimliğini doğrulamak istiyorsanız, aşağıdakilerden birini yapın:
 
-## <a name="create-a-new-automation-account-from-the-azure-portal"></a>Azure portalından yeni Otomasyon Hesabı oluşturma
-Bu bölümde, yeni bir Azure Otomasyonu hesabını Azure portalından oluşturmak için aşağıdaki adımları gerçekleştireceksiniz.  Bu işlem hem Farklı Çalıştır hem de klasik Farklı Çalıştır hesabı oluşturur.  
+  * Klasik Farklı Çalıştır hesabı oluşturmak için "Farklı Çalıştır hesabınızı yönetme" bölümünde yer alan yönergeleri izleyin. 
+  * Var olan hesabınızı güncelleştirmek için "PowerShell kullanarak Otomasyon hesabınızı güncelleştirme" bölümündeki PowerShell betiğini kullanın.
+* Yeni Farklı Çalıştır hesabını ve Klasik Farklı Çalıştır Otomasyon hesabını kullanarak kimlik doğrulamak için mevcut runbook’larınızı [Kimlik doğrulaması kod örnekleri](#authentication-code-examples) bölümünde sağlanan örnek kod ile değiştirmeniz gerekir.
 
-> [!NOTE]
-> Bu adımları gerçekleştiren kullanıcı, Hizmet Yöneticileri rolünün üyesi veya kullanıcıya abonelik erişimi veren aboneliğin ortak yöneticisi olmalıdır. Kullanıcı ayrıca ilgili aboneliğin varsayılan Active Directory’sine Kullanıcı olarak eklenmelidir; hesabın ayrıcalıklı bir role atanması gerekmez. Aboneliğin Ortak Yönetici rolüne eklenmeden önce Aboneliğin Active Directory üyesi olmayan kullanıcılar, Active Directory’ye Konuk olarak eklenir ve **Otomasyon Hesabı Ekle** dikey penceresinde "Oluşturma izniniz yok..." uyarısı görüntülenir. İlk olarak ortak yönetici rolüne eklenen kullanıcılar Active Directory aboneliklerinden kaldırılabilir ve tekrar eklenerek Active Directory’ye tam bir Kullanıcı haline getirilebilir. Bu durumu Azure portalındaki **Azure Active Directory** bölmesinde **Kullanıcılar ve gruplar**’ı ardından **Tüm kullanıcılar**’ı seçtikten sonra gerekli kullanıcıyı seçip **Profil**’i seçerek doğrulayabilirsiniz.  Kullanıcı profili altındaki **Kullanıcı türü** özniteliğinin **Konuk** olmaması gerekir.  
-> 
+    >[!NOTE]
+    >Farklı Çalıştır hesabı, sertifika tabanlı hizmet sorumlusu kullanarak Resource Manager kaynaklarına göre kimlik doğrulaması içindir. Klasik Farklı Çalıştır hesabı ise bir yönetim sertifikası ile Service Management kaynaklarına göre kimlik doğrulaması içindir.
 
-1. Azure portalında Abonelik Yöneticileri rolünün üyesi ve aboneliğin ortak yöneticisi olan bir hesapla oturum açın.
+## <a name="create-an-automation-account-from-the-azure-portal"></a>Azure portalından Otomasyon hesabı oluşturma
+Bu bölümde, Azure portalından hem bir Farklı Çalıştır hesabı hem de bir Klasik Farklı Çalıştır hesabı oluşturan Azure Otomasyonu hesabı oluşturacaksınız.
+
+>[!NOTE]
+>Bir Otomasyon hesabı oluşturmak için, Hizmet Yöneticileri rolünün bir üyesi veya aboneliğe erişim veren aboneliğin ortak yöneticisi olmanız gerekir. Ayrıca, bu aboneliğin varsayılan Active Directory örneğine kullanıcı olarak eklenmeniz gerekir. Hesabın ayrıcalıklı bir role atanması gerekmez.
+>
+>Aboneliğin ortak yönetici rolüne eklenmeden önce aboneliğin Active Directory örneğine üye değilseniz, Active Directory’ye konuk olarak eklenirsiniz. Bu örnekte, “Oluşturma izniniz yok…” uyarısını **Otomasyon Hesabı Ekle** dikey penceresinde görürsünüz.
+>
+>İlk olarak ortak yönetici rolüne eklenen kullanıcılar aboneliğin Active Directory örneğinden kaldırılabilir ve tekrar eklenerek Active Directory’de tam bir Kullanıcı haline getirilebilir. Bu durumu Azure portalındaki **Azure Active Directory** bölmesinde **Kullanıcılar ve gruplar**’ı ve **Tüm kullanıcılar**’ı seçtikten sonra gerekli kullanıcıyı belirleyip **Profil**’i seçerek doğrulayabilirsiniz. Kullanıcı profili altındaki **Kullanıcı türü** özniteliğinin **Konuk** olmaması gerekir.
+>
+
+1. Azure portalında abonelik yöneticileri rolünün üyesi ve aboneliğin ortak yöneticisi olan bir hesapla oturum açın.
+
 2. **Automation Hesapları**’nı seçin.
-3. Automation Hesapları dikey penceresinde **Ekle**’ye tıklayın.<br>![Otomasyon Hesabı ekleme](media/automation-sec-configure-azure-runas-account/create-automation-account-properties-b.png)
-   
+
+3. **Otomasyon Hesapları** dikey penceresinde **Ekle**’ye tıklayın.
+**Otomasyon Hesabı Ekle** dikey penceresi açılır.
+
+ ![“Otomasyon Hesabı Ekle” dikey penceresi](media/automation-sec-configure-azure-runas-account/create-automation-account-properties-b.png)
+
    > [!NOTE]
-   > **Otomasyon Hesabı Ekle** dikey penceresinde aşağıdaki uyarıyı görürseniz, bunun nedeni hesabınızın Abonelik Yöneticileri rolünün üyesi ya da aboneliğin ortak yöneticisi olmamasıdır.<br>![Otomasyon Hesabı Ekleme Uyarısı](media/automation-sec-configure-azure-runas-account/create-account-without-perms.png)
-   > 
-   > 
-4. **Automation Hesabı Ekle** dikey penceresinde, **Ad** kutusuna, yeni Automation hesabınız için bir ad yazın.
-5. Birden fazla aboneliğiniz varsa, yeni hesap için mevcut veya yeni **Kaynak grubu** ve Azure veri merkezi **konumu** ile birlikte bir tane belirtin.
-6. **Azure Farklı Çalıştır hesabı oluştur** seçeneği için **Evet** değerinin seçili olduğunu doğrulayın ve **Oluştur** düğmesine tıklayın.  
-   
+   > Hesabınız aboneliğin yönetici rolüne üye değilse veya aboneliğin ortak yöneticisi değilse, **Otomasyon Hesabı Ekle** dikey penceresinde şu uyarı gösterilir:
+   >
+   >![Automation Hesabı Uyarısı ekleme](media/automation-sec-configure-azure-runas-account/create-account-without-perms.png)
+   >
+   >
+
+4. **Otomasyon Hesabı Ekle** dikey penceresindeki **Ad** kutusuna yeni Otomasyon hesabınız için bir ad yazın.
+
+5. Birden fazla aboneliğiniz varsa aşağıdaki işlemleri yapın:
+
+    a. **Abonelik** altında yeni hesap için bir abonelik belirtin.
+
+    b. **Kaynak Grubu** altında, **Yeni oluştur** veya **Var olanı kullan**’a tıklayın.
+
+    c. **Konum** altında bir Azure veri merkezi belirtin.
+
+6. **Azure Farklı Çalıştır hesabı oluştur** altında **Evet**’i seçin ve ardından **Oluştur**’a tıklayın.
+
    > [!NOTE]
-   > **Hayır** seçeneğini belirleyerek Farklı Çalıştır hesabı oluşturmamayı seçerseniz, **Automation Hesabı Ekle** dikey penceresinde bir uyarı iletisi görürsünüz.  Hesap Azure portalında oluşturulurken klasik veya Resource Manager abonelik dizininizde ona karşılık gelen bir kimlik doğrulama kimliği olmaz ve bu nedenle aboneliğinizdeki kaynaklara erişemez.  Bu durum, bu hesaba başvuran runbook’ların söz konusu dağıtım modellerindeki kaynaklara göre kimlik doğrulama yapmasını ve görevler gerçekleştirmesini engeller.
-   > 
-   > ![Otomasyon Hesabı Ekleme Uyarısı](media/automation-sec-configure-azure-runas-account/create-account-decline-create-runas-msg.png)<br>
-   > Hizmet sorumlusu oluşturulmadığında Katkıda Bulunan rolü atanmaz.
-   > 
+   > **Hayır**’ı seçerek Farklı Çalıştır hesabı oluşturmamayı tercih ederseniz, **Otomasyon Hesabı Ekle** dikey penceresinde bir uyarı iletisi gösterilir. Hesap Azure portalında oluşturulsa da, klasik veya Resource Manager aboneliğinin dizin hizmetinde ona karşılık gelen bir kimlik doğrulama kimliği yoktur. Sonuç olarak hesap, aboneliğinizdeki kaynaklara erişemez. Bu senaryo, ilgili dağıtım modellerindeki kaynaklara göre kimlik doğrulama ve görev gerçekleştirme işlemlerinden bu hesaba başvuran runbook’ları engeller.
+   >
+   > !["Otomasyon Hesabı Ekle" dikey penceresindeki uyarı iletisi](media/automation-sec-configure-azure-runas-account/create-account-decline-create-runas-msg.png)
+   >
+   > Ayrıca, hizmet sorumlusu oluşturulmadığı için Katkıda Bulunan rolü atanmaz.
+   >
 
 7. Azure Automation hesabını oluşturduğu sırada menünün **Bildirimler** öğesi altında ilerleme durumunu izleyebilirsiniz.
 
-### <a name="resources-included"></a>Kaynaklar dahil
-Otomasyon hesabı başarıyla oluşturulduğunda bazı kaynaklar sizin için otomatik olarak oluşturulur.  Aşağıdaki tabloda Farklı Çalıştır hesabının kaynakları özetlenmektedir.<br>
+### <a name="resources"></a>Kaynaklar
+Otomasyon hesabı başarıyla oluşturulduğunda bazı kaynaklar sizin için otomatik olarak oluşturulur. Kaynaklar aşağıdaki iki tabloda özetlenmiştir:
+
+#### <a name="run-as-account-resources"></a>Farklı Çalıştır hesabının kaynakları
 
 | Kaynak | Açıklama |
 | --- | --- |
-| AzureAutomationTutorial Runbook |Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmayı gösteren ve tüm Resource Manager kaynaklarını alan örnek bir Grafik runbook. |
-| AzureAutomationTutorialScript Runbook |Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmayı gösteren ve tüm Resource Manager kaynaklarını alan örnek bir PowerShell runbook. |
-| AzureRunAsCertificate |Otomasyon hesabı oluşturulurken otomatik olarak oluşturulan ya da var olan bir hesap için aşağıdaki PowerShell komut dosyası kullanılarak oluşturulan sertifika varlığı.  Azure Resource Manager kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmanıza imkan tanır.  Bu sertifikanın bir yıllık kullanım ömrü vardır. |
-| AzureRunAsConnection |Otomasyon hesabı oluşturulurken otomatik olarak oluşturulan ya da var olan bir hesap için aşağıdaki PowerShell komut dosyası kullanılarak oluşturulan bağlantı varlığı. |
+| AzureAutomationTutorial Runbook | Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmayı gösteren ve tüm Resource Manager kaynaklarını alan örnek bir grafik runbook. |
+| AzureAutomationTutorialScript Runbook | Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmayı gösteren ve tüm Resource Manager kaynaklarını alan örnek bir PowerShell runbook. |
+| AzureRunAsCertificate | Bir Otomasyon hesabı oluşturduğunuzda veya var olan bir hesap için aşağıdaki PowerShell betiğini kullandığınızda otomatik olarak oluşturulan sertifika varlığı. Sertifika, Azure Resource Manager kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmanıza imkan tanır. Bu sertifikanın bir yıllık kullanım ömrü vardır. |
+| AzureRunAsConnection | Bir Otomasyon hesabı oluşturduğunuzda veya var olan bir hesap için PowerShell betiğini kullandığınızda otomatik olarak oluşturulan bağlantı varlığı. |
 
-Aşağıdaki tabloda Klasik Farklı Çalıştır hesabının kaynakları özetlenmektedir.<br>
+#### <a name="classic-run-as-account-resources"></a>Klasik Farklı Çalıştır hesabının kaynakları
 
 | Kaynak | Açıklama |
 | --- | --- |
-| AzureClassicAutomationTutorial Runbook |Bir abonelikteki tüm Klasik VM'ler, Klasik Farklı Çalıştır Hesabı (sertifika) kullanarak alan ve sonra VM adını ve durumunu çıkaran örnek Grafik runbook. |
-| AzureClassicAutomationTutorial Script Runbook |Bir abonelikteki tüm Klasik VM'ler, Klasik Farklı Çalıştır Hesabı (sertifika) kullanarak alan ve sonra VM adını ve durumunu çıkaran örnek PowerShell runbook. |
-| AzureClassicRunAsCertificate |Otomatik olarak oluşturulan ve Azure klasik kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmak üzere kullanılan sertifika varlığı.  Bu sertifikanın bir yıllık kullanım ömrü vardır. |
-| AzureClassicRunAsConnection |Otomatik olarak oluşturulan ve Azure klasik kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmak üzere kullanılan bağlantı varlığı. |
+| AzureClassicAutomationTutorial Runbook | Klasik Farklı Çalıştır hesabı (sertifika) kullanarak, bir abonelikte klasik dağıtım modeli ile oluşturulan tüm VM’leri alan ve sonra VM adı ile durumunu yazan, örnek grafik runbook. |
+| AzureClassicAutomationTutorial Script Runbook | Klasik Farklı Çalıştır hesabı (sertifika) kullanarak bir abonelikteki tüm klasik VM'leri alan ve sonra VM adını ve durumunu yazan, örnek PowerShell runbook. |
+| AzureClassicRunAsCertificate | Otomatik olarak oluşturulan ve Azure klasik kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmak üzere kullandığınız sertifika varlığı. Bu sertifikanın bir yıllık kullanım ömrü vardır. |
+| AzureClassicRunAsConnection | Otomatik olarak oluşturulan ve Azure klasik kaynaklarını runbook’lardan yönetebilmeniz için Azure kimlik doğrulaması yapmak üzere kullandığınız bağlantı varlığı. |
 
 ## <a name="verify-run-as-authentication"></a>Farklı Çalıştır kimlik doğrulamasını onaylama
-Yeni Farklı Çalıştır hesabını kullanarak kimlik doğrulamasını sorunsuz yaptığınızı doğrulamak için burada küçük bir testle devam ediyoruz.     
+Yeni Farklı Çalıştır hesabını kullanarak kimlik doğrulamasını sorunsuz yapabildiğinizi doğrulamak için küçük bir test gerçekleştirin.
 
-1. Azure portalında, daha önce oluşturduğunuz Otomasyon hesabını açın.  
+1. Azure portalında, daha önce oluşturduğunuz Otomasyon hesabını açın.
+
 2. Runbook'ların listesini açmak için **Runbook'lar** kutucuğuna tıklayın.
-3. **AzureAutomationTutorialScript** runbook’unu seçin ve ardından **Başlat**’a tıklayarak runbook’u başlatın.  Runbook'u başlatmak istediğinizi doğrulayan bir ileti alacaksınız.
-4. Bir [runbook işi](automation-runbook-execution.md) oluşturulur, İş dikey penceresi gösterilir ve iş durumu **İş Özeti** kutucuğunda gösterilir.  
-5. İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde *Sırada* olarak başlar. Ardından, bir çalışan işi talep ettiğinde *Başlatılıyor* olarak ve runbook gerçekten çalışmaya başladığında *Çalışıyor* olarak değiştirilir.  
-6. Runbook işi tamamlandığında **Tamamlandı** durumunu görmeniz gerekir.<br> ![Güvenlik Sorumlusu Runbook Testi](media/automation-sec-configure-azure-runas-account/job-summary-automationtutorialscript.png)<br>
-7. Runbook’un ayrıntılı sonuçlarını görmek için **Çıktı** kutucuğuna tıklayın.
-8. **Çıktı** dikey penceresinde kimlik doğrulamasının başarıyla yapıldığını ve kaynak grubunda mevcut olan tüm kaynakların bir listesini döndürdüğünü görmeniz gerekir.
-9. **Çıktı** dikey penceresini kapatarak **İş Özeti** dikey penceresine geri dönün.
-10. **İş Özeti**’ni ve karşılık gelen **AzureAutomationTutorialScript** runbook dikey penceresini kapatın.
+
+3. **AzureAutomationTutorialScript** runbook’unu seçin ve ardından **Başlat**’a tıklayarak runbook’u başlatın. Aşağıdaki olaylar gerçekleşir:
+ * Bir [runbook işi](automation-runbook-execution.md) oluşturulur, **İş** dikey penceresi gösterilir ve iş durumu **İş Özeti** kutucuğunda gösterilir.
+ * İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde **Sırada** olarak başlar.
+ * Bir çalışan işi talep ettiğinde durum **Başlıyor** olur.
+ * Runbook çalışmaya başladığında durum **Çalışıyor** olur.
+ * Runbook işi tamamlandığında **Tamamlandı** durumunu görmeniz gerekir.
+
+       ![Security Principal Runbook Test](media/automation-sec-configure-azure-runas-account/job-summary-automationtutorialscript.png)
+4. Runbook’un ayrıntılı sonuçlarını görmek için **Çıktı** kutucuğuna tıklayın.  
+Runbook kimlik doğrulamasının başarıyla yapıldığını ve kaynak grubunda mevcut olan tüm kaynakların bir listesini döndürdüğünü gösteren **Çıktı** dikey penceresi görüntülenir.
+
+5. **Çıktı** dikey penceresini kapatarak **İş Özeti** dikey penceresine geri dönün.
+
+6. **İş Özeti** dikey penceresini ve karşılık gelen **AzureAutomationTutorialScript** runbook dikey penceresini kapatın.
 
 ## <a name="verify-classic-run-as-authentication"></a>Klasik Farklı Çalıştır kimlik doğrulamasını onaylama
-Yeni Klasik Farklı Çalıştır hesabını kullanarak kimlik doğrulamasını sorunsuz yaptığınızı doğrulamak için burada küçük bir testle devam ediyoruz.     
+Yeni Klasik Farklı Çalıştır hesabını kullanarak kimlik doğrulamasını sorunsuz yapabildiğinizi doğrulamak için benzer bir küçük test gerçekleştirin.
 
-1. Azure portalında, daha önce oluşturduğunuz Otomasyon hesabını açın.  
+1. Azure portalında, daha önce oluşturduğunuz Otomasyon hesabını açın.
+
 2. Runbook'ların listesini açmak için **Runbook'lar** kutucuğuna tıklayın.
-3. **AzureClassicAutomationTutorialScript** runbook’unu seçin ve ardından **Başlat**’a tıklayarak runbook’u başlatın.  Runbook'u başlatmak istediğinizi doğrulayan bir ileti alacaksınız.
-4. Bir [runbook işi](automation-runbook-execution.md) oluşturulur, İş dikey penceresi gösterilir ve iş durumu **İş Özeti** kutucuğunda gösterilir.  
-5. İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde *Sırada* olarak başlar. Ardından, bir çalışan işi talep ettiğinde *Başlatılıyor* olarak ve runbook gerçekten çalışmaya başladığında *Çalışıyor* olarak değiştirilir.  
-6. Runbook işi tamamlandığında **Tamamlandı** durumunu görmeniz gerekir.<br> ![Güvenlik Sorumlusu Runbook Testi](media/automation-sec-configure-azure-runas-account/job-summary-automationclassictutorialscript.png)<br>
-7. Runbook’un ayrıntılı sonuçlarını görmek için **Çıktı** kutucuğuna tıklayın.
-8. **Çıktı** dikey penceresinde kimlik doğrulamasının başarıyla yapıldığını ve abonelikteki tüm klasik sanal makinelerin bir listesini döndürdüğünü görmeniz gerekir.
-9. **Çıktı** dikey penceresini kapatarak **İş Özeti** dikey penceresine geri dönün.
-10. **İş Özeti**’ni ve karşılık gelen **AzureClassicAutomationTutorialScript** runbook dikey penceresini kapatın.
 
-## <a name="managing-azure-run-as-account"></a>Azure Farklı Çalıştır hesabını yönetme
-Otomasyon hesabınızın kullanım süresi boyunca sertifikayı kullanım süresi sona ermeden yenilemeniz gerekecektir. Hesabın ele geçirildiğine inanıyorsanız Farklı Çalıştır hesabını silip yeniden oluşturabilirsiniz.  Bu bölümde bu işlemleri gerçekleştirme adımları anlatılmaktadır.  
+3. **AzureClassicAutomationTutorialScript** runbook’unu seçin ve ardından **Başlat**’a tıklayarak runbook’u başlatın. Aşağıdaki olaylar gerçekleşir:
+
+ * Bir [runbook işi](automation-runbook-execution.md) oluşturulur, **İş** dikey penceresi gösterilir ve iş durumu **İş Özeti** kutucuğunda gösterilir.
+ * İş durumu, bulutta bir runbook çalışanının kullanılabilir hale gelmesinin beklendiğini gösteren şekilde **Sırada** olarak başlar.
+ * Bir çalışan işi talep ettiğinde durum **Başlıyor** olur.
+ * Runbook çalışmaya başladığında durum **Çalışıyor** olur.
+ * Runbook işi tamamlandığında **Tamamlandı** durumunu görmeniz gerekir.
+
+    ![Güvenlik Sorumlusu Runbook Testi](media/automation-sec-configure-azure-runas-account/job-summary-automationclassictutorialscript.png)<br>
+4. Runbook’un ayrıntılı sonuçlarını görmek için **Çıktı** kutucuğuna tıklayın.  
+Runbook kimlik doğrulamasının başarıyla yapıldığını ve abonelikteki tüm klasik VM’lerin bir listesini döndürdüğünü gösteren **Çıktı** dikey penceresi görüntülenir.
+
+5. **Çıktı** dikey penceresini kapatarak **İş Özeti** dikey penceresine geri dönün.
+
+6. **İş Özeti** dikey penceresini ve karşılık gelen **AzureAutomationTutorialScript** runbook dikey penceresini kapatın.
+
+## <a name="managing-your-run-as-account"></a>Farklı Çalıştır hesabınızı yönetme
+Otomasyon hesabınızın süresi dolmadan önce sertifikayı yenilemeniz gerekir. Farklı Çalıştır hesabının tehlikede olduğunu düşünüyorsanız, hesabı silip yeniden oluşturabilirsiniz. Bu bölümde bu işlemlerin nasıl gerçekleştirileceği ele alınmaktadır.
 
 ### <a name="self-signed-certificate-renewal"></a>Otomatik olarak imzalanan sertifika yenileme
-Azure Farklı çalıştır hesabı için oluşturulan otomatik olarak imzalanan sertifika, oluşturma tarihinden itibaren bir yıl olan son kullanım tarihine kadar herhangi bir zamanda yenilenebilir.  Sertifikayı yenilediğinizde eski geçerli sertifika Farklı Çalıştır hesabıyla kimlik doğrulaması yapılan kuyruktaki veya etkin olarak çalışan runbook'ların etkilenmemesi için tutulur.  Sertifika, kullanım süresi dolana kadar tutulmaya devam eder.    
+Farklı Çalıştır hesabı için oluşturduğunuz otomatik olarak imzalanan sertifikanın süresi, oluşturulduktan bir yıl sonra dolar. Sertifikayı süresi dolmadan önce herhangi bir zamanda yenileyebilirsiniz. Sertifikayı yenilediğinizde, sıraya alınmış ya da o anda çalışan ve Farklı Çalıştır hesabı ile kimliği doğrulanmış runbook’ların olumsuz yönde etkilenmemesi için geçerli sertifika saklanır. Sertifika, sona erme tarihine kadar geçerliliğini sürdürür.
 
 > [!NOTE]
-> Otomasyon Farklı Çalıştır hesabınızı, kuruluş sertifika yetkiliniz tarafından yayınlanan bir sertifika kullanmak üzere yapılandırdıysanız ve bu seçeneği kullanırsanız, bu sertifika, otomatik olarak imzalanan bir sertifikayla değiştirilir.  
+> Otomasyon Farklı Çalıştır hesabınızı, kuruluş sertifika yetkiliniz tarafından yayınlanan bir sertifika kullanmak üzere yapılandırdıysanız ve bu seçeneği kullanırsanız, kurumsal sertifika otomatik olarak imzalanan bir sertifikayla değiştirilir.
 
-1. Azure portalında Otomasyon hesabınızı açın.  
-2. Otomasyon hesabı dikey penceresinin hesap özellikleri bölmesindeki **Hesap Ayarları** bölümünden **Farklı Çalıştır Hesapları**'nı seçin.<br><br> ![Otomasyon hesabı özellikleri bölmesi](media/automation-sec-configure-azure-runas-account/automation-account-properties-pane.png)<br><br>
-3. **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde sertifikasını yenilemek istediğiniz Farklı Çalıştır Hesabını veya Klasik Farklı Çalıştır Hesabını seçin ve seçilen hesabın özellikler dikey penceresinde **Sertifikayı yenile**'ye tıklayın.<br><br> ![Farklı Çalıştır hesabının sertifikasını yenileme](media/automation-sec-configure-azure-runas-account/automation-account-renew-runas-certificate.png)<br><br> Devam etmek istediğinizi doğrulayan bir ileti alacaksınız.  
-4. Sertifika yenilenirken menünün **Bildirimler** öğesi altında ilerleme durumunu izleyebilirsiniz.
+Sertifikayı yenilemek için aşağıdakileri yapın:
 
-### <a name="delete-run-as-account"></a>Farklı Çalıştır hesabını silme
-Aşağıdaki adımlar, Azure Farklı Çalıştır veya Klasik Farklı Çalıştır hesabınızı silme ve yeniden oluşturmayı açıklamaktadır.  Bu eylemi gerçekleştirdiğinizde Otomasyon hesabı korunur.  Farklı Çalıştır veya Klasik Farklı Çalıştır hesabını sildikten sonra portalda yeniden oluşturabilirsiniz.  
+1. Azure portalında Otomasyon hesabınızı açın.
 
-1. Azure portalında Otomasyon hesabınızı açın.  
-2. Otomasyon hesabı dikey penceresinin hesap özellikleri bölmesindeki **Hesap Ayarları** bölümünden **Farklı Çalıştır Hesapları**'nı seçin.
-3. **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde silmek istediğiniz Farklı Çalıştır Hesabını veya Klasik Farklı Çalıştır Hesabını seçin ve seçilen hesabın özellikler dikey penceresinde **Sil**'e tıklayın.<br><br> ![Farklı Çalıştır hesabını silme](media/automation-sec-configure-azure-runas-account/automation-account-delete-runas.png)<br><br>  Devam etmek istediğinizi doğrulayan bir ileti alacaksınız.
-4. Hesap silinirken menünün **Bildirimler** öğesi altında ilerleme durumunu izleyebilirsiniz.  Silme işlemi tamamlandıktan sonra **Farklı Çalıştır Hesapları** özellikler dikey penceresinde **Azure Farklı Çalıştır Hesabı** seçeneğini belirleyerek yeniden oluşturabilirsiniz.<br><br> ![Otomasyon Farklı Çalıştır hesabını yeniden oluşturma](media/automation-sec-configure-azure-runas-account/automation-account-create-runas.png)<br> 
+2. **Otomasyon Hesabı** dikey penceresindeki **Hesap özellikleri** bölmesinin **Hesap Ayarları** altında **Farklı Çalıştır Hesapları**’nı seçin.
+
+    ![Otomasyon hesabı özellikleri bölmesi](media/automation-sec-configure-azure-runas-account/automation-account-properties-pane.png)
+3. **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde sertifikasını yenilemek istediğiniz Farklı Çalıştır Hesabını veya Klasik Farklı Çalıştır Hesabını seçin.
+
+4. Seçili hesabın **Özellikler** dikey penceresinde **Sertifikayı yenile**’ye tıklayın.
+
+    ![Farklı Çalıştır hesabının sertifikasını yenileme](media/automation-sec-configure-azure-runas-account/automation-account-renew-runas-certificate.png)
+
+5. Sertifika yenilenirken menünün **Bildirimler** öğesi altında ilerleme durumunu izleyebilirsiniz.
+
+### <a name="delete-a-run-as-or-classic-run-as-account"></a>Farklı Çalıştır veya Klasik Farklı Çalıştır hesabını silme
+Bu bölümde bir Farklı Çalıştır veya Klasik Farklı Çalıştır hesabını silip yeniden oluşturma işlemi açıklamaktadır. Bu eylemi gerçekleştirdiğinizde Otomasyon hesabı korunur. Farklı Çalıştır veya Klasik Farklı Çalıştır hesabını sildikten sonra Azure portalında yeniden oluşturabilirsiniz.
+
+1. Azure portalında Otomasyon hesabınızı açın.
+
+2. **Otomasyon Hesabı** dikey penceresindeki hesap özellikleri bölmesinde **Farklı Çalıştır Hesapları**’nı seçin.
+
+3. **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde silmek istediğiniz Farklı Çalıştır Hesabını veya Klasik Farklı Çalıştır Hesabını seçin. Ardından, seçili hesabın **Özellikler** dikey penceresinde **Sil**’e tıklayın.
+
+ ![Farklı Çalıştır hesabını silme](media/automation-sec-configure-azure-runas-account/automation-account-delete-runas.png)
+
+4. Hesap silinirken menünün **Bildirimler** öğesi altında ilerleme durumunu izleyebilirsiniz.
+
+5. Hesap silindikten sonra **Farklı Çalıştır Hesapları** özellikler dikey penceresinde **Azure Farklı Çalıştır Hesabı** seçeneğini belirleyerek hesabı yeniden oluşturabilirsiniz.
+
+ ![Otomasyon Farklı Çalıştır hesabını yeniden oluşturma](media/automation-sec-configure-azure-runas-account/automation-account-create-runas.png)
 
 ### <a name="misconfiguration"></a>Yanlış yapılandırma
-Farklı Çalıştır veya Klasik Farklı Çalıştır hesabının düzgün çalışması için gerekli olan yapılandırma öğelerinden birinin silinmiş veya ilk kurulum sırasında düzgün oluşturulmamış olması, örnek:
+İlk kurulum sırasında, Farklı Çalıştır veya Klasik Farklı Çalıştır hesabının düzgün çalışması için gerekli olan bazıları silinmiş veya düzgün oluşturulmamış olabilir. Bu öğeler şunlardır:
 
-* Sertifika varlığı 
-* Bağlantı varlığı 
+* Sertifika varlığı
+* Bağlantı varlığı
 * Farklı Çalıştır hesabının katkıda bulunan rolünden kaldırılması
 * Azure AD'de hizmet sorumlusu veya uygulama
 
-Otomasyon bu değişiklikleri algılar ve hesabın **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde **Tamamlanmamış** durumuyla sizi bilgilendirir.<br><br> ![Tamamlanmamış Farklı Çalıştır yapılandırma durumu iletisi](media/automation-sec-configure-azure-runas-account/automation-account-runas-incomplete-config.png)<br><br>Farklı Çalıştır hesabını seçtiğinizde hesabın özellikler bölmesinde aşağıdaki hata görüntülenir:<br><br> ![Tamamlanmamış Farklı Çalıştır yapılandırma uyarısı iletisi](media/automation-sec-configure-azure-runas-account/automation-account-runas-incomplete-config-msg.png).<br>  
-Farklı Çalıştır hesabı hatalı yapılandırılmışsa bu sorunu Farklı Çalıştır hesabını silip yeniden oluşturarak hızlı bir şekilde çözebilirsiniz.   
+Yanlış yapılandırmanın önceki ve diğer örneklerinde, Otomasyon hesabı değişiklikleri algılar ve hesabın **Farklı Çalıştır Hesapları** özellikleri dikey penceresinde *Tamamlanmadı* durumunu gösterir.
 
-## <a name="update-an-automation-account-using-powershell"></a>PowerShell kullanarak Automation Hesabını güncelleştirme
-Burada aşağıdaki durumlarda var olan Otomasyon hesabınızı güncelleştirmek için PowerShell kullanma seçeneği sunulmaktadır:
+![Tamamlanmamış Farklı Çalıştır hesabı yapılandırma durumu](media/automation-sec-configure-azure-runas-account/automation-account-runas-incomplete-config.png)
 
-1. Bir Otomasyon hesabı oluşturdunuz, ancak Farklı Çalıştır hesabı oluşturmayı reddettiniz 
-2. Resource Manager kaynaklarını yönetmek için bir Otomasyon hesabınız zaten var ve runbook kimlik doğrulaması için Farklı Çalıştır hesabını içerecek şekilde güncelleştirmek istiyorsunuz
-4. Klasik kaynakları yönetmek için bir Otomasyon hesabınız zaten var ve yeni bir hesap oluşturup runbook’larınızı ve varlıklarınızı ona geçirmek yerine Klasik Farklı Çalıştır’ı kullanacak şekilde güncelleştirmek istiyorsunuz   
-5. Kuruluş sertifika yetkiliniz tarafından verilen bir sertifika kullanarak bir Azure Farklı Çalıştır ve Klasik Farklı Çalıştır hesabı oluşturmak istiyorsunuz
+Farklı Çalıştır hesabını seçtiğinizde hesabın **Özellikler** bölmesinde aşağıdaki hata iletisi görüntülenir:
 
-Bu betiğin aşağıdaki önkoşulları vardır:
+![Tamamlanmamış Farklı Çalıştır yapılandırma uyarısı iletisi](media/automation-sec-configure-azure-runas-account/automation-account-runas-incomplete-config-msg.png).
 
-1. Bu betik yalnızca Azure Resource Manager modülleri 2.01 veya üzeri yüklü Windows 10 ve Windows Server 2016 üzerinde çalışır.  Windows'un önceki sürümleri desteklenmez.  
-2. Azure PowerShell 1.0 ve üzeri. Bu sürüm ve nasıl yükleneceği hakkında daha fazla bilgi için bkz. [Azure PowerShell'i yükleme ve yapılandırma](/powershell/azureps-cmdlets-docs).
-3. Bir otomasyon hesabı oluşturduğunuzu.  Bu hesaba aşağıdaki betikte yer alan –AutomationAccountName ve -ApplicationDisplayName parametre değeri olarak başvurulacaktır.
+Hesabı silip yeniden oluşturarak Farklı Çalıştır hesabıyla ilgili bu sorunları hızlı bir şekilde çözebilirsiniz.
 
-Komut dosyaları için gerekli parametreler olan *SubscriptionID*, *ResourceGroup* ve *AutomationAccountName* değerlerini almak için Azure portalında **Otomasyon hesabı** dikey penceresinden Otomasyon hesabınızı seçin ve **Tüm ayarlar** seçeneğini belirleyin.  **Tüm ayarlar** dikey penceresindeki **Hesap Ayarları** altında **Özellikler**’i seçin.  **Özellikler** dikey penceresinde bu değerleri fark edebilirsiniz.<br><br> ![Otomasyon Hesabı özellikleri](media/automation-sec-configure-azure-runas-account/automation-account-properties.png)  
+## <a name="update-your-automation-account-by-using-powershell"></a>PowerShell kullanarak Otomasyon hesabınızı güncelleştirme
+Aşağıdaki durumlarda var olan Otomasyon hesabınızı güncelleştirmek için PowerShell kullanabilirsiniz:
 
-### <a name="create-run-as-account-powershell-script"></a>Farklı Çalıştır Hesabı PowerShell komut dosyası oluşturma
-Bu PowerShell betiği aşağıdaki yapılandırmalar için destek içerir: 
+* Bir Otomasyon hesabı oluşturdunuz, ancak Farklı Çalıştır hesabı oluşturmayı reddettiniz.
+* Resource Manager kaynaklarını yönetmek için bir Otomasyon hesabı zaten kullanıyorsunuz ve runbook kimlik doğrulaması için Farklı Çalıştır hesabını içerecek şekilde güncelleştirmek istiyorsunuz.
+* Klasik kaynakları yönetmek için bir Otomasyon hesabı zaten kullanıyorsunuz ve yeni bir hesap oluşturup runbook’larınızı ve varlıklarınızı ona geçirmek yerine Klasik Farklı Çalıştır hesabını kullanacak şekilde güncelleştirmek istiyorsunuz.   
+* Kuruluş sertifika yetkiliniz (CA) tarafından verilen bir sertifika kullanarak bir Farklı Çalıştır ve Klasik Farklı Çalıştır hesabı oluşturmak istiyorsunuz.
 
-* Otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı oluşturma
-* Otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Çalıştır hesabı oluşturma
-* Kuruluş sertifikası kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Çalıştır hesabı oluşturma
-* Azure Kamu bulutunda Otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Çalıştır hesabı oluşturma
+Betiğin aşağıdaki önkoşulları vardır:
 
-Belirlediğiniz yapılandırma seçeneğine bağlı olarak aşağıdakileri oluşturur:
+* Betik yalnızca Azure Resource Manager 2.01 veya sonrasındaki modülleri içeren Windows 10 ve Windows Server 2016 işletim sistemlerinde çalıştırılabilir. Windows'un önceki sürümleri desteklenmez.
+* Azure PowerShell 1.0 ve üzeri. PowerShell 1.0 sürümü hakkında bilgi için bkz. [Azure PowerShell’i yükleme ve yapılandırma](/powershell/azureps-cmdlets-docs).
+* Aşağıdaki PowerShell betiğinde *–AutomationAccountName* ve *-ApplicationDisplayName* parametrelerinin değeri olarak başvurulan bir Otomasyon hesabı.
 
-* Otomatik olarak imzalanan sertifikayla veya kurumsal sertifika ortak anahtarıyla dışarı aktarılacak Azure AD uygulaması, Azure AD’de bu uygulama için bir hizmet sorumlusu hesabı oluşturun ve geçerli aboneliğinizde bu hesap için Katılımcı rolü (bunu Sahip veya herhangi başka bir rolle değiştirebilirsiniz) atayın.  Daha fazla bilgi için lütfen[Azure Automation’da Rol Tabanlı Erişim Denetimi](automation-role-based-access-control.md) makalesini inceleyin.
-* Azure AD uygulaması tarafından kullanılan sertifika özel anahtarını tutan **AzureRunAsCertificate** adlı, belirtilen Otomasyon hesabındaki bir Otomasyon sertifikası varlığı.
-* applicationId, tenantId, subscriptionId ve certificate thumbprint öğelerini tutan **AzureRunAsConnection** adlı, belirtilen Automation hesabındaki bir Automation sertifikası varlığı.    
+Betiklerin parametreleri için gerekli olan *SubscriptionID*, *ResourceGroup* ve *AutomationAccountName* değerlerini almak için aşağıdakileri yapın:
+1. Azure portalında, **Otomasyon hesabı** dikey penceresinden Otomasyon hesabınızı ve ardından **Tüm ayarlar** öğesini seçin. 
+2. **Tüm ayarlar** dikey penceresindeki **Hesap Ayarları** altında **Özellikler**’i seçin. 
+3. **Özellikler** dikey penceresindeki değerleri not alın.
 
-Klasik Farklı Çalıştır hesabı için:
+ ![Otomasyon hesabı "Özellikler" dikey penceresi](media/automation-sec-configure-azure-runas-account/automation-account-properties.png)  
 
-* Yönetim sertifikası tarafından kullanılan sertifika özel anahtarını tutan **AzureClassicRunAsCertificate** adlı, belirtilen Otomasyon hesabındaki bir Otomasyon sertifikası varlığı.  
-* Subscription name, subscriptionId ve certificate asset name öğelerini tutan **AzureClassicRunAsConnection** adlı, belirtilen Otomasyon hesabındaki bir Otomasyon bağlantı varlığı.
+### <a name="create-a-run-as-account-powershell-script"></a>Farklı Çalıştır hesabı PowerShell betiği oluşturma
+Bu PowerShell betiği aşağıdaki yapılandırmalar için destek içerir:
 
-Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut dosyası yürütme sonrasında Otomasyon hesabının oluşturulduğu abonelik için yönetim deposuna ortak sertifikayı (.cer biçimli) yüklemeniz gerekir. Aşağıdaki adımlar komut dosyası yürütme ve sertifikayı karşıya yükleme işleminde size kılavuzluk edecektir.    
+* Otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı oluşturun.
+* Otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturun.
+* Kurumsal sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturun.
+* Azure Kamu bulutunda otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturun.
 
-1. Aşağıdaki betiği bilgisayarınıza kaydedin.  Bu örnekte **New-RunAsAccount.ps1** dosya adıyla kaydedin.  
-   
-         #Requires -RunAsAdministrator
+Seçtiğiniz yapılandırma seçeneğine bağlı olarak, betik aşağıdaki öğeleri oluşturur.
+
+**Farklı Çalıştır hesapları için:**
+
+* Otomatik olarak imzalanan sertifika veya kurumsal sertifika ortak anahtarıyla dışarı aktarılacak bir Azure AD uygulaması oluşturur, Azure AD’de bu uygulama için bir hizmet sorumlusu hesabı oluşturur ve geçerli aboneliğinizde hesap için Katkıda Bulunan rolünü atar. Bu ayarı Sahip veya başka bir rolle değiştirebilirsiniz. Daha fazla bilgi için bkz. [Azure Otomasyonu’nda rol tabanlı erişim denetimi](automation-role-based-access-control.md).
+* Belirtilen Otomasyon hesabında *AzureRunAsCertificate* adlı bir Otomasyon sertifikası varlığı oluşturur. Sertifika varlıkları, Azure AD uygulaması tarafından kullanılan sertifika özel anahtarını içerir.
+* Belirtilen Otomasyon hesabında *AzureRunAsConnection* adlı bir Otomasyon bağlantı varlığı oluşturur. Bağlantı varlığı applicationId, tenantId, subscriptionId ve sertifika parmak izini içerir.
+
+**Klasik Farklı Çalıştır hesapları için:**
+
+* Belirtilen Otomasyon hesabında *AzureClassicRunAsCertificate* adlı bir Otomasyon sertifikası varlığı oluşturur. Sertifika varlığı, yönetim sertifikası tarafından kullanılan sertifika özel anahtarını içerir.
+* Belirtilen Otomasyon hesabında *AzureClassicRunAsConnection* adlı bir Otomasyon bağlantı varlığı oluşturur. Bağlantı varlığı; abonelik adı, subscriptionId ve sertifika varlık adını içerir.
+
+>[!NOTE]
+> Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, betik yürütüldükten sonra Otomasyon hesabının oluşturulduğu abonelik için yönetim deposuna ortak sertifikayı (.cer dosya adı uzantısı) yükleyin.
+> 
+
+Betiği yürütüp sertifikayı karşıya yüklemek için aşağıdakileri yapın:
+
+1. Aşağıdaki betiği bilgisayarınıza kaydedin. Bu örnekte *New-RunAsAccount.ps1* dosya adıyla kaydedin.
+
+        #Requires -RunAsAdministrator
          Param (
         [Parameter(Mandatory=$true)]
         [String] $ResourceGroup,
@@ -216,7 +300,7 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
 
         [Parameter(Mandatory=$true)]
         [String] $SelfSignedCertPlainPassword,
- 
+
         [Parameter(Mandatory=$false)]
         [String] $EnterpriseCertPathForRunAsAccount,
 
@@ -237,7 +321,7 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
         [int] $SelfSignedCertNoOfMonthsUntilExpired = 12
         )
 
-        function CreateSelfSignedCertificate([string] $keyVaultName, [string] $certificateName, [string] $selfSignedCertPlainPassword, 
+        function CreateSelfSignedCertificate([string] $keyVaultName, [string] $certificateName, [string] $selfSignedCertPlainPassword,
                                       [string] $certPath, [string] $certPathCer, [string] $selfSignedCertNoOfMonthsUntilExpired ) {
         $Cert = New-SelfSignedCertificate -DnsName $certificateName -CertStoreLocation cert:\LocalMachine\My `
            -KeyExportPolicy Exportable -Provider "Microsoft Enhanced RSA and AES Cryptographic Provider" `
@@ -245,13 +329,13 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
 
         $CertPassword = ConvertTo-SecureString $selfSignedCertPlainPassword -AsPlainText -Force
         Export-PfxCertificate -Cert ("Cert:\localmachine\my\" + $Cert.Thumbprint) -FilePath $certPath -Password $CertPassword -Force | Write-Verbose
-        Export-Certificate -Cert ("Cert:\localmachine\my\" + $Cert.Thumbprint) -FilePath $certPathCer -Type CERT | Write-Verbose 
+        Export-Certificate -Cert ("Cert:\localmachine\my\" + $Cert.Thumbprint) -FilePath $certPathCer -Type CERT | Write-Verbose
         }
 
         function CreateServicePrincipal([System.Security.Cryptography.X509Certificates.X509Certificate2] $PfxCert, [string] $applicationDisplayName) {  
         $CurrentDate = Get-Date
         $keyValue = [System.Convert]::ToBase64String($PfxCert.GetRawCertData())
-        $KeyId = (New-Guid).Guid 
+        $KeyId = (New-Guid).Guid
 
         $KeyCredential = New-Object  Microsoft.Azure.Commands.Resources.Models.ActiveDirectory.PSADKeyCredential
         $KeyCredential.StartDate = $CurrentDate
@@ -259,12 +343,12 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
         $KeyCredential.KeyId = $KeyId
         $KeyCredential.CertValue  = $keyValue
 
-        # Use Key credentials and create AAD Application
+        # Use key credentials and create an Azure AD application
         $Application = New-AzureRmADApplication -DisplayName $ApplicationDisplayName -HomePage ("http://" + $applicationDisplayName) -IdentifierUris ("http://" + $KeyId) -KeyCredentials $KeyCredential
-        $ServicePrincipal = New-AzureRMADServicePrincipal -ApplicationId $Application.ApplicationId 
+        $ServicePrincipal = New-AzureRMADServicePrincipal -ApplicationId $Application.ApplicationId
         $GetServicePrincipal = Get-AzureRmADServicePrincipal -ObjectId $ServicePrincipal.Id
-   
-        # Sleep here for a few seconds to allow the service principal application to become active (should only take a couple of seconds normally)
+
+        # Sleep here for a few seconds to allow the service principal application to become active (ordinarily takes a few seconds)
         Sleep -s 15
         $NewRole = New-AzureRMRoleAssignment -RoleDefinitionName Contributor -ServicePrincipalName $Application.ApplicationId -ErrorAction SilentlyContinue
         $Retries = 0;
@@ -286,7 +370,7 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
 
         function CreateAutomationConnectionAsset ([string] $resourceGroup, [string] $automationAccountName, [string] $connectionAssetName, [string] $connectionTypeName, [System.Collections.Hashtable] $connectionFieldValues ) {
         Remove-AzureRmAutomationConnection -ResourceGroupName $resourceGroup -AutomationAccountName $automationAccountName -Name $connectionAssetName -Force -ErrorAction SilentlyContinue
-        New-AzureRmAutomationConnection -ResourceGroupName $ResourceGroup -AutomationAccountName $automationAccountName -Name $connectionAssetName -ConnectionTypeName $connectionTypeName -ConnectionFieldValues $connectionFieldValues 
+        New-AzureRmAutomationConnection -ResourceGroupName $ResourceGroup -AutomationAccountName $automationAccountName -Name $connectionAssetName -ConnectionTypeName $connectionTypeName -ConnectionFieldValues $connectionFieldValues
         }
 
         Import-Module AzureRM.Profile
@@ -298,15 +382,15 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
            Write-Error -Message "Please install the latest Azure PowerShell and retry. Relevant doc url : https://docs.microsoft.com/powershell/azureps-cmdlets-docs/ "
            return
         }
- 
+
         Login-AzureRmAccount -EnvironmentName $EnvironmentName
         $Subscription = Select-AzureRmSubscription -SubscriptionId $SubscriptionId
 
-        # Create Run As Account using Service Principal
+        # Create a Run As account by using a service principal
         $CertifcateAssetName = "AzureRunAsCertificate"
         $ConnectionAssetName = "AzureRunAsConnection"
         $ConnectionTypeName = "AzureServicePrincipal"
- 
+
         if ($EnterpriseCertPathForRunAsAccount -and $EnterpriseCertPlainPasswordForRunAsAccount) {
         $PfxCertPathForRunAsAccount = $EnterpriseCertPathForRunAsAccount
         $PfxCertPlainPasswordForRunAsAccount = $EnterpriseCertPlainPasswordForRunAsAccount
@@ -315,34 +399,35 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
           $PfxCertPathForRunAsAccount = Join-Path $env:TEMP ($CertificateName + ".pfx")
           $PfxCertPlainPasswordForRunAsAccount = $SelfSignedCertPlainPassword
           $CerCertPathForRunAsAccount = Join-Path $env:TEMP ($CertificateName + ".cer")
-          CreateSelfSignedCertificate $KeyVaultName $CertificateName $PfxCertPlainPasswordForRunAsAccount $PfxCertPathForRunAsAccount $CerCertPathForRunAsAccount $SelfSignedCertNoOfMonthsUntilExpired 
+          CreateSelfSignedCertificate $KeyVaultName $CertificateName $PfxCertPlainPasswordForRunAsAccount $PfxCertPathForRunAsAccount $CerCertPathForRunAsAccount $SelfSignedCertNoOfMonthsUntilExpired
         }
 
-        # Create Service Principal
+        # Create a service principal
         $PfxCert = New-Object -TypeName System.Security.Cryptography.X509Certificates.X509Certificate2 -ArgumentList @($PfxCertPathForRunAsAccount, $PfxCertPlainPasswordForRunAsAccount)
         $ApplicationId=CreateServicePrincipal $PfxCert $ApplicationDisplayName
 
-        # Create the automation certificate asset
+        # Create the Automation certificate asset
         CreateAutomationCertificateAsset $ResourceGroup $AutomationAccountName $CertifcateAssetName $PfxCertPathForRunAsAccount $PfxCertPlainPasswordForRunAsAccount $true
 
         # Populate the ConnectionFieldValues
         $SubscriptionInfo = Get-AzureRmSubscription -SubscriptionId $SubscriptionId
         $TenantID = $SubscriptionInfo | Select TenantId -First 1
         $Thumbprint = $PfxCert.Thumbprint
-        $ConnectionFieldValues = @{"ApplicationId" = $ApplicationId; "TenantId" = $TenantID.TenantId; "CertificateThumbprint" = $Thumbprint; "SubscriptionId" = $SubscriptionId} 
+        $ConnectionFieldValues = @{"ApplicationId" = $ApplicationId; "TenantId" = $TenantID.TenantId; "CertificateThumbprint" = $Thumbprint; "SubscriptionId" = $SubscriptionId}
 
-        # Create a Automation connection asset named AzureRunAsConnection in the Automation account. This connection uses the service principal.
-        CreateAutomationConnectionAsset $ResourceGroup $AutomationAccountName $ConnectionAssetName $ConnectionTypeName $ConnectionFieldValues  
 
-        if ($CreateClassicRunAsAccount) {  
-            # Create Run As Account using Service Principal
+        # Create an Automation connection asset named AzureRunAsConnection in the Automation account. This connection uses the service principal.
+        CreateAutomationConnectionAsset $ResourceGroup $AutomationAccountName $ConnectionAssetName $ConnectionTypeName $ConnectionFieldValues
+
+        if ($CreateClassicRunAsAccount) {
+            # Create a Run As account by using a service principal
             $ClassicRunAsAccountCertifcateAssetName = "AzureClassicRunAsCertificate"
             $ClassicRunAsAccountConnectionAssetName = "AzureClassicRunAsConnection"
             $ClassicRunAsAccountConnectionTypeName = "AzureClassicCertificate "
             $UploadMessage = "Please upload the .cer format of #CERT# to the Management store by following the steps below." + [Environment]::NewLine +
                     "Log in to the Microsoft Azure Management portal (https://manage.windowsazure.com) and select Settings -> Management Certificates." + [Environment]::NewLine +
-                    "Then click Upload and upload the .cer format of #CERT#" 
- 
+                    "Then click Upload and upload the .cer format of #CERT#"
+
              if ($EnterpriseCertPathForClassicRunAsAccount -and $EnterpriseCertPlainPasswordForClassicRunAsAccount ) {
              $PfxCertPathForClassicRunAsAccount = $EnterpriseCertPathForClassicRunAsAccount
              $PfxCertPlainPasswordForClassicRunAsAccount = $EnterpriseCertPlainPasswordForClassicRunAsAccount
@@ -353,46 +438,52 @@ Klasik Farklı Çalıştır hesabı oluşturma seçeneğini belirlerseniz, komut
              $PfxCertPlainPasswordForClassicRunAsAccount = $SelfSignedCertPlainPassword
              $CerCertPathForClassicRunAsAccount = Join-Path $env:TEMP ($ClassicRunAsAccountCertificateName + ".cer")
              $UploadMessage = $UploadMessage.Replace("#CERT#", $CerCertPathForClassicRunAsAccount)
-             CreateSelfSignedCertificate $KeyVaultName $ClassicRunAsAccountCertificateName $PfxCertPlainPasswordForClassicRunAsAccount $PfxCertPathForClassicRunAsAccount $CerCertPathForClassicRunAsAccount $SelfSignedCertNoOfMonthsUntilExpired 
+             CreateSelfSignedCertificate $KeyVaultName $ClassicRunAsAccountCertificateName $PfxCertPlainPasswordForClassicRunAsAccount $PfxCertPathForClassicRunAsAccount $CerCertPathForClassicRunAsAccount $SelfSignedCertNoOfMonthsUntilExpired
         }
 
-        # Create the automation certificate asset
+        # Create the Automation certificate asset
         CreateAutomationCertificateAsset $ResourceGroup $AutomationAccountName $ClassicRunAsAccountCertifcateAssetName $PfxCertPathForClassicRunAsAccount $PfxCertPlainPasswordForClassicRunAsAccount $false
 
         # Populate the ConnectionFieldValues
         $SubscriptionName = $subscription.Subscription.SubscriptionName
         $ClassicRunAsAccountConnectionFieldValues = @{"SubscriptionName" = $SubscriptionName; "SubscriptionId" = $SubscriptionId; "CertificateAssetName" = $ClassicRunAsAccountCertifcateAssetName}
 
-        # Create a Automation connection asset named AzureRunAsConnection in the Automation account. This connection uses the service principal.
+        # Create an Automation connection asset named AzureRunAsConnection in the Automation account. This connection uses the service principal.
         CreateAutomationConnectionAsset $ResourceGroup $AutomationAccountName $ClassicRunAsAccountConnectionAssetName $ClassicRunAsAccountConnectionTypeName $ClassicRunAsAccountConnectionFieldValues
 
         Write-Host -ForegroundColor red $UploadMessage
         }
 
-2. Bilgisayarınızda **Windows PowerShell**’i yükseltilmiş kullanıcı haklarına sahip **Başlat** ekranından başlatın.
-3. Yükseltilmiş PowerShell komut satırı kabuğundan, 1. adımda oluşturduğunuz betiği içeren klasöre gidin ve ihtiyacınız olan parametre yapılandırmasına göre gerekli parametre değerleri ayarlayarak betiği yürütün.  
+2. Bilgisayarınızda **Başlat**’a tıklayın ve yükseltilmiş kullanıcı haklarıyla **Windows PowerShell**’i başlatın.
 
-    **Otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı oluşturma**  
-    `.\New-RunAsAccount.ps1 -ResourceGroup <ResourceGroupName> -AutomationAccountName <NameofAutomationAccount> -SubscriptionId <SubscriptionId> -ApplicationDisplayName <DisplayNameofAADApplication> -SelfSignedCertPlainPassword <StrongPassword> -CreateClassicRunAsAccount $false` 
+3. Yükseltilmiş PowerShell komut satırı kabuğundan, 1. adımda oluşturduğunuz komut dosyasını içeren klasöre gidin.
 
-    **Otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Farklı Çalıştır hesabı oluşturma**  
+4. İstediğiniz yapılandırmanın parametre değerlerini kullanarak betiği yürütün.
+
+    **Otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı oluşturma**  
+    `.\New-RunAsAccount.ps1 -ResourceGroup <ResourceGroupName> -AutomationAccountName <NameofAutomationAccount> -SubscriptionId <SubscriptionId> -ApplicationDisplayName <DisplayNameofAADApplication> -SelfSignedCertPlainPassword <StrongPassword> -CreateClassicRunAsAccount $false`
+
+    **Otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturma**  
     `.\New-RunAsAccount.ps1 -ResourceGroup <ResourceGroupName> -AutomationAccountName <NameofAutomationAccount> -SubscriptionId <SubscriptionId> -ApplicationDisplayName <DisplayNameofAADApplication> -SelfSignedCertPlainPassword <StrongPassword> -CreateClassicRunAsAccount $true`
 
-    **Kuruluş sertifikası kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Farklı Çalıştır hesabı oluşturma**  
+    **Kurumsal sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturma**  
     `.\New-RunAsAccount.ps1 -ResourceGroup <ResourceGroupName> -AutomationAccountName <NameofAutomationAccount> -SubscriptionId <SubscriptionId> -ApplicationDisplayName <DisplayNameofAADApplication>  -SelfSignedCertPlainPassword <StrongPassword> -CreateClassicRunAsAccount $true -EnterpriseCertPathForRunAsAccount <EnterpriseCertPfxPathForRunAsAccount> -EnterpriseCertPlainPasswordForRunAsAccount <StrongPassword> -EnterpriseCertPathForClassicRunAsAccount <EnterpriseCertPfxPathForClassicRunAsAccount> -EnterpriseCertPlainPasswordForClassicRunAsAccount <StrongPassword>`
 
-    **Azure Kamu bulutunda otomatik olarak imzalanan sertifika kullanarak Azure Farklı Çalıştır hesabı ve Azure Klasik Farklı Çalıştır hesabı oluşturma**  
+    **Azure Kamu bulutunda otomatik olarak imzalanan sertifika kullanarak Farklı Çalıştır hesabı ve Klasik Farklı Çalıştır hesabı oluşturma**  
     `.\New-RunAsAccount.ps1 -ResourceGroup <ResourceGroupName> -AutomationAccountName <NameofAutomationAccount> -SubscriptionId <SubscriptionId> -ApplicationDisplayName <DisplayNameofAADApplication> -SelfSignedCertPlainPassword <StrongPassword> -CreateClassicRunAsAccount $true  -EnvironmentName AzureUSGovernment`
- 
-    > [!NOTE]
-    > Betiği yürüttükten sonra Azure’ün kimlik doğrulamasını yapmanız istenecektir. Abonelik Yöneticileri rolünün üyesi ve aboneliğin ortak yöneticisi olan bir hesapla oturum açmanız gerekir.
-    > 
-    > 
 
-Betik başarıyla tamamlandıktan sonra, otomatik olarak imzalanan ortak sertifika (.cer biçimi) ile Klasik Farklı Çalıştır hesabı oluşturduysanız, betik bu sertifikayı oluşturup PowerShell oturumunu yürütmek için kullandığınız kullanıcı profili (*%USERPROFILE%\AppData\Local\Temp*) altına kaydeder veya kurumsal ortak sertifika (.cer biçimi) ile Klasik Farklı Çalıştır hesabı oluşturduysanız bu sertifikayı kullanmanız gerekir.  Klasik Azure portalına [yönetim API sertifikası yükleme](../azure-api-management-certs.md) adımlarını izleyin ve ardından [örnek koduna](#sample-code-to-authenticate-with-service-management-resources) bakarak Service Management kaynaklarıyla kimlik doğrulama yapılandırmasını doğrulayın.  Klasik Farklı Çalıştır hesabı oluşturmadıysanız, Resource Manager kaynakları kimlik doğrulaması yapmak ve kimlik bilgisi yapılandırmasını doğrulamak için aşağıdaki [örnek koduna](#sample-code-to-authenticate-with-resource-manager-resources) bakın.
+    > [!NOTE]
+    > Betik yürütüldükten sonra Azure kimlik doğrulamasını yapmanız istenecektir. Aboneliğin yöneticiler rolünün üyesi ve aboneliğin ortak yöneticisi olan bir hesapla oturum açın.
+    >
+    >
+
+Betik başarıyla yürütüldükten sonra aşağıdakilere dikkat edin:
+* Otomatik olarak imzalanan bir ortak sertifika (.cer dosyası) ile Klasik Farklı Çalıştır hesabı oluşturduysanız, betik bu hesabı oluşturup bilgisayarınızdaki geçici dosya klasörüne, PowerShell oturumunu yürütmek için kullandığınız *%USERPROFILE%\AppData\Local\Temp* kullanıcı profili altında kaydeder.
+* Kurumsal ortak sertifika (.cer file) ile bir Klasik Farklı Çalıştır hesabı oluşturduysanız bu sertifikayı kullanın. [Klasik Azure portalında yönetim API sertifikayı yükleme](../azure-api-management-certs.md) yönergelerini izleyin ve ardından [Service Management Kaynakları ile kimlik doğrulamaya yönelik örnek kodu](#sample-code-to-authenticate-with-service-management-resources) kullanarak Service Management kaynakları ile kimlik bilgisi yapılandırmasını doğrulayın. 
+* Klasik Farklı Çalıştır hesabı *oluşturmadıysanız*, Resource Manager kaynakları kimlik doğrulaması yapmak ve kimlik bilgisi yapılandırmasını doğrulamak için [Service Management kaynakları ile kimlik doğrulamaya yönelik örnek kodu](#sample-code-to-authenticate-with-resource-manager-resources) kullanın.
 
 ## <a name="sample-code-to-authenticate-with-resource-manager-resources"></a>Resource Manager kaynaklarıyla kimlik doğrulaması için örnek kod
-Runbook’larınızla Resource Manager kaynaklarını yönetecek Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmak için **AzureAutomationTutorialScript** örnek runbook’undan alınan aşağıdaki güncelleştirilmiş örnek kodu kullanabilirsiniz.   
+Runbook’larınızla Resource Manager kaynaklarını yönetecek Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmak için *AzureAutomationTutorialScript* örnek runbook’undan alınan aşağıdaki güncelleştirilmiş örnek kodu kullanabilirsiniz.
 
     $connectionName = "AzureRunAsConnection"
     $SubId = Get-AutomationVariable -Name 'SubscriptionId'
@@ -421,13 +512,12 @@ Runbook’larınızla Resource Manager kaynaklarını yönetecek Farklı Çalı�
          }
     }
 
+Bu betikte, birden fazla abonelik arasında kolayca çalışmanıza yardımcı olmak üzere abonelik bağlamına başvuruyu destekleyen iki ek kod satırı bulunur. *SubscriptionId* adlı değişken varlık, aboneliğin kimliğini içerir. `Add-AzureRmAccount` cmdlet’i belirtildikten sonra *-SubscriptionId* parametre kümesi ile [`Set-AzureRmContext`](https://msdn.microsoft.com/library/mt619263.aspx) cmdlet’i belirtilir. Değişken adı çok genelse, tanımlanmasını kolaylaştırmak amacıyla bir ön ek veya başka diğer adlandırma kuralı kullanmak için değişken adını gözden geçirebilirsiniz. Alternatif olarak, ilgili değişken varlığıyla *-SubscriptionId* yerine *-SubscriptionName* parametre kümesini kullanabilirsiniz.
 
-Bu betikte, abonelik bağlamına başvuruyu desteklemek için iki ek kod satırı bulunmaktadır; böylece birden fazla abonelikte kolayca çalışabilirsiniz. SubscriptionId adlı değişken varlığında aboneliğin kimliği vardır; Add-AzureRmAccount cmdlet’i deyiminden sonra da [Set-AzureRmContext cmdlet’i](https://msdn.microsoft.com/library/mt619263.aspx) *-SubscriptionId* parametre kümesiyle belirtilir. Değişken adı çok genelse, amaçlarınız doğrultusunda tanımlanmasını kolaylaştırmak amacıyla bir önek veya başka diğer adlandırma kuralı eklemek için değişken adını gözden geçirebilirsiniz. Alternatif olarak, ilgili değişken varlığıyla -SubscriptionId yerine -SubscriptionName parametre kümesini kullanabilirsiniz.    
-
-Runbook’ta kimlik doğrulaması için kullanılan cmdlet’in (**Add-AzureRmAccount**) *ServicePrincipalCertificate* parametre kümesini kullandığına dikkat edin.  Kimlik bilgilerini değil, hizmet asıl sertifikasını kullanarak kimlik doğrulamasını yapar.  
+Runbook’ta kimlik doğrulaması için kullandığınız cmdlet `Add-AzureRmAccount`, *ServicePrincipalCertificate* parametre kümesini kullanır. Kullanıcı kimlik bilgilerini değil, hizmet sorumlusu sertifikasını kullanarak kimlik doğrulaması yapar.
 
 ## <a name="sample-code-to-authenticate-with-service-management-resources"></a>Service Management kaynaklarıyla kimlik doğrulaması için örnek kod
-Runbook’larınızla klasik kaynakları yönetecek Klasik Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmak için **AzureClassicAutomationTutorialScript** örnek runbook’undan alınan aşağıdaki güncelleştirilmiş örnek kodu kullanabilirsiniz.
+Runbook’larınızla klasik kaynakları yönetecek Klasik Farklı Çalıştır hesabını kullanarak kimlik doğrulaması yapmak için *AzureClassicAutomationTutorialScript* örnek runbook’undan alınan aşağıdaki güncelleştirilmiş örnek kodu kullanabilirsiniz.
 
     $ConnectionAssetName = "AzureClassicRunAsConnection"
     # Get the connection
@@ -454,8 +544,7 @@ Runbook’larınızla klasik kaynakları yönetecek Klasik Farklı Çalıştır 
     Select-AzureSubscription -SubscriptionId $Conn.SubscriptionID
 
 ## <a name="next-steps"></a>Sonraki adımlar
-* Hizmet Sorumluları hakkında daha fazla bilgi için bkz. [Uygulama Nesneleri ve Hizmet Sorumlusu Nesneleri](../active-directory/active-directory-application-objects.md).
-* Azure Automation’da Rol Tabanlı Erişim Denetimi hakkında daha fazla bilgi için bkz. [Azure Automation’da rol tabanlı erişim denetimi](automation-role-based-access-control.md).
-* Sertifikalar ve Azure hizmetleri hakkında daha fazla bilgi için bkz. [Azure Cloud Services sertifikalarına genel bakış](../cloud-services/cloud-services-certs-create.md)
-
+* [Azure AD’de uygulama ve hizmet sorumlusu nesneleri](../active-directory/active-directory-application-objects.md)
+* [Azure Otomasyonu’nda rol tabanlı erişim denetimi](automation-role-based-access-control.md)
+* [Azure Cloud Services’da sertifikalara genel bakış](../cloud-services/cloud-services-certs-create.md)
 

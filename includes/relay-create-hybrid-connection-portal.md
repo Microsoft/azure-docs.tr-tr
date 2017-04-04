@@ -1,4 +1,4 @@
-Lütfen daha önce [burada][namespace-how-to] gösterildiği gibi bir Geçiş ad alanı oluşturduğunuzdan emin olun.
+Daha önce [burada][namespace-how-to] gösterildiği gibi bir Geçiş ad alanı oluşturduğunuzdan emin olun.
 
 1. [Azure Portal](https://portal.azure.com) oturum açın.
 2. Portalın sol gezinti bölmesinde **Geçiş** öğesine tıklayın.
@@ -14,7 +14,3 @@ Lütfen daha önce [burada][namespace-how-to] gösterildiği gibi bir Geçiş ad
 6. Dikey pencerenin altında yer alan **Oluştur** düğmesine tıklayın.
 
 [namespace-how-to]: ../articles/service-bus-relay/relay-create-namespace-portal.md 
-
-<!--HONumber=Feb17_HO1-->
-
-

@@ -5,7 +5,7 @@ services: active-directory-b2c
 documentationcenter: 
 author: parakhj
 manager: krassk
-editor: bryanla
+editor: parakhj
 ms.assetid: 20e92275-b25d-45dd-9090-181a60c99f69
 ms.service: active-directory-b2c
 ms.workload: identity
@@ -15,9 +15,10 @@ ms.topic: get-started-article
 ms.date: 3/13/2017
 ms.author: parakhj
 translationtype: Human Translation
-ms.sourcegitcommit: c1cd1450d5921cf51f720017b746ff9498e85537
-ms.openlocfilehash: 541849501335fb25d96cffa81b8119adc158cdd7
-ms.lasthandoff: 03/14/2017
+ms.sourcegitcommit: 9553c9ed02fa198d210fcb64f4657f84ef3df801
+ms.openlocfilehash: e04fbd97dd4d5ecaf12edf47d80572b32d29ed00
+ms.lasthandoff: 03/23/2017
+
 
 
 ---
@@ -48,18 +49,26 @@ Ayrıca dikey pencereye, [Azure portalındaki](https://portal.azure.com/) **Diğ
 2. Dikey pencerenin en üstündeki **+Add (+Ekle)** seçeneğine tıklayın.
 3. Uygulamanızı tüketicilere tanımlayacak bir **Ad** girin. Örneğin, "Contoso B2C uygulaması"na girebilirsiniz.
 4. **Web uygulamasını / web API’sini dahil et** anahtarını **Evet**’e getirin. **Yanıt URL'leri**, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri getirdiği uç noktalardır. Örneğin, `https://localhost:44316/` girin.
-5. Uygulamanızı kaydetmek için **Kaydet** seçeneğine tıklayın.
-6. Oluşturduğunuz uygulamaya tıklayın ve daha sonra kodunuzda kullanacağınız genel benzersiz **Uygulama İstemci Kimliğini** kopyalayın.
+5. Uygulamanızı kaydetmek için **Create (Oluştur)** seçeneğine tıklayın.
+6. Oluşturduğunuz uygulamaya tıklayın ve daha sonra kodunuzda kullanacağınız genel benzersiz **Uygulama İstemci Kimliğini** kopyalayın. 
+7. Web uygulamanız aynı zamanda Azure AD B2C ile güvenliği sağlanan bir web API’sini çağıracaksa **Anahtarlar** dikey penceresine gidip **Anahtarı Oluştur** düğmesine tıklayarak bir **Uygulama Gizli Anahtarı** da oluşturmak istersiniz.
 
+> [!NOTE]
+> **Uygulama Gizli Anahtarı** önemli bir güvenlik kimlik bilgisidir ve güvenliği uygun şekilde sağlanmalıdır.
+> 
+   
 
 ## <a name="register-a-web-api"></a>Web API’si kaydetme
 1. Azure portalındaki B2C özellikleri dikey penceresinde **Applications (Uygulamalar)** seçeneğine tıklayın.
 2. Dikey pencerenin en üstündeki **+Add (+Ekle)** seçeneğine tıklayın.
 3. Uygulamanızı tüketicilere tanımlayacak bir **Ad** girin. Örneğin, "Contoso B2C api" girebilirsiniz.
 4. **Web uygulamasını / web API’sini dahil et** anahtarını **Evet**’e getirin. **Yanıt URL'leri**, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri getirdiği uç noktalardır. Örneğin, `https://localhost:44316/` girin.
-5. Uygulamanızı kaydetmek için **Kaydet** seçeneğine tıklayın.
-6. Oluşturduğunuz uygulamaya tıklayın ve daha sonra kodunuzda kullanacağınız genel benzersiz **Uygulama İstemci Kimliğini** kopyalayın.
-
+5. Bir **Uygulama Kimliği URI'si** girin. Bu değer, web API’niz için kullanılan tanımlayıcıdır. Örneğin, 'notlar' ifadesini girin. Altında tam tanımlayıcı URI’si oluşturulur. 
+6. Uygulamanızı kaydetmek için **Create (Oluştur)** seçeneğine tıklayın.
+7. Oluşturduğunuz uygulamaya tıklayın ve daha sonra kodunuzda kullanacağınız genel benzersiz **Uygulama İstemci Kimliğini** kopyalayın.
+8. **Yayımlanan kapsamlar**’a tıklayın. Burada diğer uygulamalara verilebilecek izinleri (kapsamları) tanımlarsınız.
+9. Gerektiğinde daha fazla kapsam ekleyin. Varsayılan olarak, "user_impersonation" kapsamı tanımlanır. Bunun yapılması, diğer uygulamaların oturum açmış kullanıcı adına bu api’de oturum açmasına olanak tanır. İsterseniz bu seçeneği kaldırabilirsiniz. 
+10. **Kaydet** düğmesine tıklayın.
 
 ## <a name="register-a-mobilenative-application"></a>Mobil/yerel bir uygulamayı kaydetme
 1. Azure portalındaki B2C özellikleri dikey penceresinde **Applications (Uygulamalar)** seçeneğine tıklayın.
@@ -69,6 +78,11 @@ Ayrıca dikey pencereye, [Azure portalındaki](https://portal.azure.com/) **Diğ
 5. Özel şema ile bir **Yeniden yönlendirme URI’si** girin. Örneğin, com.onmicrosoft.contoso.appname://redirect/path. [İyi bir yeniden yönlendirme URI’si](#choosing-a-redirect-uri) seçtiğinizden emin olun.
 6. Uygulamanızı kaydetmek için **Kaydet** seçeneğine tıklayın.
 7. Oluşturduğunuz uygulamaya tıklayın ve daha sonra kodunuzda kullanacağınız genel benzersiz **Uygulama İstemci Kimliğini** kopyalayın.
+8. Yerel uygulamanız aynı zamanda Azure AD B2C ile güvenliği sağlanan bir web API’sini çağıracaksa **Anahtarlar** dikey penceresine gidip **Anahtarı Oluştur** düğmesine tıklayarak bir **Uygulama Gizli Anahtarı** da oluşturmak istersiniz.
+
+> [!NOTE]
+> **Uygulama Gizli Anahtarı** önemli bir güvenlik kimlik bilgisidir ve güvenliği uygun şekilde sağlanmalıdır.
+> 
 
 ### <a name="choosing-a-redirect-uri"></a>Yönlendirme URI’si seçme
 Mobil/yerel uygulamalar için bir yeniden yönlendirme URI’si seçerken dikkat edilmesi gereken iki önemli nokta şunlardır: 

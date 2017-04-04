@@ -15,8 +15,9 @@ ms.topic: get-started-article
 ms.date: 01/25/2017
 ms.author: jehollan
 translationtype: Human Translation
-ms.sourcegitcommit: ce1e0cfe7c7f52d521ef3318376af75331323083
-ms.openlocfilehash: 178a57624345a4b3e5d73e64ce4ccf81b8b90a88
+ms.sourcegitcommit: 6e0ad6b5bec11c5197dd7bded64168a1b8cc2fdd
+ms.openlocfilehash: 221f1b9f0985bbaf0553f6ca01f0f048b9976315
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -27,40 +28,64 @@ Bu senaryoyu kullanmak için aşağıdakiler gereklidir:
 
 * Bir Azure aboneliği
 * Bir Twitter hesabı
-* Outlook.com veya barındırılan Office 365 posta kutusu
+* Bir Outlook.com veya Office 365 Outlook hesabı
 
 ## <a name="create-a-new-logic-app-to-email-you-tweets"></a>Tweet’leri e-posta ile göndermek için yeni bir mantıksal uygulama oluşturma
-1. [Azure portal panosunda](https://portal.azure.com) **Yeni**’yi seçin. 
-2. Arama çubuğunda 'logic' araması yapın ve ardından **Logic App** öğesini seçin. Ayrıca **Yeni**, **Web + Mobil** ve **Mantıksal Uygulama**’yi seçebilirsiniz. 
-3. Mantıksal uygulamanız için bir ad girin, bir konum, kaynak grubu ve **Oluştur**’u seçin.  **Panoya Sabitle**’yi seçerseniz mantıksal uygulama dağıtıldıktan sonra otomatik olarak açılır.  
-4. Mantıksal uygulamanızı ilk kez açtıktan sonra başlamak için bir şablondan seçim yapabilirsiniz.  Bunu sıfırdan oluşturmak için şimdilik **Boş Mantıksal Uygulama**’ya tıklayın. 
-5. Tetikleyici oluşturmanız için gereken ilk öğedir.  Mantıksal uygulamanızı başlatacak olay budur.  Tetikleyici arama kutusunda **twitter** araması yapın ve seçin.
-6. Şimdi tetiklenecek bir arama terimi yazın.  **Sıklık** ve **Aralık**, mantıksal uygulamanızın tweet’leri ne sıklıkla denetleyeceğini (ve bu süre boyunca tüm tweet’leri döndüreceğini) belirler.
-    ![Twitter araması](media/logic-apps-create-a-logic-app/twittersearch.png)
-7. **Yeni adım** düğmesini ve ardından **Eylem ekle** veya **Koşul ekle** öğesini seçin
-8. **Eylem Ekle** öğesini seçtiğinizde bir eylem seçmek üzere [kullanılabilir bağlayıcılar](../connectors/apis-list.md) içinden arama yapabilirsiniz. Örneğin, outlook.com adresinden posta göndermek için **Outlook.com - E-posta Gönder**’i seçebilirsiniz:  
-    ![Eylemler](media/logic-apps-create-a-logic-app/actions.png)
-9. Bundan sonra istediğiniz e-posta için parametreleri doldurmanız gerekir:  ![Parametreler](media/logic-apps-create-a-logic-app/parameters.png)
+
+1. [Azure Portal](https://portal.azure.com) oturum açın. 
+
+2. Sol menüden **Yeni** > **Kurumsal Tümleştirme** > **Mantıksal Uygulama**’yı seçin.
+
+    Ayrıca **Yeni**’yi seçebilir, ardından arama kutusuna `logic app` yazıp Enter tuşuna basabilirsiniz. **Mantıksal Uygulama** > **Oluştur**’u seçin.
+
+3. Mantıksal uygulamanız için bir ad girin, Azure aboneliğinizi seçin, bir Azure kaynak grubu oluşturun veya seçin, bir konum seçin ve **Oluştur**’u seçin.
+
+    **Panoya Sabitle**’yi seçerseniz, mantıksal uygulama dağıtımdan sonra otomatik olarak açılır.
+
+4. Mantıksal uygulamanızı ilk kez açtığınızda başlamak için bir şablondan seçim yapabilirsiniz.
+Bunu sıfırdan oluşturmak için şimdilik **Boş Mantıksal Uygulama**’ya tıklayın. 
+
+5. Tetikleyici oluşturmanız için gereken ilk öğedir. Mantıksal uygulamanızı başlatan olay budur. Arama kutusunda **twitter** araması yapın ve **Yeni bir tweet gönderildiğinde** öğesini seçin. Twitter hesabınızın kullanıcı adı ve parolasıyla oturum açın.
+
+6. Şimdi mantıksal uygulamanızı tetikleyecek bir arama terimi yazın.
+
+   ![Twitter araması](media/logic-apps-create-a-logic-app/twittersearch.png)
+
+    **Sıklık** ve **Aralık**, mantıksal uygulamanızın tweet’leri ne sıklıkla denetleyeceğini belirler ve bu süre boyunca tüm tweet’leri döndürür.
+
+7. **Yeni adım**’ı ve ardından **Eylem ekle** veya **Koşul ekle** öğesini seçin.
+
+    **Eylem Ekle** öğesini seçtiğinizde bir eylem seçmek üzere [kullanılabilir bağlayıcılar](../connectors/apis-list.md) içinde arama yapabilirsiniz. 
+
+8. Arama kutusunda **outlook** araması yapın ve Outlook hesabınızdan belirtilen herhangi bir e-posta adresine e-posta göndermek için **E-posta gönder**’i seçin.
+
+   ![Eylemler](media/logic-apps-create-a-logic-app/actions.png)
+
+9. Bundan sonra istediğiniz e-posta için parametreleri doldurmanız gerekir:
+
+   ![Parametreler](media/logic-apps-create-a-logic-app/parameters.png)
+
 10. Son olarak, mantıksal uygulamanızı canlı hale getirmek için **Kaydet**’i seçebilirsiniz.
 
 ## <a name="manage-your-logic-app-after-creation"></a>Oluşturduktan sonra mantıksal uygulamanızı yönetme
+
 Mantıksal uygulamanız artık çalışır durumdadır. Girilen arama terimini içeren tweet’ler düzenli olarak denetlenir. Eşleşen bir tweet bulunduğunda size bir e-posta gönderilir. Son olarak, uygulamayı devre dışı bırakmayı veya nasıl çalıştığını görürsünüz.
 
-1. [Azure Portal](https://portal.azure.com)’a gidin
-2. Ekranın sol tarafındaki **Gözat**’a tıklayın ve **Logic Apps**’ı seçin.
-3. Geçerli durumunu ve genel bilgileri görmek için oluşturduğunuz yeni mantıksal uygulamaya tıklayın.
-4. Yeni mantıksal uygulamanızı düzenlemek için **Düzenle** öğesine tıklayın.
-5. Uygulamayı kapatmak için komut çubuğunda **Devre Dışı Bırak**’a tıklayın.
-6. Mantık uygulamanızın ne zaman çalışacağını izlemek için çalışma ve tetikleme geçmişlerini görüntüleyin.  En son verileri görmek için **Yenile**’ye tıklayabilirsiniz.
+1. [Azure Portal](https://portal.azure.com) gidin.
+
+2. Sol menüdeki **Diğer hizmetler**’e tıklayın. **Kurumsal Tümleştirme** altında **Logic Apps**’ı seçin. Mantıksal uygulamanızı seçin.
+
+    *    Uygulamanızın durumunu, yürütme geçmişini ve genel bilgilerini görüntülemek için, mantıksal uygulama menüsünde **Genel Bakış**’ı seçin. Beklediğiniz verileri bulamazsanız, komut çubuğunda **Yenile**’yi seçin.
+
+    *    Uygulamanızı düzenlemek için, mantıksal uygulama menüsünde **Mantıksal Uygulama Tasarımcısı**’nı seçin.
+
+    *    Uygulamanızı geçici olarak kapatmak için, mantıksal uygulama menüsünde **Genel Bakış**’ı seçin. Komut çubuğunda **Devre Dışı Bırak**’ı seçin.
+
+    *    Uygulamanızı silmek için, mantıksal uygulama menüsünde **Genel Bakış**’ı seçin. 
+    Komut çubuğunda **Sil**’i seçin. Mantıksal uygulamanızın adını girip **Sil**’i seçin.
 
 5 dakikadan daha kısa bir süre içinde bulutta çalışan basit bir mantıksal uygulama ayarlayabildiniz. Logic Apps özelliklerini kullanma hakkında daha fazla bilgi için bkz. [Logic Apps özelliklerini kullanma]. Mantıksal Uygulama tanımları hakkında bilgi edinmek için bkz. [Mantıksal Uygulama tanımları yazma](../logic-apps/logic-apps-author-definitions.md).
 
 <!-- Shared links -->
 [Azure portal]: https://portal.azure.com
 [Logic Apps özelliklerini kullanma]: logic-apps-create-a-logic-app.md
-
-
-
-<!--HONumber=Jan17_HO4-->
-
-

@@ -1,6 +1,6 @@
 ---
-title: "VMware’den Azure’a Azure Site Recovery Dağıtım Planlayıcısı| Microsoft Belgeleri"
-description: "Bu belge Azure Site Recovery Dağıtım Planlayıcısı kullanıcı kılavuzudur."
+title: "VMware’den Azure’a Azure Site Recovery dağıtım planlayıcısı| Microsoft Docs"
+description: "Bu belge Azure Site Recovery dağıtım planlayıcısı kullanıcı kılavuzudur."
 services: site-recovery
 documentationcenter: 
 author: nsoneji
@@ -15,219 +15,252 @@ ms.topic: hero-article
 ms.date: 2/21/2017
 ms.author: nisoneji
 translationtype: Human Translation
-ms.sourcegitcommit: a087df444c5c88ee1dbcf8eb18abf883549a9024
-ms.openlocfilehash: 2575621d72b7db2b090ba923324697b7fa7b8308
-ms.lasthandoff: 03/15/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: 431f73e1be45dec9aa0fe186cb22078f8d95588d
+ms.lasthandoff: 03/28/2017
 
 
 ---
-#<a name="azure-site-recovery-deployment-planner"></a>Azure Site Recovery Dağıtım Planlayıcısı
-Bu belge, VMware’den Azure’a üretim dağıtımları için Azure Site Recovery Dağıtım Planlayıcısı kullanım kılavuzudur.
+# <a name="azure-site-recovery-deployment-planner"></a>Azure Site Recovery dağıtım planlayıcısı
+Bu makale, VMware’den Azure’a üretim dağıtımları için Azure Site Recovery kullanım kılavuzudur.
 
+## <a name="overview"></a>Genel Bakış
 
-##<a name="overview"></a>Genel Bakış
+Site Recovery kullanarak herhangi bir VMware sanal makinesini (VM) korumaya başlamadan önce, istenen kurtarma noktası hedefini (RPO) karşılayacak günlük veri değişikliği hızınıza göre yeterli bant genişliğini ayırmanız gerekir. Şirket içinde doğru sayıda yapılandırma sunucusu ve işlem sunucusu dağıttığınızdan emin olun.
 
-Azure Site Recovery kullanarak herhangi bir VMware sanal makinesini korumadan önce, istenen RPO’yu karşılayacak günlük veri değişikliği hızınıza göre yeterli bant genişliğini ayırmanız gerekir. Şirket içinde doğru sayıda Yapılandırma Sunucusu ve İşlem Sunucusu dağıtmanız gerekir. Ayrıca, zaman içinde artan kullanım nedeniyle kaynak üretim sunucularınızdaki büyümeyi hesaba katacak şekilde doğru tür ve sayıda hedef Azure Depolama hesabı (standart veya premium) oluşturmanız gerekir. Bir sanal makine için depolama türüne, iş yükü özellikleri (R/W IOPS, veri değişim sıklığı) ve Azure Site Recovery limitleri temel alınarak karar verilir.  
+Ayrıca doğru tür ve sayıda hedef Azure depolama hesabı oluşturmanız gerekir. Zaman içinde artan kullanım nedeniyle kaynak üretim sunucularınızdaki büyümeyi hesaba katarak standart veya premium depolama hesapları oluşturun. İş yükü özelliklerine (örneğin, saniyede okuma/yazma G/Ç işlemi [IOPS] veya veri değişim sıklığı) ve Site Recovery limitlerine göre VM başına depolama türü seçin.
 
-Azure Site Recovery Dağıtım Planlayıcısı Genel Önizlemesi, şu anda yalnızca VMware’den Azure’a senaryoları için kullanılabilen bir komut satırı aracıdır. Başarılı çoğaltma ve Yük Devretme Testine yönelik bant genişliği ve Azure depolama gereksinimlerini anlamak için, bu aracı kullanarak VMware sanal makinelerinizin profilini uzaktan oluşturabilirsiniz (herhangi bir üretim etkisi olmadan).  Şirket içinde herhangi bir Azure Site Recovery bileşeni yüklemeden aracı çalıştırabilirsiniz, ancak aldığınız aktarım hızı sonuçlarının doğru olması için Planlayıcıyı, üretim dağıtımının ilk adımlarında dağıtmanız gereken Azure Site Recovery Configuration Server’a yönelik en düşük gereksinimleri karşılayan bir Windows Server üzerinde çalıştırmanız önerilir.
+Azure Site Recovery dağıtım planlayıcısı genel önizlemesi, şu anda yalnızca VMware’den Azure’a senaryoları için kullanılabilen bir komut satırı aracıdır. Başarılı çoğaltma ve yük devretme testine yönelik bant genişliği ve Azure depolama gereksinimlerini anlamak için, bu aracı kullanarak VMware sanal makinelerinizin profilini uzaktan oluşturabilirsiniz (herhangi bir üretim etkisi olmadan). Şirket içinde herhangi bir Site Recovery bileşeni yüklemeden aracı çalıştırabilirsiniz. Ancak, elde edilen aktarım hızı sonuçlarını doğru şekilde almak için, planlayıcıyı üretim dağıtımının ilk adımlarından birinde dağıtmanız gereken Site Recovery yapılandırma sunucusunun en düşük gereksinimlerini karşılayan bir Windows Server üzerinde çalıştırmanız önerilir.
 
 Araç aşağıdaki bilgileri sağlar:
 
-**Uyumluluk değerlendirmesi**<br>
-* Disk sayısı, disk boyutu, IOPS ve değişim sıklığına göre sanal makine uygunluk değerlendirmesi
+**Uyumluluk değerlendirmesi**
 
-**Ağ bant genişliği gereksinimine karşılık RPO değerlendirmesi**<br>
-* Delta çoğaltma için gereken tahmini ağ bant genişliği<br>
-* Azure Site Recovery’nin şirket içinden Azure’a alabileceği aktarım hızı<br>
-* Belirli bir süre içinde ilk çoğaltmayı tamamlamak için tahmin edilen bant genişliğine göre toplu hale getirilecek sanal makine sayısı<br>
+* Disk sayısı, disk boyutu, IOPS ve değişim sıklığına göre VM uygunluk değerlendirmesi
+* Delta çoğaltma için gereken tahmini ağ bant genişliği
 
-**Microsoft Azure altyapı gereksinimleri**<br>
-* Her sanal makine için depolama türü (standart veya premium depolama) gereksinimi<br>
-* Çoğaltma için sağlanacak toplam standart ve premium depolama hesabı sayısı<br>
-* Azure Depolama kılavuzuna göre depolama hesabı adlandırma önerileri<br>
-* Her sanal makinenin depolama hesabı yerleşimi<br>
-* Abonelik üzerinde yük devretme testi/yük devretme öncesinde sağlanacak Microsoft Azure çekirdek sayısı<br>
-* Her bir şirket içi sanal makine için önerilen Microsoft Azure sanal makine boyutu<br>
+**Ağ bant genişliği ile RPO değerlendirmesi karşılaştırması**
 
-**Şirket içi altyapı gereksinimleri**<br>
-* Şirket içinde dağıtılması gereken Yapılandırma Sunucusu ve İşlem Sunucusu sayısı<br>
+* Delta çoğaltma için gereken tahmini ağ bant genişliği
+* Site Recovery’nin şirket içinden Azure’a alabileceği aktarım hızı
+* Belirli bir süre içinde ilk çoğaltmayı tamamlamak için tahmin edilen bant genişliğine göre toplu hale getirilecek VM sayısı
+
+**Azure altyapı gereksinimleri**
+
+* Her VM için depolama türü (standart veya premium depolama hesabı) gereksinimi
+* Çoğaltma için ayarlanacak toplam standart ve premium depolama hesabı sayısı
+* Azure Depolama kılavuzuna göre depolama hesabı adlandırma önerileri
+* Tüm sanal makineler için depolama hesabı yerleşimi
+* Abonelik üzerinde yük devretme testi veya yük devretme öncesinde ayarlanacak Azure çekirdek sayısı
+* Şirket içindeki her VM için önerilen Azure VM boyutu
+
+**Şirket içi altyapı gereksinimleri**
+* Şirket içinde dağıtılması gereken yapılandırma sunucusu ve işlem sunucusu sayısı
 
 >[!IMPORTANT]
 >
->Araçtaki tüm bu hesaplamalar, zaman içinde artan kullanım nedeniyle iş yükü özelliklerinizde %30’luk büyüme faktörü varsayılarak ve tüm profil oluşturma ölçümlerinin (R/W IOPS, değişim sıklığı, vb.) yüzde 95’lik dilimi alınarak yapılır. Büyüme faktörü ve yüzdelik dilim hesaplaması parametrelerinin her ikisi de yapılandırılabilir özelliktedir. Hesaplama için kullanılan [büyüme faktörü](site-recovery-deployment-planner.md#growth-factor) ve [yüzdelik dilim değeri hakkında daha fazla bilgi alın](site-recovery-deployment-planner.md#percentile-value-used-for-the-calculation).
+>Kullanım zaman içinde çoğalabileceğinden, önceki tüm araç hesaplamaları iş yükü özelliklerinde yüzde 30’luk bir büyüme olduğu varsayılarak ve tüm profil oluşturma ölçümlerinin (okuma/yazma IOPS, değişim hızı vb) yüzde 95’lik dilim değeri kullanılarak yapılır. Büyüme faktörü ve yüzdelik dilim hesaplaması öğelerinin her ikisi de yapılandırılabilir özelliktedir. Büyüme faktörü hakkında daha fazla bilgi almak için "Büyüme faktörü ile ilgili dikkat edilecek noktalar" bölümüne bakın. Yüzdelik dilim değeri hakkında daha fazla bilgi için "Hesaplama için kullanılan yüzdelik dilim değeri" bölümüne bakın.
 >
 
-
 ## <a name="requirements"></a>Gereksinimler
-Araçta başlıca iki aşama vardır: profil oluşturma ve rapor oluşturma. Yalnızca aktarım hızını hesaplamaya yönelik üçüncü bir seçenek de mevcuttur. Profil oluşturma / aktarım hızı ölçümünün başlatıldığı sunucuya yönelik gereksinimler aşağıda verilmiştir.
+Araçta başlıca iki aşama vardır: profil oluşturma ve rapor oluşturma. Yalnızca aktarım hızını hesaplamaya yönelik üçüncü bir seçenek de mevcuttur. Profil oluşturma ve aktarım hızı ölçümünün başlatıldığı sunucuya yönelik gereksinimler, aşağıdaki tabloda sunulmuştur:
 
-| Gereksinim | Açıklama|
+| Sunucu gereksinimi | Açıklama|
 |---|---|
-|Profil oluşturma ve aktarım hızı ölçümü| <br>İşletim Sistemi: Microsoft Windows Server 2012 R2 <br>En azından aşağıdaki Yapılandırma Sunucusu [boyutu](https://aka.ms/asr-v2a-on-prem-components) ile eşleşmesi idealdir<br>Makine Yapılandırması: 8 vCPus, 16 GB RAM, 300 GB HDD<br [Microsoft .NET Framework 4.5](https://aka.ms/dotnet-framework-45)<br>[VMware vSphere PowerCLI 6.0 R3](https://developercenter.vmware.com/tool/vsphere_powercli/6.0)<br>[Visual Studio 2012 için Microsoft Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)<br> Bu sunucudan Microsoft Azure’a İnternet erişimi<br> Microsoft Azure depolama hesabı<Br>Sunucu üzerinde yönetici erişimi<br>100 GB en düşük boş disk alanı (30 gün için her birinin profilinin oluşturulduğu varsayılan ortalama 3 diske sahip 1000 sanal makine varsayıldığında)|
-| Rapor Oluşturma| Microsoft Excel 2013 ve üzerinin yüklü olduğu herhangi bir Windows PC/Windows Server |
-| Kullanıcı İzinleri | Profil oluşturma sırasında VMware vCenter/vSphere sunucusuna erişmek için kullanılan kullanıcı hesabına yönelik salt okunur izinler|
-
+|Profil oluşturma ve aktarım hızı ölçümü| <ul><li>İşletim sistemi: Microsoft Windows Server 2012 R2<br>(En azından [yapılandırma sunucusuna yönelik boyut önerileri](https://aka.ms/asr-v2a-on-prem-components) ile eşleşmesi idealdir)</li><li>Makine yapılandırması: 8 vCPU, 16 GB RAM, 300 GB HDD</li><li>[Microsoft .NET Framework 4.5](https://aka.ms/dotnet-framework-45)</li><li>[VMware vSphere PowerCLI 6.0 R3](https://developercenter.vmware.com/tool/vsphere_powercli/6.0)</li><li>[Visual Studio 2012 için Microsoft Visual C++ Yeniden Dağıtılabilir](https://aka.ms/vcplusplus-redistributable)</li><li>Bu sunucudan Azure’a İnternet erişimi</li><li>Azure depolama hesabı</li><li>Sunucu üzerinde yönetici erişimi</li><li>En az 100 GB boş disk alanı (30 günlük profili oluşturulmuş ve her biri ortalama üç diske sahip 1000 VM varsayıldığında)</li><li>VMware vCenter istatistik düzeyi ayarları 2 veya daha yüksek bir düzeye ayarlanmalıdır</li></ul>|
+| Rapor oluşturma | Microsoft Excel 2013 ve üzerinin yüklü olduğu herhangi bir Windows PC ya da Windows Server |
+| Kullanıcı izinleri | Profil oluşturma sırasında VMware vCenter sunucusuna/VMware vSphere ESXi ana bilgisayarına erişmek için kullanılan kullanıcı hesabına yönelik salt okunur izin |
 
 > [!NOTE]
 >
-> Araç, sanal makinelerin profilini yalnızca VMDK ve RDM diskleri ile oluşturabilir. Sanal makine profilini iSCSI veya NFS diskleri ile oluşturamaz. Azure Site Recovery, VMware sunucuları için iSCSI ve NFS disklerini desteklese de, dağıtım planlayıcısının konuk içinde bulunmaması ve vCenter performans sayaçlarını kullanarak profil oluşturmaması nedeniyle araç bu disk türlerini görüntüleyemez.
+>Araç yalnızca VMDK ve RDM disklerine sahip VM’lerin profilini oluşturabilir. VM profilini iSCSI veya NFS diskleri ile oluşturamaz. Site Recovery, VMware sunucuları için iSCSI ve NFS disklerini desteklese de, dağıtım planlayıcısının konuk içinde bulunmaması ve yalnızca vCenter performans sayaçlarını kullanarak profil oluşturması nedeniyle araç bu disk türlerini görüntüleyemez.
 >
 
+## <a name="download-and-extract-the-public-preview"></a>Genel önizlemeyi indirin ve ayıklayın
+1. [Site Recovery dağıtım planlayıcısı genel önizlemesinin](https://aka.ms/asr-deployment-planner) son sürümünü indirin.  
+Araç bir zip klasöründe paketlenmiştir. Aracın geçerli sürümü yalnızca VMware’den Azure’a senaryosunu destekler.
 
-##<a name="download"></a>İndirme
-Azure Site Recovery Dağıtım Planlayıcısı Genel Önizlemesinin en son sürümünü [indirin](https://aka.ms/asr-deployment-planner).  Araç zip biçiminde paketlenmiştir.  Aracın geçerli sürümü yalnızca VMware’den Azure’a senaryosunu destekler.
+2. Zip klasörünü, aracı çalıştırmak istediğiniz Windows sunucusuna kopyalayın.  
+Sunucu, profili oluşturulacak VM’leri tutan vCenter sunucusu/vSphere ESXi ana bilgisayarına bağlanmak için ağ erişimine sahipse, aracı Windows Server 2012 R2’den çalıştırabilirsiniz. Ancak, aracı donanım yapılandırması [yapılandırma sunucusu boyutlandırma yönergeleri](https://aka.ms/asr-v2a-on-prem-components) ile eşleşen bir sunucu üzerinde çalıştırmanız önerilir. Site Recovery bileşenlerini şirket içinde zaten dağıttıysanız, aracı yapılandırma sunucusundan çalıştırın.
 
-Zip dosyasını, aracı çalıştırmak istediğiniz Windows Server’a kopyalayın. Aracı, profili oluşturulacak sanal makineleri tutan VMware vCenter sunucusuna veya VMware vSphere ESXi konağına bağlanmak için ağ erişimi olan herhangi bir Windows Server 2012 R2’den çalıştırabilmenize rağmen, donanım yapılandırması [Yapılandırma Sunucusu boyutlandırma yönergelerine](https://aka.ms/asr-v2a-on-prem-components) uygun olarak yapılmış bir sunucuda aracın çalıştırılması önerilir.  Azure Site Recovery bileşenlerini şirket içinde zaten dağıttıysanız, aracı Yapılandırma Sunucusu’ndan çalıştırmanız gerekir. Aracı çalıştırdığınız sunucudaki donanım yapılandırmasının Yapılandırma Sunucusu (yerleşik bir İşlem Sunucusuna sahiptir) ile aynı olması, aracın bildirdiği elde edilen aktarım hızının, çoğaltma sırasında Azure Site Recovery tarafından elde edilebilen gerçek aktarım hızı ile eşleşmesi açısından önerilir; aktarım hızı hesaplaması, sunucu üzerindeki kullanılabilir ağ bant genişliğine ve sunucunun donanım yapılandırmasına (CPU, depolama, vb.) bağlıdır. Aracı başka bir sunucudan çalıştırırsanız, o sunucudan Microsoft Azure’a aktarım hızı hesaplanır, ayrıca sunucunun donanım yapılandırması Yapılandırma Sunucusundan farklı olabilir ve aracın bildirdiği elde edilen aktarım hızı doğru olmaz.
+ Aracı çalıştırdığınız sunucuda, yapılandırma sunucusu (yerleşik bir işlem sunucusuna sahiptir) ile aynı donanım yapılandırmasına sahip olmanız önerilir. Bu tür bir yapılandırma, araç tarafından elde edildiği rapor edilen aktarım hızının, Site Recovery tarafından profil oluşturma sırasında elde edilebilecek gerçek aktarım hızı ile eşleşmesini sağlar. Aktarım hızı hesaplaması, sunucu üzerinde kullanılabilir ağ bant genişliğine ve sunucunun donanım yapılandırmasına (CPU, depolama vb.) bağlıdır. Aracı başka bir sunucudan çalıştırırsanız, bu sunucudan Microsoft Azure’a aktarım hızı hesaplanır. Ayrıca, sunucunun donanım yapılandırması, yapılandırma sunucusundan farklı olabileceği için, aracın elde edildiğini rapor ettiği aktarım hızı hatalı olabilir.
 
-Zip klasörünü ayıklayın. Birden fazla dosya ve alt klasör görebilirsiniz. Yürütülebilir dosya, üst klasördeki ASRDeploymentPlanner.exe dosyasıdır.
+3. .zip klasörünü ayıklayın.  
+Klasör birden fazla dosya ve alt klasör içerir. Yürütülebilir dosya, üst klasördeki ASRDeploymentPlanner.exe dosyasıdır.
 
-Örnek: .zip dosyasını E:\ sürücüsüne kopyalayıp ayıklayın.
-E:\ASR Deployment Planner-Preview_v1.1.zip
+    Örnek:  
+    .zip dosyasını E:\ sürücüsüne kopyalayıp ayıklayın.
+   E:\ASR Deployment Planner-Preview_v1.1.zip
 
-E:\ASR Deployment Planner-Preview_v1.1\ ASR Deployment Planner-Preview_v1.1\ ASRDeploymentPlanner.exe
+    E:\ASR Deployment Planner-Preview_v1.1\ ASR Deployment Planner-Preview_v1.1\ ASRDeploymentPlanner.exe
 
-##<a name="capabilities"></a>Özellikler
-Komut satırı aracı (ASRDeploymentPlanner.exe) aşağıdaki üç modun herhangi birinde çalıştırılabilir:
+## <a name="capabilities"></a>Özellikler
+Komut satırı aracını (ASRDeploymentPlanner.exe) aşağıdaki üç modun herhangi birinde çalıştırabilirsiniz:
 
-1.    Profil oluşturma  
-2.    Rapor oluşturma
-3.    Aktarım hızı alma
+1. Profil oluşturma  
+2. Rapor oluşturma
+3. Aktarım hızı alma
 
-İlk olarak aracı profil oluşturma modunda çalıştırarak sanal makine veri değişim sıklığı ve IOPS bilgilerini toplamanız gerekir.  Ardından, ağ bant genişliği ve depolama gereksinimlerini bulmak üzere raporu oluşturmak için aracı çalıştırın.
+İlk olarak, VM veri değişim sıklığı ve IOPS verilerini toplamak için profil oluşturma modunda aracı çalıştırın. Ardından, ağ bant genişliği ve depolama gereksinimlerini bulmak üzere raporu oluşturmak için aracı çalıştırın.
 
-##<a name="profiling"></a>Profil oluşturma
-Profil oluşturma modunda Dağıtım Planlayıcısı aracı, sanal makineye ilişkin performans verilerini toplamak için vCenter Server veya vSphere ESXi konaklarına bağlanır.
+## <a name="profiling"></a>Profil oluşturma
+Profil oluşturma modunda dağıtım planlayıcısı aracı, sanal makineye ilişkin performans verilerini toplamak için vCenter sunucusu/vSphere ESXi ana bilgisayarına bağlanır.
 
-* Profil oluşturma, üretim sanal makineleri ile doğrudan bir bağlantı kurulmadığı için üretim sanal makinelerinin performansını etkilemez. Tüm performans verileri vCenter Server/ vSphere ESXi konağından toplanır.
-* Profil oluşturma nedeniyle sunucu üzerindeki etkinin önemsiz olduğundan emin olmak için vCenter sunucusu/vSphere EXSi konağı 15 dakikada bir sorgulanır. Ancak, araç her dakikaya ait performans sayacı verilerini depoladığı için bunun yapılması profil oluşturma doğruluğunu tehlikeye atmaz.
+* Profil oluşturma işlemi sırasında üretim VM’leri ile doğrudan bağlantı kurulmadığı için bu VM’lerin performansı etkilenmez. Tüm performans verileri vCenter sunucusu/ vSphere ESXi ana bilgisayarından toplanır.
+* Profil oluşturma nedeniyle sunucu üzerindeki etkinin önemsiz olduğundan emin olmak için, araç vCenter sunucusu/vSphere EXSi ana bilgisayarını 15 dakikada bir sorgular. Araç her dakikaya ait performans sayacı verilerini depoladığı için, sorgu aralığı profil oluşturma doğruluğunu tehlikeye atmaz.
 
-####<a name="create-a-list-of-virtual-machines-to-profile"></a>Profili oluşturulacak sanal makinelerin listesini oluşturma
-İlk olarak, profilini oluşturmak istediğiniz sanal makinelerin bir listesine sahip olmanız gerekir. Aşağıdaki VMware vSphere PowerCLI komutlarını kullanarak bir VMware vCenter veya VMware vSphere ESXi konağındaki tüm sanal makinelerin adlarını alabilirsiniz. Alternatif olarak, bir dosyada profilini oluşturmak istediğiniz sanal makinelerin sadece kolay adlarını / IP adreslerini listeleyebilirsiniz.
+### <a name="create-a-list-of-vms-to-profile"></a>Profili oluşturulacak sanal makinelerin listesini oluşturma
+İlk olarak, profili oluşturulacak sanal makinelerin bir listesi gerekir. Aşağıdaki yordamda VMware vSphere PowerCLI komutlarını kullanarak bir VMware vCenter sunucusu/vSphere ESXi ana bilgisayarındaki tüm sanal makinelerin adlarını alabilirsiniz. Alternatif olarak, profilini el ile oluşturmak istediğiniz sanal makinelerin kolay adlarını veya IP adreslerini bir dosyada listeleyebilirsiniz.
 
-1.    VMware vSphere PowerCLI’nin yüklü olduğu sanal makinede oturum açın
-2.    VMware vSphere PowerCLI konsolunu açın
-3.    Betik için yürütme ilkesinin devre dışı bırakılmadığından emin olun. Devre dışı bırakılmışsa, VMware vSphere PowerCLI konsolunu yönetici modunda başlatın ve aşağıdaki komutu çalıştırarak etkinleştirin:
+1. VMware vSphere PowerCLI’nin yüklü olduğu sanal makinede oturum açın.
+2. VMware vSphere PowerCLI konsolunu açın.
+3. Betik için yürütme ilkesinin etkin olduğundan emin olun. Devre dışı bırakılmışsa, VMware vSphere PowerCLI konsolunu yönetici modunda başlatın ve aşağıdaki komutu çalıştırarak etkinleştirin:
 
             Set-ExecutionPolicy –ExecutionPolicy AllSigned
 
-4.    Bir VMware vCenter veya VMware vSphere ESXi üzerindeki tüm sanal makinelerin adlarını alıp bir .txt dosyasına depolamak için aşağıdaki iki komutu çalıştırın.
+4. Bir vCenter sunucusu/vSphere ESXi ana bilgisayarındaki tüm VM’lerin adlarını almak ve listeyi bir .txt dosyasında depolamak için burada listelenen iki komutu çalıştırın.
 &lsaquo;Sunucu adı&rsaquo;, &lsaquo;kullanıcı adı&rsaquo;, &lsaquo;parola&rsaquo;, &lsaquo;outputfile.txt&rsaquo; değerlerini girdilerinizle değiştirin.
 
             Connect-VIServer -Server <server name> -User <user name> -Password <password>
 
             Get-VM |  Select Name | Sort-Object -Property Name >  <outputfile.txt>
 
+5. Çıktı dosyasını Not Defteri’nde açın ve sonra profilini oluşturmak istediğiniz tüm VM’lerin adlarını, her satıra bir VM gelecek şekilde başka bir dosyaya (örneğin, ProfileVMList.txt) kopyalayın. Bu dosya, komut satırı aracının *-VMListFile* parametresinin girdisi olarak kullanılır.
 
-5.    Çıktı dosyasını Not Defteri'nde açın. Profilini oluşturmak istediğiniz tüm sanal makineleri, her satırda bir sanal makine adı olacak şekilde başka bir dosyaya (örneğin ProfileVMList.txt) kopyalayın. Bu dosya, komut satırı aracının -VMListFile parametresinin girdisi olarak kullanılır
+    ![Dağıtım planlayıcısındaki VM ad listesi](./media/site-recovery-deployment-planner/profile-vm-list.png)
 
-    ![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/profile-vm-list.png)
-
-
-####<a name="start-profiling"></a>Profil oluşturmaya başlama
-Profili oluşturulacak sanal makinelerin listesini oluşturduktan sonra, aracı profil oluşturma modunda çalıştırabilirsiniz. Aracın profil oluşturma modunda çalıştırılmasına yönelik zorunlu ve isteğe bağlı parametreler aşağıda verilmiştir. [] içindeki parametreler isteğe bağlıdır.
+### <a name="start-profiling"></a>Profil oluşturmaya başlama
+Profili oluşturulacak sanal makinelerin listesini oluşturduktan sonra, aracı profil oluşturma modunda çalıştırabilirsiniz. Aracın profil oluşturma modunda çalıştırılmasına yönelik zorunlu ve isteğe bağlı parametreler aşağıda verilmiştir.
 
 ASRDeploymentPlanner.exe -Operation StartProfiling /?
 
 | Parametre adı | Açıklama |
 |---|---|
-| -Operation |      StartProfiling |
-| -Server | Sanal makineleri için profil oluşturulacak vCenter sunucusunun/ESXi konağının tam etki alanı adı.|
-| -User | vCenter sunucusuna/ESXi konağına bağlanmak için kullanıcı adı. Kullanıcının en azından salt okunur erişimi olmalıdır.|
-| -VMListFile |    Profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir sanal makine adı/IP adresi içermelidir. Dosyada belirtilen sanal makine adı, vCenter sunucusu veya ESXi konağındaki VM adıyla aynı olmalıdır. <br> Örnek: “VMList.txt” dosyası aşağıdaki sanal makineleri içerir:<br>virtual_machine_A <br>10.150.29.110<br>virtual_machine_B |
-| -NoOfDaysToProfile | Profil oluşturmanın çalıştırılacağı gün sayısı. Ortamınızda belirtilen süre içindeki iş yükü deseninin doğru bir öneri sağlayacak şekilde gözlemlenip kullanılması için profil oluşturma işleminin 15 günden uzun süre çalıştırılmaması önerilir |
-| [-Directory] |    Profil oluşturma sırasında oluşturulan profil oluşturma verilerini depolamak için UNC veya yerel dizin yolu. Belirtilmemişse, geçerli yolun altındaki ‘ProfiledData’ adlı dizin varsayılan dizin olarak kullanılır. |
-| [-Password ] | vCenter sunucusuna/ESXi konağına bağlanmak için parola. Şu anda belirtilmezse, komut yürütülürken sorulacaktır.|
-|  [-StorageAccountName]  | Şirket içinden Azure’a veri çoğaltma için ulaşılabilir aktarım hızını bulmak için Azure Depolama hesabı adı. Araç, aktarım hızını hesaplamak için test verilerini bu depolama hesabına yükler.|
-| [-StorageAccountKey] | Depolama hesabına erişmek için kullanılan Azure Depolama hesabı anahtarı. Azure portal > Depolama hesapları > [Depolama hesabı adı] > Ayarlar > Erişim Anahtarları > Anahtar1 (veya klasik depolama hesabı için birincil erişim anahtarı) öğesine gidin. |
+| -Operation | StartProfiling |
+| -Server | Sanal makineleri için profil oluşturulacak vCenter sunucusunun/vSphere ESXi ana bilgisayarının tam etki alanı adı.|
+| -User | vCenter sunucusuna/vSphere ESXi ana bilgisayarına bağlanmak için kullanıcı adı. Kullanıcının en azından salt okunur erişimi olmalıdır.|
+| -VMListFile |    Profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir VM adı/IP adresi içermelidir. Dosyada belirtilen sanal makine adı, vCenter sunucusu/vSphere ESXi ana bilgisayarındaki VM adıyla aynı olmalıdır.<br>Örneğin, VMList.txt dosyası aşağıdaki sanal makineleri içerir:<ul><li>virtual_machine_A</li><li>10.150.29.110</li><li>virtual_machine_B</li><ul> |
+| -NoOfDaysToProfile | Profil oluşturmanın çalıştırılacağı gün sayısı. Ortamınızda belirtilen süre içindeki iş yükü deseninin doğru bir öneri sağlayacak şekilde gözlemlenip kullanılması için profil oluşturma işleminin 15 günden uzun süre çalıştırılmaması önerilir. |
+| -Directory | (İsteğe bağlı) Profil oluşturma sırasında oluşturulan profil oluşturma verilerini depolamak için evrensel adlandırma kuralı (UNC) veya yerel dizin yolu. Dizin adı belirtilmemişse, geçerli yolun altındaki ‘ProfiledData’ adlı dizin varsayılan dizin olarak kullanılır. |
+| -Password | (İsteğe bağlı) vCenter sunucusuna/vSphere ESXi ana bilgisayarına bağlanmak için kullanılacak parola. Şu anda belirtmezseniz, komut yürütülürken sorulacaktır.|
+| -StorageAccountName | (İsteğe bağlı) Şirket içinden Azure’a veri çoğaltma için ulaşılabilir aktarım hızını bulmak için depolama hesabı adı. Araç, aktarım hızını hesaplamak için test verilerini bu depolama hesabına yükler.|
+| -StorageAccountKey | (İsteğe bağlı) Depolama hesabına erişmek için kullanılan depolama hesabı anahtarı. Azure portalı > Depolama hesapları > <*Depolama hesabı adı*> > Ayarlar > Erişim Anahtarları > Anahtar1 (veya klasik depolama hesabı için birincil erişim anahtarı) öğesine gidin. |
 
-Sanal makinelerinizin profilini en az 15 ile 30 gün süreyle oluşturmanız önerilir. Profil oluşturma süresi boyunca ASRDeploymentPlanner.exe çalışmaya devam eder. Araç, profil oluşturma süre girdisini gün cinsinden alır. Aracın hızlı bir testi için birkaç saat veya dakika boyunca profil oluşturmak isterseniz, Genel Önizleme sürümünde saati karşılık gelen gün ölçüsüne dönüştürmeniz gerekir.  Örneğin, 30 dakika boyunca profil oluşturmak için girdinin 30 / (60*24) = 0,021 gün olması gerekir.  İzin verilen en kısa profil oluşturma süresi 30 dakikadır.
+VM’lerinizin en az 15 ila 30 günlük profilinin oluşturulması önerilir. Profil oluşturma süresi boyunca ASRDeploymentPlanner.exe çalışmaya devam eder. Araç, profil oluşturma süre girdisini gün cinsinden alır. Aracın hızlı bir testi için birkaç saat veya dakika boyunca profil oluşturmak isterseniz, genel önizleme sürümünde saati karşılık gelen gün ölçüsüne dönüştürmeniz gerekir. Örneğin, 30 dakika boyunca profil oluşturmak için girdinin 30/(60*24) = 0,021 gün olması gerekir. İzin verilen en kısa profil oluşturma süresi 30 dakikadır.
 
-Profil oluşturma sırasında, Azure Site Recovery’nin çoğaltma sırasında Yapılandırma Sunucusu / İşlem Sunucusundan Azure’a elde edilebileceği aktarım hızını bulmak için, isteğe bağlı olarak bir Azure Depolama hesabı adı ve anahtarı geçirebilirsiniz. Profil oluşturma sırasında Azure Depolama hesabı adı ve anahtarı geçirilmezse, araç ulaşılabilir aktarım hızını hesaplamaz.
+Profil oluşturma sırasında, Site Recovery’nin çoğaltma sırasında yapılandırma sunucusu veya işlem sunucusundan Azure’a elde edilebileceği aktarım hızını bulmak için, isteğe bağlı olarak bir depolama hesabı adı ve anahtarı geçirebilirsiniz. Profil oluşturma sırasında depolama hesabı adı ve anahtarı geçirilmezse, araç ulaşılabilir aktarım hızını hesaplamaz.
 
+Çeşitli sanal makine kümeleri için aracın birden çok örneğini çalıştırabilirsiniz. Sanal makine adlarının, profil kümelerinin hiçbirinde yinelenmediğinden emin olun. Örneğin, on sanal makine (VM1 - VM10) profili oluşturdunuz ve birkaç gün sonra beş sanal makine (VM11 - VM15) profili daha oluşturmak istiyorsunuz; bu durumda, ikinci sanal makine kümesi (VM11 - VM15) için başka bir komut satırı konsolundan aracı çalıştırabilirsiniz. Ancak, ikinci sanal makine kümesinde birinci profil oluşturma örneğinden herhangi bir sanal makine adı olmadığından veya ikinci çalıştırma için farklı bir çıktı dizini kullandığınızdan emin olun. Aracın iki örneği aynı sanal makinelerin profilini oluşturmak için kullanılır ve aynı çıktı dizinini kullanırsa, oluşturulan rapor hatalı olacaktır.
 
-Farklı sanal makine kümeleri için aracın birden çok örneğini çalıştırabilirsiniz. Sanal makine adlarının, profil kümelerinin hiçbirinde yinelenmediğinden emin olun. Örneğin, on sanal makine (VM1 - VM10) profili oluşturdunuz ve birkaç gün sonra beş sanal makine (VM11 - VM15) profili daha oluşturmak istiyorsunuz; bu durumda, ikinci sanal makine kümesi (VM11 - VM15) için başka bir komut satırı konsolundan aracı çalıştırabilirsiniz. Ancak, ikinci sanal makine kümesinde birinci profil oluşturma örneğinden herhangi bir sanal makine adı olmadığından veya ikinci çalıştırma için farklı bir çıktı dizini kullandığınızdan emin olun. Aracın iki örneği aynı sanal makinelerin profilini oluşturmak için kullanılır ve aynı çıktı dizinini kullanırsa, oluşturulan rapor hatalı olacaktır.
+Sanal makine yapılandırması, profil oluşturma işleminin başında bir kez yakalanır ve VMDetailList.xml adlı bir dosyada depolanır. Rapor oluşturulduğunda bu bilgiler kullanılır. Profil oluşturmanın başlangıcı ile bitişi arasında VM yapılandırmasında meydana gelen hiçbir değişiklik (örneğin, çekirdek, disk veya NIC sayısının artması) yakalanmaz. Profili oluşturulmuş bir VM yapılandırması profil oluşturma sırasında değiştiyse, genel önizleme sürümünde rapor oluştururken en son VM bilgilerini almaya yönelik geçici çözüm aşağıda verilmiştir:
 
-Sanal makine yapılandırması, profil oluşturma işleminin başında bir kez yakalanır ve VMDetailList.xml adlı bir dosyada depolanır. Bu bilgiler, rapor oluşturma sırasında kullanılır. Profil oluşturmanın başlamasıyla sona ermesi arasında VM yapılandırmasında meydana gelen hiçbir değişiklik (örneğin çekirdek, disk, NIC sayısının artması vb.) yakalanmaz. Profili oluşturulmuş herhangi bir sanal makine yapılandırmasının profil oluşturma sırasında değiştiği bir durumla karşılaşırsanız, Genel Önizleme sürümünde rapor oluştururken en son sanal makine bilgilerini almaya yönelik geçici çözüm aşağıda verilmiştir.   
-
-* 'VMdetailList.xml' dosyasını yedekleyip, dosyayı geçerli konumundan silin.
+* VMdetailList.xml dosyasını yedekleyip, dosyayı geçerli konumundan silin.
 * -User ve -Password bağımsız değişkenlerini rapor oluşturma sırasında geçirin.
 
-Profil oluşturma komutu, profil oluşturma dizininde birkaç dosya oluşturur; lütfen bu dosyaların hiçbirini silmeyin, aksi takdirde rapor oluşturma işlemi etkilenir.
+Profil oluşturma komutu, profil oluşturma dizininde birkaç dosya oluşturur. Rapor oluşturmayı etkileyeceği için hiçbir dosyayı silmeyin.
 
-#####<a name="example-1-to-profile-virtual-machines-for-30-days-and-find-the-throughput-from-on-premises-to-azure"></a>Örnek 1: 30 günlük sanal makine profili oluşturmak ve şirket içinden Azure’a aktarım hızını bulma
-ASRDeploymentPlanner.exe **-Operation** StartProfiling -Directory “E:\vCenter1_ProfiledData” **-Server** vCenter1.contoso.com **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  **-NoOfDaysToProfile**  30  **-User** vCenterUser1 **-StorageAccountName**  asrspfarm1 **-StorageAccountKey** Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
+#### <a name="example-1-profile-vms-for-30-days-and-find-the-throughput-from-on-premises-to-azure"></a>Örnek 1: 30 günlük sanal makine profili oluşturma ve şirket içinden Azure’a aktarım hızını bulma
+```
+ASRDeploymentPlanner.exe -Operation StartProfiling -Directory “E:\vCenter1_ProfiledData” -Server vCenter1.contoso.com -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  -NoOfDaysToProfile  30  -User vCenterUser1 -StorageAccountName  asrspfarm1 -StorageAccountKey Eby8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
+```
 
-#####<a name="example-2-to-profile-virtual-machines-for-15-days"></a>Örnek 2: 15 günlük sanal makine profili oluşturma
-ASRDeploymentPlanner.exe **-Operation** StartProfiling **-Directory** “E:\vCenter1_ProfiledData” **-Server** vCenter1.contoso.com **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  **-NoOfDaysToProfile**  15  -User vCenterUser1
+#### <a name="example-2-profile-vms-for-15-days"></a>Örnek 2: 15 günlük sanal makine profili oluşturma
 
-#####<a name="example-3-to-profile-virtual-machines-for-1-hour-for-a-quick-test-of-the-tool"></a>Örnek 3: Aracın hızlı bir testine yönelik 1 saatlik sanal makine profili oluşturma
-ASRDeploymentPlanner.exe **-Operation** StartProfiling **-Directory** “E:\vCenter1_ProfiledData” **-Server** vCenter1.contoso.com **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  **-NoOfDaysToProfile**  0.04  **-User** vCenterUser1
+```
+ASRDeploymentPlanner.exe -Operation StartProfiling -Directory “E:\vCenter1_ProfiledData” -Server vCenter1.contoso.com -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  -NoOfDaysToProfile  15  -User vCenterUser1
+```
 
+#### <a name="example-3-profile-vms-for-1-hour-for-a-quick-test-of-the-tool"></a>Örnek 3: Aracın hızlı bir testine yönelik 1 saatlik VM profili oluşturma
+```
+ASRDeploymentPlanner.exe -Operation StartProfiling -Directory “E:\vCenter1_ProfiledData” -Server vCenter1.contoso.com -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  -NoOfDaysToProfile  0.04  -User vCenterUser1
+```
 
 >[!NOTE]
 >
-> * Aracın çalıştığı sunucu yeniden başlatılırsa veya kilitlenmişse ya da Ctrl+C tuşları ile araçtan çıkış yaparsanız, profili oluşturulan veriler korunur. Bu nedenle, profili oluşturulan verilen son 15 dakikası kaybedilebilir. Sunucu yedeklemeyi başlattıktan sonra aracı profil oluşturma modunda yeniden çalıştırmanız gerekir.
->
-> * Azure Depolama hesabı adı ve anahtarı geçirildiğinde, araç profil oluşturma işleminin son adımında aktarım hızını ölçer. Profil oluşturma düzgün biçimde tamamlanmadan önce araç sonlandırılırsa, aktarım hızı hesaplanmaz. Raporu oluşturmadan önce aktarım hızını bulmak için GetThroughput işlemini her zaman komut satırı konsolundan çalıştırabilirsiniz; aksi takdirde, oluşturulan raporda ulaşılan aktarım hızı bilgileri bulunmaz.
->
+>* Aracın çalıştığı sunucu yeniden başlatılırsa veya kilitlenmişse ya da Ctrl+C tuşlarını kullanarak aracı kapatırsanız, profili oluşturulan veriler korunur. Ancak, profili oluşturulan verilen son 15 dakikası kaybedilebilir. Böyle bir durumda, sunucu yeniden başlatıldıktan sonra aracı profil oluşturma modunda yeniden çalıştırmanız gerekir.
+>* Depolama hesabı adı ve anahtarı geçirildiğinde, araç profil oluşturma işleminin son adımında aktarım hızını ölçer. Profil oluşturma tamamlanmadan önce araç kapatılırsa, aktarım hızı hesaplanmaz. Raporu oluşturmadan önce aktarım hızını bulmak için, komut satırı konsolundan GetThroughput işlemini çalıştırabilirsiniz. Aksi takdirde, oluşturulan rapor aktarım hızı bilgilerini içermez.
 
-##<a name="generate-report"></a>Rapor oluşturma
-Tüm dağıtım önerilerini özetleyen rapor çıktısı olarak araç bir XLSM (makro özellikli Microsoft Excel dosyası) oluşturur; rapor DeploymentPlannerReport_<Unique Numeric Identifier>.xlsm olarak adlandırılır ve belirtilen dizine yerleştirilir.
 
-Profil oluşturma tamamlandıktan sonra, aracı rapor oluşturma modunda çalıştırabilirsiniz. Aracın rapor oluşturma modunda çalıştırılmasına yönelik zorunlu ve isteğe bağlı parametreler aşağıda verilmiştir. [] içindeki parametreler isteğe bağlıdır.
+## <a name="generate-a-report"></a>Rapor oluşturma
+Araç, rapor çıktısı olarak tüm dağıtım önerilerini özetleyen makro özellikli bir Microsoft Excel dosyası (XLSM dosyası) oluşturur. Rapor, DeploymentPlannerReport_<*benzersiz sayısal tanımlayıcı*>.xlsm olarak adlandırılıp belirtilen dizine yerleştirilir.
 
-ASRDeploymentPlanner.exe -Operation GenerateReport /?
+Profil oluşturma tamamlandıktan sonra, aracı rapor oluşturma modunda çalıştırabilirsiniz. Aşağıdaki tabloda, rapor oluşturma modunda çalışmaya yönelik zorunlu ve isteğe bağlı parametreler listelenmiştir.
+
+`ASRDeploymentPlanner.exe -Operation GenerateReport /?`
 
 |Parametre adı | Açıklama |
 |-|-|
 | -Operation | GenerateReport |
-| -Server |  Raporu oluşturulacak profili oluşturulmuş sanal makinelerin bulunduğu vCenter/vSphere Sunucusu tam etki alanı adı veya IP adresi (profil oluşturma sırasında kullandığınız adın veya IP adresinin aynısını kullanın). Profil oluşturma sırasında bir vCenter Sunucusu kullandıysanız, rapor oluşturma için vSphere Sunucusu kullanamazsınız.|
-| -VMListFile | Rapor oluşturulacak profili oluşturulmuş sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir sanal makine adı/IP adresi içermelidir. Dosyada belirtilen sanal makine adları, vCenter sunucusu ya da ESXi konağındakilerle aynı olmalı ve profil oluşturma sırasında kullanılanla eşleşmelidir.|
-| [-Directory] | Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Belirtilmezse, 'ProfiledData' dizini kullanılır. |
-| [-GoalToCompleteIR] |    Profili oluşturulan sanal makinelerin ilk çoğaltmasının tamamlanması gereken saat sayısı. Oluşturulan rapor, ilk çoğaltması belirtilen süre içinde tamamlanması gereken sanal makine sayısını sağlar. Varsayılan değer 72 saattir. |
-| [-User] | vCenter/vSphere sunucusuna bağlanmak için kullanıcı adı. Bu parametre, sanal makinelerin disk sayısı, çekirdek sayısı, NIC sayısı gibi raporda kullanılacak en son yapılandırma bilgilerini getirmek için kullanılır. Bu seçenek belirtilmezse, profil oluşturma işleminin başında toplanan yapılandırma bilgileri kullanılır. |
-| [-Password] | vCenter sunucusuna/ESXi konağına bağlanmak için parola. Parametre olarak belirtilmezse, daha sonra komut yürütülürken sorulacaktır. |
-| [-DesiredRPO] | Dakika cinsinden istenen Kurtarma Noktası Hedefi (RPO). Varsayılan değer 15 dakikadır.|
-| [-Bandwidth] | MB/sn cinsinden bant genişliği. Bu değer, belirtilen bant genişliği için ulaşılabilecek RPO’yu hesaplamak için kullanılır. |
-| [-StartDate]  | AA-GG-YYYY:SS:DD (24 saat biçiminde) cinsinden başlangıç tarihi ve saati. ‘StartDate’ değeri ‘EndDate’ ile birlikte belirtilmelidir. Belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
-| [-EndDate] | AA-GG-YYYY:SS:DD (24 saat biçiminde) cinsinden bitiş tarihi ve saati. ‘EndDate’ değeri ‘StartDate’ ile birlikte belirtilmelidir. Belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
-| [-GrowthFactor] |Yüzde cinsinden büyüme faktörü. Varsayılan değer %30'dur.  |
+| -Server |  Raporu oluşturulacak profili oluşturulmuş sanal makinelerin bulunduğu vCenter/vSphere sunucusu tam etki alanı adı veya IP adresi (profil oluşturma sırasında kullandığınız adın veya IP adresinin aynısını kullanın). Profil oluşturma sırasında bir vCenter sunucusu kullandıysanız, rapor oluşturma için vSphere sunucusu kullanamazsınız.|
+| -VMListFile | Raporun oluşturulacağı profili oluşturulmuş sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir VM adı veya IP adresi içermelidir. Dosyada belirtilen VM adları, vCenter sunucusu/vSphere ESXi ana bilgisayarındakilerle aynı olmalı ve profil oluşturma sırasında kullanılanla eşleşmelidir.|
+| -Directory | (İsteğe bağlı) Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Bir ad belirtilmezse, 'ProfiledData' dizini kullanılır. |
+| -GoalToCompleteIR | (İsteğe bağlı) Profili oluşturulan sanal makinelerin ilk çoğaltmasının tamamlanması gereken saat sayısı. Oluşturulan rapor, ilk çoğaltması belirtilen süre içinde tamamlanması gereken VM sayısını sağlar. Varsayılan değer 72 saattir. |
+| -User | (İsteğe bağlı) vCenter/vSphere sunucusuna bağlanmak için kullanılacak kullanıcı adı. Bu ad, sanal makinelerin disk sayısı, çekirdek sayısı, NIC sayısı gibi raporda kullanılacak en son yapılandırma bilgilerini getirmek için kullanılır. Bir ad belirtilmezse, profil oluşturma işleminin başında toplanan yapılandırma bilgileri kullanılır. |
+| -Password | (İsteğe bağlı) vCenter sunucusuna/vSphere ESXi ana bilgisayarına bağlanmak için kullanılacak parola. Parola parametre olarak belirtilmezse, daha sonra komut yürütülürken sorulacaktır. |
+| -DesiredRPO | (İsteğe bağlı) Dakika cinsinden istenen kurtarma noktası hedefi. Varsayılan değer 15 dakikadır.|
+| -Bandwidth | MB/sn cinsinden bant genişliği. Belirtilen bant genişliği için ulaşılabilecek RPO’yu hesaplamak için kullanılan parametre. |
+| -StartDate | (İsteğe bağlı) AA-GG-YYYY:SS:DD (24 saat biçiminde) cinsinden başlangıç tarihi ve saati. *StartDate* değeri *EndDate* ile birlikte belirtilmelidir. StartDate belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
+| -EndDate | (İsteğe bağlı) AA-GG-YYYY:SS:DD (24 saat biçiminde) cinsinden bitiş tarihi ve saati. *EndDate* değeri *StartDate* ile birlikte belirtilmelidir. EndDate belirtildiğinde, StartDate ile EndDate arasında toplanan profili oluşturulmuş veriler için rapor oluşturulur. |
+| -GrowthFactor | (İsteğe bağlı) Yüzde olarak ifade edilen büyüme faktörü. Varsayılan değer yüzde 30'dur. |
 
+#### <a name="example-1-generate-a-report-with-default-values-when-the-profiled-data-is-on-the-local-drive"></a>Örnek 1: Profili oluşturulan veriler yerel sürücüde olduğunda raporu varsayılan değerlerle oluşturma
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “\\PS1-W2K12R2\vCenter1_ProfiledData” -VMListFile “\\PS1-W2K12R2\vCenter1_ProfiledData\ProfileVMList1.txt”
+```
 
-##### <a name="example-1-to-generate-report-with-default-values-when-profiled-data-is-on-the-local-drive"></a>Örnek 1: Profili oluşturulan veriler yerel sürücüde olduğunda raporu varsayılan değerlerle oluşturma
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “E:\vCenter1_ProfiledData” **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt”
+#### <a name="example-2-generate-a-report-when-the-profiled-data-is-on-a-remote-server"></a>Örnek 2: Profili oluşturulan veriler uzak bir sunucuda olduğunda rapor oluşturma
+Uzak dizin üzerinde okuma/yazma erişiminiz olmalıdır.
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “\\PS1-W2K12R2\vCenter1_ProfiledData” -VMListFile “\\PS1-W2K12R2\vCenter1_ProfiledData\ProfileVMList1.txt”
+```
 
+#### <a name="example-3-generate-a-report-with-a-specific-bandwidth-and-goal-to-complete-ir-within-specified-time"></a>Örnek 3: Belirli bir bant genişliği ve belirtilen süre içinde IR tamamlama hedefi ile rapor oluşturma
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “E:\vCenter1_ProfiledData” -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt” -Bandwidth 100 -GoalToCompleteIR 24
+```
 
-##### <a name="example-2-to-generate-report-when-profiled-data-is-on-a-remote-server-user-should-have-readwrite-access-on-the-remote-directory"></a>Örnek 2: Profili oluşturulan veriler uzak bir sunucuda olduğunda rapor oluşturma. Kullanıcının uzak dizin üzerinde okuma/yazma erişimi olmalıdır.
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “\\\\PS1-W2K12R2\vCenter1_ProfiledData” **-VMListFile** “\\\\PS1-W2K12R2\vCenter1_ProfiledData\ProfileVMList1.txt”
+#### <a name="example-4-generate-a-report-with-a-5-percent-growth-factor-instead-of-the-default-30-percent"></a>Örnek 4: Yüzde 30’luk varsayılan değer yerine yüzde 5 büyüme faktörü ile rapor oluşturma
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “E:\vCenter1_ProfiledData” -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt” -GrowthFactor 5
+```
 
-##### <a name="example-3-generate-report-with-specific-bandwidth-and-goal-to-complete-ir-within-specified-time"></a>Örnek 3: Belirli bir bant genişliği ve belirtilen süre içinde IR tamamlama hedefi ile rapor oluşturma
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “E:\vCenter1_ProfiledData” **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt” **-Bandwidth** 100 **-GoalToCompleteIR** 24
+#### <a name="example-5-generate-a-report-with-a-subset-of-profiled-data"></a>Örnek 5: Profili oluşturulan verilerin bir alt kümesi ile rapor oluşturma
+Örneğin, 30 günlük profili oluşturulmuş verilerinizin olduğunu ve raporu yalnızca 20 gün için oluşturduğunuzu varsayalım.
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “E:\vCenter1_ProfiledData” -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt” -StartDate  01-10-2017:12:30 -EndDate 01-19-2017:12:30
+```
 
-##### <a name="example-4-generate-report-with-5-growth-factor-instead-of-the-default-30"></a>Örnek 4: %30’luk varsayılan değer yerine %5 büyüme faktörü ile rapor oluşturma
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “E:\vCenter1_ProfiledData” **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt” **-GrowthFactor** 5
+#### <a name="example-6-generate-a-report-for-5-minute-rpo"></a>Örnek 6: 5 dakikalık RPO için rapor oluşturma
+```
+ASRDeploymentPlanner.exe -Operation GenerateReport -Server vCenter1.contoso.com -Directory “E:\vCenter1_ProfiledData” -VMListFile “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  -DesiredRPO 5
+```
 
-##### <a name="example-5-generate-report-with-a-subset-of-profiled-data-say-you-have-30-days-of-profiled-data-and-want-to-generate-the-report-for-only-20-days"></a>Örnek 5: Profili oluşturulan verilerin bir alt kümesi ile rapor oluşturma. 30 günlük profili oluşturulmuş verilerinizin olduğunu ve raporu yalnızca 20 gün için oluşturduğunuzu varsayalım.
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “E:\vCenter1_ProfiledData” **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt” **-StartDate**  01-10-2017:12:30 -**EndDate** 01-19-2017:12:30
+## <a name="percentile-value-used-for-the-calculation"></a>Hesaplama için kullanılan yüzdelik değer
+**Rapor oluşturulurken, profil oluşturma sırasında toplanan performans ölçümlerinin hangi varsayılan yüzdelik dilim değeri araç tarafından kullanılır?**
 
-##### <a name="example-6-generate-report-for-5-minutes-rpo"></a>Örnek 6: 5 dakikalık RPO için rapor oluşturma.
-ASRDeploymentPlanner.exe **-Operation** GenerateReport **-Server** vCenter1.contoso.com **-Directory** “E:\vCenter1_ProfiledData” **-VMListFile** “E:\vCenter1_ProfiledData\ProfileVMList1.txt”  **-DesiredRPO** 5
+Aracın, tüm sanal makinelerin profili oluşturulurken toplanan okuma/yazma IOPS, yazma IOPS ve veri değişim sıklığı için varsayılan değeri yüzde 95’lik dilimdir. Bu ölçüm, VM’lerinizin geçici olaylar nedeniyle görebileceği %100’lük dilim artışının, hedef depolama hesabı ve kaynak bant genişliği gereksinimlerini belirlemek için kullanılmamasını sağlar. Örneğin, geçici olay günde bir kez gerçekleştirilen bir yedekleme işi, düzenli aralıklarla yapılan veritabanı dizini oluşturma veya analiz raporu oluşturma etkinliği ya da kısa süreli diğer benzer olaylar olabilir.
 
-### <a name="percentile-value-used-for-the-calculation"></a>Hesaplama için kullanılan yüzdelik değer
-**Rapor oluşturulurken, profil oluşturma sırasında toplanan performans ölçümlerinin hangi varsayılan yüzdelik dilim değeri kullanılır?**
+Yüzde 95’lik dilim değeri, gerçek iş yükü özelliklerinin gerçek bir resmini verir ve bu iş yükleri Azure üzerinde çalışırken en iyi performansı sağlar. Bu sayıyı değiştirmenizin gerekli olacağı düşünülmemektedir. Bu sayıyı değiştirirseniz (örn. yüzde 90’lık dilime), bu *ASRDeploymentPlanner.exe.config* yapılandırma dosyasını varsayılan klasörde güncelleştirebilir ve kaydederek var olan profili oluşturulmuş verilere ilişkin yeni bir rapor oluşturabilirsiniz.
+```
+<add key="WriteIOPSPercentile" value="95" />      
+<add key="ReadWriteIOPSPercentile" value="95" />      
+<add key="DataChurnPercentile" value="95" />
+```
 
-Aracın, tüm sanal makinelerin profili oluşturulurken toplanan okuma/yazma IOPS, yazma IOPS ve veri değişim sıklığı için varsayılan değeri yüzde 95’lik dilimdir. Bu değer, örneğin günde bir kez çalışan bir yedekleme işi, düzenli bir veritabanı dizini oluşturma veya analiz raporu oluşturma etkinliği ya da profil oluşturma döneminde gerçekleşen kısa süreli benzer bir olay gibi geçici olaylar nedeniyle sanal makinelerinizin karşılaşabileceği yüzde 100’lük dilimin, hedef Azure Depolama ve kaynak bant genişliği gereksinimlerini belirlemek üzere kullanılmamasını sağlar. Yüzde 95’lik dilim değeri, gerçek iş yükü özelliklerinin gerçek bir resmini verir ve bu iş yükleri Microsoft Azure üzerinde çalışırken en iyi performansı sağlar. Bu sayıyı sık değiştirmeniz beklenmez, ancak daha da düşürmeyi seçerseniz (örn. yüzde 90’lık dilim), bu ‘ASRDeploymentPlanner.exe.config’ yapılandırma dosyasını varsayılan klasörde güncelleştirebilir ve kaydederek var olan profili oluşturulmuş verilere ilişkin yeni bir rapor oluşturabilirsiniz.
+## <a name="growth-factor-considerations"></a>Büyüme faktörü ile ilgili dikkat edilmesi gerekenler
+**Dağıtımları planlarken neden büyüme faktörünü göz önünde bulundurmalıyım?**
 
-        &lsaquo;add key="WriteIOPSPercentile" value="95" /&rsaquo;>      
-        &lsaquo;add key="ReadWriteIOPSPercentile" value="95" /&rsaquo;>      
-        &lsaquo;add key="DataChurnPercentile" value="95" /&rsaquo;
+Zaman içindeki kullanımın olası artışı varsayılarak, iş yükü özelliklerinizde büyümenin hesaba katılması önemlidir. Koruma uygulandıktan sonra iş yükü özellikleriniz değişirse, korumayı devre dışı bırakıp yeniden etkinleştirmeden farklı bir depolama hesabına geçiş yapamazsınız.
 
-### <a name="growth-factor"></a>Büyüme faktörü
-**Dağıtım planlaması sırasında büyüme faktörü neden göz önünde bulundurulmalıdır?**
+Örneğin, bugün sanal makinenizin standart bir depolama çoğaltma hesabına uygun olduğunu düşünelim. Önümüzdeki üç ay üzerinde bazı değişiklikler oluşabilir:
 
-Zaman içindeki kullanımın olası artışı varsayılarak, iş yükü özelliklerinizde büyümenin hesaba katılması önemlidir. Bunun nedeni, korunduktan sonra iş yükü özellikleriniz değişirse, korumayı devre dışı bırakıp yeniden etkinleştirmeden koruma için şu anda farklı bir Azure Depolama hesabına geçmenin yolu olmamasıdır. Örneğin günümüzde bir sanal makine standart bir depolama çoğaltma hesabına uyuyorsa (diyelim ki üç aylık sürede), sanal makine üzerinde çalışan uygulamanın kullanıcı sayısının artması nedeniyle, örneğin VM üzerindeki değişim sıklığı artar ve Azure Site Recovery çoğaltmasının daha yüksek olan yeni değişim sıklığına ayak uydurabilmesi için premium depolamaya geçmeyi gerektirirse, premium depolama hesabı için korumayı devre dışı bırakıp yeniden etkinleştirmeniz gerekir. Bu nedenle, dağıtım planlaması sırasında büyümenin planlanması önemle tavsiye edilir ve varsayılan değer %30’dur. Uygulamalarınızın kullanım desenini ve büyüme tahminlerini en iyi siz bilirsiniz ve rapor oluştururken bu sayıyı uygun şekilde siz değiştirebilirsiniz. Aslında, profili oluşturulmuş aynı verilerle farklı büyüme faktörleri içeren birden fazla rapor oluşturabilir ve en çok işinize yarayacak hedef Azure Depolama ile kaynak bant genişliği önerilerini görebilirsiniz.
+* VM üzerinde çalışan uygulamanın kullanıcı sayısı artar.
+* VM üzerinde artan değişim hızı, Site Recovery çoğaltmasının gerçekleştirilebilmesi için VM’nizin premium depolamaya geçmesini gerektirir.
+* Sonuç olarak, bir premium depolama hesabında korumayı devre dışı bırakıp yeniden etkinleştirmeniz gerekir.
 
-Oluşturulan Microsoft Excel raporu aşağıdaki sayfaları içerir
+Büyümeyi dağıtım planlaması sırasında ve varsayılan değer yüzde 30 iken planlamanız önerilir. Uygulamalarınızın kullanım desenini ve büyüme tahminlerini en iyi siz bilirsiniz ve rapor oluştururken bu sayıyı uygun şekilde siz değiştirebilirsiniz. Ayrıca, profili oluşturulmuş aynı verilerle farklı büyüme faktörleri içeren birden fazla rapor oluşturabilir ve en çok işinize yarayacak hedef depolama ile kaynak bant genişliği önerilerini belirleyebilirsiniz.
+
+Oluşturulan Microsoft Excel raporu aşağıdaki bilgileri içerir:
 
 * [Girdi](site-recovery-deployment-planner.md#input)
 * [Öneriler](site-recovery-deployment-planner.md#recommendations-with-desired-rpo-as-input)
@@ -236,274 +269,297 @@ Oluşturulan Microsoft Excel raporu aşağıdaki sayfaları içerir
 * [Uyumlu VM’ler](site-recovery-deployment-planner.md#compatible-vms)
 * [Uyumsuz VM’ler](site-recovery-deployment-planner.md#incompatible-vms)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/dp-report.png)
+![Dağıtım planlayıcısı](./media/site-recovery-deployment-planner/dp-report.png)
 
+## <a name="get-throughput"></a>Aktarım hızı alma
 
-##<a name="get-throughput"></a>Aktarım hızı alma
-Azure Site Recovery’nin çoğaltma sırasında şirket içinden Azure’a elde edebildiği aktarım hızını tahmin etmek için aracı GetThroughput modunda çalıştırın. Araç, aracın çalıştığı sunucudan aktarım hızını hesaplar (Yapılandırma Sunucusu boyutlandırma kılavuzunu temel alan bir sunucu olması idealdir).  Azure Site Recovery altyapı bileşenlerini şirket içinde zaten dağıttıysanız, aracı Yapılandırma Sunucusu’nda çalıştırın.
+Site Recovery’nin çoğaltma sırasında şirket içinden Azure’a elde edebildiği aktarım hızını tahmin etmek için aracı GetThroughput modunda çalıştırın. Araç, üzerinde çalıştığı sunucudan aktarım hızını hesaplar. Bu sunucunun yapılandırma sunucusu boyutlandırma kılavuzunu temel alması idealdir. Site Recovery altyapı bileşenlerini şirket içinde zaten dağıttıysanız, aracı yapılandırma sunucusunda çalıştırın.
 
-Bir komut satırı konsolu açın ve ASR dağıtım planlama aracının klasörüne gidin.  ASRDeploymentPlanner.exe dosyasını aşağıdaki parametrelerle çalıştırın. [] içindeki parametreler isteğe bağlıdır.
+Bir komut satırı konsolu açın ve Site Recovery dağıtım planlama aracının klasörüne gidin. ASRDeploymentPlanner.exe dosyasını aşağıdaki parametrelerle çalıştırın.
 
-ASRDeploymentPlanner.exe -Operation GetThroughput /?
+`ASRDeploymentPlanner.exe -Operation GetThroughput /?`
 
 |Parametre adı | Açıklama |
 |-|-|
 | -operation | GetThroughput |
-| [-Directory] | Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Belirtilmezse, 'ProfiledData' dizini kullanılır.  |
-| -StorageAccountName | Şirket içinden Azure’a veri çoğaltma için kullanılan bant genişliğini bulmak için Azure Depolama hesabı adı. Araç, kullanılan bant genişliğini bulmak için test verilerini bu depolama hesabına yükler. |
-| -StorageAccountKey | Depolama hesabına erişmek için kullanılan Azure Depolama Hesabı Anahtarı. Azure portal > Depolama hesapları > [Depolama hesabı adı] > Ayarlar > Erişim Anahtarları > Anahtar1 (veya klasik depolama hesabı için birincil erişim anahtarı) öğesine gidin. |
-| -VMListFile | Kullanılan bant genişliğini hesaplamak için profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir sanal makine adı/IP adresi içermelidir. Dosyada belirtilen sanal makine adları, vCenter sunucusu ya da ESXi konağındakilerle aynı olmalıdır.<br>Örneğin “VMList.txt” dosyası aşağıdaki sanal makineleri içerir:<br>virtual machine_A <br>10.150.29.110<br>virtual machine_B|
+| -Directory | (İsteğe bağlı) Profili oluşturulan verilerin (profil oluşturma sırasında oluşturulan dosyalar) depolandığı UNC veya yerel dizin yolu. Bu veriler, rapor oluşturmak için gereklidir. Bir dizin adı belirtilmezse ‘ProfiledData’ dizini kullanılır. |
+| -StorageAccountName | Şirket içinden Azure’a veri çoğaltma için kullanılan bant genişliğini bulmak için depolama hesabı adı. Araç, kullanılan bant genişliğini bulmak için test verilerini bu depolama hesabına yükler. |
+| -StorageAccountKey | Depolama hesabına erişmek için kullanılan depolama hesabı anahtarı. Azure portalı > Depolama hesapları > <*Depolama hesabı adı*> > Ayarlar > Erişim Anahtarları > Anahtar1 (veya klasik depolama hesabı için birincil erişim anahtarı) öğesine gidin. |
+| -VMListFile | Kullanılan bant genişliğini hesaplamak için profili oluşturulacak sanal makinelerin listesini içeren dosya. Dosya yolu mutlak veya göreli olabilir. Bu dosya her satırda bir VM adı/IP adresi içermelidir. Dosyada belirtilen sanal makine adı, vCenter sunucusu/vSphere ESXi ana bilgisayarındaki VM adıyla aynı olmalıdır.<br>Örneğin, VMList.txt dosyası aşağıdaki sanal makineleri içerir:<ul><li>VM_A</li><li>10.150.29.110</li><li>VM_B</li></ul>|
 
-Araç belirtilen dizinde 64 MB’lik birkaç ‘asrvhdfile<#>.vhd’ (# sayıdır) dosyası oluşturur.  Aktarım hızını bulmak için bu dosyaları Azure Depolama hesabına yükler. Aktarım hızı ölçüldükten sonra tüm bu dosyaları Azure Depolama hesabından ve yerel sunucudan siler. Araç aktarım hızını hesapladığı sırada herhangi bir nedenle sonlandırılırsa, dosyalar Azure Depolama veya yerel sunucudan silinmez ve sizin el ile silmeniz gerekir.
+Araç, belirtilen dizinde 64 MB’lık birkaç asrvhdfile<#>.vhd (“#” sayıdır) dosyası oluşturur. Araç, aktarım hızını bulmak için dosyaları depolama hesabına yükler. Aktarım hızı ölçüldükten sonra araç tüm dosyaları depolama hesabından ve yerel sunucudan siler. Araç aktarım hızını hesaplarken herhangi bir nedenle sonlandırılırsa, dosyaları depolama alanından veya yerel sunucudan silmez. Bunları el ile silmeniz gerekir.
 
-Aktarım hızı belirli bir zaman noktasında ölçülür ve diğer tüm faktörlerin aynı kalması koşuluyla Azure Site Recovery’nin çoğaltma sırasında ulaşabileceği en yüksek aktarım hızıdır. Örneğin, herhangi bir uygulama aynı ağ üzerinde daha fazla bant genişliği tüketmeye başlarsa, çoğaltma sırasında gerçek aktarım hızı farklılık gösterir. Bir Yapılandırma Sunucusundan GetThroughput komutunu çalıştırıyorsanız, araç korunan sanal makineleri ve devam eden çoğaltmayı fark etmez. GetThroughput işlemi korunan sanal makinelerin yüksek veri değişim sıklığına sahip olduğu zamanlarda çalıştırıldığında, düşük veri değişim sıklığına sahip olduğu zamanlarda çalıştırılmasına göre ölçülen aktarım hızının sonucu farklı olur.  Çeşitli zamanlarda hangi aktarım hızına ulaşılabileceğini anlamak için, profil oluşturma sırasında farklı zaman noktalarında aracın çalıştırılması önerilir. Raporda, araç son ölçülen aktarım hızını gösterir.
+Aktarım hızı belirli bir zaman noktasında ölçülür ve diğer tüm faktörlerin aynı kalması koşuluyla Site Recovery’nin çoğaltma sırasında ulaşabileceği en yüksek aktarım hızıdır. Örneğin, herhangi bir uygulama aynı ağ üzerinde daha fazla bant genişliği tüketmeye başlarsa, çoğaltma sırasında gerçek aktarım hızı farklılık gösterir. Bir yapılandırma sunucusundan GetThroughput komutunu çalıştırıyorsanız, araç korunan sanal makineleri ve devam eden çoğaltmayı fark etmez. Korunan VM’ler yüksek veri değişim sıklığına sahip olduğunda GetThroughput işlemi çalıştırılırsa, ölçülen aktarım hızının sonucu farklı olur. Çeşitli zamanlarda hangi aktarım hızı düzeylerine ulaşılabileceğini anlamak için, profil oluşturma sırasında farklı zaman noktalarında aracın çalıştırılması önerilir. Raporda, araç son ölçülen aktarım hızını gösterir.
 
-
-##### <a name="example"></a>Örnek
-ASRDeploymentPlanner.exe **-Operation** GetThroughput **-Directory**  E:\vCenter1_ProfiledData **-VMListFile** E:\vCenter1_ProfiledData\ProfileVMList1.txt  **-StorageAccountName**  asrspfarm1 **-StorageAccountKey** by8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
+### <a name="example"></a>Örnek
+```
+ASRDeploymentPlanner.exe -Operation GetThroughput -Directory  E:\vCenter1_ProfiledData -VMListFile E:\vCenter1_ProfiledData\ProfileVMList1.txt  -StorageAccountName  asrspfarm1 -StorageAccountKey by8vdM02xNOcqFlqUwJPLlmEtlCDXJ1OUzFT50uSRZ6IFsuFq2UVErCz4I6tq/K1SZFPTOtr/KBHBeksoGMGw==
+```
 
 >[!NOTE]
 >
-> * Aracı, Yapılandırma Sunucusu ile aynı depolama ve CPU özelliklerine sahip bir sunucuda çalıştırın
+> Aracı, yapılandırma sunucusu ile aynı depolama ve CPU özelliklerine sahip bir sunucuda çalıştırın.
 >
-> * Çoğaltma için sürenin %100 RPO’sunu karşılamak üzere önerilen bant genişliğini sağlayın. Doğru bant genişliğini sağladıktan sonra bile, araç tarafından ulaşıldığı bildirilen aktarım hızında herhangi bir artış görmezseniz aşağıdakileri denetleyin:
+> Çoğaltma için, önerilen bant genişliğini sürenin yüzde 100’ünü karşılayacak şekilde ayarlayın. Doğru bant genişliğini sağladıktan sonra araç tarafından ulaşıldığı bildirilen aktarım hızında herhangi bir artış görmezseniz aşağıdakileri yapın:
 >
-> a. Azure Site Recovery aktarım hızını sınırlayan herhangi bir ağ Hizmet Kalitesi (QoS) olup olmadığını denetleyin
+>  1. Site Recovery aktarım hızını sınırlayan herhangi bir ağ Hizmet Kalitesi (QoS) olup olmadığını denetleyin.
 >
-> b. Ağ gecikme süresini en aza indirmek için, Azure Site Recovery kasanızın desteklenen en yakın fiziksel Microsoft Azure bölgesinde olup olmadığını denetleyin
+>  2. Ağ gecikme süresini en aza indirmek için, Site Recovery kasanızın desteklenen en yakın fiziksel Microsoft Azure bölgesinde olup olmadığını denetleyin.
 >
-> c. Yerel depolama özelliklerinizi denetleyin ve donanımı iyileştirmeye çalışın (örn. HDD’den SSD’ye)
+>  3. Donanımı iyileştirip iyileştiremeyeceğinizi (örneğin, HDD’den SSD’ye) belirlemek için yerel depolama özelliklerini denetleyin.
 >
-> d. [Çoğaltma için kullanılan ağ bant genişliği miktarını artırmak](./site-recovery-plan-capacity-vmware.md#control-network-bandwidth) üzere işlem sunucusundaki Azure Site Recovery ayarlarını değiştirin.
->
+>  4. [Çoğaltma için kullanılan ağ bant genişliği miktarını artırmak](./site-recovery-plan-capacity-vmware.md#control-network-bandwidth) üzere işlem sunucusundaki Site Recovery ayarlarını değiştirin.
 
-##<a name="recommendations-with-desired-rpo-as-input"></a>Girdi olarak istenen RPO ile öneriler
+## <a name="recommendations-with-desired-rpo-as-input"></a>Girdi olarak istenen RPO ile öneriler
 
-###<a name="profiled-data"></a>Profili oluşturulan veriler
+### <a name="profiled-data"></a>Profili oluşturulan veriler
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/profiled-data-period.png)
+![Dağıtım planlayıcısında profili oluşturulmuş veriler görünümü](./media/site-recovery-deployment-planner/profiled-data-period.png)
 
-**Profili oluşturulmuş veri dönemi**, profil oluşturma işleminin gerçekleştirildiği süredir. Varsayılan olarak, rapor oluşturma sırasında StartDate ve EndDate seçenekleri kullanılarak rapor belirli bir süre için oluşturulmadıkça araç, hesaplama için profili oluşturulmuş tüm verileri alır.
+**Profili oluşturulmuş veri süresi**: Profil oluşturma işleminin gerçekleştirildiği süre. Varsayılan olarak, rapor oluşturma sırasında StartDate ve EndDate seçenekleri kullanılarak rapor belirli bir süre için oluşturulmadıkça araç, profili oluşturulmuş tüm verileri hesaplamaya dahil eder.
 
-**Sunucu Adı**, sanal makinelerinin raporu oluşturulan VMware vCenter veya ESXi konağının adı ya da IP adresidir.
+**Sunucu Adı**: sanal makinelerinin raporu oluşturulan VMware vCenter veya ESXi ana bilgisayarının adı ya da IP adresi.
 
-**İstenen RPO**, dağıtımınıza yönelik Kurtarma Noktası Hedefidir (RPO). Varsayılan olarak, gerekli ağ bant genişliği 15, 30 ve 60 dakikalık RPO değerleri için hesaplanır. Seçim temel alınarak, etkilenen değerler sayfada güncelleştirilir. Raporu oluştururken DesiredRPOinMin parametresini kullandıysanız, değer bu İstenen RPO açılır listesinde gösterilir.
+**İstenen RPO**: Dağıtımınıza yönelik kurtarma noktası hedefi. Varsayılan olarak, gerekli ağ bant genişliği 15, 30 ve 60 dakikalık RPO değerleri için hesaplanır. Seçim temel alınarak, etkilenen değerler sayfada güncelleştirilir. Raporu oluştururken *DesiredRPOinMin* parametresini kullandıysanız, değer İstenen RPO sonucunda gösterilir.
 
-###<a name="profiling-overview"></a>Profil Oluşturmaya Genel Bakış
+### <a name="profiling-overview"></a>Profil oluşturmaya genel bakış
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/profiling-overview.png)
+![Dağıtım planlayıcısında profil oluşturma sonuçları](./media/site-recovery-deployment-planner/profiling-overview.png)
 
-**Profili Oluşturulan Toplam Sanal Makine Sayısı**, profili oluşturulan verileri bulunan sanal makinelerin toplam sayısıdır. VMListFile dosyasında profili oluşturulmamış sanal makineler varsa, bu sanal makineler rapor oluşturma işleminde göz önünde bulundurulmaz ve profili oluşturulan toplam sanal makine sayısının dışında tutulur.
+**Profili Oluşturulan Toplam Sanal Makine Sayısı**: Profili oluşturulan verileri bulunan sanal makinelerin toplam sayısı. VMListFile dosyasında profili oluşturulmamış sanal makineler varsa, bu sanal makineler rapor oluşturma işleminde göz önünde bulundurulmaz ve profili oluşturulan toplam sanal makine sayısının dışında tutulur.
 
-**Uyumlu Sanal Makineler**, Azure Site Recovery kullanılarak Azure’da korunabilen sanal makine sayısıdır. Bu sayı, gerekli ağ bant genişliği, Azure Depolama hesabı sayısı, Microsoft Azure çekirdek sayısı ve Yapılandırma Sunucusu ile ek İşlem Sunucularının sayısının hesaplandığı uyumlu sanal makinelerin toplamıdır. Her uyumlu sanal makinenin ayrıntıları, raporun Uyumlu VM'ler tablosunda bulunur.
+**Uyumlu Sanal Makineler**: Site Recovery kullanılarak Azure’da korunabilen sanal makine sayısı. Bu sayı, gerekli ağ bant genişliği, depolama hesabı sayısı, Azure çekirdek sayısı ve yapılandırma sunucusu ile ek işlem sunucularının sayısının hesaplandığı uyumlu sanal makinelerin toplamıdır. Her uyumlu VM’nin ayrıntıları "Uyumlu VM’ler" bölümünde bulunabilir.
 
-**Uyumsuz Sanal Makineler**, Azure Site Recovery ile koruma için uygun olmayan, profili oluşturulmuş sanal makine sayısıdır. Uyumsuzluğun nedenleri, aşağıdaki Uyumsuz VM’ler bölümünde belirtilmiştir. VMListFile dosyasında profili oluşturulmamış sanal makineler varsa, bu sanal makineler uyumsuz sanal makine sayısının dışında tutulur. Bu sanal makineler, Uyumsuz VM’ler tablosunun sonunda 'Veri bulunamadı' olarak listelenir.
+**Uyumsuz Sanal Makineler**: Site Recovery ile koruma için uygun olmayan, profili oluşturulmuş sanal makine sayısı. Uyumsuzluğun nedenleri, “Uyumsuz VM’ler” bölümünde belirtilmiştir. VMListFile içinde profili oluşturulmamış bir sanal makinenin adı varsa, bu sanal makineler uyumsuz sanal makine sayısının dışında bırakılır. Bu sanal makineler, “Uyumsuz VM’ler” bölümünün sonunda “Veri bulunamadı” olarak listelenir.
 
-**İstenen RPO**, dakika cinsinden istediğiniz RPO’dur. Rapor, varsayılan değer 15 dakika olmak üzere 15, 30 ve 60 dakikalık üç RPO değeri için oluşturulur. Rapordaki bant genişliği önerisi, tablonun sağ üst köşesinde bulunan İstenen RPO açılır menüsündeki seçiminize göre değişir. Raporu özel bir değer ile “-DesiredRPO” parametresini kullanarak oluşturduysanız, bu özel değer İstenen RPO açılır listesinde varsayılan olarak gösterilir.
+**İstenen RPO**: Dakika cinsinden istediğiniz kurtarma noktası hedefi. Rapor üç RPO değeri için oluşturulur: 15 (varsayılan), 30 ve 60 dakika. Rapordaki bant genişliği önerisi, tablonun sağ üst köşesinde bulunan İstenen RPO açılır listesindeki seçiminize göre değişir. Raporu özel bir değer ile *-DesiredRPO* parametresini kullanarak oluşturduysanız, bu özel değer İstenen RPO açılır listesinde varsayılan olarak gösterilir.
 
-###<a name="required-network-bandwidth-mbps"></a>Gerekli Ağ Bant Genişliği (Mb/sn)
+### <a name="required-network-bandwidth-mbps"></a>Gerekli ağ bant genişliği (Mb/sn)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/required-network-bandwidth.png)
+![Dağıtım planlayıcısında gerekli ağ bant genişliği](./media/site-recovery-deployment-planner/required-network-bandwidth.png)
 
-**%100 RPO süresini karşılamak için:** İstediğiniz %100 RPO süresini karşılamak için Mb/sn cinsinden ayrılacak önerilen bant genişliğidir. Bu bant genişliği miktarı, herhangi bir RPO ihlalini önlemek üzere tüm uyumlu sanal makinelerinizin kararlı durum delta çoğaltması için ayrılmalıdır.
+**Yüzde 100 RPO süresini karşılamak için:** İstediğiniz yüzde 100 RPO süresini karşılamak için Mb/sn cinsinden ayrılacak önerilen bant genişliğidir. Bu bant genişliği miktarı, herhangi bir RPO ihlalini önlemek üzere tüm uyumlu sanal makinelerinizin kararlı durum delta çoğaltması için ayrılmalıdır.
 
-**%90 RPO süresini karşılamak için**: Geniş bant fiyatlandırması veya istediğiniz %100 RPO süresini karşılamak için gereken bant genişliğini sağlayamamanız durumunda başka bir nedenle, istediğiniz %90 RPO süresini karşılayabilen daha düşük bir bant genişliği sağlamayı seçebilirsiniz. Daha düşük olan bu bant genişliğini sağlamanın etkilerini anlamak için, raporda beklenen RPO ihlallerinin sayısı ve süresine ilişkin bir ne yapmalı analizi sağlar.
+**Yüzde 90 RPO süresini karşılamak için**: Geniş bant fiyatlandırması veya istediğiniz yüzde 100 RPO süresini karşılamak için gereken bant genişliğini ayarlayamamanız durumunda başka bir nedenle, istediğiniz yüzde 90 RPO süresini karşılayabilen daha düşük bir bant genişliği ayarlamayı seçebilirsiniz. Daha düşük olan bu bant genişliğini ayarlamanın etkilerini anlamak için, raporda beklenen RPO ihlallerinin sayısı ve süresine ilişkin bir ne yapmalı analizi sağlar.
 
-**Arşivlenen Aktarım Hızı:** Azure Depolama hesabının bulunduğu Microsoft Azure bölgesine GetThroughput komutunu gönderdiğiniz sunucudan aktarım hızıdır. Yapılandırma Sunucusu / İşlem Sunucusu depolama ve ağ özelliklerinin, aracı çalıştırdığınız sunucudakilerle aynı kalması şartıyla, Azure Site Recovery kullanarak uyumlu sanal makineleri koruduğunuzda ulaşılabilecek yaklaşık aktarım hızını gösterir.    
+**Elde Edilen Aktarım Hızı**: Depolama hesabının bulunduğu Microsoft Azure bölgesine GetThroughput komutunu gönderdiğiniz sunucudan aktarım hızıdır. Bu aktarım hızı sayısı, yapılandırma sunucusu veya işlem sunucusu depolama ve ağ özelliklerinin, aracı çalıştırdığınız sunucudaki özelliklerle aynı kalması şartıyla, Site Recovery kullanarak uyumlu VM’leri korurken elde edebileceğiniz tahmini düzeyi gösterir.
 
-Çoğaltma için sürenin %100 RPO’sunu karşılamak üzere önerilen bant genişliğini sağlamanız gerekir. Doğru bant genişliğini sağladıktan sonra bile, araç tarafından ulaşıldığı bildirilen aktarım hızında herhangi bir artış görmezseniz aşağıdakileri denetleyin:
+Çoğaltma için, önerilen bant genişliğini sürenin yüzde 100’ünü karşılayacak şekilde ayarlamanız gerekir. Bant genişliğini ayarladıktan sonra araç tarafından ulaşıldığı bildirilen aktarım hızında herhangi bir artış görmezseniz aşağıdakileri yapın:
 
-a.    Azure Site Recovery aktarım hızını sınırlayan herhangi bir ağ Hizmet Kalitesi (QoS) olup olmadığını denetleyin
+1. Site Recovery aktarım hızını sınırlayan herhangi bir ağ Hizmet Kalitesi (QoS) olup olmadığını denetleyin.
 
-b.    Ağ gecikme süresini en aza indirmek için, Azure Site Recovery kasanızın desteklenen en yakın fiziksel Microsoft Azure bölgesinde olup olmadığını denetleyin
+2. Ağ gecikme süresini en aza indirmek için, Site Recovery kasanızın desteklenen en yakın fiziksel Microsoft Azure bölgesinde olup olmadığını denetleyin.
 
-c.    Yerel depolama özelliklerinizi denetleyin ve donanımı iyileştirmeye çalışın (örn. HDD’den SSD’ye)
+3. Donanımı iyileştirip iyileştiremeyeceğinizi (örneğin, HDD’den SSD’ye) belirlemek için yerel depolama özelliklerini denetleyin.
 
-d. [Çoğaltma için kullanılan ağ bant genişliği miktarını artırmak](./site-recovery-plan-capacity-vmware.md#control-network-bandwidth) üzere işlem sunucusundaki Azure Site Recovery ayarlarını değiştirin.
+4. [Çoğaltma için kullanılan ağ bant genişliği miktarını artırmak](./site-recovery-plan-capacity-vmware.md#control-network-bandwidth) üzere işlem sunucusundaki Site Recovery ayarlarını değiştirin.
 
-Aracı zaten korunan sanal makinelere sahip bir Yapılandırma Sunucusu / İşlem Sunucusu üzerinde çalıştırdığınız durumlarda, ulaşılan aktarım hızı sayısı ilgili zaman noktasında işlenmekte olan değişim sıklığı miktarına bağlı olarak değişeceği için, aracı birkaç kez çalıştırın.
+Aracı korunan sanal makinelere zaten sahip olan bir yapılandırma sunucusu veya işlem sunucusu üzerinde çalıştırıyorsanız, aracı birkaç kez çalıştırın. Elde edilen aktarım hızı sayısı, zamanın o noktasında işlenen değişim hızı miktarına bağlı olarak değişir.
 
-Tüm kurumsal Azure Site Recovery dağıtımları için [ExpressRoute](https://aka.ms/expressroute) kullanılması önerilir.
+Tüm kurumsal Site Recovery dağıtımları için [ExpressRoute](https://aka.ms/expressroute) kullanılması önerilir.
 
-###<a name="required-azure-storage-accounts"></a>Gerekli Azure Depolama Hesapları
-Bu grafikte tüm uyumlu sanal makineleri korumak için gereken Azure Depolama hesaplarının (standart ve premium) toplam sayısı gösterilmektedir.  Her bir sanal makine için kullanılması gereken depolama hesabını öğrenmek üzere [Önerilen VM yerleşim planı](site-recovery-deployment-planner.md#vm-storage-placement)’na tıklayın.  
+### <a name="required-storage-accounts"></a>Gerekli depolama hesapları
+Aşağıdaki grafikte tüm uyumlu sanal makineleri korumak için gereken depolama hesaplarının (standart ve premium) toplam sayısı gösterilmektedir. Her bir VM için kullanılacak depolama hesabını öğrenmek için "VM depolama yerleşimi" bölümüne bakın.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/required-azure-storage-accounts.png)
+![Dağıtım planlayıcısında gerekli depolama hesapları](./media/site-recovery-deployment-planner/required-azure-storage-accounts.png)
 
-###<a name="required-number-of-azure-cores"></a>Gerekli Azure Çekirdek Sayısı
-Tüm uyumlu sanal makinelerin yük devretme işlemi ya da yük devretme testi öncesinde sağlanması gereken toplam çekirdek sayısıdır. Abonelikte yeterli çekirdek yoksa, yük devretme testi veya yük devretme sırasında Azure Site Recovery, sanal makineleri oluşturamaz.
+### <a name="required-number-of-azure-cores"></a>Gerekli Azure çekirdek sayısı
+Bu sonuç, tüm uyumlu sanal makinelerin yük devretme işlemi ya da yük devretme testi öncesinde ayarlanması gereken toplam çekirdek sayısıdır. Abonelikte çok az sayıda çekirdek varsa, yük devretme testi veya yük devretme sırasında Azure Site Recovery, sanal makineleri oluşturamaz.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/required-number-of-azure-cores.png)
+![Dağıtım planlayıcısında gereken Azure çekirdek sayısı](./media/site-recovery-deployment-planner/required-number-of-azure-cores.png)
 
-###<a name="required-on-premises-infrastructure"></a>Gerekli Şirket İçi Altyapısı
-Tüm uyumlu sanal makineleri korumak için yapılandırılması gereken Yapılandırma Sunucusu ve ek İşlem Sunucularının toplam sayısıdır. En büyük yapılandırmaya ilişkin desteklenen [limitlere](https://aka.ms/asr-v2a-on-prem-components) göre: günlük değişim sıklığı veya en fazla korunan sanal makine sayısından (sanal makine başına ortalama üç disk olduğu varsayılarak), Yapılandırma Sunucusu veya ek İşlem Sunucusunda ilk gerçekleşen olaya göre, araç ek sunucular önerir. Günlük toplam değişim sıklığı ve toplam korunan disk sayısına ilişkin ayrıntılar [Girdi](site-recovery-deployment-planner.md#input) tablosunda bulunabilir.
+### <a name="required-on-premises-infrastructure"></a>Gerekli şirket içi altyapısı
+Bu sayı, tüm uyumlu sanal makineleri korumak için yapılandırılması gereken yapılandırma sunucusu ve ek işlem sunucularının toplam sayısıdır. [Yapılandırma sunucusu için desteklenen boyut önerilerine](https://aka.ms/asr-v2a-on-prem-components) bağlı olarak, araç ek sunucular önerebilir. Öneri, günlük değişim sıklığı veya en fazla korunan VM sayısından (VM başına ortalama üç disk olduğu varsayılarak) yapılandırma sunucusu veya ek işlem sunucusunda ilk gerçekleşen olaya göre yapılır. Günlük toplam değişim sıklığı ve toplam korunan disk sayısına ilişkin ayrıntılar “Girdi” tablosunda bulunabilir.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/required-on-premises-infrastructure.png)
+![Dağıtım planlayıcısında gerekli şirket içi altyapı](./media/site-recovery-deployment-planner/required-on-premises-infrastructure.png)
 
-###<a name="what-if-analysis"></a>Ne Yapmalı Analizi
-Bu analiz, sürenin yalnızca %90’ını karşılamasını istediğiniz RPO için daha düşük bir bant genişliği sağladığınızda profil oluşturma sırasında kaç tane ihlal oluşabileceğini özetler. Belirli bir günde bir veya daha fazla RPO ihlali oluşabilir; grafikte günün yoğun RPO zamanı gösterilmektedir.
-Bu analizi temel alarak, belirtilen düşük bant genişliği ile tüm günlerdeki RPO ihlali sayısının ve bir gündeki en yoğun RPO gerçekleşme zamanının kabul edilebilir olup olmadığına karar verebilirsiniz. Değer kabul edilebilir düzeydeyse, çoğaltma için düşük bant genişliği ayırabilirsiniz; aksi takdirde, istenilen %100 RPO süresini karşılamak üzere önerilen yüksek bant genişliğini ayırmanız gerekir.
+### <a name="what-if-analysis"></a>Benzetim analiz
+Bu analiz, sürenin yalnızca yüzde 90’ını karşılamasını istediğiniz RPO için daha düşük bir bant genişliği ayarladığınızda profil oluşturma sırasında kaç tane ihlal oluşabileceğini özetler. Belirli bir günde bir veya daha fazla RPO ihlali ortaya çıkabilir. Grafik, günün yoğun RPO değerini gösterir.
+Bu analizi temel alarak, belirtilen düşük bant genişliği ile tüm günlerdeki RPO ihlali sayısının ve bir gündeki en yoğun RPO gerçekleşme zamanının kabul edilebilir olup olmadığına karar verebilirsiniz. Değer kabul edilebilir düzeydeyse, çoğaltma için düşük bant genişliği ayırabilirsiniz; aksi takdirde, istenilen yüzde 100 RPO süresini karşılamak üzere önerilen yüksek bant genişliğini ayırmanız gerekir.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/what-if-analysis.png)
+![Dağıtım planlayıcısında benzetim analizi](./media/site-recovery-deployment-planner/what-if-analysis.png)
 
-###<a name="recommended-vm-batch-size-for-initial-replication"></a>İlk çoğaltma için önerilen VM toplu iş boyutu
-Bu bölümde, istenilen %100 RPO süresini karşılamak üzere önerilen bant genişliği sağlanarak 72 saat içinde (yapılandırılabilir değer; bunu değiştirmek için rapor oluşturma sırasında GoalToCompleteIR parametresini kullanın) ilk çoğaltmayı tamamlamak amacıyla paralel olarak korunabilecek sanal makine sayısı önerilmektedir.  Grafikte, tüm uyumlu makinelerde algılanan ortalama sanal makine boyutuna göre 72 saat içinde ilk çoğaltmayı tamamlamak için bir bant genişliği değer aralığı ve hesaplanmış sanal makine toplu iş boyutu sayısı gösterilmektedir.  
+### <a name="recommended-vm-batch-size-for-initial-replication"></a>İlk çoğaltma için önerilen VM toplu iş boyutu
+Bu bölümde, ayarlanmakta olan sürenin %100 RPO değerini karşılamak amacıyla ilk çoğaltmayı önerilen bant genişliği ile 72 saat içinde tamamlamak için paralel olarak korunması gereken sanal makine sayısı önerilmektedir. Bu değer yapılandırılabilir bir değerdir. Rapor oluşturma zamanında bu değeri değiştirmek için *GoalToCompleteIR* parametresini kullanın.
 
-Genel Önizleme sürümünde rapor, bir toplu işe hangi sanal makinelerin dahil edilmesi gerektiğini belirtmez. Her bir sanal makinenin boyutunu bulmak ve bir toplu işe yönelik sanal makinelerinizi seçmek ya da bilinen iş yükü özelliklerine göre seçim yapmak için, Uyumlu VM’ler tablosunda gösterilen disk boyutunu kullanabilirsiniz.  İlk çoğaltma tamamlama süresi, gerçek sanal makine disk boyutu, kullanılan disk alanı ve kullanılabilir ağ aktarım hızı ile doğru orantılı bir şekilde değişir.
+Buradaki grafikte, tüm uyumlu makinelerde algılanan ortalama sanal makine boyutuna göre 72 saat içinde ilk çoğaltmayı tamamlamak için bir bant genişliği değer aralığı ve hesaplanmış sanal makine toplu iş boyutu sayısı gösterilmektedir.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/recommended-vm-batch-size.png)
+Genel önizleme sürümünde rapor, bir toplu işe hangi sanal makinelerin dahil edilmesi gerektiğini belirtmez. Her bir sanal makinenin boyutunu bulmak ve bir toplu işe yönelik sanal makinelerinizi seçmek ya da bilinen iş yükü özelliklerine göre seçim yapmak için, “Uyumlu VM’ler” bölümünde gösterilen disk boyutunu kullanabilirsiniz. İlk çoğaltmayı tamamlama süresi, gerçek VM disk boyutu, kullanılan disk alanı ve kullanılabilir ağ aktarım hızı ile doğru orantılı bir şekilde değişir.
 
-###<a name="growth-factor-and-percentile-values-used"></a>Kullanılan büyüme faktörü ve yüzdelik değerler
-Tablonun alt kısmındaki bu bölümde, profili oluşturulan sanal makinelerin tüm performans sayaçları için kullanılan yüzdelik dilim değeri (varsayılan değer yüzde 95’lik dilim) ve tüm hesaplamalarda kullanılan % cinsinden büyüme faktörü (varsayılan değer %30) gösterilmektedir.
+![Önerilen VM toplu iş boyutu](./media/site-recovery-deployment-planner/recommended-vm-batch-size.png)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/max-iops-and-data-churn-setting.png)
+### <a name="growth-factor-and-percentile-values-used"></a>Kullanılan büyüme faktörü ve yüzdelik değerler
+Tablonun alt kısmındaki bu bölümde, profili oluşturulan sanal makinelerin tüm performans sayaçları için kullanılan yüzdelik dilim değeri (varsayılan değer yüzde 95’lik dilim) ve tüm hesaplamalarda kullanılan büyüme faktörü (varsayılan değer yüzde 30) gösterilmektedir.
 
-##<a name="recommendations-with-available-bandwidth-as-input"></a>Girdi olarak kullanılabilir bant genişliği ile ilgili öneriler
+![Kullanılan büyüme faktörü ve yüzdelik değerler](./media/site-recovery-deployment-planner/max-iops-and-data-churn-setting.png)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/profiling-overview-bandwidth-input.png)
+## <a name="recommendations-with-available-bandwidth-as-input"></a>Girdi olarak kullanılabilir bant genişliği ile ilgili öneriler
 
-Azure Site Recovery çoğaltması için x MB/sn’den fazla bant genişliği sağlayamayacağınızı bildiğiniz bir durumla karşılaşabilirsiniz. Araç, kullanılabilir bant genişliğini girmenize (rapor oluşturma sırasında -Bandwidth parametresini kullanarak) ve dakika cinsinden ulaşılabilir RPO değerini almanıza olanak tanır. Bu ulaşılabilir RPO değeriyle ek bant genişliği sağlamanızın gerekli olup olmadığına veya bu RPO ile bir olağanüstü durum kurtarma çözümüne sahip olmak isteyip istemediğinize karar verebilirsiniz.
+![Girdi olarak kullanılabilir bant genişliği ile ilgili öneriler](./media/site-recovery-deployment-planner/profiling-overview-bandwidth-input.png)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/achievable-rpos.png)
+Site Recovery çoğaltması için x MB/sn’den fazla bant genişliği ayarlayamayacağınızı bildiğiniz bir durumla karşılaşabilirsiniz. Araç, kullanılabilir bant genişliğini girmenize (rapor oluşturma sırasında -Bandwidth parametresini kullanarak) ve dakika cinsinden ulaşılabilir RPO değerini almanıza olanak tanır. Bu ulaşılabilir RPO değeriyle ek bant genişliği ayarlamanızın gerekli olup olmadığına veya bu RPO ile bir olağanüstü durum kurtarma çözümüne sahip olmak isteyip istemediğinize karar verebilirsiniz.
 
-##<a name="input"></a>Girdi
-Girdi sayfası, profili oluşturulmuş VMware ortamına genel bir bakış sağlar.
+![500 MB/sn bant genişliği için elde edilebilen RPO](./media/site-recovery-deployment-planner/achievable-rpos.png)
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/Input.png)
+## <a name="input"></a>Girdi
+Girdi çalışma sayfası, profili oluşturulmuş VMware ortamına genel bir bakış sağlar.
 
-**Başlangıç Tarihi ve Bitiş Tarihi**, rapor oluşturma için göz önünde bulundurulan profil oluşturma verilerinin başlangıç ve bitiş tarihleridir. Varsayılan olarak, başlangıç tarihi profil oluşturmanın başladığı, bitiş tarihi ise profil oluşturmanın durdurulduğu tarihtir.  Rapor bu parametrelerle oluşturulduysa bunlar ‘StartDate’ ve ‘EndDate’ değerleri olabilir. Başlangıç Tarihi ve Bitiş Tarihi: Rapor oluşturma için göz önünde bulundurulan profil oluşturma verilerinin başlangıç ve bitiş tarihleridir. Varsayılan olarak, başlangıç tarihi profil oluşturmanın başladığı, bitiş tarihi ise profil oluşturmanın durdurulduğu tarihtir.  Rapor bu parametrelerle oluşturulduysa bunlar ‘StartDate’ ve ‘EndDate’ değerleri olabilir.
+![Profili oluşturulmuş VMware ortamına genel bakış](./media/site-recovery-deployment-planner/Input.png)
 
-**Profil oluşturulan toplam gün sayısı**, raporun oluşturulduğu başlangıç ile bitiş tarihleri arasında profil oluşturulan toplam gün sayısıdır. Profil oluşturulan toplam gün sayısı, raporun oluşturulduğu başlangıç ile bitiş tarihleri arasında profil oluşturulan toplam gün sayısıdır.
+**Başlangıç Tarihi** ve **Bitiş Tarihi**: Rapor oluşturma için göz önünde bulundurulan profil oluşturma verilerinin başlangıç ve bitiş tarihleri. Varsayılan olarak, başlangıç tarihi profil oluşturmanın başladığı, bitiş tarihi ise profil oluşturmanın durdurulduğu tarihtir. Rapor bu parametrelerle oluşturulduysa bunlar ‘StartDate’ ve ‘EndDate’ değerleri olabilir.
 
-**Uyumlu sanal makine sayısı**, gerekli ağ bant genişliği, gerekli Azure Depolama hesabı sayısı, Microsoft Azure çekirdek sayısı ve Yapılandırma Sunucusu ile ek İşlem Sunucularının sayısının hesaplandığı uyumlu sanal makinelerin toplamıdır.
-Tüm uyumlu sanal makinelerdeki toplam disk sayısı, tüm uyumlu sanal makinelerdeki toplam disk sayısıdır. Bu sayı, dağıtımda kullanılacak Yapılandırma Sunucusu ve ek İşlem Sunucusu sayısına karar vermeye yönelik girdilerden biri olarak kullanılır.
+**Profil oluşturulan toplam gün sayısı**: Raporun oluşturulduğu başlangıç ile bitiş tarihleri arasında profil oluşturulan toplam gün sayısı.
 
-**Bir uyumlu sanal makinedeki ortalama disk sayısı**, tüm uyumlu sanal makinelerde hesaplanan ortalama disk sayısıdır.
+**Uyumlu sanal makine sayısı**: Gerekli ağ bant genişliği, gerekli depolama hesabı sayısı, Microsoft Azure çekirdek sayısı ve yapılandırma sunucusu ile ek işlem sunucularının sayısının hesaplandığı uyumlu sanal makinelerin toplamı.
 
-**Ortalama disk boyutu (GB)**, tüm uyumlu sanal makinelerde hesaplanan ortalama disk boyutudur.
+**Tüm uyumlu sanal makinelerdeki toplam disk sayısı**: Bu sayı, dağıtımda kullanılacak yapılandırma sunucusu ve ek işlem sunucusu sayısına karar vermeye yönelik girdilerden biri olarak kullanılır.
 
-**İstenen RPO (dakika)**, varsayılan RPO’dur veya rapor oluşturma sırasında gerekli bant genişliğini tahmin etmek üzere ‘DesiredRPO’ parametresi için geçirilen değerdir.
+**Bir uyumlu sanal makinedeki ortalama disk sayısı**: Tüm uyumlu sanal makinelerde hesaplanan ortalama disk sayısıdır.
 
-**İstenen bant genişliği (Mb/sn)**, rapor oluşturma sırasında ulaşılabilir RPO’yu tahmin etmek üzere ‘Bandwidth’ parametresi için geçirdiğiniz değerdir.
+**Ortalama disk boyutu (GB)**: Tüm uyumlu sanal makinelerde hesaplanan ortalama disk boyutudur.
 
-**Bir günde gözlemlenen tipik veri değişim sıklığı (GB)**, profil oluşturulan tüm günlerde gözlemlenen ortalama veri değişim sıklığıdır. Bu sayı, dağıtımda kullanılacak Yapılandırma Sunucusu ve ek İşlem Sunucusu sayısına karar vermeye yönelik girdilerden biri olarak kullanılır.
+**İstenen RPO (dakika)**: Varsayılan kurtarma noktası hedefi veya rapor oluşturma sırasında gerekli bant genişliğini tahmin etmek üzere ‘DesiredRPO’ parametresi için geçirilen değer.
+
+**İstenen bant genişliği (Mb/sn)**: Rapor oluşturma sırasında ulaşılabilir RPO’yu tahmin etmek üzere ‘Bandwidth’ parametresi için geçirdiğiniz değerdir.
+
+**Bir günde gözlemlenen tipik veri değişim sıklığı (GB)**: Profil oluşturulan tüm günlerde gözlemlenen ortalama veri değişim sıklığıdır. Bu sayı, dağıtımda kullanılacak yapılandırma sunucusu ve ek işlem sunucusu sayısına karar vermeye yönelik girdilerden biri olarak kullanılır.
 
 
-##<a name="vm-storage-placement"></a>VM-Depolama yerleşimi
+## <a name="vm-storage-placement"></a>VM-depolama yerleşimi
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/vm-storage-placement.png)
+![VM-depolama yerleşimi](./media/site-recovery-deployment-planner/vm-storage-placement.png)
 
-**Disk Depolama Türü**, ‘Yerleştirilecek VM’ler’ sütununda bahsedilen tüm ilgili sanal makineleri çoğaltmak için kullanılan ‘Standart’ veya ‘Premium’ Azure Depolama hesabıdır.
+**Disk Depolama Türü**: **Yerleştirilecek VM’ler** sütununda bahsedilen tüm ilgili sanal makineleri çoğaltmak için kullanılan standart veya premium depolama hesabıdır.
 
-**Önerilen Ön Ek**, Azure depolama hesabını adlandırmak için kullanılabilecek, üç karakterli bir önerilen ön ektir. Her zaman kendi ön ekinizi kullanabilirsiniz, ancak aracın önerdiği ön ek, [Azure Depolama hesaplarının bölüm adlandırma kuralına](https://aka.ms/storage-performance-checklist) uygundur.
+**Önerilen Ön Ek**: depolama hesabını adlandırmak için kullanılabilecek, üç karakterli bir önerilen ön ektir. Kendi ön ekinizi kullanabilirsiniz, ancak aracın önerisi [depolama hesapları için bölüm adlandırma kuralına](https://aka.ms/storage-performance-checklist) uygundur.
 
-**Önerilen Hesap Adı**, önerilen ön ek dahil edildikten sonra Azure Depolama hesabı adının nasıl görünmesi gerektiğini gösterir. < > içindeki adı özel girdinizle değiştirin.
+**Önerilen Hesap Adı**: Önerilen ön eki ekledikten sonra depolama hesabı adı. Köşeli ayraç (< ve >) içindeki adı özel girdinizle değiştirin.
 
-**Kayıt Depolama Hesabı:** Tüm çoğaltma kayıtları standart bir Azure Depolama hesabında depolanır. Premium Azure Depolama hesabına çoğaltılan sanal makineler için, kayıt depolamaya yönelik ek bir standart Azure Depolama hesabı sağlanmalıdır. Tek bir standart kayıt depolama hesabı, birden fazla premium çoğaltma depolama hesabı tarafından kullanılabilir. Standart depolama hesaplarına çoğaltılan sanal makineler, kayıtlarla aynı depolama hesabını kullanır.
+**Kayıt Depolama Hesabı:** Tüm çoğaltma kayıtları standart bir depolama hesabında depolanır. Premium depolama hesabına çoğaltılan sanal makineler için günlük depolamaya yönelik ek bir standart depolama hesabı oluşturun. Tek bir standart kayıt depolama hesabı, birden fazla premium çoğaltma depolama hesabı tarafından kullanılabilir. Standart depolama hesaplarına çoğaltılan sanal makineler, kayıtlarla aynı depolama hesabını kullanır.
 
-**Önerilen Kayıt Hesabı Adı**, önerilen ön ek dahil edildikten sonra kayıt Azure Depolama hesabı adının nasıl görünmesi gerektiğini gösterir. < > içindeki adı özel girdinizle değiştirin.
+**Önerilen Günlük Hesabı Adı**: Önerilen ön eki ekledikten sonra depolama günlük hesabı adı. Köşeli ayraç (< ve >) içindeki adı özel girdinizle değiştirin.
 
-**Yerleştirme Özeti**, çoğaltma ve yük devretme testi / yük devretme sırasında Azure Depolama hesabındaki toplam sanal makine yükünün özetini sağlar. Buna Azure Depolama hesabıyla eşlenmiş toplam sanal makine sayısı, bu Azure Depolama hesabına yerleştirilen tüm sanal makinelerdeki toplam okuma/yazma IOPS sayısı, toplam yazma (çoğaltma) IOPS sayısı, tüm disklerde sağlanan toplam boyut ve toplam disk sayısı dahildir.
+**Yerleştirme Özeti**: Çoğaltma ve yük devretme testi veya yük devretme sırasında depolama hesabındaki toplam sanal makine yükünün özeti. Buna depolama hesabıyla eşlenmiş toplam sanal makine sayısı, bu depolama hesabına yerleştirilen tüm sanal makinelerdeki toplam okuma/yazma IOPS sayısı, toplam yazma (çoğaltma) IOPS sayısı, tüm disklerde ayarlanan toplam boyut ve toplam disk sayısı dahildir.
 
-**Yerleştirilecek Sanal Makineler**, en iyi performans ve kullanım için belirli bir Azure Depolama hesabına yerleştirilmesi gereken tüm sanal makineleri listeler.
+**Yerleştirilecek Sanal Makineler**: En iyi performans ve kullanım için belirli bir depolama hesabına yerleştirilmesi gereken tüm sanal makinelerin listesi.
 
 ## <a name="compatible-vms"></a>Uyumlu VM’ler
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/compatible-vms.png)
+![Uyumlu VM'lerin Excel elektronik tablosu](./media/site-recovery-deployment-planner/compatible-vms.png)
 
-**VM Adı**, rapor oluşturma sırasında VMListFile içinde kullanılan sanal makine adı veya IP adresidir. Bu sütunda ayrıca sanal makinelere bağlanan diskler (VMDK) listelenir. Bir vCenter üzerinde yinelenen adlara veya IP adreslerine sahip sanal makineler, her bir sanal makineyi ayırt etmek için ESXi ana bilgisayar adıyla belirtilir. Listelenen ESXi ana bilgisayarı, profil oluşturma sırasında sanal makine araç tarafından ilk kez bulunduğunda sanal makinenin yerleştirildiği ana bilgisayardır.
+**VM Adı**: Bir rapor oluşturulurken VMListFile içinde kullanılan VM adı veya IP adresi. Bu sütunda ayrıca sanal makinelere bağlanan diskler (VMDK) listelenir. Yinelenen adlara veya IP adreslerine sahip vCenter sanal makinelerini birbirinden ayırt etmek için, adlar ESXi ana bilgisayar adını içerir. Listelenen ESXi ana bilgisayarı, profil oluşturma sırasında araç keşfettiğinde VM’in yerleştirildiği yerdir.
 
-**VM Uyumluluğu** iki değere sahiptir – Evet / Evet*. Evet*, sanal makinenin P20 veya P30 kategorisinde profili oluşturulmuş yüksek değişim sıklığı /IOPS disk uyumu ile [premium Azure Depolama](https://aka.ms/premium-storage-workload)’ya uygun olduğu, ancak disk boyutunun P10 veya P20 ile eşlenmeye neden olduğu durumlar için geçerlidir. Azure Depolama, bir diskin hangi premium depolama disk türüne eşleneceğine, boyutuna göre karar verir – örn. < 128 GB P10, 128 ila 512 GB P20, 512 GB ila 1023 GB ise P30’dur. Bu nedenle, bir diskin iş yükü özellikleri onu P20 veya P30’a yerleştirir, ancak boyutu onu daha düşük bir premium depolama disk türü ile eşlerse, araç bu sanal makineyi Evet* olarak işaretler ve kaynak disk boyutunu önerilen doğru premium depolama disk türüne uyacak şekilde değiştirmenizi ya da yük devretme sonrasındaki hedef disk türünü değiştirmenizi önerir.
-Depolama Türü standart veya premiumdur.
+**VM Uyumluluğu**: Değerler **Evet** ve **Evet**\* şeklindedir. **Evet**\* değer, VM’nin [Azure Premium Depolama](https://aka.ms/premium-storage-workload) için uygun olduğu örneklere yöneliktir. Burada, profili oluşturulmuş yüksek değişim sıklığı veya IOPS diski P20 ya da P30 kategorisine uyar, ancak diskin boyutu diskin bir P10 veya P20 ile eşlenmesine neden olur. Depolama hesabı, bir diskin boyutuna göre hangi premium depolama disk türüne eşleneceğine karar verir. Örneğin:
+* <128 GB bir P10’dur.
+* 128 GB ile 512 GB arası P20'dir.
+* 512 GB ile 1023 GB arası P30'dur.
 
-**Önerilen Ön Ek**, üç karakterli Azure Depolama hesabı ön ekidir
+Bir diskin iş yükü özellikleri diski P20 veya P30 kategorisine koyarken boyutu nedeniyle daha düşük bir premium depolama disk türüne eşleniyorsa, araç bu VM’yi **Evet**\* olarak işaretler. Araç ayrıca kaynak disk boyutunu önerilen premium depolama disk türüne uyacak şekilde değiştirmenizi veya hedef disk türünü yük devretme sonrasını değiştirmenizi önerir.
 
-**Depolama Hesabı**, önerilen ön eki kullanan addır
+**Depolama Türü**: Standart veya Premium.
 
-**Okuma/Yazma IOPS (Büyüme Faktörü ile)**, disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer %30) içeren en yoğun iş yükü IOPS değeridir (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun Okuma/Yazma IOPS değeri, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin Okuma/Yazma IOPS değeri toplamının tepe noktası olduğundan, sanal makinenin toplam Okuma/Yazma IOPS değeri her zaman sanal makinedeki ayrı disklerin Okuma/Yazma IOPS değerinin toplamı olmayacaktır.
+**Önerilen Ön Ek**: Üç karakterli depolama hesabı ön ekidir.
 
-**Mb/sn cinsinden Veri Değişim Sıklığı (Büyüme Faktörü ile)**, disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer %30) içeren en yüksek erime oranıdır (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun veri değişim sıklığı, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin veri değişim sıklığı toplamının tepe noktası olduğundan, sanal makinenin toplam veri değişim sıklığı her zaman sanal makinedeki ayrı disklerin veri değişim sıklığının toplamı olmayacaktır.
+**Depolama Hesabı**: Önerilen depolama hesabı ön ekini kullanan ad.
 
-**Azure VM Boyutu** bu şirket içi sanal makine için eşlenen ideal Azure İşlem sanal makine boyutudur. Bu eşleme, şirket içi sanal makine belleğine, disk/çekirdek/NIC sayısına ve Okuma/Yazma IOPS değerine göre yapılır; her zaman tüm bu şirket içi sanal makine özellikleri ile eşleşen en düşük Azure sanal makine boyutunun kullanılması önerilir.
+**Okuma/Yazma IOPS (Büyüme Faktörü ile)**: Disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer yüzde 30) içeren en yoğun iş yükü okuma/yazma IOPS değeridir (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun okuma/yazma IOPS değeri profil oluşturma işleminin her dakikası boyunca tek disklerin okuma/yazma IOPS değerinin toplamı olduğundan, bir sanal makinenin toplam okuma/yazma IOPS değeri her zaman sanal makinenin ayrı disklerinin okuma/yazma IOPS değerine eşit değildir.
 
-**Disk Sayısı**, sanal makine üzerindeki toplam disk sayısıdır (VMDK)
+**Mb/sn cinsinden Veri Değişim Sıklığı (Büyüme Faktörü ile)**: Disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer yüzde 30) içeren en yüksek erime oranıdır (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun veri değişim sıklığı, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin veri değişim sıklığı toplamının tepe noktası olduğundan, sanal makinenin toplam veri değişim sıklığı her zaman sanal makinedeki ayrı disklerin veri değişim sıklığının toplamı olmayacaktır.
 
-**Disk boyutu (GB)**, sanal makinenin tüm diskleri için sağlanan toplam boyuttur. Araç ayrıca sanal makinedeki ayrı diskler için disk boyutunu gösterir.
+**Azure VM Boyutu**: Bu şirket içi sanal makine için eşlenen ideal Azure Cloud Services makine boyutudur. Eşleme, şirket içi sanal makinenin belleğine, disk/çekirdek/NIC sayısına ve okuma/yazma IOPS değerine bağlıdır. Her zaman şirket içi VM özelliklerinin tümüyle eşleşen en düşük Azure VM boyutunun kullanılması önerilir.
 
-**Çekirdek**, sanal makine üzerindeki CPU çekirdeği sayısıdır.
+**Disk Sayısı**: Sanal makine üzerindeki toplam disk sayısı (VMDK).
 
-**Bellek (MB)**, sanal makinedeki RAM kapasitesidir.
+**Disk boyutu (GB)**: Sanal makinenin tüm disklerinin toplam kurulum boyutu. Araç ayrıca sanal makinedeki ayrı diskler için disk boyutunu gösterir.
 
-**NIC**, sanal makine üzerindeki NIC sayısıdır.
+**Çekirdek**: Sanal makine üzerindeki CPU çekirdeği sayısı.
 
-##<a name="incompatible-vms"></a>Uyumsuz VM’ler
+**Bellek (MB)**: VM üzerindeki RAM.
 
-![Dağıtım Planlayıcısı](./media/site-recovery-deployment-planner/incompatible-vms.png)
+**NIC**: VM üzerindeki NIC sayısı.
 
-**VM Adı**, rapor oluşturma sırasında VMListFile içinde kullanılan sanal makine adı veya IP adresidir. Bu sütunda ayrıca sanal makinelere bağlanan diskler (VMDK) listelenir. Bir vCenter üzerinde yinelenen adlara veya IP adreslerine sahip sanal makineler, her bir sanal makineyi ayırt etmek için ESXi ana bilgisayar adıyla belirtilir. Listelenen ESXi ana bilgisayarı, profil oluşturma sırasında sanal makine araç tarafından ilk kez bulunduğunda sanal makinenin yerleştirildiği ana bilgisayardır.
+## <a name="incompatible-vms"></a>Uyumsuz VM’ler
 
-**VM Uyumluluğu**, belirli bir sanal makinenin Azure Site recovery ile kullanıma neden uyumlu olmadığını gösterir. Nedenler sanal makinenin her uyumsuz diski için ayrıca gösterilir ve yayımlanan Azure Depolama [limitlerine](https://aka.ms/azure-storage-scalbility-performance) göre aşağıdakilerden biri olabilir.
+![Uyumsuz VM'lerin Excel elektronik tablosu](./media/site-recovery-deployment-planner/incompatible-vms.png)
 
-* Disk boyutu > 1023 GB – Azure Depolama şu anda 1 TB’den büyük disk boyutlarını desteklememektedir
-* Toplam VM boyutu (çoğaltma + TFO) desteklenen Azure Depolama hesabı boyut limitini (35 TB) aşıyor – Bu durum genellikle sanal makinede sanal makineyi premium depolama bölgesine iten ve standart depolama için desteklenen Microsoft Azure / Azure Site Recovery üst limitlerini aşan bazı performans özelliklerine sahip tek bir disk olduğunda gerçekleşir. Ancak, bir premium Azure Depolama hesabı için desteklenen en büyük boyut 35 TB’dir ve tek bir korunan sanal makine birden fazla depolama hesabında korunamaz. Ayrıca, korunan bir sanal makinede TFO (yük devretme testi) yürütüldüğünde, çoğaltmanın devam ettiği depolama hesabında çalıştığı unutulmamalıdır; bu nedenle, disk çoğaltmanın devam etmesi ve paralel olarak yük devretme testinin başarılı olması için disk boyutunun 2 katı sağlanmalıdır.
-* Kaynak IOPS, Azure Depolama IOPS için disk başına desteklenen 5000 limitini aşıyor
-* Kaynak IOPS, Azure Depolama IOPS için VM başına desteklenen 80.000 limitini aşıyor
-* Ortalama veri değişim sıklığı, disk için ortalama G/Ç’ye yönelik 10 Mb/sn’lik Azure Site Recovery veri değişim sıklığı limitini aşıyor
-* Sanal makine üzerindeki tüm disklerde bulunan toplam veri değişim sıklığı, VM başına 54 MB/sn’lik desteklenen Azure Site Recovery veri değişim sıklığı sınırını aşıyor
-* Algılanan ortalama yazma IOPS değeri, disk için 840 olan desteklenen Azure Site Recovery IOPS limitini aşıyor
-* Hesaplanan anlık görüntü depolama alanı, 10 TB’lik desteklenen anlık görüntü depolama limitini aşıyor
+**VM Adı**: Bir rapor oluşturulurken VMListFile içinde kullanılan VM adı veya IP adresi. Bu sütunda ayrıca sanal makinelere bağlanan VMDK’lar listelenir. Yinelenen adlara veya IP adreslerine sahip vCenter sanal makinelerini birbirinden ayırt etmek için, adlar ESXi ana bilgisayar adını içerir. Listelenen ESXi ana bilgisayarı, profil oluşturma sırasında araç keşfettiğinde VM’in yerleştirildiği yerdir.
 
-**Okuma/Yazma IOPS (Büyüme Faktörü ile)**, disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer %30) içeren en yoğun iş yükü IOPS değeridir (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun Okuma/Yazma IOPS değeri, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin Okuma/Yazma IOPS değeri toplamının tepe noktası olduğundan, sanal makinenin toplam Okuma/Yazma IOPS değeri her zaman sanal makinedeki ayrı disklerin Okuma/Yazma IOPS değerinin toplamı olmayacaktır.
+**VM Uyumluluğu**: Belirli bir sanal makinenin, Site Recovery ile kullanım için neden uyumlu olmadığını gösterir. Sanal makinenin her uyumsuz diski için, yayımlanan [depolama sınırlarına](https://aka.ms/azure-storage-scalbility-performance) göre nedenler aşağıdakilerden biri olabilir:
 
-**Mb/sn cinsinden Veri Değişim Sıklığı (Büyüme Faktörü ile)**, disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer %30) içeren en yüksek erime oranıdır (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun veri değişim sıklığı, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin veri değişim sıklığı toplamının tepe noktası olduğundan, sanal makinenin toplam veri değişim sıklığı her zaman sanal makinedeki ayrı disklerin veri değişim sıklığının toplamı olmayacaktır.
+* Disk boyutu > 1023 GB’dir. Azure Depolama şu anda 1 TB’den büyük disk boyutlarını desteklememektedir.
 
-**Disk Sayısı**, sanal makine üzerindeki toplam disk sayısıdır (VMDK)
+* Toplam VM boyutu (çoğaltma + TFO), desteklenen depolama hesabı boyut sınırını (35 TB) aşıyor. Bu uyumsuzluk genellikle sanal makine içindeki tek bir diskin standart depolama için desteklenen Azure veya Site Recovery sınırlarını aşan bir performans özelliği olduğunda gerçekleşir. Bu tür bir örnek, sanal makineyi premium depolama bölgesine iter. Ancak, bir premium depolama hesabı için desteklenen en büyük boyut 35 TB’dir ve tek bir korunan sanal makine birden fazla depolama hesabında korunamaz. Ayrıca, korunan bir sanal makine üzerinde yük devretme testi yürütüldüğünde, test ile çoğaltma aynı depolama hesabında devam eder. Bu örnekte, çoğaltmanın ilerlemesi ve yük devretme testinin paralel olarak başarılı olması için disk boyutunun 2 katını ayarlayın.
+* Kaynak IOPS, depolama IOPS için disk başına desteklenen 5000 limitini aşıyor.
+* Kaynak IOPS, depolama IOPS için VM başına desteklenen 80.000 limitini aşıyor.
+* Ortalama veri değişim sıklığı, disk için ortalama G/Ç’ye yönelik 10 Mb/sn’lik Site Recovery veri değişim sıklığı limitini aşıyor.
+* Sanal makine üzerindeki tüm disklerde bulunan toplam veri değişim sıklığı, VM başına 54 MB/sn’lik desteklenen Site Recovery veri değişim sıklığı sınırını aşıyor.
+* Algılanan ortalama yazma IOPS değeri, disk için 840 olan desteklenen Site Recovery IOPS limitini aşıyor.
+* Hesaplanan anlık görüntü depolama alanı, 10 TB’lik desteklenen anlık görüntü depolama limitini aşıyor.
 
-**Disk boyutu (GB)**, sanal makinenin tüm diskleri için sağlanan toplam boyuttur. Araç ayrıca sanal makinedeki ayrı diskler için disk boyutunu gösterir.
+**Okuma/Yazma IOPS (Büyüme Faktörü ile)**: Disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer yüzde 30) içeren en yoğun iş yükü IOPS değeridir (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun okuma/yazma IOPS değeri profil oluşturma işleminin her dakikası boyunca tek disklerin okuma/yazma IOPS değerinin toplamı olduğundan, bir sanal makinenin toplam okuma/yazma IOPS değeri her zaman sanal makinenin ayrı disklerinin okuma/yazma IOPS değerine eşit değildir.
 
-**Çekirdek**, sanal makine üzerindeki CPU çekirdeği sayısıdır.
+**Mb/sn cinsinden Veri Değişim Sıklığı (Büyüme Faktörü ile)**: disk üzerinde gelecekteki büyüme faktörünü de (varsayılan değer yüzde 30) içeren en yüksek erime oranıdır (varsayılan değer yüzde 95’lik dilim). Sanal makinenin en yoğun veri değişim sıklığı, profil oluşturma döneminin her dakikasında içindeki ayrı disklerin veri değişim sıklığı toplamının tepe noktası olduğundan, sanal makinenin toplam veri değişim sıklığı her zaman sanal makinedeki ayrı disklerin veri değişim sıklığının toplamı olmayacaktır.
 
-**Bellek (MB)**, sanal makinedeki RAM kapasitesidir.
+**Disk Sayısı**: Sanal makine üzerindeki toplam VMDK sayısı.
 
-**NIC**, sanal makine üzerindeki NIC sayısıdır.
+**Disk boyutu (GB)**: Sanal makinenin tüm disklerinin toplam kurulum boyutu. Araç ayrıca sanal makinedeki ayrı diskler için disk boyutunu gösterir.
+
+**Çekirdek**: Sanal makine üzerindeki CPU çekirdeği sayısı.
+
+**Bellek (MB)**: VM üzerindeki RAM miktarı.
+
+**NIC**: VM üzerindeki NIC sayısı.
 
 
-##<a name="azure-site-recovery-limits"></a>Azure Site Recovery limitleri
+## <a name="site-recovery-limits"></a>Site Recovery limitleri
 
-**Çoğaltma Depolama Hedefi** | **Ortalama Kaynak Disk G/Ç Boyutu** |**Ortalama Kaynak Disk Veri Değişim Sıklığı** | **Günlük Toplam Kaynak Disk Veri Değişim Sıklığı**
+**Çoğaltma depolama hedefi** | **Ortalama kaynak disk G/Ç boyutu** |**Ortalama kaynak disk veri değişim sıklığı** | **Günlük toplam kaynak disk veri değişim sıklığı**
 ---|---|---|---
-Standart depolama | 8 KB    | 2 MB/sn | Disk başına&168; GB
-Premium P10 disk | 8 KB    | 2 MB/sn | Disk başına&168; GB
-Premium P10 disk | 16 KB | 4 MB/sn |    Disk başına&336; GB
-Premium P10 disk | 32 KB veya daha yüksek | 8 MB/sn | Disk başına&672; GB
-Premium P20/P30 disk | 8 KB    | 5 MB/sn | Disk başına&421; GB
-Premium P20/P30 disk | 16 KB veya daha yüksek |10 MB/sn    | Disk başına&842; GB
+Standart depolama | 8 KB    | 2 Mb/sn | Disk başına 168 GB
+Premium P10 disk | 8 KB    | 2 Mb/sn | Disk başına 168 GB
+Premium P10 disk | 16 KB | 4 Mb/sn |    Disk başına 336 GB
+Premium P10 disk | 32 KB veya daha büyük | 8 Mb/sn | Disk başına 672 GB
+Premium P20 veya P30 disk | 8 KB    | 5 Mb/sn | Disk başına 421 GB
+Premium P20 veya P30 disk | 16 KB veya daha büyük |10 Mb/sn | Disk başına 842 GB
+
+Bunlar yüzde 30 G/Ç çakışmasını varsayan ortalama sayılardır. Site Recovery; çakışma oranı, büyük yazma boyutları ve gerçek iş yükü G/Ç davranışına göre daha yüksek aktarım hızını işleyebilir. Yukarıdaki sayılar yaklaşık beş dakikalık tipik bir kapsamı varsayar. Diğer bir deyişle, veriler karşıya yüklendikten sonra işlenir ve beş dakika içinde kurtarma noktası oluşturulur.
+
+Bu limitler yaptığımız testleri temel alsa da mümkün olan tüm uygulama G/Ç birleşimlerini kapsamamaktadır. Gerçek sonuçlar, uygulamanızın G/Ç karışımına göre değişebilir. En iyi sonuçlar için, gerçek performans görüntüsünü elde etmek üzere, dağıtım planlamasından sonra bile yük devretme testi kullanılarak her zaman kapsamlı uygulama testleri gerçekleştirilmesi önerilir.
+
+## <a name="updating-the-deployment-planner"></a>Dağıtım planlayıcısını güncelleştirme
+Dağıtım planlayıcısını güncelleştirmek için aşağıdakileri yapın:
+
+1. [Azure Site Recovery dağıtım planlayıcısı](https://aka.ms/asr-deployment-planner)’nın en son sürümünü indirin.
+
+2. .zip klasörünü çalıştırmak istediğiniz sunucuya kopyalayın.
+
+3. .zip klasörünü ayıklayın.
+
+4. Aşağıdakilerden birini yapın:
+ * En son sürüm bir profil oluşturma düzeltmesi içermiyor ve profil oluşturma planlayıcının geçerli sürümünde devam ediyorsa, profil oluşturmaya devam edin.
+ * En son sürüm bir profil oluşturma düzeltmesi içeriyorsa, geçerli sürümünüzde profil oluşturmayı durdurmanız ve profil oluşturma işlemini yeni sürümle yeniden başlatmanız önerilir.
+
+  >[!NOTE]
+  >
+  >Yeni sürümle profil oluşturma işlemini başlattığınızda, aracın profil verilerini mevcut dosyalara iliştirebilmesi için aynı çıktı dizini yolunu geçirin. Raporu oluşturmak için profili oluşturulmuş verilerin tamamı kullanılır. Farklı bir çıktı dizininden geçerseniz, yeni dosyalar oluşturulur ve profili oluşturulmuş eski veriler rapor oluşturma işleminde kullanılamaz.
+  >
+  >Her yeni dağıtım planlayıcısı, .zip dosyasının toplu bir güncelleştirmesidir. En yeni dosyaları önceki klasöre kopyalamanız gerekmez. Yeni bir klasör oluşturup kullanabilirsiniz.
 
 
-Bunlar %30 G/Ç çakışmasını varsayan ortalama sayılardır. Azure Site Recovery; çakışma oranı, büyük yazma boyutları ve gerçek iş yükü G/Ç davranışına göre daha yüksek aktarım hızını işleyebilir. Yukarıdaki sayılar yaklaşık 5 dakikalık tipik bir kapsam olduğunu varsayar; örn. veriler yüklendikten sonra işlenir ve 5 dakika içinde bir kurtarma noktası oluşturulur.
-
-Yukarıdaki yayımlanmış limitler yaptığımız testleri temel alsa da mümkün olan tüm uygulama G/Ç birleşimlerini kapsamamaktadır. Gerçek sonuçlar, uygulamanızın G/Ç karışımına göre değişir. En iyi sonuçlar için, gerçek performans görüntüsünü elde etmek üzere, dağıtım planlamasından sonra bile yük devretme testi kullanılarak her zaman kapsamlı uygulama testleri gerçekleştirilmesi önerilir.
-
-## <a name="how-to-update-the-deployment-planner"></a>Dağıtım Planlayıcısı nasıl güncelleştirilir?
-Azure Site Recovery Dağıtım Planlayıcısı’nın en son sürümünü [indirin](site-recovery-deployment-planner.md#download). Zip dosyasını çalıştırmak istediğiniz sunucuya kopyalayın. Zip dosyasını ayıklayın.
-Dağıtım planlayıcısının önceki bir sürümü zaten varsa ve profil oluşturma devam ediyorsa, yeni sürümde profil oluşturma düzeltmesi olmadıkça profil oluşturma işlemini durdurmanız gerekmez. Sürümün profil oluşturma bileşeninde düzeltmeleri varsa, eski sürümü kullanarak profil oluşturmayı durdurmanız ve yeni sürümü kullanarak profil oluşturma işlemini yeniden başlatmanız önerilir. Yeni sürümü kullanarak profil oluşturma işlemini başlattığınızda, aracın profil verilerini mevcut dosyalara ekleyebilmesi ve rapor oluşturma işleminde profili oluşturulmuş tüm verilerin kullanılabilmesi için aynı çıkış dizini yolundan geçmeniz gerekir. Farklı bir çıkış dizininden geçerseniz, yeni dosyalar oluşturulur ve profili oluşturulmuş eski veriler rapor oluşturma işleminde kullanılamaz.<br> Her güncelleştirme, zip dosyası içeren bir toplu güncelleştirmedir. Yeni sürüm dosyalarını, kullanılabilmesi için önceki sürüm klasörüne kopyalamanız gerekmez. Bunun için yeni klasörü kullanabilirsiniz.
-
-
-##<a name="version-history"></a>Sürüm Geçmişi
+## <a name="version-history"></a>Sürüm geçmişi
 ### <a name="11"></a>1.1
-Güncelleştirme: 09 Mar 2017 <br>
+Güncelleştirme: 9 Mart 2017
 
-Aşağıdaki sorunlar çözülmüştür<br>
+Aşağıdaki sorunlar çözülmüştür:
 
-* vCenter farklı ESXi ana bilgisayarları üzerinde aynı ad/IP adresine sahip iki veya daha fazla sanal makineye sahipse, sanal makinelerin profili oluşturulamaz.<br>
-* Uyumlu VM'ler ve Uyumsuz VM sayfaları için kopyalama ve arama devre dışı bırakıldı.
+* vCenter farklı ESXi ana bilgisayarları üzerinde aynı ad veya IP adresine sahip iki veya daha fazla sanal makineye sahipse araç, sanal makinelerin profilini oluşturamaz.
+* Uyumlu VM'ler ve Uyumsuz VM’ler çalışma sayfaları için kopyalama ve arama devre dışı bırakıldı.
 
+### <a name="10"></a>1.0
+Güncelleme: 23 Şubat 2017
 
-### <a name="10"></a>1.0 
-Güncelleştirme: 23 Şub 2017 
-
-Azure Site Recovery Dağıtım Planlayıcısı Genel Önizleme 1.0 sürümünde, gelecek güncelleştirmelerde giderilecek aşağıdaki bilinen sorunlar bulunmaktadır.
+Azure Site Recovery Dağıtım Planlayıcısı genel önizleme 1.0 sürümünde aşağıdaki bilinen sorunlar bulunmaktadır (gelecek güncelleştirmelerde giderilecek):
 
 * Araç yalnızca VMware’den Azure’a senaryosu için çalışır, Hyper-V’den Azure’a dağıtımlar için çalışmaz. Hyper-V’den Azure’a dağıtım senaryosu için [Hyper-V kapasite planlayıcısı aracını](./site-recovery-capacity-planning-for-hyper-v-replication.md) kullanın.
-* GetThroughput işlemi ABD Hükümeti ve Çin Microsoft Azure bölgelerinde desteklenmez.
-* vCenter farklı ESXi konakları üzerinde aynı ad/IP adresine sahip iki veya daha fazla sanal makineye sahipse araç, sanal makinelerin profilini oluşturamaz. Bu sürümde, araç VMListFile dosyasındaki yinelenen sanal makine adları/IP adresleri için profil oluşturmayı atlar. Bunun geçici çözümü, sanal makine profillerinin vCenter sunucusu yerine ESXi konağı ile oluşturulmasını içerir. Her ESXi konağı için bir örnek çalıştırmanız gerekir.
+* GetThroughput işlemi, Microsoft Azure’un US Government ve Çin bölgelerinde desteklenmez.
+* vCenter sunucusu farklı ESXi ana bilgisayarları üzerinde aynı ad veya IP adresine sahip iki veya daha fazla sanal makineye sahipse araç, sanal makinelerin profilini oluşturamaz. Bu sürümde, araç VMListFile dosyasındaki yinelenen sanal makine adları veya IP adresleri için profil oluşturmayı atlar. Bunun geçici çözümü, sanal makine profillerinin vCenter sunucusu yerine bir ESXi ana bilgisayarı kullanılarak oluşturulmasıdır. Her ESXi ana bilgisayarı için bir örnek çalıştırmanız gerekir.
 

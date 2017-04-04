@@ -16,8 +16,9 @@ ms.workload: infrastructure-services
 ms.date: 01/23/2017
 ms.author: cherylmc
 translationtype: Human Translation
-ms.sourcegitcommit: eadb1f29da69e7f6fcc2c7c19ba67f4e3072c346
-ms.openlocfilehash: 7796ec3a7c65e320ca142de4d03f6de5d0698e21
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: 102eab0e2e915521f8702b526dda886a2502f40b
+ms.lasthandoff: 03/25/2017
 
 
 ---
@@ -66,7 +67,7 @@ Sanal ağları aşağıdaki sebeplerden dolayı bağlamak isteyebilirsiniz:
 
 Sanal ağlar arası bağlantılar hakkında daha fazla bilgi için bu makalenin sonunda yer alan [Sanal ağdan sanal ağa dikkat edilecek noktalar](#faq) bölümünü inceleyin.
 
-### <a name="a-namevaluesaexample-settings"></a><a name="values"></a>Örnek ayarlar
+### <a name="values"></a>Örnek ayarlar
 Bu adımları bir alıştırma olarak kullanırken, örnek yapılandırma değerlerini kullanabilirsiniz. Örneklerde her sanal ağ için birden fazla adres alanı kullanılmaktadır. Ancak sanal ağlar arası bağlantı yapılandırmaları için birden fazla adres alanı gerekli değildir.
 
 **Değerler TestVNet1 için:**
@@ -115,18 +116,18 @@ Bu adımları bir alıştırma olarak kullanırken, örnek yapılandırma değer
   * Ad: TestVNet4toTestVNet1
   * Paylaşılan anahtar: Paylaşılan anahtarı kendiniz oluşturabilirsiniz. Bu örnekte abc123 kullanacağız. Sanal ağlar arası bağlantı oluştururken önemli olan, iki ağda da aynı değerin kullanılmasıdır.
 
-## <a name="a-namecreatvneta1-create-and-configure-testvnet1"></a><a name="CreatVNet"></a>1. TestVNet1’i oluşturma ve yapılandırma
+## <a name="CreatVNet"></a>1. TestVNet1’i oluşturma ve yapılandırma
 Zaten bir VNet'iniz varsa ayarların VPN ağ geçidi tasarımınızla uyumlu olduğunu doğrulayın. Diğer ağlarla çakışabilecek herhangi bir alt ağ olup olmadığına özellikle dikkat edin. Çakışan alt ağlarınız varsa bağlantınız düzgün şekilde gerçekleşmeyebilir. VNet'iniz doğru ayarlarla yapılandırıldıysa [DNS sunucusu belirtme](#dns) bölümündeki adımları uygulamaya başlayabilirsiniz.
 
 ### <a name="to-create-a-virtual-network"></a>Sanal ağ oluşturmak için
 [!INCLUDE [vpn-gateway-basic-vnet-rm-portal](../../includes/vpn-gateway-basic-vnet-rm-portal-include.md)]
 
-## <a name="a-namesubnetsa2-add-additional-address-space-and-create-subnets"></a><a name="subnets"></a>2. Ek adres alanı ekleme ve alt ağ oluşturma
+## <a name="subnets"></a>2. Ek adres alanı ekleme ve alt ağ oluşturma
 Sanal ağınız oluşturulduktan sonra ek adres alanı ekleyebilir ve alt ağ oluşturabilirsiniz.
 
 [!INCLUDE [vpn-gateway-additional-address-space](../../includes/vpn-gateway-additional-address-space-include.md)]
 
-## <a name="a-namegatewaysubneta3-create-a-gateway-subnet"></a><a name="gatewaysubnet"></a>3. Ağ geçidi alt ağı oluşturma
+## <a name="gatewaysubnet"></a>3. Ağ geçidi alt ağı oluşturma
 Sanal ağınızı bir ağ geçidine bağlamadan önce, bağlamak istediğiniz sanal ağ için ağ geçidi alt ağını oluşturmanız gerekir. Mümkünse, gelecekteki ek yapılandırma gereksinimlerini karşılamaya yetecek sayıda IP adresi sağlamak için /28 veya /27 CIDR bloğu kullanılarak ağ geçidi alt ağı oluşturulması idealdir.
 
 Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız ağ geçidi alt ağınızı oluştururken bu [Örnek ayarlara](#values) başvurun.
@@ -136,21 +137,21 @@ Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız ağ geçidi alt 
 ### <a name="to-create-a-gateway-subnet"></a>Bir ağ geçidi alt ağı oluşturmak için
 [!INCLUDE [vpn-gateway-add-gwsubnet-rm-portal](../../includes/vpn-gateway-add-gwsubnet-rm-portal-include.md)]
 
-## <a name="a-namednsservera4-specify-a-dns-server-optional"></a><a name="DNSServer"></a>4. DNS sunucusu belirtme (isteğe bağlı)
-Sanal ağlarınıza dağıtılmış olan sanal makineleriniz için ad çözümleme istiyorsanız bir DNS sunucusu belirtmeniz gerekir.
+## <a name="DNSServer"></a>4. DNS sunucusu belirtme (isteğe bağlı)
+Sanal Ağdan Sanal Ağa bağlantılar için DNS gerekli değildir. Ancak, sanal ağınıza dağıtılmış olan kaynaklarınız için ad çözümleme istiyorsanız bir DNS sunucusu belirtmeniz gerekir. Bu ayar, bu sanal ağ için ad çözümlemede kullanmak istediğiniz DNS sunucusunu belirtmenizi sağlar. Bir DNS sunucusu oluşturmaz.
 
 [!INCLUDE [vpn-gateway-add-dns-rm-portal](../../includes/vpn-gateway-add-dns-rm-portal-include.md)]
 
-## <a name="a-namevnetgatewaya5-create-a-virtual-network-gateway"></a><a name="VNetGateway"></a>5. Sanal ağ geçidi oluşturma
+## <a name="VNetGateway"></a>5. Sanal ağ geçidi oluşturma
 Bu adımda sanal ağınız için sanal ağ geçidi oluşturacaksınız. Bu adımın tamamlanması 45 dakika sürebilir. Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız [Örnek ayarlara](#values) başvurabilirsiniz.
 
 ### <a name="to-create-a-virtual-network-gateway"></a>Bir sanal ağ geçidi oluşturmak için
 [!INCLUDE [vpn-gateway-add-gw-rm-portal](../../includes/vpn-gateway-add-gw-rm-portal-include.md)]
 
-## <a name="a-namecreatetestvnet4a6-create-and-configure-testvnet4"></a><a name="CreateTestVNet4"></a>6. TestVNet4’ü oluşturma ve yapılandırma
+## <a name="CreateTestVNet4"></a>6. TestVNet4’ü oluşturma ve yapılandırma
 TestVNet1’i oluşturduktan sonra önceki adımlarda verilen değerleri TestVNet4’ün değerleriyle değiştirip tekrar uygulayarak TestVNet4’ü oluşturun. TestVNet4’ü yapılandırmak için TestVNet1’in sanal ağ geçidi oluşturma işlemlerinin tamamlanmasını beklemenize gerek yoktur. Değerleri kendiniz belirliyorsanız adres alanlarının bağlanmak istediğiniz sanal ağlarınkilerle çakışmadığından emin olun.
 
-## <a name="a-nametestvnet1connectiona7-configure-the-testvnet1-connection"></a><a name="TestVNet1Connection"></a>7. TestVNet1 bağlantısını yapılandırma
+## <a name="TestVNet1Connection"></a>7. TestVNet1 bağlantısını yapılandırma
 TestVNet1 ve TestVNet4 için sanal ağ geçidi oluşturma işlemleri tamamlandıktan sonra sanal ağ geçidi bağlantılarınızı oluşturabilirsiniz. Bu bölümde VNet1 ile VNet4 arasında bir bağlantı oluşturacaksınız.
 
 1. **Tüm kaynaklar** bölümünde sanal ağınıza ait sanal ağ geçidini bulun. Örnek: **TestVNet1GW**. Sanal ağ geçidi dikey penceresini açmak için **TestVNet1GW** öğesine tıklayın.
@@ -172,10 +173,10 @@ TestVNet1 ve TestVNet4 için sanal ağ geçidi oluşturma işlemleri tamamlandı
     ![Paylaşılan anahtar](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/sharedkey.png "Shared key")
 10. Değişikliklerinizi kaydetmek için dikey pencerenin en altında yer alan **Tamam**’a tıklayın.
 
-## <a name="a-nametestvnet4connectiona8-configure-the-testvnet4-connection"></a><a name="TestVNet4Connection"></a>8. TestVNet4 bağlantısını yapılandırma
+## <a name="TestVNet4Connection"></a>8. TestVNet4 bağlantısını yapılandırma
 Bu adımda TestVNet4 ile TestVNet1 arasında bir bağlantı oluşturun. TestVNet1 ile TestVNet4 arasında bağlantı oluşturmak için kullandığınız yöntemi kullanın. Aynı paylaşılan anahtarı kullandığınızdan emin olun.
 
-## <a name="a-nameverifyconnectiona9-verify-your-connection"></a><a name="VerifyConnection"></a>9. Bağlantınızı doğrulama
+## <a name="VerifyConnection"></a>9. Bağlantınızı doğrulama
 Bağlantınızı doğrulayın. Her sanal ağ geçidi için aşağıdakileri yapın:
 
 1. Sanal ağ geçidine ait dikey pencereyi bulun. Örnek: **TestVNet4GW**. 
@@ -189,16 +190,11 @@ Her bir bağlantıya çift tıklayarak daha fazla bilgi görüntüleyebilirsiniz
 
 ![Temel Parçalar](./media/vpn-gateway-howto-vnet-vnet-resource-manager-portal/essentials.png "Essentials")
 
-## <a name="a-namefaqavnet-to-vnet-considerations"></a><a name="faq"></a>Sanal Ağdan Sanal Ağa dikkat edilecek noktalar
+## <a name="faq"></a>Sanal Ağdan Sanal Ağa dikkat edilecek noktalar
 Sanal ağlar arası bağlantılar hakkında ek bilgi için SSS sayfasını görüntüleyin.
 
 [!INCLUDE [vpn-gateway-vnet-vnet-faq](../../includes/vpn-gateway-vnet-vnet-faq-include.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Daha fazla bilgi için bkz. [Virtual Machines belgeleri](https://docs.microsoft.com/azure/#pivot=services&panel=Compute).
-
-
-
-<!--HONumber=Jan17_HO4-->
-
 

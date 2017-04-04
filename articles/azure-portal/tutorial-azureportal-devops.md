@@ -15,8 +15,9 @@ ms.topic: hero-article
 ms.date: 06/05/2016
 ms.author: mlearned
 translationtype: Human Translation
-ms.sourcegitcommit: dcda8b30adde930ab373a087d6955b900365c4cc
-ms.openlocfilehash: 6a03b96b3f06d9c8cdb820e6c7835f728a28cc99
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: eec7d1402bdea4e5433c473dd713eed23aa80464
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -62,10 +63,10 @@ Azure platformu esnek DevOps iş akışları ile doludur. Bu öğreticide Azure 
 9. Projenizi ve dalınızı seçtikten sonra Tamam'a tıklayın. Bir dağıtımın bildirimlerini görmeye başlamanız gerekir.
    
    ![image9][image9]
-10. Kaynak denetim deposunu Azure ile tümleştirmek üzere oluşturulan web kancasını görmek için Github’a geri gidin. Azure Portal yalnızca birkaç basit adımda Github ile tümleştirme sağlar.
+10. Kaynak denetim deposunu Azure ile tümleştirmek üzere oluşturulan web kancasını görmek için GitHub’a geri gidin. Azure portalı yalnızca birkaç basit adımda GitHub ile tümleştirme olanağı sağlar.
     
     ![image10][image10]
-11. Sürekli dağıtımı göstermek için depoya bir miktar içeriği hızlıca ekleyin. Basit bir örnek için Github deposuna örnek bir metin dosyası ekleyin. App Service ile .NET, Ruby, Python veya başka bir uygulama türü kullanabilirsiniz. Tercih ettiğiniz depoya bir metin dosyası, ASP.NET MVC, Java ya da Ruby uygulaması eklemekten çekinmeyin.
+11. Sürekli dağıtımı göstermek için depoya bir miktar içeriği hızlıca ekleyin. Basit bir örnek için GitHub deposuna örnek bir metin dosyası ekleyin. App Service ile .NET, Ruby, Python veya başka bir uygulama türü kullanabilirsiniz. Tercih ettiğiniz depoya bir metin dosyası, ASP.NET MVC, Java ya da Ruby uygulaması eklemekten çekinmeyin.
     
     ![image11][image11]
 12. Değişiklikleri deponuza uyguladıktan sonra portal bildirimleri alanında yeni bir dağıtımın başladığını görürsünüz. Değişiklikleri deponuza uyguladıktan sonra hızlıca görmüyorsanız Eşitle’ye tıklayın.
@@ -334,9 +335,4 @@ Bu öğretici bir web uygulaması için sürekli dağıtımı hızlıca etkinle�
 [image67]: ./media/tutorial-azureportal-devops/image67.png
 [image68]: ./media/tutorial-azureportal-devops/image68.png
 [image69]: ./media/tutorial-azureportal-devops/image69.png
-
-
-
-<!--HONumber=Dec16_HO1-->
-
 

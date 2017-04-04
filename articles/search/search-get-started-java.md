@@ -15,8 +15,9 @@ ms.tgt_pltfrm: na
 ms.date: 07/14/2016
 ms.author: evboyle
 translationtype: Human Translation
-ms.sourcegitcommit: 2ea002938d69ad34aff421fa0eb753e449724a8f
-ms.openlocfilehash: 6ecc365fd90ba955efb977c4e598eae6746916f0
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: f6ca06a0349def97b38a1bf6d0d8f36236077e92
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -60,7 +61,7 @@ Aşağıdaki listede, bu örnek ile ilgili dosyalar açıklanmaktadır.
 
 <a id="sub-2"></a>
 
-## <a name="find-the-service-name-and-apikey-of-your-azure-search-service"></a>Azure Search hizmetinizin hizmet adını ve api anahtarını bulma
+## <a name="find-the-service-name-and-api-key-of-your-azure-search-service"></a>Azure Search hizmetinizin hizmet adını ve api anahtarını bulma
 Azure Search'e yönelik tüm REST API çağrıları, hizmet URL'si ve api anahtarı sağlamanızı gerektirir. 
 
 1. [Azure Portal](https://portal.azure.com)'da oturum açın.
@@ -88,7 +89,7 @@ Sonraki tüm dosya değişiklikleri ve çalıştırma deyimleri bu klasördeki d
 3. **Finish (Son)** düğmesine tıklayın.
 4. Dosyaları görüntülemek ve düzenlemek için **Proje Gezgini**'ni kullanın. Zaten açık değilse **Pencere** > **Görünümü Göster** > **Proje Gezgini**'ne tıklayın veya açmak için kısayolu kullanın.
 
-## <a name="configure-the-service-url-and-apikey"></a>Hizmet URL'sini ve api anahtarını yapılandırma
+## <a name="configure-the-service-url-and-api-key"></a>Hizmet URL'sini ve api anahtarını yapılandırma
 1. **Proje Gezgini**'nde, sunucu adını ve api anahtarını içeren yapılandırma ayarlarını düzenlemek için **config.properties**'e çift tıklayın.
 2. Bu makalenin, [Azure Portal](https://portal.azure.com)'da hizmet URL'sini ve api anahtarını bulduğunuz önceki adımlarına bakarak, şimdi **config.properties**'e gireceğiniz değerleri alabilirsiniz.
 3. **config.properties**'de, "Api Anahtarı"nı hizmetinizin api anahtarı ile değiştirin. Ardından, aynı dosyada hizmet adı (URL http://servicename.search.windows.net URL'sinin ilk bileşeni) "hizmet adı" ile değiştirilir.
@@ -179,9 +180,4 @@ Azure Search'ü ilk kez mi kullanıyorsunuz? Neler yapabileceğinizi anlamak iç
 [10]: ./media/search-get-started-java/AzSearch-Java-BuildProject1.PNG
 [11]: ./media/search-get-started-java/rogerwilliamsschool1.PNG
 [12]: ./media/search-get-started-java/AzSearch-Java-SelectProject.png
-
-
-
-<!--HONumber=Nov16_HO2-->
-
 

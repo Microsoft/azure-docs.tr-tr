@@ -1,12 +1,7 @@
 > [!NOTE]
-> Bu öğreticiyi tamamlamak için .NET için Azure Storage İstemci Kitaplığı’nın en son sürümünü kullanmanızı öneririz. Kitaplığın en son sürümü olan 7.x sürümüne, indirmek için [Nuget](https://www.nuget.org/packages/WindowsAzure.Storage/) adresinden ulaşabilirsiniz. İstemci kitaplığı kaynağına [GitHub](https://github.com/Azure/azure-storage-net) adresinden ulaşabilirsiniz.
+> Bu öğreticiyi tamamlamak için .NET için Azure Depolama İstemci Kitaplığı’nın en son sürümünü kullanmanızı öneririz. İndirilebilecek en son sürümü [NuGet](https://www.nuget.org/packages/WindowsAzure.Storage/)’te bulabilirsiniz. İstemci kitaplığı kaynak koduna [GitHub](https://github.com/Azure/azure-storage-net) adresinden ulaşabilirsiniz.
 > 
-> Depolama öykünücüsü kullanıyorsanız, istemci kitaplığının bu 7.x sürümüne depolama öykünücüsünün en azından 4.3 sürümünün gerektiğini unutmayın 
+> Depolama öykünücüsü kullanıyorsanız, sürüm gereksinimleri için [istemci kitaplığı BENİOKU](https://github.com/Azure/azure-storage-net/blob/master/README.md) dosyasına bakın. Depolama öykünücüsü ile .NET için Depolama İstemcisi Kitaplığı kullanmak için, Azure depolama öykünücüsünün karşılık gelen en düşük sürümü kullanılmalıdır.
 > 
 > 
-
-
-
-<!--HONumber=Nov16_HO2-->
-
 

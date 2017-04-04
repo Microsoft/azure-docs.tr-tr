@@ -12,17 +12,17 @@ ms.devlang: tbd
 ms.topic: get-started-article
 ms.tgt_pltfrm: dotnet
 ms.workload: na
-ms.date: 11/30/2016
+ms.date: 03/23/2017
 ms.author: jotaub
 translationtype: Human Translation
-ms.sourcegitcommit: 4a972b9b8b52a90f27afda98d8bdc661016d1fe1
-ms.openlocfilehash: ba7093f8a2c06ab4cecf11207174a4871435ae64
-ms.lasthandoff: 02/28/2017
+ms.sourcegitcommit: 0bec803e4b49f3ae53f2cc3be6b9cb2d256fe5ea
+ms.openlocfilehash: 5de92033eb7eb4fef8d27a215b3284ab80594065
+ms.lasthandoff: 03/24/2017
 
 
 ---
 # <a name="create-a-service-bus-namespace-using-the-azure-portal"></a>Azure portalı ile Service Bus ad alanı oluşturma
-Ad alanı, tüm mesajlaşma bileşenleri için ortak bir kapsayıcıdır. Tek bir ad alanında birden fazla kuyruk ve konu bulunabilir ve ad alanları genellikle uygulama kapsayıcıları olarak görev yapar. Şu anda bir Service Bus ad alanı oluşturmak için iki farklı yol vardır.
+Ad alanı, tüm mesajlaşma bileşenleri için ortak bir kapsayıcıdır. Tek bir ad alanında birden fazla kuyruk ve konu bulunabilir ve ad alanları genellikle uygulama kapsayıcıları olarak görev yapar. Bir Service Bus ad alanı oluşturmak için iki farklı yol vardır:
 
 1. Azure portalı (bu makale)
 2. [Resource Manager şablonları][create-namespace-using-arm]

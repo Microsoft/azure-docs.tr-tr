@@ -1,5 +1,5 @@
 ---
-title: ".NET içeren Service Bus konu başlıklarını kullanma | Microsoft Belgeleri"
+title: ".NET içeren Azure Service Bus konu başlıklarını kullanma | Microsoft Docs"
 description: "Azure&quot;da .NET içeren Service Bus konu başlıklarını ve abonelikleri kullanmayı öğrenin. Kod örnekleri .NET uygulamalarına yönelik yazılır."
 services: service-bus-messaging
 documentationcenter: .net
@@ -12,11 +12,12 @@ ms.workload: na
 ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: get-started-article
-ms.date: 12/21/2016
+ms.date: 03/23/2017
 ms.author: sethm
 translationtype: Human Translation
-ms.sourcegitcommit: add228c8a24fbd36ab05f55570abf1374f519822
-ms.openlocfilehash: 9927de3bba251a2cc135657f00b789c7522fc05c
+ms.sourcegitcommit: 0bec803e4b49f3ae53f2cc3be6b9cb2d256fe5ea
+ms.openlocfilehash: bec18e91ef8798a791d4b1fe93bd529593197e01
+ms.lasthandoff: 03/24/2017
 
 
 ---
@@ -33,10 +34,10 @@ Bu makale, Service Bus konu başlıklarını ve aboneliklerini kullanmayı açı
 Service Bus kullanan bir uygulama oluştururken Service Bus derlemesine yönelik bir başvuru eklemeniz ve ilgili ad alanlarını dahil etmeniz gerekir. Bunu yapmanın en kolay yolu uygun [NuGet](https://www.nuget.org) paketini indirmektir.
 
 ## <a name="get-the-service-bus-nuget-package"></a>Service Bus NuGet paketi alma
-[Service Bus NuGet paketi](https://www.nuget.org/packages/WindowsAzure.ServiceBus), Service Bus API'sini almanın ve uygulamanızı gerekli tüm Service Bus bağımlılıklarıyla yapılandırmanın en kolay yoludur. Service Bus NuGet paketini projenize yüklemek için aşağıdakileri yapın:
+[Service Bus NuGet paketi](https://www.nuget.org/packages/WindowsAzure.ServiceBus), uygulamanızı gerekli tüm Service Bus bağımlılıklarıyla yapılandırmanın en kolay yoludur. Service Bus NuGet paketini projenize yüklemek için aşağıdakileri yapın:
 
 1. Çözüm Gezgini'nde, **Başvurular**'a sağ tıklayın ve ardından **NuGet Paketlerini Yönet**'e tıklayın.
-2. "Service Bus" için arama yapın ve **Microsoft Azure Service Bus** öğesini seçin. Yüklemeyi tamamlamak için **Yükle**'ye tıklayın, ardından aşağıdaki iletişim kutusunu kapatın:
+2. **Gözat**’a tıklayın, “Azure Service Bus” araması yapın ve **Microsoft Azure Service Bus**’ı seçin. Yüklemeyi tamamlamak için **Yükle**'ye tıklayın, ardından iletişim kutusunu kapatın:
    
    ![][7]
 
@@ -97,7 +98,7 @@ Web sitelerini veya Virtual Machines hizmetini kullanırken, .NET yapılandırma
 Daha önce açıklandığı gibi [Azure portalı][Azure portal] aldığınız SAS adını ve anahtar değerlerini kullanın.
 
 ## <a name="create-a-topic"></a>Konu başlığı oluşturma
-[NamespaceManager](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.namespacemanager) sınıfını kullanarak Service Bus konu başlıklarına ve aboneliklerine yönelik yönetim işlemlerini gerçekleştirebilirsiniz. Bu sınıfın sağladığı yöntemlerle konu oluşturabilir, konu başlıklarını numaralandırabilir ve silebilirsiniz.
+[NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) sınıfını kullanarak Service Bus konu başlıklarına ve aboneliklerine yönelik yönetim işlemlerini gerçekleştirebilirsiniz. Bu sınıfın sağladığı yöntemlerle konu oluşturabilir, konu başlıklarını numaralandırabilir ve silebilirsiniz.
 
 Aşağıdaki örnek, Service Bus hizmeti ad alanı taban adresini ve yönetme izniyle birlikte uygun SAS kimlik bilgilerinin bulunduğu bir bağlantı dizesini içeren Azure `CloudConfigurationManager` sınıfını kullanan bir `NamespaceManager` nesnesi oluşturur. Bu bağlantı dizesi aşağıdaki şekildedir:
 
@@ -121,7 +122,7 @@ if (!namespaceManager.TopicExists("TestTopic"))
 }
 ```
 
-Konunun özelliklerini ayarlamanıza olanak sağlayan (örneğin, konu başlığına gönderilen iletilere uygulanacak varsayılan yaşam süresi (TTL) değerini ayarlama) [CreateTopic](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.namespacemanager) yönteminde aşırı yükleme yapılmıştır. Bu ayarlar [TopicDescription](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicdescription) sınıfı kullanılarak uygulanır. Aşağıdaki örnek, maksimum 5 GB boyuta sahip olan ve 1 dakikalık varsayılan ileti TTL'si içeren, **TestTopic** olarak adlandırılan bir konu başlığının nasıl oluşturulacağını gösterir.
+Konunun özelliklerini ayarlamanıza olanak sağlayan (örneğin, konu başlığına gönderilen iletilere uygulanacak varsayılan yaşam süresi (TTL) değerini ayarlama) [CreateTopic](/dotnet/api/microsoft.servicebus.namespacemanager) yönteminde aşırı yükleme yapılmıştır. Bu ayarlar [TopicDescription](/dotnet/api/microsoft.servicebus.messaging.topicdescription) sınıfı kullanılarak uygulanır. Aşağıdaki örnek, maksimum 5 GB boyuta sahip olan ve 1 dakikalık varsayılan ileti TTL'si içeren, **TestTopic** olarak adlandırılan bir konu başlığının nasıl oluşturulacağını gösterir.
 
 ```csharp
 // Configure Topic Settings.
@@ -143,12 +144,12 @@ if (!namespaceManager.TopicExists("TestTopic"))
 ```
 
 > [!NOTE]
-> Konu başlığı için belirtilen adın zaten bir hizmet ad alanında kullanılıp kullanılmadığını kontrol etmek için [NamespaceManager](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.namespacemanager) nesnelerinde [TopicExists](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.namespacemanager#Microsoft_ServiceBus_NamespaceManager_TopicExists_System_String_) yöntemini kullanabilirsiniz.
+> Konu başlığı için belirtilen adın zaten bir hizmet ad alanında kullanılıp kullanılmadığını kontrol etmek için [NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) nesnelerinde [TopicExists](/dotnet/api/microsoft.servicebus.namespacemanager#Microsoft_ServiceBus_NamespaceManager_TopicExists_System_String_) yöntemini kullanabilirsiniz.
 > 
 > 
 
 ## <a name="create-a-subscription"></a>Abonelik oluşturma
-Ayrıca, [NamespaceManager](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.namespacemanager) sınıfını kullanarak da konu başlığı abonelikleri oluşturabilirsiniz. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna gönderilen ileti kümesini sınırlayan isteğe bağlı bir filtre içerebilir.
+Ayrıca, [NamespaceManager](/dotnet/api/microsoft.servicebus.namespacemanager) sınıfını kullanarak da konu başlığı abonelikleri oluşturabilirsiniz. Abonelikler adlandırılır ve aboneliğin sanal kuyruğuna gönderilen ileti kümesini sınırlayan isteğe bağlı bir filtre içerebilir.
 
 > [!IMPORTANT]
 > İletilerin bir abonelik tarafından alınabilmesi için konuya herhangi bir ileti göndermeden önce ilgili aboneliği oluşturmanız gerekir. Bir konuya abonelik yoksa konu bu iletileri atar.
@@ -203,9 +204,9 @@ namespaceManager.CreateSubscription("TestTopic",
 Artık `TestTopic` konu başlığına bir ileti gönderildiğinde bu ileti **AllMessages** konu başlığı aboneliği bulunan tüm alıcılara teslim edilir. **HighMessages** ve **LowMessages** konu başlığı aboneliklerini seçen diğer alıcılara ise ileti teslimi seçime bağlı olarak gerçekleştirilir (ileti içeriğine göre).
 
 ## <a name="send-messages-to-a-topic"></a>Konu başlığına ileti gönderme
-Bir Service Bus konu başlığına bir ileti göndermek için uygulamanız bağlantı dizesini kullanarak bir [TopicClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesi oluşturur.
+Bir Service Bus konu başlığına bir ileti göndermek için uygulamanız bağlantı dizesini kullanarak bir [TopicClient](/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesi oluşturur.
 
-Aşağıdaki kodda, daha önce [CreateFromConnectionString](https://docs.microsoft.com/en-us/dotnet/api/microsoft.servicebus.messaging.topicclient#Microsoft_ServiceBus_Messaging_TopicClient_CreateFromConnectionString_System_String_System_String_) API kullanarak oluşturulan **TestTopic** konu başlığına yönelik [TopicClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesi oluşturma işleminin nasıl gerçekleştirileceği gösterilir.
+Aşağıdaki kodda, daha önce [CreateFromConnectionString](/dotnet/api/microsoft.servicebus.messaging.topicclient#Microsoft_ServiceBus_Messaging_TopicClient_CreateFromConnectionString_System_String_System_String_) API kullanarak oluşturulan **TestTopic** konu başlığına yönelik [TopicClient](/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesi oluşturma işleminin nasıl gerçekleştirileceği gösterilir.
 
 ```csharp
 string connectionString =
@@ -217,9 +218,9 @@ TopicClient Client =
 Client.Send(new BrokeredMessage());
 ```
 
-Service Bus konu başlıklarına gönderilen iletiler, [BrokeredMessage](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) sınıfının örnekleridir. **BrokeredMessage** nesneleri, bir standart özellikler kümesi ([Label](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Label) ve [TimetoLive](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_TimeToLive) gibi) uygulamaya özgü özel özellikleri tutmak için kullanılan bir sözlük ve rastgele uygulama verileri gövdesi içerir. Uygulama herhangi bir seri haline getirebilir nesneyi **BrokeredMessage** nesnesinin oluşturucusuna geçirerek ileti gövdesini ayarlayabilir ve ardından nesneyi seri haline getirmek için uygun **DataContractSerializer** kullanılır. Alternatif olarak, bir **System.IO.Stream** nesnesi sağlanabilir.
+Service Bus konu başlıklarına gönderilen iletiler, [BrokeredMessage](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage) sınıfının örnekleridir. **BrokeredMessage** nesneleri, bir standart özellikler kümesi ([Label](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Label) ve [TimetoLive](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_TimeToLive) gibi) uygulamaya özgü özel özellikleri tutmak için kullanılan bir sözlük ve rastgele uygulama verileri gövdesi içerir. Uygulama herhangi bir seri haline getirebilir nesneyi **BrokeredMessage** nesnesinin oluşturucusuna geçirerek ileti gövdesini ayarlayabilir ve ardından nesneyi seri haline getirmek için uygun **DataContractSerializer** kullanılır. Alternatif olarak, bir **System.IO.Stream** nesnesi sağlanabilir.
 
-Aşağıdaki örnek, bir önceki kod örneğinde elde ettiğiniz **TestTopic** [TopicClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesine nasıl beş test iletisi göndereceğinizi gösterir. Döngü tekrarına bağlı olarak her iletinin [MessageId](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_MessageId) özelliği değerinin değişebileceğini unutmayın (iletileri alacak abonelikleri belirler).
+Aşağıdaki örnek, bir önceki kod örneğinde elde ettiğiniz **TestTopic** [TopicClient](/dotnet/api/microsoft.servicebus.messaging.topicclient) nesnesine nasıl beş test iletisi göndereceğinizi gösterir. Döngü tekrarına bağlı olarak her iletinin [MessageId](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_MessageId) özelliği değerinin değişebileceğini unutmayın (iletileri alacak abonelikleri belirler).
 
 ```csharp
 for (int i=0; i<5; i++)
@@ -238,13 +239,13 @@ for (int i=0; i<5; i++)
 Service Bus konu başlıkları, [Standart katmanda](service-bus-premium-messaging.md) maksimum 256 KB ve [Premium katmanda](service-bus-premium-messaging.md) maksimum 1 MB ileti boyutunu destekler. Standart ve özel uygulama özelliklerini içeren üst bilginin maksimum dosya boyutu 64 KB olabilir. Konu başlığında tutulan ileti sayısına ilişkin bir sınır yoktur ancak konu başlığı tarafından tutulan iletilerin toplam boyutu için uç sınır vardır. Bu konu başlığı boyutu, üst sınır 5 GB olacak şekilde oluşturulma zamanında belirlenir. Bölümlendirme etkinse üst sınır daha yüksektir. Daha fazla bilgi için bkz. [Bölümlenmiş mesajlaşma varlıkları](service-bus-partitioning.md).
 
 ## <a name="how-to-receive-messages-from-a-subscription"></a>Abonelikten ileti alma
-Abonelikten ileti almak için tavsiye edilen yöntem [SubscriptionClient](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptionclient) nesnesi kullanmaktır. **SubscriptionClient** nesneleri iki farklı modda çalışabilir: [*ReceiveAndDelete* ve *PeekLock*](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) **PeekLock** varsayılan değerdir.
+Abonelikten ileti almak için tavsiye edilen yöntem [SubscriptionClient](/dotnet/api/microsoft.servicebus.messaging.subscriptionclient) nesnesi kullanmaktır. **SubscriptionClient** nesneleri iki farklı modda çalışabilir: [*ReceiveAndDelete* ve *PeekLock*](/dotnet/api/microsoft.servicebus.messaging.receivemode) **PeekLock** varsayılan değerdir.
 
 **ReceiveAndDelete** modunu kullanırken alma işlemi tek aşamalıdır. Service Bus abonelikte bir iletiye yönelik okuma isteği aldığında, iletiyi kullanılıyor olarak işaretler ve uygulamaya döndürür. **ReceiveAndDelete** modu, en basit modeldir ve uygulamanın hata oluştuğunda bir iletinin işlenmemesine izin verebileceği senaryolarda en iyi şekilde çalışır. Bu durumu daha iyi anlamak için müşterinin bir alma isteği bildirdiğini ve bu isteğin işlenmeden çöktüğünü varsayın. Service Bus iletiyi kullanılmış olarak işaretlediğinden, uygulama yeniden başlatılıp iletileri tekrar kullanmaya başladığında çökmenin öncesinde kullanılan iletiyi atlamış olur.
 
-**PeekLock** modunda (varsayılan mod), atlanan iletilere izin veremeyen uygulamaları desteklemenin mümkün olması için alma işlemi iki aşamalıdır. Service Bus bir istek aldığında bir sonraki kullanılacak iletiyi bulur, diğer tüketicilerin bu iletiyi almasını engellemek için kilitler ve ardından uygulamaya döndürür. Uygulama iletiyi işlemeyi tamamladıktan sonra (veya iletiyi daha sonra işlemek üzere güvenli şekilde depoladıktan sonra) alınan iletide [Complete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) yöntemini çağırarak alma işleminin ikinci aşamasını tamamlar. Service Bus **Complete** çağrısını gördüğünde iletiyi kullanılıyor olarak işaretler ve abonelikten kaldırır.
+**PeekLock** modunda (varsayılan mod), atlanan iletilere izin veremeyen uygulamaları desteklemenin mümkün olması için alma işlemi iki aşamalıdır. Service Bus bir istek aldığında bir sonraki kullanılacak iletiyi bulur, diğer tüketicilerin bu iletiyi almasını engellemek için kilitler ve ardından uygulamaya döndürür. Uygulama iletiyi işlemeyi tamamladıktan sonra (veya iletiyi daha sonra işlemek üzere güvenli şekilde depoladıktan sonra) alınan iletide [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) yöntemini çağırarak alma işleminin ikinci aşamasını tamamlar. Service Bus **Complete** çağrısını gördüğünde iletiyi kullanılıyor olarak işaretler ve abonelikten kaldırır.
 
-Aşağıdaki örnekte, varsayılan **PeekLock** modu kullanılarak iletilerin nasıl alınıp işlenebileceği gösterilir. Farklı bir [ReceiveMode](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.receivemode) değeri belirtmek üzere [CreateFromConnectionString](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_CreateFromConnectionString_System_String_System_String_System_String_Microsoft_ServiceBus_Messaging_ReceiveMode_) için başka bir aşırı yükü kullanabilirsiniz. Bu örnekte, iletilerin **HighMessages** aboneliğine ulaştığında işlenmesi için [OnMessage](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_OnMessage_System_Action_Microsoft_ServiceBus_Messaging_BrokeredMessage__Microsoft_ServiceBus_Messaging_OnMessageOptions_) geri çağrısı kullanılır.
+Aşağıdaki örnekte, varsayılan **PeekLock** modu kullanılarak iletilerin nasıl alınıp işlenebileceği gösterilir. Farklı bir [ReceiveMode](/dotnet/api/microsoft.servicebus.messaging.receivemode) değeri belirtmek üzere [CreateFromConnectionString](/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_CreateFromConnectionString_System_String_System_String_System_String_Microsoft_ServiceBus_Messaging_ReceiveMode_) için başka bir aşırı yükü kullanabilirsiniz. Bu örnekte, iletilerin **HighMessages** aboneliğine ulaştığında işlenmesi için [OnMessage](/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_OnMessage_System_Action_Microsoft_ServiceBus_Messaging_BrokeredMessage__Microsoft_ServiceBus_Messaging_OnMessageOptions_) geri çağrısı kullanılır.
 
 ```csharp
 string connectionString =
@@ -281,14 +282,14 @@ Client.OnMessage((message) =>
 }, options);
 ```
 
-Bu örnek, bir [OnMessageOptions](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.onmessageoptions) nesnesini kullanarak [OnMessage](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_OnMessage_System_Action_Microsoft_ServiceBus_Messaging_BrokeredMessage__Microsoft_ServiceBus_Messaging_OnMessageOptions_) geri çağrısını yapılandırır. Alınan iletide [Complete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) çağrısı yapıldığında ileti üzerinde kontrol sağlamanız için [AutoComplete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.onmessageoptions#Microsoft_ServiceBus_Messaging_OnMessageOptions_AutoComplete) **yanlış** olarak ayarlanmıştır. Otomatik yenileme özelliği sonlandırılmadan önce istemcinin ileti için en fazla bir dakika beklemesini ve iletileri kontrol etmek için istemcinin yeni bir çağrı yapmasını sağlamak için [AutoRenewTimeout](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.onmessageoptions#Microsoft_ServiceBus_Messaging_OnMessageOptions_AutoRenewTimeout) 1 dakika olarak ayarlanır. Bu özellik değeri sayesinde, istemci tarafından gerçekleştirilen, ileti almayan ücretlendirilebilir çağrı sayısı azaltılır.
+Bu örnek, bir [OnMessageOptions](/dotnet/api/microsoft.servicebus.messaging.onmessageoptions) nesnesini kullanarak [OnMessage](/dotnet/api/microsoft.servicebus.messaging.subscriptionclient#Microsoft_ServiceBus_Messaging_SubscriptionClient_OnMessage_System_Action_Microsoft_ServiceBus_Messaging_BrokeredMessage__Microsoft_ServiceBus_Messaging_OnMessageOptions_) geri çağrısını yapılandırır. Alınan iletide [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) çağrısı yapıldığında ileti üzerinde kontrol sağlamanız için [AutoComplete](/dotnet/api/microsoft.servicebus.messaging.onmessageoptions#Microsoft_ServiceBus_Messaging_OnMessageOptions_AutoComplete) **yanlış** olarak ayarlanmıştır. Otomatik yenileme özelliği sonlandırılmadan önce istemcinin ileti için en fazla bir dakika beklemesini ve iletileri kontrol etmek için istemcinin yeni bir çağrı yapmasını sağlamak için [AutoRenewTimeout](/dotnet/api/microsoft.servicebus.messaging.onmessageoptions#Microsoft_ServiceBus_Messaging_OnMessageOptions_AutoRenewTimeout) 1 dakika olarak ayarlanır. Bu özellik değeri sayesinde, istemci tarafından gerçekleştirilen, ileti almayan ücretlendirilebilir çağrı sayısı azaltılır.
 
 ## <a name="how-to-handle-application-crashes-and-unreadable-messages"></a>Uygulama çökmelerini ve okunmayan iletileri giderme
-Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Bazı nedenlerden dolayı alıcı uygulamanın iletiyi işleyememesi durumunda, alınan iletide [Abandon](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon_System_Collections_Generic_IDictionary_System_String_System_Object__) yöntemini ([Complete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) yöntemi yerine) çağrılabilir. Bu işlem, Service Bus hizmetinin abonelikteki iletinin kilidini açmasına ve iletiyi aynı veya başka bir kullanıcı uygulama tarafından tekrar alınabilir hale getirmesine neden olur.
+Service Bus, uygulamanızda gerçekleşen hataları veya ileti işlenirken oluşan zorlukları rahat bir şekilde ortadan kaldırmanıza yardımcı olmak için işlevsellik sağlar. Bazı nedenlerden dolayı alıcı uygulamanın iletiyi işleyememesi durumunda, alınan iletide [Abandon](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Abandon_System_Collections_Generic_IDictionary_System_String_System_Object__) yöntemini ([Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) yöntemi yerine) çağrılabilir. Bu işlem, Service Bus hizmetinin abonelikteki iletinin kilidini açmasına ve iletiyi aynı veya başka bir kullanıcı uygulama tarafından tekrar alınabilir hale getirmesine neden olur.
 
 Ayrıca abonelikte kilitlenen iletiye ilişkin bir zaman aşımı vardır. Uygulama, kilitleme zaman aşımı dolmadan önce iletiyi işleyemezse (örneğin, uygulama çökerse), Service Bus otomatik olarak iletinin kilidini açar ve tekrar alınabilmesini sağlar.
 
-Uygulamanın iletiyi işleyip [Complete](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) isteği bildirilmeden önce çökmesi durumunda ise uygulama yeniden başlatıldığında ileti uygulamaya tekrar teslim edilir. Bu durum *En Az Bir Kez İşleme* olarak adlandırılır. Her ileti en az bir kez işlenir ancak belirli durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işlemeyi kabul etmiyorsa yinelenen ileti teslimine izin vermek için uygulama geliştiricilerin uygulamaya ilave bir mantık eklemesi gerekir. Bu işlem genellikle iletinin teslimat denemelerinde korunan [MessageId](https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_MessageId) özelliği kullanılarak gerçekleştirilir.
+Uygulamanın iletiyi işleyip [Complete](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_Complete) isteği bildirilmeden önce çökmesi durumunda ise uygulama yeniden başlatıldığında ileti uygulamaya tekrar teslim edilir. Bu durum *En Az Bir Kez İşleme* olarak adlandırılır. Her ileti en az bir kez işlenir ancak belirli durumlarda aynı ileti yeniden teslim edilebilir. Senaryo yinelenen işlemeyi kabul etmiyorsa yinelenen ileti teslimine izin vermek için uygulama geliştiricilerin uygulamaya ilave bir mantık eklemesi gerekir. Bu işlem genellikle iletinin teslimat denemelerinde korunan [MessageId](/dotnet/api/microsoft.servicebus.messaging.brokeredmessage#Microsoft_ServiceBus_Messaging_BrokeredMessage_MessageId) özelliği kullanılarak gerçekleştirilir.
 
 ## <a name="delete-topics-and-subscriptions"></a>Konu başlıklarını ve abonelikleri silme
 Aşağıdaki örnekte **HowToSample** hizmeti ad alanından **TestTopic** konu başlığının nasıl silineceği gösterilir.
@@ -319,13 +320,8 @@ Artık Service Bus konu başlıklarına ve aboneliklerine ilişkin temel bilgile
 
 [Queues, topics, and subscriptions]: service-bus-queues-topics-subscriptions.md
 [Topic filters sample]: https://github.com/Azure-Samples/azure-servicebus-messaging-samples/tree/master/TopicFilters
-[SqlFilter]: https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.sqlfilter
-[SqlFilter.SqlExpression]: https://docs.microsoft.com/dotnet/api/microsoft.servicebus.messaging.sqlfilter#Microsoft_ServiceBus_Messaging_SqlFilter_SqlExpression
+[SqlFilter]: /dotnet/api/microsoft.servicebus.messaging.sqlfilter
+[SqlFilter.SqlExpression]: /dotnet/api/microsoft.servicebus.messaging.sqlfilter#Microsoft_ServiceBus_Messaging_SqlFilter_SqlExpression
 [Service Bus brokered messaging .NET tutorial]: service-bus-brokered-tutorial-dotnet.md
 [Azure samples]: https://code.msdn.microsoft.com/site/search?query=service%20bus&f%5B0%5D.Value=service%20bus&f%5B0%5D.Type=SearchText&ac=2
-
-
-
-<!--HONumber=Jan17_HO3-->
-
 

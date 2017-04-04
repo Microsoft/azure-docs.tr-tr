@@ -1,5 +1,5 @@
 ---
-title: "SQL (PaaS) Veritabanı ile VM&quot;lerdeki bulutta bulunan SQL Server (IaaS) karşılaştırması | Microsoft Belgeleri"
+title: "SQL (PaaS) Veritabanı ile VM&quot;lerdeki bulutta bulunan SQL Server (IaaS) karşılaştırması | Microsoft Docs"
 description: "Hangi bulut SQL Server seçeneğinin uygulamanıza uygun olduğunu öğrenin: Azure SQL (PaaS) Veritabanı veya Azure Virtual Machines&quot;deki bulutta bulunan SQL Server."
 services: sql-database, virtual-machines
 keywords: "SQL Server bulut, bulutta SQL Server, PaaS veritabanı, bulut SQL Server, DBaaS"
@@ -17,8 +17,9 @@ ms.topic: get-started-article
 ms.date: 02/01/2017
 ms.author: carlrab
 translationtype: Human Translation
-ms.sourcegitcommit: 8d988aa55d053d28adcf29aeca749a7b18d56ed4
-ms.openlocfilehash: bdcf28703f007d32144278c7f0956fe4c27c3b27
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: 98cb1d7e5fd464421ae97f2ace33852e71a18a21
+ms.lasthandoff: 03/25/2017
 
 
 ---
@@ -54,7 +55,7 @@ Aşağıdaki bölümlerde, Microsoft genel bulutta SQL Server ile ilgili bilgi e
 
 Genellikle, bu iki SQL seçeneği farklı amaçlar için en iyi hale getirilmiştir:
 
-* **SQL Database**, çok sayıda veritabanının hazırlanması ve yönetilmesi için maliyetleri minimum düzeye indirmek üzere en iyi hale getirilmiştir. Herhangi bir sanal makineyi, işletim sistemini veya veritabanı yazılımını yönetmeniz gerekmediğinden, bu, devam eden yönetim maliyetlerini azaltır. Yükseltme, yüksek kullanılabilirlik veya [yedeklemeleri](sql-database-automated-backups.md) yönetmeniz gerekli değildir. Genellikle, Azure SQL Database tek bir BT veya geliştirme kaynağı tarafından yönetilen veritabanlarının sayısını önemli ölçüde artırabilir.
+* **Azure SQL Veritabanı**, çok sayıda veritabanının hazırlanması ve yönetilmesi için maliyetleri minimum düzeye indirmek üzere en iyi hale getirilmiştir. Herhangi bir sanal makineyi, işletim sistemini veya veritabanı yazılımını yönetmeniz gerekmediğinden, bu, devam eden yönetim maliyetlerini azaltır. Yükseltme, yüksek kullanılabilirlik veya [yedeklemeleri](sql-database-automated-backups.md) yönetmeniz gerekli değildir. Genellikle, Azure SQL Database tek bir BT veya geliştirme kaynağı tarafından yönetilen veritabanlarının sayısını önemli ölçüde artırabilir.
 * **Azure VM’ler üzerinde çalışan SQL Server**, var olan uygulamaları Azure’a geçirmek veya var olan şirket içi uygulamaları karma dağıtımlarda buluta genişletmek için en iyi duruma getirilmiştir. Ayrıca, SQL Server’ı sanal bir makinede kullanarak geleneksel SQL Server uygulamaları geliştirip test edebilirsiniz. Azure VM'lerinde SQL Server ile, adanmış bir SQL Server örneği ve bulut tabanlı bir VM üzerinde tam yönetici haklarına sahip olursunuz. Bu, bir kuruluşun halihazırda sanal makinelerin bakımını yapmak için kullanılabilir BT kaynaklarına sahip olması durumunda ideal bir seçenektir. Bu özellikler uygulamanızın belirli performans ve kullanılabilirlik gereksinimlerini karşılamak üzere yüksek düzeyde özelleştirilmiş bir sistem oluşturmanıza olanak sağlar.
 
 Aşağıdaki tabloda, SQL Database ve Azure VM'lerinde SQL Server'ın temel özellikleri özetlenmektedir:
@@ -123,7 +124,7 @@ Birçok BT departmanı için, bir Hizmet Düzeyi Sözleşmesi'nin çalışma sü
 
 **Azure VM'lerinde çalıştırılan SQL Server** için Microsoft, yalnızca Sanal Makine'yi kapsayan %99,95 oranında bir kullanılabilirlik SLA'sı sağlar. Bu SLA, VM'de çalıştırılan işlemleri (SQL Server gibi) kapsamaz ve bir kullanılabilirlik kümesinde en az iki VM örneğini barındırmanızı gerektirir. En son bilgiler için bkz. [VM SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/). VM'lerde veritabanı yüksek kullanılabilirliği (HA) için, [AlwaysOn Kullanılabilirlik Grupları](http://blogs.technet.com/b/dataplatforminsider/archive/2014/08/25/sql-server-alwayson-offering-in-microsoft-azure-portal-gallery.aspx) gibi, SQL Server'da desteklenen yüksek kullanılabilirlik seçeneklerinden birini gibi yapılandırmanız gerekir. Desteklenen bir yüksek kullanılabilirlik seçeneğinin kullanılması ek bir SLA sağlamaz, ancak %99,99’un üzerinde veritabanı kullanılabilirliği elde etmenize imkan tanır.
 
-### <a name="a-namemarketatime-to-market"></a><a name="market"></a>Pazarlama süresi
+### <a name="market"></a>Pazarlama süresi
 **SQL Database**, geliştirici üretkenliği ve hızlı pazarlama süresi kritik önem taşıdığında bulut tasarımlı uygulamalar için doğru çözümdür. Programlama DBA benzeri işlevsellik ile, altta yatan işletim sistemini ve veritabanını yönetmeye yönelik ihtiyacı azalttığından, bulut mimarları ve geliştiricileri için idealdir. Örneğin, [REST API](http://msdn.microsoft.com/library/azure/dn505719.aspx) ve [PowerShell Cmdlet'lerini](http://msdn.microsoft.com/library/mt740629.aspx) binlerce veritabanının yönetimsel işlemlerini otomatik hale getirmek ve yönetmek için kullanabilirsiniz. [Elastik havuzlar](sql-database-elastic-pool.md), uygulama katmanına odaklanmanıza ve çözümünüzü pazara daha hızlı bir şekilde sunmanıza olanak sağlar.
 
 **Azure VM’lerde çalışan SQL Server**, var olan veya yeni uygulamalarınızın büyük veritabanları, birbiriyle ilişkili veritabanları veya SQL Server ya da Windows’un tüm özelliklerine erişim gerektirmesi durumunda idealdir. Bu aynı zamanda, var olan şirket içi uygulamaların ve veritabanlarının oldukları gibi Azure'a geçişini sağlamak istediğinizde iyi bir tercihtir. Sunumu, uygulamayı ve veri katmanlarını değiştirmeniz gerekmediği için, var olan çözümünüzü yeniden yapılandırma konusunda zamandan ve bütçeden tasarruf sağlarsınız. Bunun yerine, tüm çözümlerinizin Azure'a geçişini sağlamaya ve Azure platformu tarafından gerekli kılınabilen bazı performans iyileştirmelerini gerçekleştirmeye odaklanabilirsiniz. Daha fazla bilgi için bkz. [Azure Virtual Machines'de SQL Server için En İyi Performans Uygulamaları](../virtual-machines/windows/sql/virtual-machines-windows-sql-performance.md).
@@ -145,10 +146,5 @@ Bu makalede, SQL Database ve Azure Virtual Machines'de (VM'ler) SQL Server işle
 * SQL Veritabanı’nı kullanmaya başlamak için bkz. [İlk Azure SQL Veritabanınız](sql-database-get-started.md).
 * Bkz. [SQL Veritabanı Fiyatlandırması](https://azure.microsoft.com/pricing/details/sql-database/).
 * Azure VM'lerinde SQL Server'ı kullanmaya başlamak için bkz. [Azure'da SQL Server sanal makinesi sağlama](../virtual-machines/windows/sql/virtual-machines-windows-portal-sql-server-provision.md).
-
-
-
-
-<!--HONumber=Feb17_HO3-->
 
 

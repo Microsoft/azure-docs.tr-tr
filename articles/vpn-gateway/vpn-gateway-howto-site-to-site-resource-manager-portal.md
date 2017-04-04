@@ -13,16 +13,16 @@ ms.devlang: na
 ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 03/23/2017
 ms.author: cherylmc
 translationtype: Human Translation
-ms.sourcegitcommit: afe143848fae473d08dd33a3df4ab4ed92b731fa
-ms.openlocfilehash: 37311ea17004d8c5cfe9bfc9360c3972e39fb7f5
-ms.lasthandoff: 03/17/2017
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: 80939bb48c29ba39e2d347cb80d6169d79329cfc
+ms.lasthandoff: 03/25/2017
 
 
 ---
-# <a name="create-a-vnet-with-a-site-to-site-connection-using-the-azure-portal"></a>Azure portalını kullanarak Siteden Siteye bağlantı ile VNet oluşturma
+# <a name="create-a-site-to-site-connection-in-the-azure-portal"></a>Azure portalında Siteden Siteye bağlantı oluşturma
 > [!div class="op_single_selector"]
 > * [Resource Manager - Azure Portal](vpn-gateway-howto-site-to-site-resource-manager-portal.md)
 > * [Resource Manager - PowerShell](vpn-gateway-create-site-to-site-rm-powershell.md)
@@ -31,7 +31,10 @@ ms.lasthandoff: 03/17/2017
 >
 >
 
-Bu makale, Azure Resource Manager dağıtım modelini ve Azure portal’ı kullanarak sanal ağ ve şirket içi ağınıza yönelik Konumdan Konuma VPN ağ geçidi bağlantısı oluşturma işleminde size yol gösterir. Siteden Siteye bağlantılar, şirket içi ve dışı karışık yapılandırmalar ve karma yapılandırmalar için kullanılabilir.
+
+Siteden Siteye (S2S) VPN ağ geçidi bağlantısı, IPSec/IKE (IKEv1 veya IKEv2) VPN tüneli üzerinden kurulan bir bağlantıdır. Bu bağlantı türü için, şirket içinde ortak IP adresi atanmış olan ve NAT'nin arkasında bulunmayan bir VPN cihazı gerekir. Siteden Siteye bağlantılar, şirket içi ve dışı karışık yapılandırmalar ve karma yapılandırmalar için kullanılabilir.
+
+Bu makale, Azure Resource Manager dağıtım modelini ve Azure portal’ı kullanarak sanal ağ ve şirket içi ağınıza yönelik Konumdan Konuma VPN ağ geçidi bağlantısı oluşturma işleminde size yol gösterir. 
 
 ![Siteden Siteye şirket içi ve dışı karışık VPN Gateway bağlantısı diyagramı](./media/vpn-gateway-howto-site-to-site-resource-manager-portal/site-to-site-diagram.png)
 
@@ -48,23 +51,26 @@ Sanal ağları birbirine bağlamak istiyor ancak şirket içi bir konuma bağlan
 ## <a name="before-you-begin"></a>Başlamadan önce
 Yapılandırmanıza başlamadan önce aşağıdaki öğelerin bulunduğunu doğrulayın:
 
-* Uyumlu bir VPN cihazı ve bu cihazı yapılandırabilecek biri. Bkz. [VPN Cihazları Hakkında](vpn-gateway-about-vpn-devices.md). VPN cihazınızı yapılandırma konusuyla veya şirket içi ağ yapılandırmanızdaki IP adresi aralıklarıyla ilgili fazla bilginiz yoksa size bu ayrıntıları sağlayabilecek biriyle çalışmanız gerekir.
+* Uyumlu bir VPN cihazı ve bu cihazı yapılandırabilecek biri. Bkz. [VPN Cihazları Hakkında](vpn-gateway-about-vpn-devices.md).
+* Şirket içi ağınızda bulunan IP adresi alanlarıyla ilgili fazla bilginiz yoksa size bu ayrıntıları sağlayabilecek biriyle çalışmanız gerekir. Siteden Siteye bağlantıların çakışan adres alanları olamaz.
 * VPN cihazınız için dışarıya yönelik genel bir IP adresi. Bu IP adresi bir NAT’nin arkasında olamaz.
 * Azure aboneliği. Henüz Azure aboneliğiniz yoksa [MSDN abonelik avantajlarınızı](http://azure.microsoft.com/pricing/member-offers/msdn-benefits-details) etkinleştirebilir veya [ücretsiz bir hesap](http://azure.microsoft.com/pricing/free-trial) için kaydolabilirsiniz.
 
-### <a name="values"></a>Bu alıştırma için örnek yapılandırma değerleri
-Bu adımları bir alıştırma olarak kullanırken, şu örnek yapılandırma değerlerini kullanabilirsiniz:
+### <a name="values"></a>Örnek değerler
+Bu adımları bir alıştırma olarak kullanırken, şu örnek değerleri kullanabilirsiniz:
 
 * **VNet Name:** TestVNet1
-* **Adres Alanı:** 10.11.0.0/16 ve 10.12.0.0/16
+* **Adres Alanı:** 
+    * 10.11.0.0/16
+    * 10.12.0.0/16 (bu alıştırma için isteğe bağlı)
 * **Alt ağlar:**
   * FrontEnd: 10.11.0.0/24
-  * BackEnd: 10.12.0.0/24
-  * GatewaySubnet: 10.12.255.0/27
+  * BackEnd: 10.12.0.0/24 (bu alıştırma için isteğe bağlı)
+  * GatewaySubnet: 10.11.255.0/27
 * **Kaynak Grubu:** TestRG1
 * **Konum:** Doğu ABD
-* **DNS Sunucusu:** 8.8.8.8
-* **Ağ Geçidi Adı:** VNet1GW
+* **DNS Sunucusu:** DNS sunucunuzun IP adresi
+* **Sanal Ağ Geçidi Adı: VNet1GW**
 * **Genel IP:** VNet1GWIP
 * **VPN Türü:** Yol tabanlı
 * **Bağlantı Türü:** Siteden siteye (IPsec)
@@ -73,57 +79,40 @@ Bu adımları bir alıştırma olarak kullanırken, şu örnek yapılandırma de
 * **Bağlantı Adı:** VNet1toSite2
 
 ## <a name="CreatVNet"></a>1. Sanal ağ oluşturma
-Zaten bir VNet'iniz varsa ayarların VPN ağ geçidi tasarımınızla uyumlu olduğunu doğrulayın. Diğer ağlarla çakışabilecek herhangi bir alt ağ olup olmadığına özellikle dikkat edin. Çakışan alt ağlarınız varsa bağlantınız düzgün şekilde gerçekleşmeyebilir. VNet'iniz doğru ayarlarla yapılandırıldıysa [DNS sunucusu belirtme](#dns) bölümündeki adımları uygulamaya başlayabilirsiniz.
 
-### <a name="to-create-a-virtual-network"></a>Sanal ağ oluşturmak için
-[!INCLUDE [vpn-gateway-basic-vnet-rm-portal](../../includes/vpn-gateway-basic-vnet-rm-portal-include.md)]
+[!INCLUDE [vpn-gateway-basic-vnet-rm-portal](../../includes/vpn-gateway-basic-vnet-s2s-rm-portal-include.md)]
 
-## <a name="subnets"></a>2. Ek adres alanı ve alt ağları ekleme
-Ek adres alanı ve alt ağları VNet’iniz oluşturulduktan sonra ekleyebilirsiniz.
+## <a name="dns"></a>2. DNS sunucusu belirleme
+Siteden Siteye bağlantılar için DNS gerekli değildir. Ancak, sanal ağınıza dağıtılmış olan kaynaklarınız için ad çözümleme istiyorsanız bir DNS sunucusu belirtmeniz gerekir. Bu ayar, bu sanal ağ için ad çözümlemede kullanmak istediğiniz DNS sunucusunu belirtmenizi sağlar. Bir DNS sunucusu oluşturmaz.
 
-[!INCLUDE [vpn-gateway-additional-address-space](../../includes/vpn-gateway-additional-address-space-include.md)]
-
-## <a name="dns"></a>3. DNS sunucusu belirleme
-### <a name="to-specify-a-dns-server"></a>DNS sunucusu belirlemek için
 [!INCLUDE [vpn-gateway-add-dns-rm-portal](../../includes/vpn-gateway-add-dns-rm-portal-include.md)]
 
-## <a name="gatewaysubnet"></a>4. Ağ geçidi alt ağı oluşturma
-Sanal ağınızı bir ağ geçidine bağlamadan önce, bağlamak istediğiniz sanal ağ için ağ geçidi alt ağını oluşturmanız gerekir. Mümkünse, gelecekteki ek yapılandırma gereksinimlerini karşılamaya yetecek sayıda IP adresi sağlamak için /28 veya /27 CIDR bloğu kullanılarak ağ geçidi alt ağı oluşturulması idealdir.
+## <a name="gatewaysubnet"></a>3. Ağ geçidi alt ağı oluşturma
+VPN ağ geçidiniz için bir ağ geçidi alt ağı oluşturmanız gerekir. Ağ geçidi alt ağı, VPN ağ geçidi hizmetlerinin kullanacağı IP adreslerini içerir. Mümkünse, /28 veya /27 CIDR bloğu kullanarak bir ağ geçidi alt ağı oluşturun. Bunun yapılması, gelecekteki ağ geçidi yapılandırma gereksinimlerini karşılamaya yetecek sayıda IP adresine sahip olmanızı sağlar.
 
-Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız ağ geçidi alt ağınızı oluştururken bu [değerlere](#values) başvurun.
+[!INCLUDE [vpn-gateway-add-gwsubnet-rm-portal](../../includes/vpn-gateway-add-gwsubnet-s2s-rm-portal-include.md)]
 
-### <a name="to-create-a-gateway-subnet"></a>Bir ağ geçidi alt ağı oluşturmak için
-[!INCLUDE [vpn-gateway-add-gwsubnet-rm-portal](../../includes/vpn-gateway-add-gwsubnet-rm-portal-include.md)]
+## <a name="VNetGateway"></a>4. Sanal ağ geçidi oluşturma
 
-## <a name="VNetGateway"></a>5. Sanal ağ geçidi oluşturma
-Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız [örnek yapılandırma değerlerine](#values) başvurabilirsiniz.
+[!INCLUDE [vpn-gateway-add-gw-s2s-rm-portal](../../includes/vpn-gateway-add-gw-s2s-rm-portal-include.md)]
 
-### <a name="to-create-a-virtual-network-gateway"></a>Bir sanal ağ geçidi oluşturmak için
-[!INCLUDE [vpn-gateway-add-gw-rm-portal](../../includes/vpn-gateway-add-gw-rm-portal-include.md)]
+## <a name="LocalNetworkGateway"></a>5. Yerel ağ geçidi oluşturma
+Yerel ağ geçidi, şirket içi konumunuz anlamına gelir. Yerel ağ geçidi için belirttiğiniz ayarlar, şirket içi VPN cihazınıza yönlendirilen adres alanlarını belirler.
 
-## <a name="LocalNetworkGateway"></a>6. Yerel ağ geçidi oluşturma
-‘Yerel ağ geçidi’ şirket içi konumunuz anlamına gelir. Azure'ın başvurmak üzere kullanabilmesi için yerel ağ geçidinize bir ad verin. 
+[!INCLUDE [vpn-gateway-add-lng-s2s-rm-portal](../../includes/vpn-gateway-add-lng-s2s-rm-portal-include.md)]
 
-Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız [örnek yapılandırma değerlerine](#values) başvurabilirsiniz.
-
-### <a name="to-create-a-local-network-gateway"></a>Bir yerel ağ geçidi oluşturmak için
-[!INCLUDE [vpn-gateway-add-lng-rm-portal](../../includes/vpn-gateway-add-lng-rm-portal-include.md)]
-
-## <a name="VPNDevice"></a>7. VPN cihazınızı yapılandırma
+## <a name="VPNDevice"></a>6. VPN cihazınızı yapılandırma
 [!INCLUDE [vpn-gateway-configure-vpn-device-rm](../../includes/vpn-gateway-configure-vpn-device-rm-include.md)]
 
-## <a name="CreateConnection"></a>8. Siteden Siteye bağlantı kurma
-Sanal ağ geçidiniz ile VPN cihazınız arasında Siteden Siteye VPN bağlantısı oluşturun. Değerlerin kendinizinkilerle değiştirildiğinden emin olun. Paylaşılan anahtar, VPN cihazınızın yapılandırması için kullandığınız değerin aynısı olmalıdır. 
+## <a name="CreateConnection"></a>7. Siteden Siteye bağlantı kurma
 
-Bu bölüme başlamadan önce sanal ağa ait ağ geçidi ve yerel ağa ait ağ geçidinizin oluşturulmasının tamamlandığından emin olun. Bu yapılandırmayı bir alıştırma olarak oluşturuyorsanız bağlantınızı oluştururken bu [değerlere](#values) başvurun.
+Bu adımda, sanal ağ geçidiniz ile şirket içi VPN cihazınız arasında Siteden Siteye VPN bağlantısı oluşturacaksınız. Bu bölüme başlamadan önce sanal ağa ait ağ geçidi ve yerel ağa ait ağ geçidinizin oluşturulmasının tamamlandığından emin olun.
 
-### <a name="to-create-the-vpn-connection"></a>Bir VPN bağlantısını oluşturmak için
-[!INCLUDE [vpn-gateway-add-site-to-site-connection-rm-portal](../../includes/vpn-gateway-add-site-to-site-connection-rm-portal-include.md)]
+[!INCLUDE [vpn-gateway-add-site-to-site-connection-rm-portal](../../includes/vpn-gateway-add-site-to-site-connection-s2s-rm-portal-include.md)]
 
-## <a name="VerifyConnection"></a>9. VPN bağlantısını doğrulama
-VPN bağlantınızı portaldan veya PowerShell kullanarak doğrulayabilirsiniz.
+## <a name="VerifyConnection"></a>8. VPN bağlantısını doğrulama
 
-[!INCLUDE [vpn-gateway-verify-connection-rm](../../includes/vpn-gateway-verify-connection-rm-include.md)]
+[!INCLUDE [Azure portal](../../includes/vpn-gateway-verify-connection-portal-rm-include.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
 *  Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Daha fazla bilgi için bkz. [Sanal Makineler](https://docs.microsoft.com/azure/#pivot=services&panel=Compute).

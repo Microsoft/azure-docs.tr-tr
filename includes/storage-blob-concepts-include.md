@@ -14,7 +14,7 @@ Blob hizmetinde şu bileşenler bulunur:
 
 ![Blob mimarisi](./media/storage-blob-concepts-include/blob1.png)
 
-* **Depolama Hesabı:** Tüm Azure Storage erişimi bir depolama hesabıyla yapılır. Bu depolama hesabı **Genel amaçlı depolama hesabı** veya nesnelerin/blobların depolanması için özelleştirilen **Blob Storage hesabı** olabilir. Depolama hesapları hakkında daha fazla bilgi için bkz. [Azure Storage hesabı](../articles/storage/storage-create-storage-account.md).
+* **Depolama Hesabı:** Tüm Azure Storage erişimi bir depolama hesabıyla yapılır. Bu depolama hesabı **Genel amaçlı depolama hesabı** veya nesnelerin/blobların depolanması için özelleştirilen **Blob Storage hesabı** olabilir. Daha fazla bilgi için bkz. [Azure depolama hesapları hakkında](../articles/storage/storage-create-storage-account.md).
 * **Kapsayıcı:** Kapsayıcı, bir dizi blobun gruplandırılmasını sağlar. Tüm bloblar bir kapsayıcıda olmalıdır. Bir hesapta sınırsız sayıda kapsayıcı olabilir. Kapsayıcıda sınırsız sayıda blob depolanabilir. Kapsayıcı adındaki harflerin küçük harf olması gerektiğini unutmayın.
 * **Blob:** Herhangi bir türde ve boyutta bir dosya. Azure Storage üç tür blob sunar: blok blobları, sayfa blobları ve ekleme blobları.
   
@@ -22,10 +22,5 @@ Blob hizmetinde şu bileşenler bulunur:
   
     *Sayfa blobları* boyut olarak 1 TB'ye kadar olabilir; sık gerçekleştirilen okuma/yazma işlemleri için daha verimlidir. Azure Virtual Machines sayfa bloblarını işletim sistemi ve veri diskleri olarak kullanır.
   
-    Kapsayıcıları ve blobları adlandırma hakkında ayrıntılı bilgi için bkz. [Kapsayıcıları, Blobları ve Meta Verileri Adlandırma ve Bunlara Başvurma](https://msdn.microsoft.com/library/azure/dd135715.aspx).
-
-
-
-<!--HONumber=Dec16_HO3-->
-
+    Kapsayıcıları ve blobları adlandırma hakkında ayrıntılı bilgi için bkz. [Kapsayıcıları, Blobları ve Meta Verileri Adlandırma ve Bunlara Başvurma](/rest/api/storageservices/fileservices/Naming-and-Referencing-Containers--Blobs--and-Metadata).
 

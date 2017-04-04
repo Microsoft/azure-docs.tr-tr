@@ -15,9 +15,9 @@ ms.workload: storage-backup-recovery
 ms.date: 02/06/2017
 ms.author: raynew
 translationtype: Human Translation
-ms.sourcegitcommit: 0c56a74e43b989a32b10a878cec16cce0f972a9f
-ms.openlocfilehash: 63c0397b6e737038fb7758d2749ae82d1485d45d
-ms.lasthandoff: 02/22/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: 34a9d187eecec185e2b8d6977baea267ca9e60e5
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -130,6 +130,19 @@ Site Recovery'yi kullanarak SAP dağıtımınızı şu şekilde koruyun:
 * Test ve hata ayıklama uygulamaları için isteğe bağlı üretim benzeri bir kopya oluşturarak SAP geliştirmesini ve testini basitleştirin.
 
 SAP'yi koruma hakkında [daha fazla bilgi edinin](http://aka.ms/asr-sap).
+
+## <a name="protect-iis"></a>IIS Koruma
+Site Recovery'yi kullanarak IIS dağıtımınızı şu şekilde koruyun:
+
+Azure Site Recovery, ortamınızdaki kritik bileşenleri soğuk bir uzak konuma veya Microsoft Azure gibi bir genel buluta çoğaltarak olağanüstü durum kurtarma sağlar. Web sunucusu ve veritabanı ile sanal makine, kurtarma konumuna çoğaltıldığı için yapılandırma dosyalarının veya sertifikaların ayrıca yedeklenmesi gerekmez. Yük devretme sonrasında değişen ortam değişkenlerine bağımlı uygulama eşlemeleri ve bağlamaları, olağanüstü durum kurtarma planlarına tümleştirilmiş betikler aracılığıyla güncelleştirilebilir. Sanal Makineler yalnızca yük devretme durumunda kurtarma konumuna getirilir. Azure Site Recovery ayrıca aşağıdaki özellikleri sağlayarak uçtan uca yük devretmeyi düzenlemenize yardımcı olur:
+
+-    Çeşitli katmanlardaki sanal makinelerin kapatma ve başlatma sıralaması.
+-    Uygulama bağımlılıkları ve başlatıldıktan sonra sanal makineler üzerindeki bağlamaların güncelleştirilmesine olanak tanıyan betikler ekleme. Betikler ayrıca DNS sunucusunu kurtarma konumunu işaret edecek şekilde güncelleştirmek için kullanılabilir.
+-    Birincil ve kurtarma ağlarını eşleyerek yük devretme öncesinde sanal makinelere IP adresleri ayırın ve böylece yük devretme sonrasında güncelleştirilmesi gerekmeyen betikler kullanın.
+-    Web sunucularında birden fazla web uygulaması için tek tıklamayla yük devretme yapabilme olanağı, böylece olağanüstü bir durumda karışıklık kapsamını ortadan kaldırma.
+-    DR ayrıntıları için yalıtılmış bir ortamda kurtarma planlarını test edebilme olanağı.
+
+IIS web grubunu koruma hakkında [daha fazla bilgi edinin](https://aka.ms/asr-iis).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 [Önkoşulları denetleme](site-recovery-prereq.md) 

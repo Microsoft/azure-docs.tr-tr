@@ -1,5 +1,5 @@
 ---
-title: "Redis Önbelleği ile Web Uygulamaları oluşturma | Microsoft Belgeleri"
+title: "Redis Önbelleği ile Web Uygulamaları oluşturma | Microsoft Docs"
 description: "Redis Önbelleği ile Web Uygulaması oluşturmayı öğrenin"
 services: redis-cache
 documentationcenter: 
@@ -12,11 +12,12 @@ ms.workload: tbd
 ms.tgt_pltfrm: cache-redis
 ms.devlang: na
 ms.topic: hero-article
-ms.date: 01/27/2017
+ms.date: 03/27/2017
 ms.author: sdanie
 translationtype: Human Translation
-ms.sourcegitcommit: 8d1b9293a0b3958d0f478b6a0b6816b8d534883d
-ms.openlocfilehash: d7e98ef1205f0d88e12779a4ce9317128ae81e73
+ms.sourcegitcommit: 6e0ad6b5bec11c5197dd7bded64168a1b8cc2fdd
+ms.openlocfilehash: 02e30f7fcbe0782528460b542a75f1d11c7286a1
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -30,7 +31,7 @@ ms.openlocfilehash: d7e98ef1205f0d88e12779a4ce9317128ae81e73
 > 
 > 
 
-Bu öğreticide, ASP.NET web uygulamasının nasıl oluşturulacağını ve Visual Studio 2015 kullanılarak Azure App Service’teki bir web uygulamasına dağıtılacağı gösterilmektedir. Örnek uygulama bir veritabanındaki ekip istatistiklerinin listesini görüntüler ve önbellekten veri depolama ve almaya yönelik Azure Redis Önbelleği’ni kullanmak için farklı yollar gösterir. Öğreticiyi tamamladığınızda, Azure Redis Önbelleği ile en iyi hale getirilmiş ve Azure’da barındırılan, bir veritabanını okuyan ve yazan çalışan bir web uygulamasına sahip olacaksınız.
+Bu öğreticide, ASP.NET web uygulamasının nasıl oluşturulacağını ve Visual Studio 2017 kullanılarak Azure Uygulama Hizmeti’ndeki bir web uygulamasına nasıl dağıtılacağı gösterilmektedir. Örnek uygulama bir veritabanındaki ekip istatistiklerinin listesini görüntüler ve önbellekten veri depolama ve almaya yönelik Azure Redis Önbelleği’ni kullanmak için farklı yollar gösterir. Öğreticiyi tamamladığınızda, Azure Redis Önbelleği ile en iyi hale getirilmiş ve Azure’da barındırılan, bir veritabanını okuyan ve yazan çalışan bir web uygulamasına sahip olacaksınız.
 
 Şunları öğreneceksiniz:
 
@@ -45,7 +46,7 @@ Bu öğreticide, ASP.NET web uygulamasının nasıl oluşturulacağını ve Visu
 Bu öğreticiyi tamamlamak için aşağıdaki ön koşullara sahip olmanız gerekir.
 
 * [Azure hesabı](#azure-account)
-* [.NET için Azure SDK içeren Visual Studio 2015](#visual-studio-2015-with-the-azure-sdk-for-net)
+* [.NET için Azure SDK içeren Visual Studio 2017](#visual-studio-2017-with-the-azure-sdk-for-net)
 
 ### <a name="azure-account"></a>Azure hesabı
 Öğreticiyi tamamlamak için bir Azure hesabınızın olması gerekir. Şunları yapabilirsiniz:
@@ -53,22 +54,23 @@ Bu öğreticiyi tamamlamak için aşağıdaki ön koşullara sahip olmanız gere
 * [Ücretsiz bir Azure hesabı açın](https://azure.microsoft.com/pricing/free-trial/?WT.mc_id=redis_cache_hero). Ücretli Azure hizmetlerini denemek için kullanabileceğiniz krediler alırsınız. Krediler bitmiş olsa bile hesabı sürdürebilir ve ücretsiz Azure hizmet ve özelliklerinden faydalanabilirsiniz.
 * [Visual Studio abone avantajları etkinleştirin](https://azure.microsoft.com/pricing/member-offers/msdn-benefits-details/?WT.mc_id=redis_cache_hero). MSDN aboneliğiniz, ücretli Azure hizmetlerinizi kullanabildiğiniz her ay size kredi verir.
 
-### <a name="visual-studio-2015-with-the-azure-sdk-for-net"></a>.NET için Windows Azure SDK içeren Visual Studio 2015
-Bu öğretici, [.NET için Azure SDK](../dotnet-sdk.md) 2.8.2 veya sonraki bir sürümünü içeren Visual Studio 2015 için hazırlanmıştır. [Visual Studio 2015 için en son Azure SDK’sını buradan indirin](http://go.microsoft.com/fwlink/?linkid=518003). Visual Studio’nuz yoksa, SDK ile otomatik olarak yüklenir.
+### <a name="visual-studio-2017-with-the-azure-sdk-for-net"></a>.NET için Azure SDK içeren Visual Studio 2017
+Bu öğretici, [.NET için Azure SDK](https://www.visualstudio.com/news/releasenotes/vs2017-relnotes#azuretools) içeren Visual Studio 2017 için hazırlanmıştır. Visual Studio yükleyicisine Azure SDK 2.9.5 dahildir.
+
+Visual Studio 2015’e sahipseniz, [.NET için Azure SDK](../dotnet-sdk.md) 2.8.2 ile öğreticiyi takip edebilirsiniz. [Visual Studio 2015 için en son Azure SDK’sını buradan indirin](http://go.microsoft.com/fwlink/?linkid=518003). Visual Studio’nuz yoksa, SDK ile otomatik olarak yüklenir. Bu öğreticideki bazı ekranlar gösterilenlerden farklı görünebilir.
 
 Visual Studio 2013’ünüz varsa, [Visual Studio 2013 için en son Azure SDK'sını indirebilirsiniz](http://go.microsoft.com/fwlink/?LinkID=324322). Bu öğreticideki bazı ekranlar gösterilenlerden farklı görünebilir.
-
-> [!NOTE]
-> Makinenizde zaten bulunan SDK bağımlılığı sayısına bağlı olarak, SDK’nin yüklenmesi birkaç dakikadan yarım saate uzanacak şekilde biraz uzun sürebilir.
-> 
-> 
 
 ## <a name="create-the-visual-studio-project"></a>Visual Studio projesini oluşturma
 1. Visual Studio’yu açın ve **Dosya**, **Yeni**, **Proje**’yi tıklayın.
 2. **Şablonlar** listesindeki **Visual C#** öğesini genişletin, **Bulut**’u seçin ve **ASP.NET Web Uygulaması**’na tıklayın. **.NET Framework 4.5.2** veya daha yüksek bir sürümün seçili olduğundan emin olun.  **Ad** metin kutusunda **ContosoTeamStats** yazın ve **Tamam**’a tıklayın.
    
     ![Proje oluşturma][cache-create-project]
-3. Proje türü olarak **MVC**’yi seçin. **Buluttaki konak** onay kutusunun işaretini kaldırın. Öğreticinin sonraki adımlarında [Azure kaynaklarını hazırlayacak](#provision-the-azure-resources) ve [uygulamayı Azure’a yayımlayacaksınız](#publish-the-application-to-azure). **Buluttaki konak** öğesini işaretli bırakarak Visual Studio’dan bir App Service web uygulaması hazırlama örneği için, bkz. [ASP.NET ve Visual Studio kullanarak Azure App Service’deki Web Uygulamalarını kullanmaya başlama](../app-service-web/web-sites-dotnet-get-started.md).
+3. Proje türü olarak **MVC**’yi seçin. 
+
+    **Kimlik Doğrulama** ayarları için **Kimlik Doğrulaması Yok** seçeneğinin belirtildiğinden emin olun. Visual Studio sürümünüze bağlı olarak, varsayılan değer başka bir şeye ayarlanmış olabilir. Değiştirmek için **Kimlik Doğrulamasını Değiştir**’e tıklayıp **Kimlik Doğrulaması Yok**’u seçin.
+
+    Visual Studio 2015 ile takip ediyorsanız, **Bulutta barındır** onay kutusunun işaretini kaldırın. Öğreticinin sonraki adımlarında [Azure kaynaklarını hazırlayacak](#provision-the-azure-resources) ve [uygulamayı Azure’a yayımlayacaksınız](#publish-the-application-to-azure). **Buluttaki konak** öğesini işaretli bırakarak Visual Studio’dan bir App Service web uygulaması hazırlama örneği için, bkz. [ASP.NET ve Visual Studio kullanarak Azure App Service’deki Web Uygulamalarını kullanmaya başlama](../app-service-web/web-sites-dotnet-get-started.md).
    
     ![Proje şablonu seçme][cache-select-template]
 4. Projeyi oluşturmak için **Tamam**'a tıklayın.
@@ -76,9 +78,21 @@ Visual Studio 2013’ünüz varsa, [Visual Studio 2013 için en son Azure SDK's�
 ## <a name="create-the-aspnet-mvc-application"></a>4. Adım: ASP.NET MVC uygulamasını oluşturma
 Öğreticinin bu bölümünde, bir veritabanındaki ekip istatistiklerini okuyan ve görüntüleyen temel uygulamayı oluşturacaksınız.
 
+* [Entity Framework NuGet paketi ekleme](#add-the-entity-framework-nuget-package)
 * [Modeli ekleme](#add-the-model)
 * [Denetleyiciyi ekleme](#add-the-controller)
 * [Görünümleri yapılandırma](#configure-the-views)
+
+### <a name="add-the-entity-framework-nuget-package"></a>Entity Framework NuGet paketi ekleme
+
+1. **Araçlar** menüsünden **NuGet Paket Yöneticisi**, **Paket Yöneticisi Konsolu**’na tıklayın.
+2. `Package Manager Console` penceresinden aşağıdaki komutu çalıştırın.
+    
+    ```
+    Install-Package EntityFramework
+    ```
+
+Bu paket hakkında daha fazla bilgi için [EntityFramework](https://www.nuget.org/packages/EntityFramework/) NuGet sayfasına bakın.
 
 ### <a name="add-the-model"></a>Modeli ekleme
 1. **Çözüm Gezgini**’nde **Modeller**’e sağ tıklayın ve **Ekle**, **Sınıf**’ı seçin. 
@@ -172,21 +186,27 @@ Visual Studio 2013’ünüz varsa, [Visual Studio 2013 için en son Azure SDK's�
 1. **Çözüm Gezgini**’nde, **web.config**’i açmak için sağ tıklayın.
    
     ![Web.config][cache-web-config]
-2. Aşağıdaki bağlantı dizesini `connectionStrings` bölümüne ekleyin. Bağlantı dizesinin adını Entity Framework veritabanı bağlamı sınıfının adı olan `TeamContext` ile eşleşmelidir.
-
-    ```xml   
-    <add name="TeamContext" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Teams.mdf;Integrated Security=True" providerName="System.Data.SqlClient" />
-    ```
-
-    Bunu ekledikten sonra, `connectionStrings` bölümü aşağıdaki örnek gibi görünmelidir.
+2. Aşağıdaki `connectionStrings` bölümünü ekleyin. Bağlantı dizesinin adını Entity Framework veritabanı bağlamı sınıfının adı olan `TeamContext` ile eşleşmelidir.
 
     ```xml
     <connectionStrings>
-        <add name="DefaultConnection" connectionString="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-ContosoTeamStats-20160216120918.mdf;Initial Catalog=aspnet-ContosoTeamStats-20160216120918;Integrated Security=True"
-            providerName="System.Data.SqlClient" />
         <add name="TeamContext" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Teams.mdf;Integrated Security=True"     providerName="System.Data.SqlClient" />
     </connectionStrings>
     ```
+
+    Aşağıdaki örnekte gösterildiği gibi, yeni `connectionStrings` bölümünü `configSections` bölümünün sonuna ekleyebilirsiniz.
+
+    ```xml
+    <configuration>
+      <configSections>
+        <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+        <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+      </configSections>
+      <connectionStrings>
+        <add name="TeamContext" connectionString="Data Source=(LocalDB)\v11.0;AttachDbFilename=|DataDirectory|\Teams.mdf;Integrated Security=True"     providerName="System.Data.SqlClient" />
+      </connectionStrings>
+      ...
+      ```
 
 ### <a name="add-the-controller"></a>Denetleyiciyi ekleme
 1. Projeyi derlemek için **F6**’ya basın. 
@@ -228,7 +248,7 @@ Visual Studio 2013’ünüz varsa, [Visual Studio 2013 için en son Azure SDK's�
         url: "{controller}/{action}/{id}",
         defaults: new { controller = "Teams", action = "Index", id = UrlParameter.Optional }
     );
-```
+    ```
 
 
 ### <a name="configure-the-views"></a>Görünümleri yapılandırma
@@ -261,14 +281,14 @@ Visual Studio 2013’ünüz varsa, [Visual Studio 2013 için en son Azure SDK's�
 * [Ekipler Dizini görünümünü önbellek ile çalışacak şekilde güncelleştirme](#update-the-teams-index-view-to-work-with-the-cache)
 
 ### <a name="configure-the-application-to-use-stackexchangeredis"></a>StackExchange.Redis kullanmak için uygulamayı yapılandırma
-1. Visual Studio’da StackExchange.Redis NuGet paketi kullanarak bir istemci uygulamasını yapılandırmak için, **Çözüm Gezgini**’nde sağ tıklayın ve **NuGet Paketlerini Yönet**’i seçin. 
+1. Visual Studio’da StackExchange.Redis NuGet paketi kullanarak bir istemci uygulamasını yapılandırmak için, **Araçlar** menüsünden **NuGet Paket Yöneticisi**, **Paket Yöneticisi Konsolu**’nu seçin.
+2. `Package Manager Console` penceresinden aşağıdaki komutu çalıştırın.
+    
+    ```
+    Install-Package StackExchange.Redis
+    ```
    
-    ![NuGet paketlerini yönetme][redis-cache-manage-nuget-menu]
-2. Arama metin kutusuna **StackExchange.Redis** yazın, sonuçlardan istediğiniz sürümü seçin ve **Yükle**’ye tıklayın.
-   
-    ![StackExchange.Redis NuGet paketi][redis-cache-stack-exchange-nuget]
-   
-    NuGet paketi, StackExchange.Redis önbellek istemcisiyle Azure Redis Önbelleğine erişmek üzere istemci uygulamanız için gerekli derleme başvurularını ekler. **StackExchange.Redis** istemci kitaplığının kesin adlandırılmış bir sürümünü kullanmak isterseniz, **StackExchange.Redis.StrongName** seçeneğin seçin; istemezseniz **StackExchange.Redis** seçeneğin seçin.
+    NuGet paketi, StackExchange.Redis önbellek istemcisiyle Azure Redis Önbelleğine erişmek üzere istemci uygulamanız için gerekli derleme başvurularını ekler. `StackExchange.Redis` istemci kitaplığının tanımlayıcı adlı bir sürümünü kullanmak istiyorsanız `StackExchange.Redis.StrongName` paketini yükleyin.
 3. **Çözüm Gezgini**’nde, **Denetleyiciler** klasörünü genişletin ve **TeamsController.cs** öğesini açmak için çift tıklayın.
    
     ![Ekip denetleyicisi][cache-teamscontroller]
@@ -521,7 +541,7 @@ Bu örnekte, ekip istatistikleri veritabanı veya önbellekten alınabilir. Ekip
     }
     ```
 
-    `GetFromSortedSetTop5` yöntemi önbelleğe alınan sıralanmış kümesinden en iyi 5 ekibi okur. Bu, `teamsSortedSet` anahtarının varlığı için önbelleği denetleyerek başlar. Bu anahtar yoksa, ekip istatistikleri okumak ve bunları önbellekte depolamak için `GetFromSortedSet` yöntemi çağrılır. Daha sonra önbelleğe alınan sıralanmış küme, döndürülen en iyi 5 ekip için sorgulanır.
+    `GetFromSortedSetTop5` yöntemi önbelleğe alınan sıralanmış kümesinden en iyi 5 ekibi okur. Bu, `teamsSortedSet` anahtarının varlığı için önbelleği denetleyerek başlar. Bu anahtar yoksa, ekip istatistikleri okumak ve bunları önbellekte depolamak için `GetFromSortedSet` yöntemi çağrılır. Daha sonra önbelleğe alınan sıralanmış küme, döndürülen en iyi 5 takım için sorgulanır.
 
     ```c#
     List<Team> GetFromSortedSetTop5()
@@ -670,7 +690,7 @@ Bu örneğin bir parçası olarak oluşturulan iskele kurma kodu ekip ekleme, d�
     <tr><td colspan="5">@ViewBag.Msg</td></tr>
     ```
    
-    Bu satır, önceki adımdaki eylem bağlantılarından birine tıkladığınızda ayarlanan geçerli işlem hakkında bir durum raporu içeren `ViewBag.Msg` öğesinin değerini görüntüler.   
+    Bu satırda, geçerli işlem hakkında durum raporu içeren `ViewBag.Msg` değerini gösterir. Önceki adımdan herhangi bir eylem bağlantısına tıkladığınızda `ViewBag.Msg` değeri ayarlanır.   
    
     ![Durum iletisi][cache-status-message]
 2. Projeyi derlemek için **F6**’ya basın.
@@ -698,7 +718,7 @@ Bu **Azure’a Dağıt** düğmesi, bu hizmetleri hazırlamak ve SQL Database i�
 ![Azure’a Dağıt][cache-deploy-to-azure-step-1]
 
 1. **Temel Bilgiler** bölümünde, kullanılacak Azure aboneliğini ve mevcut bir kaynak grubu seçin veya yeni bir tane oluşturun ve kaynak grubu konumunu belirtin.
-2. **Ayarlar** bölümünde, bir yönetici hesabı adı (**ADMINISTRATORLOGIN** - **admin** kullanmayın), yönetici oturum açma parolası (**ADMINISTRATORLOGINPASSWORD**), ve veritabanı adı (**DATABASENAME**) belirtin. Diğer parametreler, ücretsiz bir App Service barındırma planı ve ücretsiz katman ile birlikte gelmeyen SQL Database ve Azure Redis Önbelleği için daha düşük maliyetli seçenekler sunmak için yapılandırılır.
+2. **Ayarlar** bölümünde bir **Yönetici Kullanıcı Adı** (**admin** adını kullanmayın), **Yönetici Parolaları** ve **Veritabanı Adı** belirtin. Diğer parametreler, ücretsiz bir App Service barındırma planı ve ücretsiz katmanı ile birlikte sunulmayan SQL Veritabanı ve Azure Redis Önbelleği için daha düşük maliyetli seçenekler sunmak için yapılandırılır.
 
     ![Azure’a Dağıt][cache-deploy-to-azure-step-2]
 
@@ -726,17 +746,13 @@ Hazırlama işlemi tamamlandığında, uygulamanızı Visual Studio’dan Azure�
 1. Visual Studio’da **ContosoTeamStats** öğesine sağ tıklayın ve **Yayımla**’yı seçin.
    
     ![Yayımlama][cache-publish-app]
-2. **Azure App Service**’e tıklayın.
+2. **Microsoft Azure App Service**’e tıklayın, **Var Olanı Seç**’i seçin ve **Yayımla**’ya tıklayın.
    
     ![Yayımlama][cache-publish-to-app-service]
-3. Azure kaynakları oluşturulurken kullanılan aboneliği seçin, kaynakları içeren kaynak grubunu genişletin, istediğiniz Web Uygulamasını seçin ve **Tamam**’a tıklayın. **Azure’a Dağıt** düğmesini kullandıysanız Web Uygulaması adınız **webSite** ile başlar ve bazı ek karakterlerle devam eder.
+3. Azure kaynakları oluşturulurken kullanılan aboneliği seçin, kaynakları içeren kaynak grubunu genişletin ve istediğiniz Web Uygulamasını seçin. **Azure’a Dağıt** düğmesini kullandıysanız Web Uygulaması adınız **webSite** ile başlar ve bazı ek karakterlerle devam eder.
    
     ![Web Uygulaması Seçme][cache-select-web-app]
-4. Ayarlarınızı doğrulamak için **Bağlantıyı Doğrula** ve ardından **Yayımla**’ya tıklayın.
-   
-    ![Yayımlama][cache-publish]
-   
-    Birkaç dakika sonra yayımlama işlemini tamamlanır ve örnek uygulamayı çalıştırarak bir tarayıcı başlatılır. Doğrularken veya yayımlarken ve henüz tamamlanan uygulama için Azure kaynakları için işlem hazırlarken bir DNS hatası alırsanız, birkaç dakika bekleyin ve tekrar deneyin.
+4. Yayımlama işlemine başlamak için **Tamam**’a tıklayın. Birkaç dakika sonra yayımlama işlemi tamamlanır ve örnek uygulama çalıştırılarak bir tarayıcı başlatılır. Doğrularken veya yayımlarken ve henüz tamamlanan uygulama için Azure kaynakları için işlem hazırlarken bir DNS hatası alırsanız, birkaç dakika bekleyin ve tekrar deneyin.
    
     ![Önbellek eklendi][cache-added-to-application]
 
@@ -848,10 +864,5 @@ Kullanılacak önbelleği seçtikten veya oluşturduktan sonra, Azure portalınd
 [cache-publish]: ./media/cache-web-app-howto/cache-publish.png
 [cache-delete-resource-group]: ./media/cache-web-app-howto/cache-delete-resource-group.png
 [cache-delete-confirm]: ./media/cache-web-app-howto/cache-delete-confirm.png
-
-
-
-
-<!--HONumber=Feb17_HO3-->
 
 

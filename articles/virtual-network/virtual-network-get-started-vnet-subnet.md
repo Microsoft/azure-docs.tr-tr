@@ -16,9 +16,9 @@ ms.workload: infrastructure-services
 ms.date: 02/27/2016
 ms.author: jdial
 translationtype: Human Translation
-ms.sourcegitcommit: afe143848fae473d08dd33a3df4ab4ed92b731fa
-ms.openlocfilehash: 214913cb63e38c5df0ab32ad19629507e5fdb35c
-ms.lasthandoff: 03/17/2017
+ms.sourcegitcommit: 5e6ffbb8f1373f7170f87ad0e345a63cc20f08dd
+ms.openlocfilehash: 81c9313635f382252550a4c0dcc7a707e9f365fb
+ms.lasthandoff: 03/24/2017
 
 
 ---
@@ -240,9 +240,9 @@ MyDBServer VM’sine bir genel IP adresi kaynağı atanmamış olsa dahi tüm gi
 
 Bu makalede oluşturulan tüm kaynakları silmek için, aşağıdaki adımları tamamlayın:
 
-1. Bu makalede oluşturulan MyRG kaynak grubunu görüntülemek için, bu makalede [Kaynakları gözden geçirme](#review) bölümündeki 1-3. adımları tamamlayın. Bir kez daha, kaynak grubundaki kaynakları gözden geçirin. MyRG kaynak grubunu önceki adımlara göre oluşturduysanız, 3. adımdaki resimde gösterilen 12 kaynağı göreceksiniz.
+1. Bu makalede oluşturulan MyRG kaynak grubunu görüntülemek için, bu makalede [Kaynakları gözden geçirme](#review) bölümündeki 1-3. adımları tamamlayın. Bir kez daha, kaynak grubundaki kaynakları gözden geçirin. MyRG kaynak grubunu önceki adımlara göre oluşturduysanız, 4. adımdaki resimde gösterilen 12 kaynağı göreceksiniz.
 2. MyRG dikey penceresinde, **Sil** düğmesine tıklayın.
-3. Portal, silmek istediğinizi onaylamak için kaynak grubunun adını yazmanızı gerektirir. Bu makalede [Kaynakları gözden geçirme](#review) bölümündeki 3. adımda gösterilen kaynaklardan başka kaynaklar görürseniz, **İptal** öğesine tıklayın. Yalnızca, bu makale kapsamında oluşturulan 12 kaynağı görürseniz, kaynak grubu adı için *MyRG* yazın, ardından **Sil** öğesine tıklayın. Bir kaynak grubunun silinmesiyle, kaynak grubu içerisindeki tüm kaynaklar silinir, bu nedenle, silmeden önce kaynak grubunun içeriğini onaylamayı hiçbir zaman unutmayın. Portal, kaynak grubu içinde yer alan tüm kaynakları siler ve sonra kaynak grubunu siler. Bu işlem birkaç dakika sürer.
+3. Portal, silmek istediğinizi onaylamak için kaynak grubunun adını yazmanızı gerektirir. Bu makalede [Kaynakları gözden geçirme](#review) bölümündeki 4. adımda gösterilen kaynaklardan başka kaynaklar görürseniz, **İptal** öğesine tıklayın. Yalnızca, bu makale kapsamında oluşturulan 12 kaynağı görürseniz, kaynak grubu adı için *MyRG* yazın, ardından **Sil** öğesine tıklayın. Bir kaynak grubunun silinmesiyle, kaynak grubu içerisindeki tüm kaynaklar silinir, bu nedenle, silmeden önce kaynak grubunun içeriğini onaylamayı hiçbir zaman unutmayın. Portal, kaynak grubu içinde yer alan tüm kaynakları siler ve sonra kaynak grubunu siler. Bu işlem birkaç dakika sürer.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

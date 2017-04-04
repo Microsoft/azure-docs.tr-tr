@@ -15,9 +15,9 @@ ms.topic: hero-article
 ms.date: 08/19/2016
 ms.author: piyushjo
 translationtype: Human Translation
-ms.sourcegitcommit: 06e16033435ed0a37d5688055743875827d3aec2
-ms.openlocfilehash: 2fc534e90431d7c44dc05327fd3d32a2e6ab1c8b
-ms.lasthandoff: 02/28/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: d7a761310782faab1dda023785f93cf90742e2ae
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -42,14 +42,14 @@ Bu öğretici için aşağıdakiler gereklidir:
 * [Mobile Engagement Cordova eklentisi](https://www.npmjs.com/package/cordova-plugin-ms-azure-mobile-engagement)
 
 > [!NOTE]
-> Cordova eklentisinin kaynak kodunu ve BeniOku dosyasını [Github](https://github.com/Azure/azure-mobile-engagement-cordova) sayfasında bulabilirsiniz
+> Cordova eklentisinin kaynak kodunu ve BeniOku dosyasını [GitHub](https://github.com/Azure/azure-mobile-engagement-cordova) sayfasında bulabilirsiniz
 > 
 > 
 
-## <a name="a-idsetup-azmeasetup-mobile-engagement-for-your-cordova-app"></a><a id="setup-azme"></a>Cordova uygulamanız için Mobile Engagement kurma
+## <a id="setup-azme"></a>Cordova uygulamanız için Mobile Engagement kurma
 [!INCLUDE [Create Mobile Engagement App in Portal](../../includes/mobile-engagement-create-app-in-portal-new.md)]
 
-## <a name="a-idconnecting-appaconnecting-your-app-to-the-mobile-engagement-backend"></a><a id="connecting-app"></a>Uygulamanızı Mobile Engagement arka ucuna bağlama
+## <a id="connecting-app"></a>Uygulamanızı Mobile Engagement arka ucuna bağlama
 Bu öğreticide, veri toplamak ve anında iletme bildirimi göndermek için gerekli en küçük grup olan bir "temel tümleştirme" gösterilmektedir. 
 
 Tümleştirmeyi göstermek için Cordova ile temel bir uygulama oluşturacağız:
@@ -90,7 +90,7 @@ Tümleştirmeyi göstermek için Cordova ile temel bir uygulama oluşturacağız
 
 *iOS Reach Simgesi*: Uzantısı ile birlikte kaynağın adı olmalıdır (ör. mynotificationicon.png) ve simge dosyası XCode ile iOS projenize eklenmelidir (Dosya Ekle Menüsü kullanılarak)
 
-## <a name="a-idmonitoraenabling-real-time-monitoring"></a><a id="monitor"></a>Gerçek zamanlı izlemeyi etkinleştirme
+## <a id="monitor"></a>Gerçek zamanlı izlemeyi etkinleştirme
 1. Cordova projesinde **www/js/index.js** dosyasını düzenleyerek, *deviceReady* olayı alındığında yeni bir etkinlik bildirmek üzere Mobile Engagement çağrısı ekleyin.
    
          onDeviceReady: function() {
@@ -117,10 +117,10 @@ Tümleştirmeyi göstermek için Cordova ile temel bir uygulama oluşturacağız
         [Engagement] Connection: Sent: startSession
         [Engagement] Connection: Sent: activity name='myPage'
 
-## <a name="a-idmonitoraconnect-app-with-real-time-monitoring"></a><a id="monitor"></a>Uygulamayı gerçek zamanlı izlemeyle bağlama
+## <a id="monitor"></a>Uygulamayı gerçek zamanlı izlemeyle bağlama
 [!INCLUDE [Connect app with real-time monitoring](../../includes/mobile-engagement-connect-app-with-monitor.md)]
 
-## <a name="a-idintegrate-pushaenabling-push-notifications-and-in-app-messaging"></a><a id="integrate-push"></a>Anında İletme Bildirimlerini ve uygulama içi mesajlaşmayı etkinleştirme
+## <a id="integrate-push"></a>Anında İletme Bildirimlerini ve uygulama içi mesajlaşmayı etkinleştirme
 Mobile Engagement, kampanyalar bağlamında Anında İletme Bildirimleri ve uygulama içi mesajlaşma aracılığıyla kullanıcılarınız ile etkileşim kurmanızı sağlar. Mobile Engagement portalında bu modüle REACH adı verilir.
 Aşağıdaki bölümler, uygulamanızı bu bildirim ve mesajları alacak şekilde ayarlar.
 
@@ -172,7 +172,7 @@ GCM bildirimleri Android öykünücüsünde desteklendiğinden Android uygulamas
 
     cordova run android
 
-## <a name="a-idsendasend-a-notification-to-your-app"></a><a id="send"></a>Uygulamanıza bildirim gönderme
+## <a id="send"></a>Uygulamanıza bildirim gönderme
 Şimdi, cihazda çalışan uygulamanıza bir anında iletim gönderecek olan basit bir Anında İletme Bildirimi kampanyası oluşturacağız:
 
 1. Mobile Engagement portalınızın **Reach** sekmesine gidin
@@ -206,7 +206,7 @@ GCM bildirimleri Android öykünücüsünde desteklendiğinden Android uygulamas
     ![][10]
 9. Şimdi cihazınızda veya öykünücünüzde bu kampanyanın bir parçası olan bir anında iletme bildirimi görmelisiniz. 
 
-## <a name="a-idnext-stepsanext-steps"></a><a id="next-steps"></a>Sonraki Adımlar
+## <a id="next-steps"></a>Sonraki Adımlar
 [Cordova Mobile Engagement SDK ile kullanılabilen tüm metotlara genel bakış](https://github.com/Azure/azure-mobile-engagement-cordova)
 
 <!-- Images. -->

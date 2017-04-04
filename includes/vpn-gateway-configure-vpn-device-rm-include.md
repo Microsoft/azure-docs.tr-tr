@@ -1,14 +1,16 @@
+Bir şirket içi ağı ile Siteden Siteye bağlantılar için VPN cihazı gerekir. Azure ile çalışabilecek çok sayıda farklı VPN cihazı vardır. VPN cihazları ve yapılandırma ayarları hakkında daha fazla bilgi için bkz. [VPN Cihazları](../articles/vpn-gateway/vpn-gateway-about-vpn-devices.md). VPN cihazınızı yapılandırmadan önce, kullanmak istediğiniz VPN cihazının [Bilinen cihaz uyumluluğu sorunları](../articles/vpn-gateway/vpn-gateway-about-vpn-devices.md#known) olup olmadığını denetleyin. VPN cihazı yapılandırmayla ilgili belirli bilgiler için cihazınızın üreticisine danışın.
 
-VPN cihazınızı yapılandırmak için, şirket içi VPN cihazınızın yapılandırılması için size sanal ağ geçidinin genel IP adresi gerekecektir. Belirli yapılandırma bilgileri için cihaz üreticinizle birlikte çalışın ve cihazınızı yapılandırın. Azure ile verimli çalışan VPN cihazları hakkında daha fazla bilgi için [VPN Cihazları](../articles/vpn-gateway/vpn-gateway-about-vpn-devices.md)’na başvurun.
+VPN cihazınızı yapılandırırken aşağıdaki öğeler gerekir:
 
-PowerShell kullanarak sanal ağ geçidinizin ortak IP adresini bulmak için şu örneği kullanın:
+- Sanal ağ geçidinizin **Genel IP adresi**.
 
-    Get-AzureRmPublicIpAddress -Name GW1PublicIP -ResourceGroupName TestRG
+    -  Azure portalını kullanarak Genel IP adresini bulmak için **Sanal ağ geçitleri**’ne gidin ve ağ geçidinizin adına tıklayın. 
 
-Azure portalı kullanarak da sanal ağ geçidiniz için genel IP adresini görüntüleyebilirsiniz. **Sanal Ağ Geçitleri**’ne gidin ve ağ geçidinizin adına tıklayın.
+    - PowerShell kullanarak sanal ağ geçidinizin Genel IP adresini bulmak için, değerleri kendi değerlerinizle değiştirerek aşağıdaki örneği kullanın.
+
+            Get-AzureRmPublicIpAddress -Name GW1PublicIP -ResourceGroupName TestRG
+- **Paylaşılan bir anahtar**. Siteden Siteye VPN bağlantınızı oluştururken belirteceğiniz paylaşılan anahtarın aynısıdır. Bu örneklerde çok temel bir paylaşılan anahtar kullanılır. Kullanmak için daha karmaşık bir anahtar oluşturmanız gerekir.
 
 
-
-<!--HONumber=Nov16_HO2-->
 
 

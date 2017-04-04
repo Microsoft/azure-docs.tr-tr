@@ -8,6 +8,7 @@ manager: jhubbard
 editor: cgronlun
 ms.assetid: 43585abf-bec1-4322-adde-6db21de98d7f
 ms.service: hdinsight
+ms.custom: hdinsightactive
 ms.devlang: 
 ms.topic: hero-article
 ms.tgt_pltfrm: na
@@ -15,8 +16,9 @@ ms.workload: big-data
 ms.date: 02/14/2017
 ms.author: larryfr
 translationtype: Human Translation
-ms.sourcegitcommit: f592dc23938c436e803c7a0d8f7fd2dd5b4185c8
-ms.openlocfilehash: 3b645725b88b33e7283ce2bf89383b285d75cddc
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: 1c7a95354358d91859ce9d2019cef93b6662811f
+ms.lasthandoff: 03/25/2017
 
 ---
 # <a name="get-started-with-apache-kafka-preview-on-hdinsight"></a>Azure HDInsight’ta Apache Kafka (önizleme) ile çalışmaya başlama
@@ -34,11 +36,7 @@ Bu Apache Kafka öğreticisini başarıyla tamamlamak için şunlara sahip olman
 
 * **Bir Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
 
-* **SSH ve SCP hakkında bilgi**. HDInsight ile SSH ve SCP kullanma hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
-  
-   * **Linux, Unix, OS X ve Windows 10 istemcileri**: Bkz. [Linux, OS X, Unix ve Windows 10 üzerinde Bash işletim sistemlerinden HDInsight’ta Linux tabanlı Hadoop ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md)
-   
-   * **Windows istemcileri**: [Windows’dan HDInsight’ta Linux tabanlı Hadoop ile SSH (PuTTY) kullanma](hdinsight-hadoop-linux-use-ssh-windows.md)
+* **SSH ve SCP hakkında bilgi**. Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
 
 * [Java JDK 8](http://www.oracle.com/technetwork/java/javase/downloads/index.html) veya OpenJDK gibi eşdeğeri.
 
@@ -107,16 +105,9 @@ Kümeye bağlanmak için istemcinizden SSH kullanın. Linux, Unix, MacOS veya Wi
 
 İstendiğinde, SSH hesabı için kullanılan parolayı girin.
 
-> [!NOTE]
-> SSH komutunu içermeyen bir Windows sürümü kullanıyorsanız [Windows’dan HDInsight’ta Linux tabanlı Hadoop ile SSH (PuTTY) kullanma](hdinsight-hadoop-linux-use-ssh-windows.md) belgesine bakın. Bu belge, Windows için PuTTY SSH istemcisini kullanmayla ilgili bilgileri içerir.
+Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
 
-HDInsight ile SSH kullanma hakkında bilgi için aşağıdaki belgelere bakın:
-
-* [Linux, Unix, OS X veya Windows 10 üzerinde Bash işletim sistemlerinden HDInsight’ta Linux tabanlı Hadoop ile SSH’yi kullanma](hdinsight-hadoop-linux-use-ssh-unix.md)
-
-* [Windows’dan HDInsight’ta Linux tabanlı Hadoop ile SSH (PuTTY) kullanma](hdinsight-hadoop-linux-use-ssh-windows.md)
-
-##<a name="a-idgetkafkainfoaget-the-zookeeper-and-broker-host-information"></a><a id="getkafkainfo"></a>Zookeeper ve Aracı konak bilgilerini alma
+##<a id="getkafkainfo"></a>Zookeeper ve Aracı konak bilgilerini alma
 
 Kafka ile çalışırken konak değerlerini bilmeniz gerekir; *Zookeeper* konakları ve *Aracı* konakları. Bu konaklar Kafka API’si ve Kafka ile gönderilen yardımcı programların birçoğu ile birlikte kullanılır.
 
@@ -350,10 +341,5 @@ Bu belgede, HDInsight üzerinde Apache Kafka ile çalışmanın temel bilgilerin
 * [MirrorMaker kullanarak HDInsight üzerinde Kafka kopyası oluşturma](hdinsight-apache-kafka-mirroring.md)
 * [Apache Storm’u HDInsight üzerinde Kafka ile kullanma](hdinsight-apache-storm-with-kafka.md)
 * [Apache Spark’ı HDInsight üzerinde Kafka ile kullanma](hdinsight-apache-spark-with-kafka.md)
-
-
-
-
-<!--HONumber=Feb17_HO3-->
 
 

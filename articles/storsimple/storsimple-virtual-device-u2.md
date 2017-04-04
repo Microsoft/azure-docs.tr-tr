@@ -1,10 +1,10 @@
 ---
-title: "StorSimple sanal cihazını Güncelleştirme 2 | Microsoft Belgeleri"
+title: "StorSimple sanal cihazını Güncelleştirme 2 | Microsoft Docs"
 description: "Microsoft Azure sanal ağında StorSimple sanal cihazı oluşturmayı, dağıtmayı ve yönetmeyi öğrenin. (StorSimple Güncelleştirme 2 için geçerlidir)."
 services: storsimple
 documentationcenter: 
 author: alkohli
-manager: carmonm
+manager: timlt
 editor: 
 ms.assetid: f37752a5-cd0c-479b-bef2-ac2c724bcc37
 ms.service: storsimple
@@ -12,11 +12,12 @@ ms.devlang: NA
 ms.topic: hero-article
 ms.tgt_pltfrm: NA
 ms.workload: NA
-ms.date: 11/16/2016
+ms.date: 03/22/2017
 ms.author: alkohli
 translationtype: Human Translation
-ms.sourcegitcommit: b84e07b26506149cf9475491b32b9ff3ea9ae80d
-ms.openlocfilehash: c081f31acb7d8767343f41be59d75616fa14b2da
+ms.sourcegitcommit: 5e6ffbb8f1373f7170f87ad0e345a63cc20f08dd
+ms.openlocfilehash: 48d9d8ae97eb763932dd6a59a7df01ae92c92eff
+ms.lasthandoff: 03/24/2017
 
 
 ---
@@ -32,34 +33,13 @@ StorSimple sanal cihazı, standart 8010 (önceden 1100 olarak biliniyordu) ve pr
 | **Maksimum kapasite** |30 TB |64 TB |
 | **Azure VM** |Standard_A3 (4 çekirdek, 7 GB bellek) |Standard_DS3 (4 çekirdek, 14 GB bellek) |
 | **Sürüm uyumluluğu** |Güncelleştirme 2 ya da üst sürümü öncesini çalıştıran sürümler |Güncelleştirme 2 ya da üst sürümünü çalıştıran sürümler |
-| **Bölge kullanılabilirliği** |Tüm Azure bölgeleri |Premium Storage destekleyen Azure bölgeleri<br></br>Bölgelerin bir listesi için bkz. [8020 için desteklenen bölgeler](#supported-regions-for-8020) |
+| **Bölge kullanılabilirliği** |Tüm Azure bölgeleri |Premium Depolamayı destekleyen tüm Azure bölgeleri<br></br> Premium depolama bölgeleri, [Bölgeye Göre Azure Hizmetleri](https://azure.microsoft.com/en-us/regions/services) listesinde *Disk depolama* satırına karşılık gelen bölgelerdir. |
 | **Depolama türü** |Yerel diskler için Azure Standard Storage kullanır.<br></br> [Standart Depolama hesabı oluşturmayı](../storage/storage-create-storage-account.md) öğrenin. |Yerel diskler için Azure Premium Depolama kullanır<sup>2</sup> <br></br>[Premium Storage hesabı oluşturmayı](../storage/storage-premium-storage.md) öğrenin. |
 | **İş yükü kılavuzu** |Yedeklerden dosya alma öğe düzeyi |Bulut geliştirme ve test senaryoları, düşük gecikme, daha yüksek performans iş yükleri <br></br>Olağanüstü durum kurtarma için ikincil cihaz |
 
 <sup>1</sup> *Önceden 1100 olarak biliniyordu*.
 
 <sup>2</sup> *Hem 8010 hem de 8020 bulut katmanı için Azure Standart Depolama kullanır. Tek fark cihazdaki yerel katmandadır*.
-
-#### <a name="supported-regions-for-8020"></a>8020 için desteklenen bölgeler
-8020 için şu anda desteklenen Premium Storage bölgeleri aşağıdaki tabloda verilmiştir. Premium Storage daha fazla bölgede kullanılabilir oldukça liste sürekli güncelleştirilecektir.
-
-| S. no. | Şu anda desteklenmediği bölgeler |
-| --- | --- |
-| 1 |Orta ABD |
-| 2 |Doğu ABD |
-| 3 |Doğu ABD 2 |
-| 4 |Batı ABD |
-| 5 |Kuzey Avrupa |
-| 6 |Batı Avrupa |
-| 7 |Güneydoğu Asya |
-| 8 |Japonya Doğu |
-| 9 |Japonya Batı |
-| 10 |Avustralya Doğu |
-| 11 |Avustralya Güneydoğu* |
-| 12 |Doğu Asya* |
-| 13 |Güney Orta ABD* |
-
-*Premium Storage bu bölgelerde henüz kullanıma sunulmuştur.
 
 Bu makalede, Azure’da bir StorSimple sanal cihazı dağıtma işlemi adım adım açıklanmaktadır. Bu makaleyi okuduktan sonra şunları yapabilir olacaksınız:
 
@@ -89,7 +69,7 @@ Aşağıdaki bölümlerde, StorSimple sanal cihazınız için yapılandırma ön
 #### <a name="azure-requirements"></a>Azure gereksinimleri
 Sanal cihaz sağlamadan önce, Azure ortamınızda aşağıdaki hazırlıkları yapmanız gerekir:
 
-* Sanal cihaz için, [Azure üzerinde bir sanal ağ yapılandırın](../virtual-network/virtual-networks-create-vnet-classic-portal.md). Premium Storage kullanıyorsanız, Premium Storage’ı destekleyen bir Azure bölgesinde sanal ağ oluşturmanız gerekir. Daha fazla bilgi için bkz. [8020 için şu anda desteklenen Premium Depolama bölgeleri](#supported-regions-for-8020).
+* Sanal cihaz için, [Azure üzerinde bir sanal ağ yapılandırın](../virtual-network/virtual-networks-create-vnet-classic-portal.md). Premium Storage kullanıyorsanız, Premium Storage’ı destekleyen bir Azure bölgesinde sanal ağ oluşturmanız gerekir. Premium depolama bölgeleri, [Bölgeye Göre Azure Hizmetleri](https://azure.microsoft.com/en-us/regions/services) listesinde *Disk depolama* satırına karşılık gelen bölgelerdir.
 * Kendi DNS sunucu adınızı belirtmek yerine Azure tarafından sağlanan varsayılan DNS sunucusunu kullanmanız önerilir. DNS sunucusu adınız geçerli değilse veya DNS sunucusu IP adreslerini doğru çözümleyemiyorsa, sanal cihaz oluşturma başarısız olur.
 * Noktadan siteye ve siteden siteye isteğe bağlıdır, ancak gerekli değildir. İsterseniz, daha gelişmiş senaryolar için bu seçenekleri yapılandırabilirsiniz.
 * Sanal cihaz tarafından sunulan birimleri kullanabileceğiniz sanal ağda [Azure Sanal Makineleri](../virtual-machines/virtual-machines-linux-about.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) (barındırma sunucuları) oluşturabilirsiniz. Bu sunucular aşağıdaki gereksinimleri karşılamalıdır:                             
@@ -256,9 +236,4 @@ Sanal cihaz oluştururken İnternet bağlantısı yoksa oluşturma adımı başa
 ## <a name="next-steps"></a>Sonraki adımlar
 * [Sanal cihazı yönetmek için StorSimple Yöneticisi hizmetini kullanma](storsimple-manager-service-administration.md)yı öğrenin.
 * [Bir yedeklemek kümesinden StorSimple birimini geri yükleme](storsimple-restore-from-backup-set.md)yi öğrenin.
-
-
-
-<!--HONumber=Feb17_HO2-->
-
 

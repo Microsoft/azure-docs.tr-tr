@@ -17,9 +17,9 @@ ms.date: 03/17/2017
 ms.author: larryfr
 ms.custom: H1Hack27Feb2017,hdinsightactive
 translationtype: Human Translation
-ms.sourcegitcommit: cfaade8249a643b77f3d7fdf466eb5ba38143f18
-ms.openlocfilehash: 4950dbe528290c7d839c97cc8770db4ae0ec08c6
-ms.lasthandoff: 02/28/2017
+ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
+ms.openlocfilehash: 5d74f2c130eeddb1022acf9673c6a2006af2db58
+ms.lasthandoff: 03/25/2017
 
 ---
 #<a name="get-started-with-the-storm-starter-samples-for-big-data-analytics-on-linux-based-hdinsight"></a>Linux tabanlı HDInsight'ta büyük veri analizi için Storm Starter örneklerini kullanmaya başlama
@@ -35,11 +35,7 @@ Apache Storm, veri akışlarını işlemeye yönelik ölçeklenebilir, hataya da
 
 * **Bir Azure aboneliği**. Bkz. [Azure ücretsiz deneme sürümü alma](https://azure.microsoft.com/documentation/videos/get-azure-free-trial-for-testing-hadoop-in-hdinsight/).
 
-* **SSH ve SCP hakkında bilgi**. HDInsight ile SSH ve SCP kullanma hakkında daha fazla bilgi için aşağıdaki belgelere bakın:
-  
-    * [Windows 10 üzerinde Bash, Linux, Unix veya OS X işletim sistemlerinden HDInsight'ta Linux tabanlı Hadoop ile SSH'yi kullanma](hdinsight-hadoop-linux-use-ssh-unix.md)
-    
-    * [Windows’dan HDInsight’ta Linux tabanlı Hadoop ile SSH (PuTTY) kullanma](hdinsight-hadoop-linux-use-ssh-windows.md)
+* **SSH ve SCP hakkında bilgi**. Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
 
 ### <a name="access-control-requirements"></a>Erişim denetimi gereksinimleri
 
@@ -99,11 +95,7 @@ HDInsight kümesinde Storm oluşturmak için aşağıdaki adımları kullanın:
    
     SSH kullanıcı hesabınızın güvenliğini sağlamak için parola kullandıysanız parolayı girmeniz istenir. Bir ortak anahtar kullandıysanız eşleşen özel anahtarı belirtmek için `-i` parametresini kullanmanız gerekebilir. Örneğin, `ssh -i ~/.ssh/id_rsa USERNAME@CLUSTERNAME-ssh.azurehdinsight.net`.
    
-    Linux tabanlı HDInsight ile SSH kullanma hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
-   
-    * [Windows 10 üzerinde Bash, Linux, Unix veya OS X işletim sistemlerinden HDInsight'ta Linux tabanlı Hadoop ile SSH'yi kullanma](hdinsight-hadoop-linux-use-ssh-unix.md)
-
-    * [Windows’dan HDInsight’ta Linux tabanlı Hadoop ile SSH (PuTTY) kullanma](hdinsight-hadoop-linux-use-ssh-windows.md)
+    Bilgi için bkz. [HDInsight ile SSH kullanma](hdinsight-hadoop-linux-use-ssh-unix.md).
 
 2. Örnek bir topoloji başlatmak için aşağıdaki komutu kullanın:
    

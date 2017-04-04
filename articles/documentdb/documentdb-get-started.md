@@ -1,5 +1,5 @@
 ---
-title: "NoSQL öğreticisi: DocumentDB .NET SDK&quot;sı | Microsoft Belgeleri"
+title: "NoSQL öğreticisi: DocumentDB .NET SDK&quot;sı | Microsoft Docs"
 description: "DocumentDB .NET SDK&quot;sını kullanarak çevrimiçi bir veritabanı ve C# konsol uygulaması oluşturan bir NoSQL öğreticisi. DocumentDB, JSON için bir NoSQL veritabanıdır."
 keywords: "nosql öğreticisi, çevrimiçi veritabanı, c# konsol uygulaması"
 services: documentdb
@@ -16,9 +16,9 @@ ms.topic: hero-article
 ms.date: 03/19/2017
 ms.author: anhoh
 translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 639eb424c31abea4106cf37b14fee99a8fd9d307
-ms.lasthandoff: 03/21/2017
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: 648aa01beaffccf69250f1028e27bc13ed70837c
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -529,7 +529,7 @@ Başlarken uygulamanızın çıktısını görmeniz gerekir. Çıktı, eklediği
 Tebrikler! Bu NoSQL öğreticisini tamamladınız ve çalışan bir C# konsol uygulamasına sahipsiniz!
 
 ## <a id="GetSolution"></a> NoSQL öğreticisi tam çözümünü edinme
-Bu öğreticideki adımları tamamlama fırsatınız olmadıysa veya yalnızca kod örneklerini indirmek isterseniz [Github](https://github.com/Azure-Samples/documentdb-dotnet-getting-started)'dan ulaşabilirsiniz. 
+Bu öğreticideki adımları tamamlama fırsatınız olmadıysa veya yalnızca kod örneklerini indirmek isterseniz [GitHub](https://github.com/Azure-Samples/documentdb-dotnet-getting-started)'dan ulaşabilirsiniz. 
 
 GetStarted çözümünü oluşturmak için aşağıdakilere ihtiyacınız olacak:
 

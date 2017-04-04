@@ -16,8 +16,9 @@ ms.topic: get-started-article
 ms.date: 2/21/2017
 ms.author: negat
 translationtype: Human Translation
-ms.sourcegitcommit: db84d2b03ad1542a898c2c452e62a3f7ef7e6af8
-ms.openlocfilehash: 4824a8a24a7e43bc8e8112303f20d916e67b6aff
+ms.sourcegitcommit: 503f5151047870aaf87e9bb7ebf2c7e4afa27b83
+ms.openlocfilehash: 4ec20a30f423d4b30e953f873100be90167f987b
+ms.lasthandoff: 03/28/2017
 
 
 ---
@@ -40,7 +41,7 @@ az group create -l southcentralus -n dsktest
 az vmss create -g dsktest -n dskvmss --image ubuntults --instance-count 10 --data-disk-sizes-gb 50 100
 ```
 
-Alternatif olarak, [Azure Hızlı Başlangıç Şablonları Github deposunda](https://github.com/Azure/azure-quickstart-templates) `vmss` içeren klasörlere bakarak ölçek kümesi dağıtan önceden oluşturulmuş şablon örneklerini inceleyebilirsiniz. Hangi şablonların yönetilen diskler kullanmakta olduğunu [bu listede](https://github.com/Azure/azure-quickstart-templates/blob/master/managed-disk-support-list.md) görebilirsiniz.
+Alternatif olarak, [Azure Hızlı Başlangıç Şablonları GitHub deposunda](https://github.com/Azure/azure-quickstart-templates) `vmss` içeren klasörlere bakarak ölçek kümesi dağıtan önceden oluşturulmuş şablon örneklerini inceleyebilirsiniz. Hangi şablonların yönetilen diskler kullanmakta olduğunu [bu listede](https://github.com/Azure/azure-quickstart-templates/blob/master/managed-disk-support-list.md) görebilirsiniz.
 
 ## <a name="api-versions"></a>API sürümleri
 
@@ -56,10 +57,5 @@ Bir Resource Manager şablonunu yönetilen diskler içeren ölçek kümeleri sa�
 
 Büyük ölçek kümeleri ile çalışmaya başlamak için [bu makaleye](./virtual-machine-scale-sets-placement-groups.md) başvurun.
 
-
-
-
-
-<!--HONumber=Feb17_HO3-->
 
 
