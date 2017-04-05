@@ -3,7 +3,7 @@ title: "ASP.NET uygulamasını Visual Studio’yu kullanarak Azure’a dağıtma
 description: "Azure App Service’te bir ASP.NET web projesini Visual Studio’yu kullanarak yeni bir web uygulamasına dağıtmayı öğrenin."
 services: app-service\web
 documentationcenter: .net
-author: tdykstra
+author: cephalin
 manager: erikre
 editor: 
 ms.assetid: 69759e3c-384c-4afb-9278-db6724f6cb74
@@ -13,11 +13,11 @@ ms.tgt_pltfrm: na
 ms.devlang: dotnet
 ms.topic: get-started-article
 ms.date: 12/16/2016
-ms.author: rachelap
+ms.author: cephalin
 translationtype: Human Translation
-ms.sourcegitcommit: 9b7e0b429575d080819f25e04d492a2b09d4d63a
-ms.openlocfilehash: 946552d1b268c6e70a9e8fcd4c40bd6e2ab76178
-ms.lasthandoff: 01/24/2017
+ms.sourcegitcommit: 26d460a699e31f6c19e3b282fa589ed07ce4a068
+ms.openlocfilehash: 93107d19e1814b30d69fc12c92b544d9760bda6a
+ms.lasthandoff: 04/04/2017
 
 
 ---
@@ -50,7 +50,7 @@ Bu bir başlangıç öğreticisi olduğundan, veritabanı kullanmayan ve kimlik 
   
     Bir Azure hesabı için kaydolmadan önce Azure App Service’i kullanmaya başlamak istiyorsanız [App Service’i Deneyin](https://azure.microsoft.com/try/app-service/)’e gidin. Burada, App Service’te kısa süreli bir başlangıç web uygulaması oluşturabilirsiniz; kredi kartı gerekmez ve hiçbir taahhüt yoktur.
 
-## <a name="a-namesetupdevenvaset-up-the-development-environment"></a><a name="setupdevenv"></a>Geliştirme ortamını ayarlama
+## <a name="setupdevenv"></a>Geliştirme ortamını ayarlama
 Bu öğretici, [.NET için Azure SDK](../dotnet-sdk.md) 2.9 veya sonraki bir sürümünü içeren Visual Studio 2015 için hazırlanmıştır. 
 
 * [Visual Studio 2015 için en son Azure SDK’sını indirin](http://go.microsoft.com/fwlink/?linkid=518003). Visual Studio 2015’iniz yoksa, SDK sizin yerinize yükler.
@@ -189,8 +189,6 @@ Bu bölümde web projesini Azure App Service'te oluşturduğunuz web uygulaması
 
 ## <a name="troubleshooting"></a>Sorun giderme
 Bu öğreticide ilerlerken bir sorunla karşılaşırsanız, .NET için Azure SDK’nın en son sürümünü kullandığınızdan emin olun. Bunu yapmanın en kolay yolu [Visual Studio 2015 için Azure SDK’yı indirmektir](http://go.microsoft.com/fwlink/?linkid=518003). Geçerli sürüm yüklüyse, Web Platformu Yükleyicisi yükleme yapılmasına gerek olmadığını belirtir.
-
-Kurumsal bir ağda bulunuyorsanız ve Azure App Service’e bir güvenlik duvarı aracılığıyla dağıtmaya çalışıyorsanız, 443 ve 8172 numaralı bağlantı noktalarının Web Dağıtımı için açık olduklarından emin olun. Bu bağlantı noktalarını açamıyorsanız, diğer dağıtım seçenekleri aşağıdaki Sonraki adımlar bölümüne bakın.
 
 Azure App Service’te ASP.NET web uygulamanızı çalıştırdıktan sonra, sorun giderme sürecini kolaylaştıracak Visual Studio özellikler hakkında daha fazla bilgi edinmek isteyebilirsiniz. Günlüğe kaydetme, uzaktan hata ayıklama ve çok daha fazlası hakkında bilgi edinmek için bkz. [Visual Studio’daki Azure Web Apps sorunlarını giderme](web-sites-dotnet-troubleshoot-visual-studio.md).
 

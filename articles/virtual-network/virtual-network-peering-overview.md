@@ -15,8 +15,9 @@ ms.workload: infrastructure-services
 ms.date: 10/17/2016
 ms.author: narayan
 translationtype: Human Translation
-ms.sourcegitcommit: 15afcad97941fc595478e36e826a73831f40475e
-ms.openlocfilehash: eb05b504c5cf13cd852a5e01cc3bec79fd20d547
+ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
+ms.openlocfilehash: 6fbcdcf77f46a3c643e8fedc1d112588cbd7befc
+ms.lasthandoff: 04/03/2017
 
 
 ---
@@ -36,7 +37,7 @@ VNet eşlemesi ile ilgili gereksinimler ve önemli noktalar:
 * Sanal ağ eşlemesi iki sanal ağ arasında gerçekleşir ve eşlemeler arasında türetilmiş geçişli bir ilişki yoktur. Örneğin, SanalAğA ile SanalAğB eşlenir ve SanalAğB ile SanalAğC eşlenirse, SanalAğA ile SanalAğC *eşlenmez*.
 * Eşlemenin her iki aboneliğin de ayrıcalıklı bir kullanıcısı tarafından yetkilendirilmiş olması ve aboneliklerin aynı Active Directory kiracısı ile ilişkilendirilmesi şartıyla iki farklı abonelikte mevcut olan sanal ağları eşleyebilirsiniz.
 * Her iki sanal ağ da Resource Manager dağıtım modeliyle oluşturulursa veya biri Resource Manager dağıtım modeliyle, diğeri klasik dağıtım modeliyle oluşturulursa sanal ağlar eşlenebilir. Ancak, klasik dağıtım modeliyle oluşturulan iki sanal ağ birbiriyle eşlenemez. Farklı dağıtım modelleriyle oluşturulan sanal ağlar eşlenirken, sanal ağların her ikisi de *aynı* abonelikte olmalıdır. *Farklı* aboneliklerde mevcut olan farklı dağıtım modelleriyle oluşturulmuş sanal ağları eşleyebilme özelliği **önizleme** sürümündedir. Daha fazla bilgi için [Powershell kullanarak sanal ağ eşlemesi oluşturma](virtual-networks-create-vnetpeering-arm-ps.md) makalesini okuyun.
-* Eşlenmiş sanal ağlardaki sanal makineler arasında kurulan iletişim için ek bant genişliği kısıtlamaları olmasa da, sanal makine boyutuna bağlı olarak hala geçerli olan bir ağ bant genişliği üst sınırı vardır. Farklı sanal makine boyutlarına yönelik ağ bant genişliği üst sınırları hakkında daha fazla bilgi almak için [Windows](../virtual-machines/virtual-machines-windows-sizes.md) veya [Linux](../virtual-machines/virtual-machines-linux-sizes.md) VM boyutları makalelerini okuyun.
+* Eşlenmiş sanal ağlardaki sanal makineler arasında kurulan iletişim için ek bant genişliği kısıtlamaları olmasa da, sanal makine boyutuna bağlı olarak hala geçerli olan bir ağ bant genişliği üst sınırı vardır. Farklı sanal makine boyutlarına yönelik ağ bant genişliği üst sınırları hakkında daha fazla bilgi almak için [Windows](../virtual-machines/windows/sizes.md) veya [Linux](../virtual-machines/linux/sizes.md) VM boyutları makalelerini okuyun.
 
 ![Temel VNet eşlemesi](./media/virtual-networks-peering-overview/figure01.png)
 
@@ -84,15 +85,10 @@ Tek bir sanal ağ için izin verilen eşleme sayısı sınırlıdır. Daha fazla
 ## <a name="pricing"></a>Fiyatlandırma
 Sanal ağ eşlemesi kullanan giriş ve çıkış trafiği için nominal bir ücret uygulanır. Daha fazla bilgi edinmek için bkz. [fiyatlandırma sayfası](https://azure.microsoft.com/pricing/details/virtual-network).
 
-## <a name="a-namenext-stepsanext-steps"></a><a name="next-steps"></a>Sonraki adımlar
+## <a name="next-steps"></a>Sonraki adımlar
 Aşağıdakileri kullanarak sanal ağ eşlemesi oluşturma hakkında bilgi alın:
 
 * [Azure portalı](virtual-networks-create-vnetpeering-arm-portal.md)
 * [Azure PowerShell](virtual-networks-create-vnetpeering-arm-ps.md)
 * [Azure Resource Manager şablonu](virtual-networks-create-vnetpeering-arm-template-click.md)
-
-
-
-<!--HONumber=Feb17_HO1-->
-
 

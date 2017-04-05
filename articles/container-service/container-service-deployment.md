@@ -18,9 +18,9 @@ ms.date: 03/01/2017
 ms.author: rogardle
 ms.custom: H1Hack27Feb2017
 translationtype: Human Translation
-ms.sourcegitcommit: 2464901d22bb91cbf396ef60f4bda6d979b578b7
-ms.openlocfilehash: 003d975f57d63bcb95d6b0de9dcfaf8816fcdd6f
-ms.lasthandoff: 03/02/2017
+ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
+ms.openlocfilehash: 2e8ff5304d4ccc63f92567b22c0508e3fc7b9bcf
+ms.lasthandoff: 04/03/2017
 
 ---
 # <a name="deploy-a-docker-container-hosting-solution-using-the-azure-portal"></a>Azure portalını kullanarak Docker kapsayıcısı barındırma çözümü dağıtma
@@ -38,7 +38,7 @@ Arka plan bilgileri için bkz. [Azure Container Service'e giriş](container-serv
 
 * **Azure aboneliği**: Aboneliğiniz yoksa [ücretsiz deneme](http://azure.microsoft.com/pricing/free-trial/?WT.mc_id=AA4C1C935) sürümüne kaydolun. 
 
-* **SSH RSA ortak anahtarı**: Portal veya Azure hızlı başlangıç şablonlarından biri ile dağıtım yaparken, Azure Container Service sanal makinelerinde kimlik doğrulamak için ortak anahtar belirtmeniz gerekir. Güvenli Kabuk (SSH) RSA anahtarları oluşturmak için [OS X ve Linux](../virtual-machines/virtual-machines-linux-mac-create-ssh-keys.md) veya [Windows](../virtual-machines/virtual-machines-linux-ssh-from-windows.md) kılavuzuna bakın. 
+* **SSH RSA ortak anahtarı**: Portal veya Azure hızlı başlangıç şablonlarından biri ile dağıtım yaparken, Azure Container Service sanal makinelerinde kimlik doğrulamak için ortak anahtar belirtmeniz gerekir. Güvenli Kabuk (SSH) RSA anahtarları oluşturmak için [OS X ve Linux](../virtual-machines/linux/mac-create-ssh-keys.md) veya [Windows](../virtual-machines/linux/ssh-from-windows.md) kılavuzuna bakın. 
 
 * **Hizmet sorumlusu istemci kimliği ve parolası** (yalnızca Kubernetes): Azure Active Directory Hizmet sorumlusu oluşturma hakkında bilgi ve yönergeler için bkz. [Kubernetes kümelerinde hizmet sorumlusu hakkında](container-service-kubernetes-service-principal.md).
 

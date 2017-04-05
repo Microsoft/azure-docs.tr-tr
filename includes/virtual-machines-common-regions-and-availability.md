@@ -81,14 +81,14 @@ Azure'da VM’ler bir görüntüden oluşturulur. Genellikle, görüntüler iş 
 
 Azure Market’te bir görüntüden VM oluşturduğunuzda, aslında şablonlarla çalışırsınız. Azure Resource Manager şablonları; VM, depolama, sanal ağ vb. öğelerden oluşan karmaşık uygulama ortamları oluşturmak için kullanılabilen, bildirim temelli JavaScript Nesne Gösterimi (JSON) dosyalarıdır. [Şablonlarınızı oluşturma](../articles/resource-group-authoring-templates.md) işlemi dahil [Azure Resource Manager şablonlarını](../articles/azure-resource-manager/resource-group-overview.md) kullanma hakkında daha fazla bilgi alabilirsiniz.
 
-Ayrıca, kendi özel görüntülerinizi oluşturabilir ve derleme gereksinimlerinize göre özel VM’leri hızlıca oluşturmak üzere [Azure CLI](../articles/virtual-machines/virtual-machines-linux-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ya da [Azure PowerShell](../articles/virtual-machines/virtual-machines-windows-upload-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) kullanarak karşıya yükleyebilirsiniz.
+Ayrıca, kendi özel görüntülerinizi oluşturabilir ve derleme gereksinimlerinize göre özel VM’leri hızlıca oluşturmak üzere [Azure CLI](../articles/virtual-machines/linux/upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ya da [Azure PowerShell](../articles/virtual-machines/windows/upload-image.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) kullanarak karşıya yükleyebilirsiniz.
 
 ## <a name="availability-sets"></a>Kullanılabilirlik kümeleri
 Kullanılabilirlik kümesi, Azure’un, uygulamanızın yedeklilik ve kullanılabilirlik sağlamak üzere nasıl oluşturulduğunu anlamasına olanak tanıyan bir mantıksal VM grubudur. Yüksek oranda kullanılabilir bir uygulama sağlamak ve [%99,95 Azure SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/) hedefini karşılamak üzere bir kullanılabilirlik kümesinde iki ya da daha fazla BM oluşturulması önerilir. Tek bir VM, [Azure Premium Depolama](../articles/storage/storage-premium-storage.md) kullanıyorsa, Azure SLA planlanmamış bakım olayları için geçerli olur. Kullanılabilirlik kümesi, donanım hatalarına karşı koruyan ve güncelleştirmelerin güvenli bir şekilde uygulanmasını sağlayan iki ek gruptan oluşur: hata etki alanları (FD) ve güncelleme etki alanları (UD).
 
 ![Güncelleme etki alanı ve hata etki alanı yapılandırmasının kavramsal çizimi](./media/virtual-machines-common-regions-and-availability/ud-fd-configuration.png)
 
-[Linux VM](../articles/virtual-machines/virtual-machines-linux-manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [Windows VM](../articles/virtual-machines/virtual-machines-linux-manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) kullanılabilirliğini yönetme hakkında daha fazla bilgi alabilirsiniz.
+[Linux VM](../articles/virtual-machines/linux/manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) veya [Windows VM](../articles/virtual-machines/linux/manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) kullanılabilirliğini yönetme hakkında daha fazla bilgi alabilirsiniz.
 
 ### <a name="fault-domains"></a>Hata etki alanları
 Hata etki alanı, ortak bir güç kaynağı ve ağ anahtarını paylaşan, şirket içi veri merkezindeki rafa benzer bir temel alınan donanım mantık grubudur. Bir kullanılabilirlik kümesinde VM’ler oluşturduğunuzda, Azure platformu VM’lerinizi bu hata etki alanlarına otomatik olarak dağıtır. Bu yaklaşım, olası fiziksel donanım hatalarının, ağ kesintilerinin veya güç kesintilerinin etkisini sınırlar.
@@ -101,9 +101,4 @@ Güncelleme etki alanı, bakımdan geçirilebilen ya da aynı anda yeniden başl
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Azure ortamınızı oluşturmak için bu kullanılabilirlik ve yedeklilik özelliklerini kullanmaya başlayabilirsiniz. En iyi uygulama bilgileri için bkz. [Azure kullanılabilirlik en iyi uygulamaları](../articles/best-practices-availability-checklist.md).
-
-
-
-<!--HONumber=Feb17_HO2-->
-
 

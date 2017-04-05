@@ -7,7 +7,7 @@ Güncel Windows ve Linux tabanlı sanal makine görüntüleri için bkz. [Oracle
 Windows Server tabanlı Azure sanal makineleri üzerindeki Oracle yazılımı sınırlamalarını anlamak için bkz. [Oracle sanal makine görüntüleri için dikkat edilmesi gereken çeşitli konular](../articles/virtual-machines/windows/classic/oracle-considerations.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json).
 
 ## <a name="prepare-an-oracle-linux-virtual-machine"></a>Oracle Linux sanal makinesi hazırlama
-[Azure için Oracle Linux sanal makinesi hazırlama](../articles/virtual-machines/virtual-machines-linux-oracle-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json), Oracle Linux 6.4+ ve Oracle Linux 7.0+ sanal makinesi oluşturma önkoşullarını ve oluşturma adımlarını açıklamaktadır.
+[Azure için Oracle Linux sanal makinesi hazırlama](../articles/virtual-machines/linux/oracle-create-upload-vhd.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json), Oracle Linux 6.4+ ve Oracle Linux 7.0+ sanal makinesi oluşturma önkoşullarını ve oluşturma adımlarını açıklamaktadır.
 
 ## <a name="oracle-data-guard"></a>Oracle Data Guard
 [Azure'da Oracle Data Guard'ı yapılandırma](../articles/virtual-machines/windows/classic/configure-oracle-data-guard.md?toc=%2fazure%2fvirtual-machines%2fwindows%2fclassic%2ftoc.json), bekleme ortamı ve dinleyici yapılandırması adımlarını açıklamaktadır.

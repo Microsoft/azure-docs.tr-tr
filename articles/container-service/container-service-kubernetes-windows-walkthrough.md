@@ -1,5 +1,5 @@
 ---
-title: "Windows için Azure Kubernetes kümesi | Microsoft Belgeleri"
+title: "Windows için Azure Kubernetes kümesi | Microsoft Docs"
 description: "Azure Container Service’te Windows kapsayıcıları için Kubernetes kümesi dağıtma ve kullanmaya başlama"
 services: container-service
 documentationcenter: 
@@ -18,9 +18,9 @@ ms.date: 03/20/2017
 ms.author: danlep
 ms.custom: H1Hack27Feb2017
 translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: c43648dae95d90d0ee9f3d6b5bedfad7ab4889ca
-ms.lasthandoff: 03/22/2017
+ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
+ms.openlocfilehash: eb3af43b8a13eaaebfa9147848383ff889119d97
+ms.lasthandoff: 04/03/2017
 
 
 ---
@@ -49,7 +49,7 @@ Tüm VM’ler aynı gizli sanal ağ üzerindedir ve birbirlerine tam olarak eri�
 ## <a name="prerequisites"></a>Ön koşullar
 
 
-* **SSH RSA ortak anahtarı**: Portal veya Azure hızlı başlangıç şablonlarından biri ile dağıtım yaparken, Azure Container Service sanal makinelerinde kimlik doğrulamak için bir SSH RSA ortak anahtarı belirtmeniz gerekir. Güvenli Kabuk (SSH) RSA anahtarları oluşturmak için [OS X ve Linux](../virtual-machines/virtual-machines-linux-mac-create-ssh-keys.md) veya [Windows](../virtual-machines/virtual-machines-linux-ssh-from-windows.md) kılavuzuna bakın. 
+* **SSH RSA ortak anahtarı**: Portal veya Azure hızlı başlangıç şablonlarından biri ile dağıtım yaparken, Azure Container Service sanal makinelerinde kimlik doğrulamak için bir SSH RSA ortak anahtarı belirtmeniz gerekir. Güvenli Kabuk (SSH) RSA anahtarları oluşturmak için [OS X ve Linux](../virtual-machines/linux/mac-create-ssh-keys.md) veya [Windows](../virtual-machines/linux/ssh-from-windows.md) kılavuzuna bakın. 
 
 * **Hizmet sorumlusu istemci kimliği ve gizli dizisi**: Daha fazla bilgi ve rehberlik için bkz. [Kubernetes kümelerinde hizmet sorumlusu hakkında](container-service-kubernetes-service-principal.md).
 

@@ -16,9 +16,9 @@ ms.date: 02/27/2017
 ms.author: danlep
 ms.custom: H1Hack27Feb2017
 translationtype: Human Translation
-ms.sourcegitcommit: 6b6c548ca1001587e2b40bbe9ee2fcb298f40d72
-ms.openlocfilehash: 288bd4dc0bde4cb610efc4a6d015e5b9499eb0ee
-ms.lasthandoff: 02/28/2017
+ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
+ms.openlocfilehash: 0bab12648a31b416bd7ceca75f0f83f5da226bad
+ms.lasthandoff: 03/31/2017
 
 
 ---
@@ -90,10 +90,10 @@ Big Compute çözümleri ve iş akışları için birleştirebildiğiniz hesapla
 > 
 
 ### <a name="compute-services"></a>İşlem hizmetleri
-Azure işlem hizmetleri Big Compute çözümünün çekirdeğidir ve farklı işlem hizmetleri farklı senaryolar için avantaj sunarlar. Temel düzeyde, bu hizmetler, Azure’ün Windows Server Hyper-V teknolojisini kullanarak sağladığı sanal makine tabanlı işlem örneklerini çalıştırmak için uygulamaların farklı modlarını sağlar. Bu örnekler standart ve özel Linux ve Windows işletim sistemlerinin ve araçlarını çalıştırabilir. Azure, CPU çekirdekleri, bellek, disk kapasitesi ve diğer özelliklerin farklı yapılandırmalarıyla size [örnek boyutları](../virtual-machines/virtual-machines-windows-sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) seçimi sağlar. Gereksinimlerinize bağlı olarak örnekleri binlerce çekirdeğe ölçeklendirip, daha az kaynak gerektiğinde de ölçeklendirmeyi azaltın.
+Azure işlem hizmetleri Big Compute çözümünün çekirdeğidir ve farklı işlem hizmetleri farklı senaryolar için avantaj sunarlar. Temel düzeyde, bu hizmetler, Azure’ün Windows Server Hyper-V teknolojisini kullanarak sağladığı sanal makine tabanlı işlem örneklerini çalıştırmak için uygulamaların farklı modlarını sağlar. Bu örnekler standart ve özel Linux ve Windows işletim sistemlerinin ve araçlarını çalıştırabilir. Azure, CPU çekirdekleri, bellek, disk kapasitesi ve diğer özelliklerin farklı yapılandırmalarıyla size [örnek boyutları](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) seçimi sağlar. Gereksinimlerinize bağlı olarak örnekleri binlerce çekirdeğe ölçeklendirip, daha az kaynak gerektiğinde de ölçeklendirmeyi azaltın.
 
 > [!NOTE]
-> HPC iş yüklerinin performansını ve ölçeklenebilirliğini geliştirmek için [H serisi gibi yoğun işlem gücü kullanımlı Azure örneklerinden](../virtual-machines/virtual-machines-windows-a8-a9-a10-a11-specs.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) yararlanın. Bu örnekler, düşük gecikme ve yüksek üretimli bir uygulama ağı gerektiren paralel MPI uygulamalarını da destekler. Ayrıca, Azure’daki işlem ve görselleştirme senaryolarını genişletmek için NVIDIA GPU içeren [N serisi](https://azure.microsoft.com/blog/azure-n-series-general-availability-on-december-1/) VM’ler de kullanılabilir.  
+> HPC iş yüklerinin performansını ve ölçeklenebilirliğini geliştirmek için [H serisi gibi yoğun işlem gücü kullanımlı Azure örneklerinden](../virtual-machines/windows/a8-a9-a10-a11-specs.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) yararlanın. Bu örnekler, düşük gecikme ve yüksek üretimli bir uygulama ağı gerektiren paralel MPI uygulamalarını da destekler. Ayrıca, Azure’daki işlem ve görselleştirme senaryolarını genişletmek için NVIDIA GPU içeren [N serisi](https://azure.microsoft.com/blog/azure-n-series-general-availability-on-december-1/) VM’ler de kullanılabilir.  
 > 
 > 
 

@@ -17,7 +17,7 @@ NC örnekleri, NVIDIA Tesla K80 kartını kullanmaktadır. Kullanıcılar artık
 
 **Desteklenen işletim sistemleri**
 
-* Windows Server 2016, Windows Server 2012 R2, bkz. [Windows için N Serisi sürücü kurulumu](../articles/virtual-machines/virtual-machines-windows-n-series-driver-setup.md)
+* Windows Server 2016, Windows Server 2012 R2, bkz. [Windows için N Serisi sürücü kurulumu](../articles/virtual-machines/windows/n-series-driver-setup.md)
 
 ## <a name="nc-instances"></a>NC Örnekleri
 
@@ -34,8 +34,8 @@ NC örnekleri, NVIDIA Tesla K80 kartını kullanmaktadır. Kullanıcılar artık
 
 **Desteklenen işletim sistemleri**
 
-* Windows Server 2016, Windows Server 2012 R2, bkz. [Windows için N Serisi sürücü kurulumu](../articles/virtual-machines/virtual-machines-windows-n-series-driver-setup.md)
-* Ubuntu 16.04 LTS, bkz. [Linux için N Serisi sürücü kurulumu](../articles/virtual-machines/virtual-machines-linux-n-series-driver-setup.md)
+* Windows Server 2016, Windows Server 2012 R2, bkz. [Windows için N Serisi sürücü kurulumu](../articles/virtual-machines/windows/n-series-driver-setup.md)
+* Ubuntu 16.04 LTS, bkz. [Linux için N Serisi sürücü kurulumu](../articles/virtual-machines/linux/n-series-driver-setup.md)
 
 <br>
 

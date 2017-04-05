@@ -16,7 +16,7 @@ Temel Bilgiler dikey penceresi, sanal makine için yönetim bilgileri ister.
 
 2. Sanal makinede yerel hesap oluşturmak için kullanılan bir **Kullanıcı adı** ve güçlü bir **Parola** girin. Yerel hesap VM’de oturum açmak ve VM’yi yönetmek için kullanılır. Bu örnekte, kullanıcı adı _azureuser_’dır.
 
- Parola 8-123 karakter uzunluğunda olmalıdır ve en az şu dört karmaşıklık gereksinimini karşılamalıdır: bir küçük harf karakter, bir büyük harf karakter, bir sayı ve bir özel karakter. [Kullanıcı adı ve parola gereksinimleri](../articles/virtual-machines/virtual-machines-windows-faq.md) hakkında daha fazla bilgi edinin.
+ Parola 8-123 karakter uzunluğunda olmalıdır ve en az şu dört karmaşıklık gereksinimini karşılamalıdır: bir küçük harf karakter, bir büyük harf karakter, bir sayı ve bir özel karakter. [Kullanıcı adı ve parola gereksinimleri](../articles/virtual-machines/windows/faq.md) hakkında daha fazla bilgi edinin.
 
 3. **Abonelik** isteğe bağlıdır. Yaygın olarak kullanılan bir ayar "Kullandıkça Öde"dir.
 

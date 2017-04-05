@@ -15,6 +15,7 @@ ms.author: carolz
 translationtype: Human Translation
 ms.sourcegitcommit: 642f9469722dfe701db8e353f4aa2b17edc00081
 ms.openlocfilehash: 67fdc8b9b4db5d311a8247995d7f8f626b90e5c5
+ms.lasthandoff: 02/09/2017
 
 ---
 # <a name="cdn-documentation"></a>CDN Belgeleri
@@ -23,7 +24,7 @@ ms.openlocfilehash: 67fdc8b9b4db5d311a8247995d7f8f626b90e5c5
 
 <ul class="panelContent cardsFTitle">
     <li>
-        <a href="/azure/best-practices-CDN">
+        <a href="/azure/best-practices-cdn">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -121,10 +122,5 @@ ms.openlocfilehash: 67fdc8b9b4db5d311a8247995d7f8f626b90e5c5
 </ul>
 
 
-
-
-
-
-<!--HONumber=Feb17_HO2-->
 
 

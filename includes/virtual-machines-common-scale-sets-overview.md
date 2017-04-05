@@ -23,7 +23,7 @@ Bir VM ölçek kümesindeki sanal makinelerin sayısını artırmak ya da azaltm
 
 Kapasiteyi değiştirmek için bir şablonu yeniden dağıtıyorsanız, yalnızca SKU ve güncelleştirilmiş kapasiteyi içeren çok daha küçük bir şablon tanımlayabilirsiniz. Bunun bir örneği şurada gösterilmiştir: [https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vmss-scale-in-or-out/azuredeploy.json](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/201-vmss-linux-nat/azuredeploy.json).
 
-Otomatik olarak ölçeklendirilen bir ölçek kümesi oluşturan adımları uygulamak için bkz. [Sanal Makine Ölçek Kümesinde Makineleri Otomatik Olarak Ölçeklendirme](../articles/virtual-machines/virtual-machines-windows-vmss-powershell-creating.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
+Otomatik olarak ölçeklendirilen bir ölçek kümesi oluşturan adımları uygulamak için bkz. [Sanal Makine Ölçek Kümesinde Makineleri Otomatik Olarak Ölçeklendirme](../articles/virtual-machines/windows/vmss-powershell-creating.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json)
 
 ## <a name="monitoring-your-vm-scale-set"></a>VM ölçek kümenizi izleme
 Şu anda VM ölçek kümelerini görüntülemek için [Azure Resource Explorer](https://resources.azure.com)’ı kullanmanız önerilir. VM ölçek kümeleri Microsoft.Compute altındaki bir kaynaktır; bu nedenle, bu siteden aşağıdaki bağlantıları genişleterek bunları görebilirsiniz:
@@ -64,7 +64,7 @@ Bu bölümde tipik VM ölçek kümesi senaryolarından bazıları listelenmekted
 ## <a name="vm-scale-set-frequently-asked-questions"></a>VM ölçek kümeleri hakkında sık sorulan sorular
 **S.** Bir VM ölçek kümesinde kaç tane VM’niz olabilir?
 
-**C.** birden fazla depolama hesabı arasında dağıtılabilir platform görüntüleri kullanıyorsanız,&100;. Özel görüntüler önizleme sırasında tek bir depolama hesabı ile sınırlı olduğu için, özel görüntüler kullanıyorsanız bu sayı en fazla 40’tır.
+**C.** birden fazla depolama hesabı arasında dağıtılabilir platform görüntüleri kullanıyorsanız, 100. Özel görüntüler önizleme sırasında tek bir depolama hesabı ile sınırlı olduğu için, özel görüntüler kullanıyorsanız bu sayı en fazla 40’tır.
 
 **S** VM ölçek kümeleri için başka hangi kaynak limitleri mevcuttur?
 
@@ -115,9 +115,4 @@ Bu bölümde tipik VM ölçek kümesi senaryolarından bazıları listelenmekted
 **S.** VM ölçek kümeleri Azure kullanılabilirlik kümeleri ile birlikte çalışır mı?
 
 **C.** Evet. Bir VM ölçek kümesi, 3 FD ve 5 UD’ye sahip örtülü bir kullanılabilirlik kümesidir. VirtualMachineProfile altında herhangi bir yapılandırma yapılması gerekmez. Gelecekteki sürümlerde, VM ölçek kümeleri birden fazla kiracıya yayılabilir, ancak şimdilik bir ölçek kümesi tek bir kullanılabilirlik kümesidir.
-
-
-
-<!--HONumber=Jan17_HO5-->
-
 

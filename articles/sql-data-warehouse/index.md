@@ -15,6 +15,7 @@ ms.author: carolz
 translationtype: Human Translation
 ms.sourcegitcommit: e065918a1380e006253aefb4ab9c897b9148dea5
 ms.openlocfilehash: 576e12831945701b880e891394c0cbb8374d333b
+ms.lasthandoff: 02/09/2017
 
 ---
 
@@ -60,7 +61,7 @@ SQL Server ilişkisel veritabanını yüksek düzeyde paralel işleme ile birle�
         </a>
     </li>
      <li>
-        <a href="/azure/sql-data-WArehouse/sql-data-warehouse-get-started-provision">
+        <a href="/azure/sql-data-warehouse/sql-data-warehouse-get-started-provision">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -113,10 +114,5 @@ SQL Server ilişkisel veritabanını yüksek düzeyde paralel işleme ile birle�
     </li>
 </ul>
 
-
-
-
-
-<!--HONumber=Feb17_HO2-->
 
 

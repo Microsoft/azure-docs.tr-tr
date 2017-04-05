@@ -1,5 +1,5 @@
 ---
-title: Azure Backup nedir? | Microsoft Belgeleri
+title: Azure Backup nedir? | Microsoft Docs
 description: "Azure Backup’ı, Windows Server’lardan, Windows iş istasyonlarından, System Center DPM sunucularından ve Azure sanal makinelerinden verileri ve iş yüklerini yedeklemek ve geri yüklemek için kullanın."
 services: backup
 documentationcenter: 
@@ -17,9 +17,9 @@ ms.date: 3/13/2017
 ms.author: markgal;trinadhk; anuragm
 ms.custom: H1Hack27Feb2017
 translationtype: Human Translation
-ms.sourcegitcommit: 424d8654a047a28ef6e32b73952cf98d28547f4f
-ms.openlocfilehash: 0be8f1f9fb96bce445c4a91520b9a847b205a519
-ms.lasthandoff: 03/22/2017
+ms.sourcegitcommit: 303cb9950f46916fbdd58762acd1608c925c1328
+ms.openlocfilehash: a2452b95c9355957b10477a6e457000f0eba6a9c
+ms.lasthandoff: 04/04/2017
 
 
 ---
@@ -98,7 +98,7 @@ Aşağıdaki tabloda Linux destekli Azure Backup bileşenleri gösterilmektedir.
 Azure Backup, Premium Depolama VM'leri koruma altına alır. Azure Premium Depolama, G/Ç açısından yoğun iş yüklerini desteklemek için tasarlanan katı hal sürücüsü (SSD) tabanlı bir depolama hizmetidir. Premium Depolama, sanal makine (VM) iş yükleri için idealdir. Premium Depolama hakkında daha fazla bilgi almak için bkz. [Premium Depolama: Azure Sanal Makine İş Yükleri için Yüksek Performanslı Depolama](../storage/storage-premium-storage.md).
 
 ### <a name="back-up-premium-storage-vms"></a>Premium Storage VM'lerini yedekleme
-Premium Depolama VM'lerini yedeklerken, Backup hizmeti, Premium Depolama hesabında “AzureBackup-” adlı geçici bir hazırlama konumu oluşturur. Hazırlama konumu, kurtarma noktası anlık görüntüsünü boyutuna eşittir. Depolama hesabında, geçici hazırlama konumu barındırmak için boş alan olduğundan emin olun. Daha fazla bilgi için [premium depolama sınırlamaları](../storage/storage-premium-storage.md#premium-storage-scalability-and-performance-targets) makalesine bakın. Yedekleme işi tamamlandıktan sonra, hazırlama konumu silinir. Hazırlama konumu için kullanılan depolama alanının fiyatı tüm [Premium depolama fiyatlandırması](../storage/storage-premium-storage.md#pricing-and-billing) ile tutarlıdır.
+Premium Depolama VM'lerini yedeklerken, Backup hizmeti, Premium Depolama hesabında “AzureBackup-” adlı geçici bir hazırlama konumu oluşturur. Hazırlama konumu, kurtarma noktası anlık görüntüsünü boyutuna eşittir. Depolama hesabında, geçici hazırlama konumu barındırmak için boş alan olduğundan emin olun. Daha fazla bilgi için [premium depolama sınırlamaları](../storage/storage-premium-storage.md#scalability-and-performance-targets) makalesine bakın. Yedekleme işi tamamlandıktan sonra, hazırlama konumu silinir. Hazırlama konumu için kullanılan depolama alanının fiyatı tüm [Premium depolama fiyatlandırması](../storage/storage-premium-storage.md#pricing-and-billing) ile tutarlıdır.
 
 > [!NOTE]
 > Hazırlama konumunu değiştirmeyin veya düzenlemeyin.

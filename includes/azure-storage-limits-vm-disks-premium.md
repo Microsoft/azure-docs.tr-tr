@@ -4,7 +4,7 @@
 | --- | --- |
 | Hesap başına toplam disk kapasitesi |35 TB |
 | Hesap başına toplam anlık görüntü kapasitesi |10 TB |
-| Hesap başına en fazla bant genişliği (giriş ve çıkış <sup>1</sup>) |En fazla&50; Gbps |
+| Hesap başına en fazla bant genişliği (giriş ve çıkış <sup>1</sup>) |En fazla 50 Gbps |
 
 <sup>1</sup>*Giriş*, bir depolama hesabına gönderilen tüm verileri (istekler) ifade eder. *Çıkış*, bir depolama hesabından alınan tüm verileri (yanıtlar) ifade eder.
 
@@ -21,13 +21,8 @@
 
 | Kaynak | Varsayılan Sınır |
 | --- | --- |
-| VM başına en fazla IOPS |GS5 VM ile&80;.000 IOPS<sup>1</sup> |
-| Sanal makine başına en fazla aktarım hızı |GS5 VM ile&2;.000 MB/sn<sup>1</sup> |
+| VM başına en fazla IOPS |GS5 VM ile 80.000 IOPS<sup>1</sup> |
+| Sanal makine başına en fazla aktarım hızı |GS5 VM ile 2.000 MB/sn<sup>1</sup> |
 
-<sup>1</sup>Diğer VM boyutlarına yönelik limitlerle ilgili bilgi edinmek için [Sanal Makine Boyutu](../articles/virtual-machines/virtual-machines-linux-sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)’na başvurun. 
-
-
-
-<!--HONumber=Feb17_HO3-->
-
+<sup>1</sup>Diğer VM boyutlarına yönelik limitlerle ilgili bilgi edinmek için [Sanal Makine Boyutu](../articles/virtual-machines/linux/sizes.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)’na başvurun. 
 

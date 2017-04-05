@@ -7,7 +7,7 @@ VM uzantıları aşağıdakilerde size yardımcı olur:
 * RDP ve SSH gibi bağlantı özelliklerini sıfırlamak veya yüklemek
 * VM’lerinizi tanılamak, izlemek ve yönetmek
 
-Başka birçok özellik de vardır. Yeni VM Uzantısı özellikleri düzenli olarak kullanıma sunulur. Bu makalede, Windows ve Linux için Azure Sanal Makine Aracıları ve bunların VM Uzantısı işlevselliğini nasıl destekledikleri açıklanmaktadır. Özellik kategorisine göre VM Uzantılarının bir listesi için, bkz. [Azure VM Uzantıları ve Özellikleri](../articles/virtual-machines/virtual-machines-windows-extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
+Başka birçok özellik de vardır. Yeni VM Uzantısı özellikleri düzenli olarak kullanıma sunulur. Bu makalede, Windows ve Linux için Azure Sanal Makine Aracıları ve bunların VM Uzantısı işlevselliğini nasıl destekledikleri açıklanmaktadır. Özellik kategorisine göre VM Uzantılarının bir listesi için, bkz. [Azure VM Uzantıları ve Özellikleri](../articles/virtual-machines/windows/extensions-features.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
 
 ## <a name="azure-vm-agents-for-windows-and-linux"></a>Windows ve Linux için Azure VM Aracıları
 Azure Aracısı (VM Aracısı), Azure Sanal Makine örneklerinde VM uzantılarını yükleyen, yapılandıran ve kaldıran, güvenlikli ve hafif bir işlemdir. VM Aracısı, Azure VM’niz için güvenli yerel denetim hizmeti işlevi görür. Aracının yüklediği uzantılar, örneğini kullanarak verimliliğinizi artırmak için belirli özellikler sağlar.
@@ -31,7 +31,7 @@ VM Aracısı aşağıdaki durumlarda etkinleştirilir:
       $vm.VM.ProvisionGuestAgent = $TRUE
       Update-AzureVM –Name $name –VM $vm.VM –ServiceName $svc
 
-* Yüklü bir VM Aracısını içeren bir VM görüntüsü oluşturduğunuzda. VM Aracısıyla görüntü mevcut olduğunda, o görüntüyü Azure’a yükleyebilirsiniz. Bir Windows VM için, [Windows VM Agent .msi dosyasını](http://go.microsoft.com/fwlink/?LinkID=394789) indirin ve VM Aracısını yükleyin. Bir Linux VM için, <https://github.com/Azure/WALinuxAgent> adresinde bulunan GitHub deposundan VM Aracısını yükleyin. Linux’ta VM Aracısını yükleme hakkında daha fazla bilgi için, bkz: [Azure Linux VM Aracısı Kullanıcı Kılavuzu](../articles/virtual-machines/virtual-machines-linux-agent-user-guide.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+* Yüklü bir VM Aracısını içeren bir VM görüntüsü oluşturduğunuzda. VM Aracısıyla görüntü mevcut olduğunda, o görüntüyü Azure’a yükleyebilirsiniz. Bir Windows VM için, [Windows VM Agent .msi dosyasını](http://go.microsoft.com/fwlink/?LinkID=394789) indirin ve VM Aracısını yükleyin. Bir Linux VM için, <https://github.com/Azure/WALinuxAgent> adresinde bulunan GitHub deposundan VM Aracısını yükleyin. Linux’ta VM Aracısını yükleme hakkında daha fazla bilgi için, bkz: [Azure Linux VM Aracısı Kullanıcı Kılavuzu](../articles/virtual-machines/linux/agent-user-guide.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 > [!NOTE]
 > PaaS’ta, VM Aracısına **WindowsAzureGuestAgent** adı verilir ve her zaman Web’de ve Çalışan Rolü VM’lerinde kullanılabilir. (Daha fazla bilgi için bkz. [Azure Rol Mimarisi](http://blogs.msdn.com/b/kwill/archive/2011/05/05/windows-azure-role-architecture.aspx).) Rol VM’leri için VM Aracısı şimdi uzantıları bulut hizmeti VM’lerine, kalıcı Sanal Makineler için yapacağı gibi ekleyebilir. Rol VM’lerindeki ve kalıcı VM’lerdeki VM Uzantıları arasındaki en büyük fark, VM uzantılarının eklendiği zamandır. Rol VM’leriyle, uzantılar önce bulut hizmetine, ardından o bulut hizmeti içerisindeki dağıtımlara eklenir.

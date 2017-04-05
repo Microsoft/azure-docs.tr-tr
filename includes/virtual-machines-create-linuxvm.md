@@ -37,7 +37,7 @@
     ```
    
    > [!NOTE]
-   > Bir Linux sanal makinesi için `vm create` içinde `-e` seçeneğini belirtmeniz gerekir. Sanal makine oluşturulduktan sonra SSH etkinleştirilemez. SSH hakkında daha ayrıntılı bilgi için bkz. [Azure’da Linux ile SSH kullanma](../articles/virtual-machines/virtual-machines-linux-mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+   > Bir Linux sanal makinesi için `vm create` içinde `-e` seçeneğini belirtmeniz gerekir. Sanal makine oluşturulduktan sonra SSH etkinleştirilemez. SSH hakkında daha ayrıntılı bilgi için bkz. [Azure’da Linux ile SSH kullanma](../articles/virtual-machines/linux/mac-create-ssh-keys.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 5. `azure vm show` komutunu kullanarak VM’nin özniteliklerini doğrulayabilirsiniz. Aşağıdaki örnekte `myVM` adlı VM’nin bilgileri listelenmiştir:
 
@@ -53,9 +53,4 @@
 
 ## <a name="next-steps"></a>Sonraki adımlar
 Tüm bu Azure CLI 1.0 sanal makine komutlarıyla ilgili ayrıntılar için [Azure CLI 1.0’ı Klasik dağıtım API’si ile kullanma](https://docs.microsoft.com/cli/azure/get-started-with-az-cli2) makalesini okuyun.
-
-
-
-<!--HONumber=Feb17_HO2-->
-
 

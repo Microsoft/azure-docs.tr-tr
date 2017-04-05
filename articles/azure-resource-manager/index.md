@@ -13,8 +13,9 @@ ms.topic: landing-page
 ms.date: 01/23/2017
 ms.author: carolz
 translationtype: Human Translation
-ms.sourcegitcommit: c4a7875e7a5cace68b592cc7c4ea673851e0b070
-ms.openlocfilehash: ecf5fcec2ec5c1d11c34a035f24d78f991d66b57
+ms.sourcegitcommit: 303cb9950f46916fbdd58762acd1608c925c1328
+ms.openlocfilehash: 186bbc75211988f51dc91e2227472f6369b3bfdd
+ms.lasthandoff: 04/04/2017
 
 ---
 #<a name="azure-resource-manager-documentation"></a>Azure Resource Manager Belgeleri
@@ -23,7 +24,7 @@ Resource Manager’ı kullanarak çözüm kaynaklarını bir grup olarak dağıt
 
 <ul class="panelContent cardsFTitle">
     <li>
-        <a href="/azure/Azure-Resource-Manager/resource-group-overview">
+        <a href="/azure/azure-resource-manager/resource-group-overview">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -140,7 +141,8 @@ Resource Manager’ı kullanarak çözüm kaynaklarını bir grup olarak dağıt
                         <p><a href="/dotnet/api/microsoft.azure.management.resourcemanager">.NET</a></p>
                         <p><a href="/java/api/com.microsoft.azure.management.resources">Java</a></p>
                         <p><a href="http://azure-sdk-for-python.readthedocs.io/en/latest/resourcemanagement.html">Python</a></p>
-                        <p><a href="https://github.com/Azure/azure-resource-manager-schemas">Şablon şemaları</a></p>
+                        <p><a href="/azure/templates/">Şablon biçimi</a></p>
+                        <p><a href="/resource-group-template-functions.md">Şablon işlevleri</a></p>
                     </div>
                 </div>
             </div>
@@ -159,11 +161,4 @@ Resource Manager’ı kullanarak çözüm kaynaklarını bir grup olarak dağıt
         </div>
     </li>
 </ul>
-
-
-
-
-
-<!--HONumber=Feb17_HO3-->
-
 

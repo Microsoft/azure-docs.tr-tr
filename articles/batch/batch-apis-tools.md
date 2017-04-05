@@ -1,5 +1,5 @@
 ---
-title: "Azure Batch API’leri kullanarak büyük ölçekli paralel işleme çözümleri geliştirme | Microsoft Belgeleri"
+title: "Azure Batch API’leri kullanarak büyük ölçekli paralel işleme çözümleri geliştirme | Microsoft Docs"
 description: "Azure Batch hizmeti ile çözüm geliştirmek için kullanılabilen API’ler ve araçlar hakkında bilgi edinin."
 services: batch
 documentationcenter: 
@@ -15,9 +15,9 @@ ms.topic: get-started-article
 ms.date: 03/08/2017
 ms.author: tamram
 translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: b886bab44f11354ba60ae06c6d1d671e01316d48
-ms.lasthandoff: 03/21/2017
+ms.sourcegitcommit: 5cce99eff6ed75636399153a846654f56fb64a68
+ms.openlocfilehash: 405cb202e2b6da0dd24e6f7b8ed55ce8c56e0fe1
+ms.lasthandoff: 03/31/2017
 
 ---
 
@@ -26,7 +26,7 @@ ms.lasthandoff: 03/21/2017
 
 Azure Batch ile paralel iş yükleri genellikle [Batch API'lerinden](#batch-development-apis) biri kullanılarak programlı bir şekilde işlenir. İstemci uygulamanız veya hizmetiniz, Batch hizmetiyle iletişim kurmak için Batch API'lerini kullanabilir. Batch API'leriyle, işlem düğümü havuzları (sanal makineler veya bulut hizmetleri) oluşturabilir veya yönetebilirsiniz. Ardından bu düğümlerde çalıştırılacak işleri ve görevleri zamanlayabilirsiniz. 
 
-Kuruluşunuz için büyük ölçekli iş yüklerini verimli bir şekilde işleyebilir ya da müşterilerinizin tek, yüzlerce ve hatta binlerce düğümde istek üzerine veya planlı olarak işleri ve görevleri çalıştırabileceği şekilde onlara bir hizmet ön ucu sağlayabilirsiniz. [Azure Data Factory](../data-factory/data-factory-data-processing-using-batch.md) gibi araçlarla yönetilen Azure Batch'i daha büyük bir iş akışının parçası olarak da kullanabilirsiniz.
+Kuruluşunuz için büyük ölçekli iş yüklerini verimli bir şekilde işleyebilir ya da müşterilerinizin tek, yüzlerce ve hatta binlerce düğümde istek üzerine veya planlı olarak işleri ve görevleri çalıştırabileceği şekilde onlara bir hizmet ön ucu sağlayabilirsiniz. [Azure Data Factory](../data-factory/data-factory-data-processing-using-batch.md?toc=%2fazure%2fbatch%2ftoc.json) gibi araçlarla yönetilen Azure Batch'i daha büyük bir iş akışının parçası olarak da kullanabilirsiniz.
 
 > [!TIP]
 > Sağladığı özellikleri daha derinlemesine anlamak amacıyla Batch API'sinin ayrıntılarına gitmeye hazır olduğunuzda, [Geliştiriciler için Batch özelliklerine genel bakış](batch-api-basics.md) konusunu inceleyin.
@@ -56,7 +56,7 @@ Uygulamalarınız ve hizmetleriniz doğrudan REST API çağrıları kullanabilir
 Geliştirme API'leri tarafından sunulan işlevlere komut satırı araçlarını kullanarak da ulaşabilirsiniz: 
 
 * [Batch PowerShell cmdlet'leri][batch_ps]: [Azure PowerShell](/powershell/azureps-cmdlets-docs) modülündeki Azure Batch cmdlet'leri PowerShell ile Batch kaynaklarını yönetmenizi sağlar.
-* [Azure CLI](../cli-install-nodejs.md): Azure Komut Satırı Arabirimi (Azure CLI), Batch de içinde olmak üzere çok sayıda Azure hizmetiyle etkileşim için kabuk komutları sağlayan platformlar arası bir araç takımıdır.
+* [Azure CLI](/cli/azure/overview): Azure Komut Satırı Arabirimi (Azure CLI), Batch de içinde olmak üzere çok sayıda Azure hizmetiyle etkileşim için kabuk komutları sağlayan platformlar arası bir araç takımıdır.
 
 ## <a name="batch-resource-management"></a>Batch kaynak yönetimi
 
@@ -98,7 +98,7 @@ Batch kullanarak çözüm derlemek için gerekmese de Batch uygulamalarınızı 
 [api_sample_net]: https://github.com/Azure/azure-batch-samples/tree/master/CSharp
 [api_sample_python]: https://github.com/Azure/azure-batch-samples/tree/master/Python/Batch
 [api_sample_java]: https://github.com/Azure/azure-batch-samples/tree/master/Java/
-[batch_ps]: https://msdn.microsoft.com/library/azure/mt125957.aspx
+[batch_ps]: /powershell/resourcemanager/azurerm.batch/v2.7.0/azurerm.batch
 [batch_rest]: https://msdn.microsoft.com/library/azure/Dn820158.aspx
 [free_account]: https://azure.microsoft.com/free/
 [github_samples]: https://github.com/Azure/azure-batch-samples

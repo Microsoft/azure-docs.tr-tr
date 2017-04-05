@@ -16,8 +16,9 @@ ms.topic: get-started-article
 ms.date: 2/6/2017
 ms.author: guybo
 translationtype: Human Translation
-ms.sourcegitcommit: 2939de432fcb5dbf4a7316343c3c6ae102b579e8
-ms.openlocfilehash: 5b34969f9c854775587d402acbedee12f236ab7a
+ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
+ms.openlocfilehash: 91d36d5321f455a2af31093fa460ddf6640942d4
+ms.lasthandoff: 03/31/2017
 
 
 ---
@@ -62,7 +63,7 @@ Azure CLI _az vmss disk attach_ komutunu kullanarak bir VM ölçek kümesine ver
 az vmss disk attach -g dsktest -n dskvmss --size-gb 50 --lun 3
 ```
 > [!NOTE]
-> Farklı VM boyutları, destekledikleri bağlı sürücü sayısı ile ilgili farklı sınırlara sahiptir. Yeni bir disk eklemeden önce [sanal makine boyut özelliklerini](../virtual-machines/virtual-machines-windows-sizes.md) denetleyin.
+> Farklı VM boyutları, destekledikleri bağlı sürücü sayısı ile ilgili farklı sınırlara sahiptir. Yeni bir disk eklemeden önce [sanal makine boyut özelliklerini](../virtual-machines/windows/sizes.md) denetleyin.
 
 Ayrıca bir ölçek kümesi tanımının _storageProfile_ kısmındaki _dataDisks_ özelliğine yeni bir giriş ekleyip değişikliği uygulayarak da bir disk ekleyebilirsiniz. Bunu test etmek için [Azure Kaynak Gezgini](https://resources.azure.com/)’nde var olan bir ölçek kümesi tanımı bulun. _Düzenle_’yi seçin ve veri diskleri listesine yeni bir disk ekleyin. Örneğin yukarıdaki örneği kullanın:
 ```json
@@ -106,10 +107,5 @@ Azure Yönetilen Diskler ve ölçek kümesi bağlı diskleri için destek, Micro
 
 Ölçek kümelerindeki bağlı veri diskleri için Azure portalı desteği başlangıçta sınırlıydı. Gereksinimlerinize bağlı olarak, bağlı diskleri yönetmek için Azure şablonları, CLI, PowerShell, SDK’lar ve REST API kullanabilirsiniz.
 
-
-
-
-
-<!--HONumber=Feb17_HO2-->
 
 

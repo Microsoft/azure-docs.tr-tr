@@ -2,7 +2,7 @@ Azure bulut çözümlerinin altyapısını, yazılım dağıtımlarının çevik
 
 Azure aşağıdaki Docker değerlerini sunar:
 
-* İçinde bulunduğunuz duruma uygun Docker konakları oluşturmak için [birçok](../articles/virtual-machines/virtual-machines-linux-docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) [farklı](../articles/virtual-machines/virtual-machines-linux-dockerextension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) yol
+* İçinde bulunduğunuz duruma uygun Docker konakları oluşturmak için [birçok](../articles/virtual-machines/linux/docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) [farklı](../articles/virtual-machines/linux/dockerextension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) yol
 * [Azure Container Service](https://azure.microsoft.com/documentation/services/container-service/), **marathon** ve **swarm** gibi düzenleyicileri kullanarak kapsayıcı konaklarından oluşan kümeler oluşturur.
 * Karmaşık dağıtılmış uygulamaların dağıtımını ve güncelleştirilmesini basitleştirmek için [Azure Resource Manager](../articles/azure-resource-manager/resource-group-overview.md) ve [kaynak grubu şablonları](../articles/resource-group-authoring-templates.md)
 * Hem özel hem de açık kaynaklı bir çok farklı yapılandırma yönetim aracı ile tümleştirme
@@ -92,19 +92,19 @@ Daha sonra, bu özellikler genellikle uygun ölçekte sanal makine oluşturma i�
 Daha yakın bir tarihte Azure tarafından [Azure kaynak yönetimi](../articles/resource-manager-deployment-model.md) REST API’si ve bunu daha kolay kullanabilmenizi sağlayan güncelleştirilmiş PowerShell ve Azure CLI araçları yayınlandı. Azure kaynak yönetimi API’sini içeren [Azure Resource Manager şablonlarını](../articles/resource-group-authoring-templates.md) aşağıdakilerle kullanarak bütün bir uygulama topolojisini dağıtabilir, değiştirebilir ve yeniden dağıtabilirsiniz:
 
 * [şablonları kullanan Azure portalı](https://github.com/Azure/azure-quickstart-templates)&mdash;ipucu: "DeployToAzure" düğmesini kullanın
-* [Azure CLI](../articles/virtual-machines/virtual-machines-linux-cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Azure PowerShell modülleri](../articles/virtual-machines/virtual-machines-linux-cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure CLI](../articles/virtual-machines/linux/cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure PowerShell modülleri](../articles/virtual-machines/linux/cli-deploy-templates.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 
 ### <a name="deployment-and-management-of-entire-groups-of-azure-vms-and-containers"></a>Azure sanal makine ve kapsayıcı gruplarının bütünlüklü olarak dağıtımı ve yönetimi
 Sanal makine gruplarını bütünlüklü olarak dağıtabilen ve bunlara otomatikleştirilebilen bir grup olarak Docker’ı (veya diğer Linux kapsayıcı konak sistemleri) yükleyebilen çeşitli popüler sistemler mevcuttur. Doğrudan bağlantılar için aşağıdaki [kapsayıcılar ve araçlar](#containers-and-vm-technologies) bölümüne bakın. Bu işlemleri daha geniş veya daha dar kapsamlı olarak gerçekleştirebilen çeşitli sistemler mevcuttur ve bu listede hepsine yer verilmemiştir. Bunlar, becerilerinize ve senaryolarınıza bağlı olarak sizin için kullanışlı olabilir veya olmayabilir.
 
-Docker kendi sanal makine oluşturma araçları ([docker-machine](../articles/virtual-machines/virtual-machines-linux-docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) kümesine ve yük dengeleyen bir docker kapsayıcı kümesi yönetim aracına ([swarm](../articles/virtual-machines/virtual-machines-linux-docker-swarm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) sahiptir. Ayrıca, [Azure Docker Sanal Makine Uzantısı](https://github.com/Azure/azure-docker-extension/blob/master/README.md), birden çok kapsayıcıya yapılandırılmış uygulama kapsayıcıları dağıtabilen [`docker-compose`](https://docs.docker.com/compose/) için varsayılan olarak destek sağlar.
+Docker kendi sanal makine oluşturma araçları ([docker-machine](../articles/virtual-machines/linux/docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) kümesine ve yük dengeleyen bir docker kapsayıcı kümesi yönetim aracına ([swarm](../articles/virtual-machines/virtual-machines-linux-docker-swarm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)) sahiptir. Ayrıca, [Azure Docker Sanal Makine Uzantısı](https://github.com/Azure/azure-docker-extension/blob/master/README.md), birden çok kapsayıcıya yapılandırılmış uygulama kapsayıcıları dağıtabilen [`docker-compose`](https://docs.docker.com/compose/) için varsayılan olarak destek sağlar.
 
 Ayrıca, [Mesosphere tarafından sunulan Data Center Operating System (DCOS)](http://docs.mesosphere.com/install/azurecluster/) ürününü deneyebilirsiniz. DCOS, veri merkezinizi tek bir hizmet olarak görmenize imkan tanıyan açık kaynaklı [mesos](http://mesos.apache.org/) "dağıtılmış sistemler çekirdeği"ni temel alır. DCOS’de [Spark](http://spark.apache.org/) ve [Kafka](http://kafka.apache.org/) (ve diğerleri) gibi çeşitli önemli sistemler ve [Marathon](https://mesosphere.github.io/marathon/) (kapsayıcı denetleme sistemi) ve [Chronos](https://mesos.github.io/chronos/) (dağıtılmış zamanlayıcı) gibi yerleşik hizmetlere yönelik yerleşik paketler vardır. Mesos sistemi Twitter, AirBnb ve diğer web ölçeğindeki işletmelerden alınan derslerden türetilmiştir. Düzenleme altyapısı olarak **swarm**’ı da kullanabilirsiniz.
 
 Ayrıca, Google’dan alınan derslerden türetilen, sanal makine ve kapsayıcı grubu yönetimi için açık kaynaklı bir sistem olan [kubernetes](https://azure.microsoft.com/blog/2014/08/28/hackathon-with-kubernetes-on-azure/) de kullanılabilir. [Ağ desteği sağlamak için kubernetes’i weave ile kullanma](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/getting-started-guides/coreos/azure/README.md#kubernetes-on-azure-with-coreos-and-weave) olanağınız bile vardır.
 
-[Deis](http://deis.io/overview/), uygulamalarınızı kendi sunucularınızda dağıtmayı ve yönetmeyi kolaylaştıran açık kaynaklı bir "Hizmet Olarak Platform" (PaaS) çözümüdür. Docker ve CoreOS’u temel alan Deis, Heroku’dan ilham alan bir iş akışıyla hafif bir PaaS sunar. Azure’da kolayca [3 Düğümlü bir Azure sanal makine grubu oluşturup Deis’i yükleyebilir](../articles/virtual-machines/virtual-machines-linux-deis-cluster.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ardından [bir Hello World Go uygulaması yükleyebilirsiniz](../articles/virtual-machines/virtual-machines-linux-deis-cluster.md#deploy-and-scale-a-hello-world-application).
+[Deis](http://deis.io/overview/), uygulamalarınızı kendi sunucularınızda dağıtmayı ve yönetmeyi kolaylaştıran açık kaynaklı bir "Hizmet Olarak Platform" (PaaS) çözümüdür. Docker ve CoreOS’u temel alan Deis, Heroku’dan ilham alan bir iş akışıyla hafif bir PaaS sunar. Azure’da kolayca [3 Düğümlü bir Azure sanal makine grubu oluşturup Deis’i yükleyebilir](../articles/virtual-machines/linux/deis-cluster.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json) ardından [bir Hello World Go uygulaması yükleyebilirsiniz](../articles/virtual-machines/linux/deis-cluster.md#deploy-and-scale-a-hello-world-application).
 
 Kapladığı alan, Docker desteği ve kendine ait [rkt](https://github.com/coreos/rkt) adlı kapsayıcı sistemiyle iyileştirilmiş bir Linux dağıtımı olan [CoreOS](https://coreos.com/os/docs/latest/booting-on-azure.html), [fleet](https://coreos.com/using-coreos/clustering/) adlı bir kapsayıcı grubu yönetim aracına da sahiptir.
 
@@ -144,13 +144,13 @@ Docker araçları:
 
 Microsoft Azure’da Docker:
 
-* [Azure’da Linux için Docker Sanal Makine Uzantısı](../articles/virtual-machines/virtual-machines-linux-dockerextension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure’da Linux için Docker Sanal Makine Uzantısı](../articles/virtual-machines/linux/dockerextension.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Azure Docker Sanal Makine Uzantısı Kullanıcı Kılavuzu](https://github.com/Azure/azure-docker-extension/blob/master/README.md)
 * [Docker Sanal Makine Uzantısını Azure Komut Satırı Arabirimi (Azure CLI) ile kullanma](../articles/virtual-machines/linux/classic/cli-use-docker.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)
 * [Docker Sanal Makine Uzantısını Azure portalından kullanma](../articles/virtual-machines/linux/classic/portal-use-docker.md?toc=%2fazure%2fvirtual-machines%2flinux%2fclassic%2ftoc.json)
-* [Azure’da docker-machine kullanma](../articles/virtual-machines/virtual-machines-linux-docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure’da docker-machine kullanma](../articles/virtual-machines/linux/docker-machine.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Azure’da swarm ile docker'ı kullanma](../articles/virtual-machines/virtual-machines-linux-docker-swarm.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
-* [Azure’da Docker ve Compose Kullanmaya Başlama](../articles/virtual-machines/virtual-machines-linux-docker-compose-quickstart.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+* [Azure’da Docker ve Compose Kullanmaya Başlama](../articles/virtual-machines/linux/docker-compose-quickstart.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * [Azure kaynak grubu şablonu kullanarak Azure’da hızlıca Docker konağı oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/docker-simple-on-ubuntu)
 * [Kapsanan uygulamalar için yerleşik `compose`](https://github.com/Azure/azure-docker-extension#11-public-configuration-keys) desteği
 * [Azure’da Docker özel kayıt defteri uygulama](../articles/virtual-machines/virtual-machines-linux-docker-registry-in-blob-storage.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
@@ -164,7 +164,7 @@ Yapılandırma, küme yönetimi ve kapsayıcı düzenleme:
 * [CoreOS üzerinde Fleet](https://coreos.com/using-coreos/clustering/)
 * Deis
 
-  * [3 Düğümlü bir Azure sanal makine grubu oluşturma, Deis’i yükleme ve bir Hello World Go uygulaması başlatma](../articles/virtual-machines/virtual-machines-linux-deis-cluster.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
+  * [3 Düğümlü bir Azure sanal makine grubu oluşturma, Deis’i yükleme ve bir Hello World Go uygulaması başlatma](../articles/virtual-machines/linux/deis-cluster.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json)
 * Kubernetes
 
   * [CoreOS ve Weave ile otomatikleştirilmiş Kubernetes küme dağıtımı konusunda bilmeniz gereken her şey](https://github.com/GoogleCloudPlatform/kubernetes/blob/master/docs/getting-started-guides/coreos/azure/README.md#kubernetes-on-azure-with-coreos-and-weave)

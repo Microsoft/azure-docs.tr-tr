@@ -60,7 +60,7 @@ Batch’i kullanarak bulutta büyük ölçekli paralel ve yüksek performanslı 
         </a>
     </li>
     <li>
-        <a href="/azure/Batch/batch-account-create-portal">
+        <a href="/azure/batch/batch-account-create-portal">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">

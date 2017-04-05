@@ -23,6 +23,7 @@
 ## Sanal ağdan sanal ağa bağlantı yapılandırma
 ### [Azure portal](vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)
 ### [PowerShell](vpn-gateway-vnet-vnet-rm-ps.md)
+### [Azure portal (klasik)](vpn-gateway-howto-vnet-vnet-portal-classic.md)
 ### [Klasik portal (klasik)](virtual-networks-configure-vnet-to-vnet-connection.md)
 ## Dağıtım modelleri arasında sanal ağdan sanal ağa bağlantı yapılandırma
 ### [Azure Portal](vpn-gateway-connect-different-deployment-models-portal.md)
@@ -42,6 +43,7 @@
 ## [VPN ağ geçidi bağlantısını doğrulama](vpn-gateway-verify-connection-resource-manager.md)
 ## [VPN ağ geçidini sıfırlama](vpn-gateway-resetgw-classic.md)
 ## VPN ağ geçidi silme
+### [Azure portal](vpn-gateway-delete-vnet-gateway-portal.md)
 ### [PowerShell](vpn-gateway-delete-vnet-gateway-powershell.md)
 ### [PowerShell (klasik)](vpn-gateway-delete-vnet-gateway-classic-powershell.md)
 ## [P2S bağlantıları için otomatik olarak imzalanan kök sertifikaları oluşturma](vpn-gateway-certificates-point-to-site.md)

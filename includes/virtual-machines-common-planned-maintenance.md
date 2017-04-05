@@ -14,7 +14,7 @@ Tüm güncelleştirmeler bu mekanizma kullanılarak dağıtılamaz, ancak kısa 
 
 Çok örnekli yapılandırma, fiziksel makineler arasında yedeklilik, güç ile ağ sağlar ve uygulamanızın kullanılabilirliğini sağlamak için önerilir. Kullanılabilirlik kümesindeki tüm sanal makineler, uygulamanız için aynı amaca hizmet etmelidir.
 
-Sanal makinelerinizi yüksek kullanılabilirlik için yapılandırma hakkında daha fazla bilgi için, bkz: [Windows sanal makinelerinizin kullanılabilirliğini yönetme](../articles/virtual-machines/virtual-machines-windows-manage-availability.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) veya [Linux sanal makinelerinizin kullanılabilirliğini yönetme](../articles/virtual-machines/virtual-machines-linux-manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
+Sanal makinelerinizi yüksek kullanılabilirlik için yapılandırma hakkında daha fazla bilgi için, bkz: [Windows sanal makinelerinizin kullanılabilirliğini yönetme](../articles/virtual-machines/windows/manage-availability.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) veya [Linux sanal makinelerinizin kullanılabilirliğini yönetme](../articles/virtual-machines/linux/manage-availability.md?toc=%2fazure%2fvirtual-machines%2flinux%2ftoc.json).
 
 Bunun aksine, tek örnekli yapılandırma, bir kullanılabilirlik kümesine yerleştirilmemiş bağımsız sanal makineler için kullanılır. Bu sanal makineler, iki veya daha fazla sanal makinenin aynı kullanılabilirlik kümesine dağıtılmasını gerektiren hizmet düzeyi sözleşmesi (SLA) için uygun değildir.
 
@@ -28,7 +28,7 @@ Bir çok örnekli yapılandırma güncelleştirmesi, her bir sanal makinenin kul
 Bir kullanılabilirlik kümesindeki her sanal makineye, temel alınan Azure platformu tarafından bir güncelleme etki alanı ve bir hata etki alanı atanır. Her güncelleme etki alanı, aynı süre içinde yeniden başlatılacak olan bir sanal makineler grubudur. Her hata etki alanı, ortak bir güç kaynağı ve ağ anahtarını paylaşan bir sanal makine grubudur.
 
 
-Güncelleştirme etki alanları ve hata etki alanları hakkında daha fazla bilgi için, bkz: [Bir kullanılabilirlik kümesindeki birden çok sanal makineyi yedeklilik için yapılandırma](../articles/virtual-machines/virtual-machines-windows-manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy).
+Güncelleştirme etki alanları ve hata etki alanları hakkında daha fazla bilgi için, bkz: [Bir kullanılabilirlik kümesindeki birden çok sanal makineyi yedeklilik için yapılandırma](../articles/virtual-machines/windows/manage-availability.md#configure-multiple-virtual-machines-in-an-availability-set-for-redundancy).
 
 Azure, bir güncelleştirme boyunca kullanılabilirliğini sağlamak için, bir seferde bir etki alanını güncelleştirerek, bakımı güncelleme etki alanına göre gerçekleştirir. Bir güncelleme etki alanında bakım, etki alanındaki her bir sanal makinenin kapatılmasından, güncelleştirmenin ana makinelere uygulanmasından ve ardından sanal makinelerin yeniden başlatılmasından oluşur. Etki alanındaki bakım tamamlandığında, Azure işlemi sonraki güncelleme etki alanıyla tekrarlar ve tümü güncelleştirilene kadar her bir etki alanı ile devam eder.
 
@@ -101,4 +101,4 @@ Geçerli bölge çiftleri için aşağıdaki tabloya bakın:
 <!--Link references-->
 [Virtual Machines Manage Availability]: ../articles/virtual-machines/virtual-machines-windows-hero-tutorial.md
 
-[Understand planned versus unplanned maintenance]: ../articles/virtual-machines/virtual-machines-windows-manage-availability.md#Understand-planned-versus-unplanned-maintenance/
+[Understand planned versus unplanned maintenance]: ../articles/virtual-machines/windows/manage-availability.md#Understand-planned-versus-unplanned-maintenance/

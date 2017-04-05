@@ -1,13 +1,3 @@
-### <a name="disk-persistence"></a>Disk Kalıcılığı 
-
-Aşağıdaki tabloda, bir Azure VM’deki farklı disklerin farklı durumları ve bu durumlarda verilerin kalıcı olup olmadığı gösterilmektedir.
-
-| Disk | Başlatma | Durdurma/<br>Serbest bırakma | Duraklat | Yeniden<br>başlatma | Kapat-<br>ma | Sil | Hata | Yeniden boyutlandırma | 
-| ---- | ----- | ---- | ---- | ---- | ----  | ------ | ------- | ------ | 
-| İşletim Sistemi Diski | Evet | Evet  | Evet | Evet | Evet  | Hayır | Hayır  | Evet | 
-| RAM  | Evet | Evet | Evet | Evet | Hayır   | Hayır | Hayır | Hayır | 
-| Yerel Geçici Disk | Evet | Hayır | Yes | Hayır | Hayır  | Hayır | Hayır | Hayır | 
-| Ekli Veri Diski | Evet | Evet | Evet | Evet | Evet  | Evet | Evet | Evet | 
 
 ## <a name="about-vhds"></a>VHD'ler hakkında
 
@@ -41,7 +31,7 @@ Premium Depolama, SSD’ler ile desteklenir ve G/Ç yoğunluklu iş yükleri iç
 
 ### <a name="unmanaged-disks"></a>Yönetilmeyen diskler
 
-Yönetilmeyen diskler, VM'ler tarafından kullanılan geleneksel türdeki disklerdir. Bunları kullanarak kendi depolama hesabınızı oluşturabilir ve diski oluştururken bu depolama hesabını belirtebilirsiniz. Depolama hesabının [ölçeklendirme hedeflerini](../articles/storage/storage-scalability-targets.md) (örneğin,&20;.000 IOPS) aşarak VM’lerin azaltılmasına neden olabileceğinden, aynı depolama hesabına çok fazla disk yerleştirmediğinizden emin olun. Yönetilmeyen disklerde, VM’lerinizden en iyi performansı elde etmek için, bir veya daha fazla depolama hesabının kullanımını nasıl en üst düzeye çıkarabileceğinizi anlamanız gerekir.
+Yönetilmeyen diskler, VM'ler tarafından kullanılan geleneksel türdeki disklerdir. Bunları kullanarak kendi depolama hesabınızı oluşturabilir ve diski oluştururken bu depolama hesabını belirtebilirsiniz. Depolama hesabının [ölçeklendirme hedeflerini](../articles/storage/storage-scalability-targets.md) (örneğin, 20.000 IOPS) aşarak VM’lerin azaltılmasına neden olabileceğinden, aynı depolama hesabına çok fazla disk yerleştirmediğinizden emin olun. Yönetilmeyen disklerde, VM’lerinizden en iyi performansı elde etmek için, bir veya daha fazla depolama hesabının kullanımını nasıl en üst düzeye çıkarabileceğinizi anlamanız gerekir.
 
 ### <a name="managed-disks"></a>Yönetilen diskler 
 
@@ -63,7 +53,3 @@ Aşağıdaki tabloda, kullanacağınız seçeneğe karar vermenize yardımcı ol
 | Disk Boyutu | P10: 128 GB<br>P20: 512 GB<br>P30: 1024 GB | Yönetilmeyen Diskler: 1 GB – 1 TB <br><br>Yönetilen Diskler:<br> S4: 32 GB <br>S6: 64 GB <br>S10: 128 GB <br>S20: 512 GB <br>S30: 1024 GB |
 | Disk Başına En Fazla Aktarım Hızı | 200 MB/sn | 60 MB/sn |
 | Disk başına en fazla IOPS | 5000 IOPS | 500 IOPS |
-
-<!--HONumber=Feb17_HO3-->
-
-

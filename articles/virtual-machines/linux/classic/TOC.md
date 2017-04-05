@@ -1,16 +1,16 @@
-# [Genel Bakış](../../virtual-machines-linux-azure-overview.md)
+# [Genel Bakış](../overview.md)
 ## [Görüntüler](about-images.md)
 ## [VM uzantıları](agents-and-extensions.md)
 ## [Kullanılabilirlik](configure-availability.md)
 ## [SSS](faq.md)
 
-# [Başlarken](../../virtual-machines-linux-opensource-links.md)
+# [Başlarken](../opensource-links.md)
 ## [Portal ile Linux VM oluşturma](createportal.md)
 ## [Azure CLI'yı yükleme](../../../cli-install-nodejs.md)
-## [SSH anahtarları oluşturma](../../virtual-machines-linux-mac-create-ssh-keys.md)
+## [SSH anahtarları oluşturma](../mac-create-ssh-keys.md)
 
 # Nasıl yapılır?
-## [İşlem](../../virtual-machines-linux-intro-on-azure.md)
+## [İşlem](../intro-on-azure.md)
 ### [Özel VM oluşturma](create-custom.md)
 ### [VM yakalama](capture-image.md)
 ### [Bir Linux VM ile Uzak Masaüstü kullanma](remote-desktop.md)

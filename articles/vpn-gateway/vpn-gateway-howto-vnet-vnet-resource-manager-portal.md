@@ -13,12 +13,12 @@ ms.devlang: na
 ms.topic: hero-article
 ms.tgt_pltfrm: na
 ms.workload: infrastructure-services
-ms.date: 01/23/2017
+ms.date: 03/27/2017
 ms.author: cherylmc
 translationtype: Human Translation
-ms.sourcegitcommit: 4f2230ea0cc5b3e258a1a26a39e99433b04ffe18
-ms.openlocfilehash: 102eab0e2e915521f8702b526dda886a2502f40b
-ms.lasthandoff: 03/25/2017
+ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
+ms.openlocfilehash: c80ddbaf8c2c84735564e514ddaf4308c4aff303
+ms.lasthandoff: 03/31/2017
 
 
 ---
@@ -26,6 +26,7 @@ ms.lasthandoff: 03/25/2017
 > [!div class="op_single_selector"]
 > * [Resource Manager - Azure Portal](vpn-gateway-howto-vnet-vnet-resource-manager-portal.md)
 > * [Resource Manager - PowerShell](vpn-gateway-vnet-vnet-rm-ps.md)
+> * [Klasik - Azure Portal](vpn-gateway-howto-vnet-vnet-portal-classic.md)
 > * [Klasik - Klasik Portal](virtual-networks-configure-vnet-to-vnet-connection.md)
 > 
 > 

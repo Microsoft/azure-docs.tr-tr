@@ -16,13 +16,13 @@ ms.workload: infrastructure-services
 ms.date: 03/20/2017
 ms.author: cherylmc
 translationtype: Human Translation
-ms.sourcegitcommit: 0d8472cb3b0d891d2b184621d62830d1ccd5e2e7
-ms.openlocfilehash: 33646ad42b9209b2970c0745acec899aed3ff88c
-ms.lasthandoff: 03/21/2017
+ms.sourcegitcommit: eeb56316b337c90cc83455be11917674eba898a3
+ms.openlocfilehash: 8cbf4e8ec2b8904d16c6a74b40cbf6d2ec6a1330
+ms.lasthandoff: 04/03/2017
 
 
 ---
-# <a name="configure-a-point-to-site-connection-to-a-vnet-using-powershell"></a>PowerShell'i kullanarak VNet’e yönelik bir Noktadan Siteye bağlantısı yapılandırma
+# <a name="configure-a-point-to-site-connection-to-a-vnet-using-powershell"></a>PowerShell'i kullanarak sanal ağa yönelik bir Noktadan Siteye bağlantısı yapılandırma
 > [!div class="op_single_selector"]
 > * [Resource Manager - Azure Portal](vpn-gateway-howto-point-to-site-resource-manager-portal.md)
 > * [Resource Manager - PowerShell](vpn-gateway-howto-point-to-site-rm-ps.md)
@@ -44,7 +44,7 @@ Aşağıdaki tabloda, P2S yapılandırmaları için iki dağıtım modeli ve kul
 ## <a name="basic-workflow"></a>Temel iş akışı
 ![Bir bilgisayarı Azure sanal ağına bağlama - Noktadan Siteye bağlantı diyagramı](./media/vpn-gateway-howto-point-to-site-rm-ps/point-to-site-diagram.png)
 
-Bu senaryoda, Noktadan Siteye bağlantı ile bir sanal ağ oluşturacaksınız. Yönergeler ayrıca bu yapılandırma için gerekli olan sertifikaları oluşturmanıza yardımcı olur. P2S bağlantısı şu öğelerden oluşur: VPN ağ geçidine sahip bir VNet, kök sertifika .cer dosyası (ortak anahtar), istemci sertifikası ve istemci üzerindeki VPN yapılandırması. 
+Bu senaryoda, Noktadan Siteye bağlantı ile bir sanal ağ oluşturacaksınız. Yönergeler ayrıca bu yapılandırma için gerekli olan sertifikaları oluşturmanıza yardımcı olur. P2S bağlantısı şu öğelerden oluşur: VPN ağ geçidine sahip bir sanal ağ, kök sertifika .cer dosyası (ortak anahtar), istemci sertifikası ve istemci üzerindeki VPN yapılandırması. 
 
 Bu yapılandırma için aşağıdaki değerler kullanılır. Değişkenler makalenin [1](#declare). bölümünde ayarlanır. İzlenecek yol olarak adımları kullanıp değerleri değiştirmeden uygulayabilir veya ortamınızı yansıtacak şekilde değiştirebilirsiniz. 
 
@@ -105,7 +105,7 @@ Bu bölümde oturum açıp bu yapılandırma için kullanılan değerleri bildir
 1. Bir kaynak grubu oluşturun.
    
         New-AzureRmResourceGroup -Name $RG -Location $Location
-2. Sanal ağ için alt ağ yapılandırmalarını oluşturup *FrontEnd*, *BackEnd* ve *GatewaySubnet* olarak adlandırın. Bu ön ekler bildirdiğiniz VNet adres alanının parçası olmalıdır.
+2. Sanal ağ için alt ağ yapılandırmalarını oluşturup *FrontEnd*, *BackEnd* ve *GatewaySubnet* olarak adlandırın. Bu ön ekler bildirdiğiniz sanal adres alanının parçası olmalıdır.
    
         $fesub = New-AzureRmVirtualNetworkSubnetConfig -Name $FESubName -AddressPrefix $FESubPrefix
         $besub = New-AzureRmVirtualNetworkSubnetConfig -Name $BESubName -AddressPrefix $BESubPrefix
@@ -191,7 +191,7 @@ Dosya yolunu kendi dosya yolunuzla değiştirin ve ardından cmdlet'leri çalı�
         $p2srootcert = New-AzureRmVpnClientRootCertificate -Name $P2SRootCertName -PublicCertData $CertBase64
 
 ## <a name="creategateway"></a>4. Kısım - VPN ağ geçidini oluşturma
-VNet'iniz için sanal ağ geçidini yapılandırın ve oluşturun. *-GatewayType* değeri **Vpn** ve *-VpnType* değeri **RouteBased** olmalıdır. Bu işlemin tamamlanması 45 dakika sürebilir.
+Sanal ağınız için sanal ağ geçidini yapılandırın ve oluşturun. *-GatewayType* değeri **Vpn** ve *-VpnType* değeri **RouteBased** olmalıdır. Bu işlemin tamamlanması 45 dakika sürebilir.
 
         New-AzureRmVirtualNetworkGateway -Name $GWName -ResourceGroupName $RG `
         -Location $Location -IpConfigurations $ipconf -GatewayType Vpn `
@@ -226,7 +226,7 @@ VPN istemci paketi, Windows'da yerleşik bulunan VPN istemci yazılımını yap�
 5. **Son**'a tıklayın. Sertifika yüklemesi için **Güvenlik Uyarısı**’nda, **Evet**’e tıklayın. Sertifikayı siz oluşturduğunuz için güvenle ‘Evet’ seçeneğine tıklayabilirsiniz. Sertifika başarıyla içeri aktarılır.
 
 ## <a name="connect"></a>7. Kısım - Azure'a bağlanma
-1. İstemci bilgisayarda VNet'inize bağlanmak için VPN bağlantılarında gezinin ve oluşturduğunuz VPN bağlantısını bulun. Bu VPN bağlantısı sanal ağınızla aynı ada sahiptir. **Bağlan**'a tıklayın. Sertifika kullanımına ilişkin bir açılır ileti görüntülenebilir. Böyle bir durumla karşılaşırsanız yükseltilmiş ayrıcalıkları kullanmak için **Devam**'a tıklayın. 
+1. İstemci bilgisayarda sanal ağınıza bağlanmak için VPN bağlantılarında gezinin ve oluşturduğunuz VPN bağlantısını bulun. Bu VPN bağlantısı sanal ağınızla aynı ada sahiptir. **Bağlan**'a tıklayın. Sertifika kullanımına ilişkin bir açılır ileti görüntülenebilir. Böyle bir durumla karşılaşırsanız yükseltilmiş ayrıcalıkları kullanmak için **Devam**'a tıklayın. 
 2. **Bağlantı** durum sayfasında **Bağlan**'a tıklayarak bağlantıyı başlatın. Bir **Sertifika Seç** ekranı çıkarsa, gösterilen istemci sertifikasının bağlanmak için kullanmak istediğiniz sertifika olduğunu doğrulayın. Başka bir sertifika gösteriliyorsa, açılan liste okunu kullanarak doğru sertifikayı seçin ve **Tamam**’a tıklayın.
    
     ![Azure’a VPN istemcisi bağlama](./media/vpn-gateway-howto-point-to-site-rm-ps/clientconnect.png)
@@ -349,7 +349,7 @@ Parmak izini, iptal edilen istemci sertifikaları listesinden kaldırarak bir is
 [!INCLUDE [Point-to-Site FAQ](../../includes/vpn-gateway-point-to-site-faq-include.md)]
 
 ## <a name="next-steps"></a>Sonraki adımlar
-Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Daha fazla bilgi için bkz. [Sanal Makineler](https://docs.microsoft.com/azure/#pivot=services&panel=Compute). Ağ ve sanal makineler hakkında daha fazla bilgi edinmek için, bkz. [Azure ve Linux VM ağına genel bakış](../virtual-machines/virtual-machines-linux-azure-vm-network-overview.md).
+Bağlantınız tamamlandıktan sonra sanal ağlarınıza sanal makineler ekleyebilirsiniz. Daha fazla bilgi için bkz. [Sanal Makineler](https://docs.microsoft.com/azure/#pivot=services&panel=Compute). Ağ ve sanal makineler hakkında daha fazla bilgi edinmek için, bkz. [Azure ve Linux VM ağına genel bakış](../virtual-machines/linux/azure-vm-network-overview.md).
 
 
 

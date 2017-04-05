@@ -15,6 +15,7 @@ ms.author: carolz
 translationtype: Human Translation
 ms.sourcegitcommit: 4835208ce6dcff978cb7b4d722763f705dc6dd33
 ms.openlocfilehash: 8cfa25410edc7c54e9139a596ab39d8d580f44a5
+ms.lasthandoff: 02/17/2017
 
 ---
 
@@ -60,7 +61,7 @@ Tam olarak yönetilen bir işleme altyapısı olan Stream Analytics ile bulutta 
         </a>
     </li>
     <li>
-        <a href="/azure/Stream-Analytics/">
+        <a href="/azure/stream-analytics/">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -78,7 +79,7 @@ Tam olarak yönetilen bir işleme altyapısı olan Stream Analytics ile bulutta 
         </a>
     </li>
      <li>
-        <a href="/azure/Stream-Analytics/stream-analytics-build-an-iot-solution-using-stream-analytics">
+        <a href="/azure/stream-analytics/stream-analytics-build-an-iot-solution-using-stream-analytics">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -96,7 +97,7 @@ Tam olarak yönetilen bir işleme altyapısı olan Stream Analytics ile bulutta 
         </a>
     </li>
      <li>
-        <a href="/azure/Stream-Analytics/stream-analytics-twitter-sentiment-analysis-trends">
+        <a href="/azure/stream-analytics/stream-analytics-twitter-sentiment-analysis-trends">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -114,7 +115,7 @@ Tam olarak yönetilen bir işleme altyapısı olan Stream Analytics ile bulutta 
         </a>
     </li>
      <li>
-        <a href="/azure/Stream-Analytics/stream-analytics-machine-learning-integration-tutorial">
+        <a href="/azure/stream-analytics/stream-analytics-machine-learning-integration-tutorial">
         <div class="cardSize">
             <div class="cardPadding">
                 <div class="card">
@@ -176,10 +177,5 @@ Tam olarak yönetilen bir işleme altyapısı olan Stream Analytics ile bulutta 
     </li>
 </ul>
 
-
-
-
-
-<!--HONumber=Feb17_HO3-->
 
 

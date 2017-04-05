@@ -16,9 +16,9 @@ ms.workload: infrastructure-services
 ms.date: 02/27/2016
 ms.author: jdial
 translationtype: Human Translation
-ms.sourcegitcommit: 5e6ffbb8f1373f7170f87ad0e345a63cc20f08dd
-ms.openlocfilehash: 81c9313635f382252550a4c0dcc7a707e9f365fb
-ms.lasthandoff: 03/24/2017
+ms.sourcegitcommit: 197ebd6e37066cb4463d540284ec3f3b074d95e1
+ms.openlocfilehash: c731099cb91512f3bf0ecc2ffa5258788c90cd1b
+ms.lasthandoff: 03/31/2017
 
 
 ---
@@ -101,7 +101,7 @@ Web sunucusu VM’sini oluşturmak için, aşağıdaki adımları tamamlayın:
     |**Kaynak grubu**|**Var olanı kullan:** *MyRG* öğesini seçin|Sanal ağ ile aynı kaynak grubu kullanılsa da, kaynakların aynı kaynak grubunda olması gerekmez.|
     |**Konum**|*Batı ABD*|Konum, bu makalenin [İki alt ağa sahip bir sanal ağ oluşturma](#create-vnet) bölümünde 5. adımda belirttiğiniz konumla aynı olmalıdır. VM’ler ve bağlandıkları sanal ağlar aynı konumda olmalıdır.|
 
-4. **Boyut seç** dikey penceresinde, *DS1_V2 Standart* öğesine tıklayın, ardından **Seç**'e tıklayın. Azure tarafından desteklenen tüm Windows VM boyutlarının bir listesi için, [Windows VM boyutları](../virtual-machines/virtual-machines-windows-sizes.md?toc=%2fazure%2fvirtual-network%2ftoc.json) makalesini okuyun.
+4. **Boyut seç** dikey penceresinde, *DS1_V2 Standart* öğesine tıklayın, ardından **Seç**'e tıklayın. Azure tarafından desteklenen tüm Windows VM boyutlarının bir listesi için, [Windows VM boyutları](../virtual-machines/windows/sizes.md?toc=%2fazure%2fvirtual-network%2ftoc.json) makalesini okuyun.
 5. **Ayarlar** dikey penceresinde, aşağıdaki değerleri girin veya seçin ve **Tamam**’a tıklayın:
 
     |**Ayar**|**Değer**|**Ayrıntılar**|
@@ -111,7 +111,7 @@ Web sunucusu VM’sini oluşturmak için, aşağıdaki adımları tamamlayın:
     |**Alt ağ**|*Ön uç*’u seçin|Sanal ağ içinde mevcut herhangi bir alt ağı seçebilirsiniz.|
     |**Genel IP adresi**|Varsayılanı kabul edin|Bir genel IP adresi, sanal ağa İnternet’ten bağlanmanızı sağlar. Genel IP adresleri hakkında daha fazla bilgi edinmek için, [IP adresleri](virtual-network-ip-addresses-overview-arm.md#public-ip-addresses) makalesini okuyun.|
     |**Ağ güvenlik grubu (güvenlik duvarı)**|Varsayılanı kabul edin|Portalın oluşturduğu **(Yeni) MyWebServer nsg** varsayılan NSG’ye tıklayarak ayarlarını görüntüleyin. Açılan **Ağ güvenlik grubu oluştur** dikey penceresinde, herhangi bir kaynak IP adresinden TCP/3389 (RDP) trafiğine izin veren bir gelen kuralı olduğunu göreceksiniz.|
-    |**Diğer tüm değerler**|Varsayılanları kabul edin|Kalan ayarlar hakkında daha fazla bilgi için, [VM’ler hakkında](../virtual-machines/virtual-machines-windows-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) makalesini okuyun.|
+    |**Diğer tüm değerler**|Varsayılanları kabul edin|Kalan ayarlar hakkında daha fazla bilgi için, [VM’ler hakkında](../virtual-machines/windows/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json) makalesini okuyun.|
 
     Ağ güvenlik grupları (NSG’ler), VM için gelen ve giden akış ağ trafiği türüne dair gelen/giden kuralları oluşturmanıza olanak sağlar. Varsayılan olarak, VM’ye tüm gelen trafik reddedilir. Bir üretim web sunucusu için, TCP/80 (HTTP) ve TCP/443 (HTTPS) için ilave gelen kuralları ekleyebilirsiniz. Varsayılan olarak, giden trafik için kural yoktur, tüm giden trafiğe izin verilir. Trafiği ilkelerinize göre denetlemek için kurallar ekleyebilir/kaldırabilirsiniz. NSG’ler hakkında daha fazla bilgi almak için [Ağ güvenlik grupları](virtual-networks-nsg.md) makalesini okuyun.
 
@@ -160,7 +160,7 @@ Bir sanal ağ ve iki VM oluştursanız da Azure portalı, MyRG kaynak grubunda s
 
     ![Kaynak grubu içeriği](./media/virtual-network-get-started-vnet-subnet/resource-group-contents.png)
 
-VM’ler, diskler ve depolama hesapları hakkında daha fazla bilgi için, [Sanal makine](../virtual-machines/virtual-machines-windows-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json), [Disk](../storage/storage-about-disks-and-vhds-windows.md?toc=%2fazure%2fvirtual-network%2ftoc.json) ve [Depolama hesabı](../storage/storage-introduction.md?toc=%2fazure%2fvirtual-network%2ftoc.json) genel bakış makalelerini okuyun. Portalın sizin için oluşturduğu iki varsayılan NSG’yi görebilirsiniz. Ayrıca, portalın iki ağ arabirimi (NIC) kaynağı oluşturduğunu da görebilirsiniz. Bir NIC, bir VM’nin sanal ağ üzerindeki diğer kaynaklara bağlanmasını sağlar. NIC’ler hakkında daha fazla bilgi için, [NIC](virtual-network-network-interface.md) makalesini okuyun. Portal bir Genel IP adresi kaynağı da oluşturmuştur. Genel IP adresleri, genel bir IP adresi kaynağı için bir ayardır. Genel IP adresleri hakkında daha fazla bilgi edinmek için, [IP adresleri](virtual-network-ip-addresses-overview-arm.md#public-ip-addresses) makalesini okuyun.
+VM’ler, diskler ve depolama hesapları hakkında daha fazla bilgi için, [Sanal makine](../virtual-machines/windows/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json), [Disk](../storage/storage-about-disks-and-vhds-windows.md?toc=%2fazure%2fvirtual-network%2ftoc.json) ve [Depolama hesabı](../storage/storage-introduction.md?toc=%2fazure%2fvirtual-network%2ftoc.json) genel bakış makalelerini okuyun. Portalın sizin için oluşturduğu iki varsayılan NSG’yi görebilirsiniz. Ayrıca, portalın iki ağ arabirimi (NIC) kaynağı oluşturduğunu da görebilirsiniz. Bir NIC, bir VM’nin sanal ağ üzerindeki diğer kaynaklara bağlanmasını sağlar. NIC’ler hakkında daha fazla bilgi için, [NIC](virtual-network-network-interface.md) makalesini okuyun. Portal bir Genel IP adresi kaynağı da oluşturmuştur. Genel IP adresleri, genel bir IP adresi kaynağı için bir ayardır. Genel IP adresleri hakkında daha fazla bilgi edinmek için, [IP adresleri](virtual-network-ip-addresses-overview-arm.md#public-ip-addresses) makalesini okuyun.
 
 ## <a name="connect-to-from-vms"></a>VM’lere bağlanma
 
@@ -252,5 +252,5 @@ Bu alıştırmada, bir sanal ağ ve iki VM oluşturdunuz. VM oluşturma esnasın
 - [Genel IP adresleri](virtual-network-ip-addresses-overview-arm.md#public-ip-addresses)
 - [Ağ arabirimleri](virtual-network-network-interface.md)
 - [Ağ güvenlik grupları](virtual-networks-nsg.md)
-- [Sanal makineler](../virtual-machines/virtual-machines-windows-overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
+- [Sanal makineler](../virtual-machines/windows/overview.md?toc=%2fazure%2fvirtual-network%2ftoc.json)
 
