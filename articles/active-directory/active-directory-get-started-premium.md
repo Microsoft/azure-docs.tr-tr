@@ -3,8 +3,8 @@ title: "Azure Active Directory Premium ile çalışmaya başlama"
 description: "Azure Active Directory Premium sürümü için, Toplu Lisanslama web sitesi üzerinden kayıt işleminin nasıl yapıldığını açıklayan bir konu başlığı."
 services: active-directory
 documentationcenter: 
-author: MarkusVi
-manager: curtand
+author: curtand
+manager: femila
 ms.assetid: 391764e5-c4eb-4ae6-b8a9-3d09f0de04a6
 ms.service: active-directory
 ms.workload: infrastructure-services
