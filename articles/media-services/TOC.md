@@ -41,6 +41,7 @@
 #### [.NET](media-services-dotnet-upload-files.md)
 #### [REST](media-services-rest-upload-files.md)
 ### [Aspera ile büyük dosyaları karşıya yükleme](media-services-upload-files-with-aspera.md)
+### [StorSimple ile dosyaları karşıya yükleme](media-services-upload-files-from-storsimple.md)
 ### [Mevcut blobları kopyalama](media-services-copying-existing-blob.md)
 
 ## [İçerik kodlama](media-services-encode-asset.md)

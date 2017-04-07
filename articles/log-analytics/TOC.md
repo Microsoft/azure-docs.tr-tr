@@ -52,7 +52,7 @@
 ### [AD Çoğaltma Durumu](log-analytics-ad-replication-status.md)
 ### [Uyarı yönetimi](log-analytics-solution-alert-management.md)
 ### [Azure SQL Analizi](log-analytics-azure-sql.md)
-### [Kapasite Yönetimi](log-analytics-capacity.md)
+### [Kapasite ve performans](log-analytics-capacity.md)
 ### [Değişiklik İzleme](log-analytics-change-tracking.md)
 ### [Kapsayıcılar](log-analytics-containers.md)
 ### [Anahtar Kasası](log-analytics-azure-key-vault.md)

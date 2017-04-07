@@ -46,11 +46,12 @@
 ### [Güvenlikle ilgili dikkat edilmesi gerekenler](best-practices-resource-manager-security.md)
 ## Kaynak ilkeleri ayarlama
 ### [Kaynak ilkeleri nelerdir?](resource-manager-policy.md)
-### [İlke atama ve yönetme](resource-manager-policy-create-assign.md)
+### [Portal ilke ataması](resource-manager-policy-portal.md)
+### [Betik ilke ataması](resource-manager-policy-create-assign.md)
 ### [Kaynak etiketi ilkeleri](resource-manager-policy-tags.md)
 ### [Depolama ilkeleri](resource-manager-policy-storage.md)
-### [Linux VM ilkeleri](../virtual-machines/virtual-machines-linux-policy.md?toc=%2fazure%2fazure-resource-manager%2ftoc.json)
-### [Windows VM ilkeleri](../virtual-machines/virtual-machines-windows-policy.md?toc=%2fazure%2fazure-resource-manager%2ftoc.json)
+### [Linux VM ilkeleri](../virtual-machines/linux/policy.md?toc=%2fazure%2fazure-resource-manager%2ftoc.json)
+### [Windows VM ilkeleri](../virtual-machines/windows/policy.md?toc=%2fazure%2fazure-resource-manager%2ftoc.json)
 ## Denetim ve Sorun Giderme
 ### [Sık karşılaşılan dağıtım hatalarını giderme](resource-manager-common-deployment-errors.md)
 ### [Etkinlik günlüklerini görüntüleme](resource-group-audit.md)

@@ -16,15 +16,16 @@
 ### [.NET 2.0’a geçiş](key-vault-dotnet2api-release-notes.md)
 
 ## Yönet
-### [Azure Anahtar Kasası Günlüğü](key-vault-logging.md)
+### [Azure Key Vault günlüğü](key-vault-logging.md)
 ### [Güvenlik duvarı arkasına erişme](key-vault-access-behind-firewall.md)
 ### [İstemci kimliğini değiştirme](key-vault-subscription-move-fix.md)
 ### [Kullanılabilirlik ve yedekleme](key-vault-disaster-recovery-guidance.md)
 ### [Anahtar kasanızın güvenliğini sağlama](key-vault-secure-your-key-vault.md)
 
 ## Otomatikleştirme
-### [Azure Otomasyonu](automation-manage-key-vault.md)
-### [CLI aracılığıyla Oluşturma ve Yönetme](key-vault-manage-with-cli.md)
+### [Azure otomasyonu](automation-manage-key-vault.md)
+### [CLI aracılığıyla oluşturma ve yönetme](key-vault-manage-with-cli.md)
+### [CLI 2.0 aracılığıyla oluşturma ve yönetme](key-vault-manage-with-cli2.md)
 
 # Başvuru
 ## [PowerShell](/powershell/resourcemanager/azurerm.keyvault/v2.3.0/azurerm.keyvault)

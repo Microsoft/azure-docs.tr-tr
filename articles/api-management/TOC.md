@@ -44,6 +44,7 @@
 ### [Kullanıcı hesaplarını yönetme](api-management-howto-create-or-invite-developers.md)
 ### [Otomasyonu kullanarak yönetme](automation-manage-api-management.md)
 ### [Git kullanarak yapılandırma](api-management-configuration-repository-git.md)
+### [Azure İzleyicisi’ni kullanarak izleme](api-management-howto-use-azure-monitor.md)
 # Başvuru
 ## [PowerShell](/powershell/azureps-cmdlets-docs)
 ## [REST](/rest/api/apimanagement/)

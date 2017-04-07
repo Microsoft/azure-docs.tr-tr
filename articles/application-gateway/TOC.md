@@ -1,13 +1,14 @@
 # Genel Bakış
 ## [Application Gateway Nedir?](application-gateway-introduction.md)
 ## [Application Gateway hakkında SSS](application-gateway-faq.md)
-## [Web uygulaması güvenlik duvarı](application-gateway-webapplicationfirewall-overview.md)
+## [Web uygulaması güvenlik duvarı](application-gateway-web-application-firewall-overview.md)
+### [Çekirdek kural kümeleri ve kurallar](application-gateway-crs-rulegroups-rules.md)
 ## [Sistem Durumunu İzleme](application-gateway-probe-overview.md)
 ## [URL yönlendirme](application-gateway-url-route-overview.md)
 ## [Çok Siteli](application-gateway-multi-site-overview.md)
 ## [Uçtan Uca SSL’ye genel bakış](application-gateway-backend-ssl.md)
 ## [WebSocket](application-gateway-websocket.md)
-## [Hizmet sınırlamaları](../azure-subscription-service-limits.md#application-gateway-limits?toc=%2fazure%2fapplication-gateway%2ftoc.json)
+## [Hizmet sınırlamaları](../azure-subscription-service-limits.md?toc=%2fazure%2fapplication-gateway%2ftoc.json#application-gateway-limits)
 # Başlarken
 ## Application Gateway Oluşturma
 ### Genel yönlü
@@ -23,6 +24,8 @@
 ## Web uygulaması güvenlik duvarını yapılandırma
 ### [Portal](application-gateway-web-application-firewall-portal.md)
 ### [PowerShell](application-gateway-web-application-firewall-powershell.md)
+## Web uygulaması güvenlik duvarı kurallarını özelleştirme
+### [Portal](application-gateway-customize-waf-rules-portal.md)
 ## SSL yük boşaltmasını yapılandırma
 ### [Portal](application-gateway-ssl-portal.md)
 ### [PowerShell](application-gateway-ssl-arm.md)

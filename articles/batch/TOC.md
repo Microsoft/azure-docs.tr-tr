@@ -37,8 +37,8 @@
 
 # İlgili
 ## [Batch Shipyard](https://github.com/Azure/batch-shipyard)
+## [Batch ve Data Factory kullanarak veri işleme](../data-factory/data-factory-data-processing-using-batch.md?toc=%2fazure%2fbatch%2ftoc.json)
 ## [Azure bulutta Batch ve HPC çözümleri](batch-hpc-solutions.md)
-## [Azure’da Big Compute: teknik kaynaklar](big-compute-resources.md)
 
 # Kaynaklar
 ## [Fiyatlandırma](https://azure.microsoft.com/pricing/details/batch/)
@@ -48,5 +48,8 @@
 ## [Hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?product=batch&updatetype=&platform=)
 ## [C# kod örnekleri](https://github.com/Azure/azure-batch-samples/tree/master/CSharp/)
 ## [Python kod örnekleri](https://github.com/Azure/azure-batch-samples/tree/master/Python/Batch)
+## [CLI örnekleri](batch-cli-samples.md)
+## [Big Compute kaynakları](big-compute-resources.md)
 ## [Blog](https://blogs.technet.microsoft.com/windowshpc/)
+
 

@@ -48,6 +48,7 @@
 ### [Akış Analizi ile kullanma](data-lake-store-stream-analytics.md)
 ### [Power BI ile kullanma](data-lake-store-power-bi.md)
 ### [Veri Kataloğu ile kullanma](data-lake-store-with-data-catalog.md)
+### [SQL Veri Ambarı’nda PolyBase ile kullanma](../sql-data-warehouse/sql-data-warehouse-load-from-azure-data-lake-store.md)
 ### [Diğer Azure tümleştirme seçenekleri](data-lake-store-integrate-with-other-services.md)
 
 ## Yönet

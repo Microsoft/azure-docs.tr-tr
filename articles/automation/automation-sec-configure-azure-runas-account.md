@@ -250,7 +250,7 @@ Betiklerin parametreleri için gerekli olan *SubscriptionID*, *ResourceGroup* ve
 2. **Tüm ayarlar** dikey penceresindeki **Hesap Ayarları** altında **Özellikler**’i seçin. 
 3. **Özellikler** dikey penceresindeki değerleri not alın.
 
- ![Otomasyon hesabı "Özellikler" dikey penceresi](media/automation-sec-configure-azure-runas-account/automation-account-properties.png)  
+![Otomasyon hesabı "Özellikler" dikey penceresi](media/automation-sec-configure-azure-runas-account/automation-account-properties.png)  
 
 ### <a name="create-a-run-as-account-powershell-script"></a>Farklı Çalıştır hesabı PowerShell betiği oluşturma
 Bu PowerShell betiği aşağıdaki yapılandırmalar için destek içerir:
@@ -415,7 +415,6 @@ Betiği yürütüp sertifikayı karşıya yüklemek için aşağıdakileri yapı
         $TenantID = $SubscriptionInfo | Select TenantId -First 1
         $Thumbprint = $PfxCert.Thumbprint
         $ConnectionFieldValues = @{"ApplicationId" = $ApplicationId; "TenantId" = $TenantID.TenantId; "CertificateThumbprint" = $Thumbprint; "SubscriptionId" = $SubscriptionId}
-
 
         # Create an Automation connection asset named AzureRunAsConnection in the Automation account. This connection uses the service principal.
         CreateAutomationConnectionAsset $ResourceGroup $AutomationAccountName $ConnectionAssetName $ConnectionTypeName $ConnectionFieldValues

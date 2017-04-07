@@ -30,8 +30,8 @@
 #### [Trafiği yalnızca NGFW aracılığıyla yönlendirme](security-center-add-next-generation-firewall.md#route-traffic-through-ngfw-only)
 
 ### [SQL hizmet önerileri](security-center-sql-service-recommendations.md)
-#### [SQL veritabanlarında denetimi etkinleştirme](security-center-enable-auditing-on-sql-databases.md)
-#### [SQL sunucularında denetimi etkinleştirme](security-center-enable-auditing-on-sql-servers.md)
+#### [SQL veritabanlarında denetim ve tehdit algılamayı etkinleştirme](security-center-enable-auditing-on-sql-databases.md)
+#### [SQL sunucularında denetim ve tehdit algılamayı etkinleştirme](security-center-enable-auditing-on-sql-servers.md)
 #### [Saydam Veri Şifrelemesini Etkinleştirme](security-center-enable-transparent-data-encryption.md)
 
 ### [Sanal makine önerileri](security-center-virtual-machine-recommendations.md)
@@ -74,8 +74,3 @@
 ## [Hizmete genel bakış](https://azure.microsoft.com/services/security-center/)
 ## [Hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?product=security-center)
 ## [Videolar](https://azure.microsoft.com/documentation/videos/index/?services=security-center)
-
-
-<!--HONumber=Feb17_HO1-->
-
-

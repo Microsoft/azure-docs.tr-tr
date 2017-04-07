@@ -25,10 +25,11 @@
 
 # Nasıl yapılır
 ## Veri Taşıma
+### [Kopyalama Etkinliği’ne Genel Bakış](data-factory-data-movement-activities.md)
 ### [Data Factory Kopyalama Sihirbazı](data-factory-azure-copy-wizard.md)
 #### [15 dakika içinde 1 TB yükleyin](data-factory-load-sql-data-warehouse.md)
-### [Kopyalama Etkinliği](data-factory-data-movement-activities.md)
-#### [Performans ve Ayar Kılavuzu](data-factory-copy-activity-performance.md)
+### [Performans ve ayar kılavuzu](data-factory-copy-activity-performance.md)
+### Bağlayıcılar
 #### [Amazon Redshift](data-factory-amazon-redshift-connector.md)
 #### [Amazon S3](data-factory-amazon-simple-storage-service-connector.md)
 #### [Azure Blob Depolama](data-factory-azure-blob-connector.md)
@@ -52,16 +53,14 @@
 #### [PostgreSQL](data-factory-onprem-postgresql-connector.md)
 #### [Salesforce](data-factory-salesforce-connector.md)
 #### [SAP Business Warehouse](data-factory-sap-business-warehouse-connector.md)
-#### [SFTP](data-factory-sftp-connector.md)
 #### [SAP HANA](data-factory-sap-hana-connector.md)
+#### [SFTP](data-factory-sftp-connector.md)
 #### [SQL Server](data-factory-sqlserver-connector.md)
 #### [Sybase](data-factory-onprem-sybase-connector.md)
 #### [Teradata](data-factory-onprem-teradata-connector.md)
 #### [Web tablosu](data-factory-web-table-connector.md)
 ### [Veri Yönetimi Ağ Geçidi](data-factory-data-management-gateway.md)
 ### [Şirket içi ile bulut arasında veri taşıma](data-factory-move-data-between-onprem-and-cloud.md)
-### [Giriş ve çıkış veri kümesi sütunlarını eşleme](data-factory-map-columns.md)
-### [Desteklenen dosya ve sıkıştırma biçimleri](data-factory-supported-file-and-compression-formats.md)
 
 ## [Verileri Dönüştürme](data-factory-data-transformation-activities.md)
 ### [HDInsight Hive Etkinliği](data-factory-hive-activity.md)
@@ -100,9 +99,9 @@
 ### [Ürün Önerileri](data-factory-product-reco-usecase.md)
 ### [Müşteri Profili Oluşturma](data-factory-customer-profiling-usecase.md)
 ### [Data Factory ve Batch kullanarak büyük ölçekli veri kümelerini işleme](data-factory-data-processing-using-batch.md)
-## [Hizmet güncelleştirmeleri](https://azure.microsoft.com/en-us/updates/?product=data-factory)
+## [Hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?product=data-factory)
 ## [Fiyatlandırma](https://azure.microsoft.com/pricing/details/data-factory/)
-## [MSDN Forumu](https://social.msdn.microsoft.com/Forums/en-US/home?forum=AzureDataFactory)
+## [MSDN Forumu](https://social.msdn.microsoft.com/Forums/home?forum=AzureDataFactory)
 ## [Stack Overflow](http://stackoverflow.com/questions/tagged/azure-data-factory)
 ## [Videolar](https://azure.microsoft.com/documentation/videos/index/?services=data-factory)
 ## [Özellik isteme](https://feedback.azure.com/forums/270578-azure-data-factory)

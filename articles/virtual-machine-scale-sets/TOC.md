@@ -4,6 +4,7 @@
 # Kullanmaya Başlama
 ## [Portalda ölçek kümesi dağıtma](virtual-machine-scale-sets-portal-create.md)
 ## [PowerShell veya Azure CLI kullanarak ölçek kümesi dağıtma](virtual-machine-scale-sets-create.md)
+## [Şablon kullanarak bir otomatik ölçeklendirme uygulaması dağıtma](virtual-machine-scale-sets-deploy-scaling-app-template.md)
 
 # Nasıl yapılır
 ## Planlama ve tasarım

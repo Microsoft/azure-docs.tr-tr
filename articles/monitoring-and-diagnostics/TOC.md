@@ -4,6 +4,7 @@
 ## [Uyarılar](monitoring-overview-alerts.md)
 ## [Otomatik Ölçeklendirme](monitoring-overview-autoscale.md)
 ## [Etkinlik Günlüğü](monitoring-overview-activity-logs.md)
+## [Eylem Grupları](monitoring-action-groups.md)
 ## [Tanılama Günlükleri](monitoring-overview-of-diagnostic-logs.md)
 ## [İş Ortağı Tümleştirmeleri](monitoring-partners.md)
 ## [Azure Tanılama](azure-diagnostics.md)
@@ -28,10 +29,19 @@
 ### [Otomatik ölçeklendirmede web kancalarını ve e-posta bildirimlerini yapılandırma](insights-autoscale-to-webhook-email.md)
 ## Ekinlik günlüğünü kullanma
 ### [Etkinlik günlüğünde olayları görüntüleme](insights-debugging-with-events.md)
-### [Bir Etkinlik Günlüğü uyarısında web kancası yapılandırma](insights-auditlog-to-webhook-email.md)
+### [Bir etkinlik günlüğü olayında uyarı yapılandırma](monitoring-activity-log-alerts.md)
 ### [Etkinlik günlüğünü arşivleme](monitoring-archive-activity-log.md)
 ### [Etkinlik günlüğünün Event Hubs’a akışını sağlama](monitoring-stream-activity-logs-event-hubs.md)
 ### [Resource Manager ile işlemleri denetleme](../azure-resource-manager/resource-group-audit.md)
+### [Kaynak Yöneticisi ile etkinlik günlüğü uyarıları oluşturma](monitoring-create-activity-log-alerts-with-resource-manager-template.md)
+## Hizmet bildirimleri
+### [Hizmet bildirimlerini görüntüleme](monitoring-service-notifications.md)
+### [Hizmet bildirimlerinde uyarı yapılandırma](monitoring-activity-log-alerts-on-service-notifications.md)
+## Eylem Grupları
+### [Web kancası şeması hakkında bilgi edinin](monitoring-activity-log-alerts-webhook.md)
+### [SMS Uyarısı davranışı](monitoring-sms-alert-behavior.md)
+### [Uyarı Hızı sınırlama](monitoring-alerts-rate-limiting.md)
+### [Resource Manager ile eylem grupları oluşturma](monitoring-create-action-group-with-resource-manager-template.md)
 ## Tanılama günlüklerini yönetme
 ### [Arşiv](monitoring-archive-diagnostic-logs.md)
 ### [Event Hubs’a Akış](monitoring-stream-diagnostic-logs-to-event-hubs.md)

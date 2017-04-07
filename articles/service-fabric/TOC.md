@@ -57,16 +57,19 @@
 #### Başlarken
 ##### [Windows üzerinde C#](service-fabric-reliable-services-quick-start.md)
 ##### [Linux üzerinde Java](service-fabric-reliable-services-quick-start-java.md)
-#### [Reliable Services yaşam döngüsü](service-fabric-reliable-services-lifecycle.md)
+#### [Reliable Services yaşam döngüsü - C#](service-fabric-reliable-services-lifecycle.md)
+#### [Reliable Services yaşam döngüsü - Java](service-fabric-reliable-services-lifecycle-java.md)
 #### [Güvenilir Koleksiyonlar](service-fabric-reliable-services-reliable-collections.md)
 #### [Reliable Collections kullanımı](service-fabric-work-with-reliable-collections.md)
 #### [Yapılandırma](service-fabric-reliable-services-configuration.md)
 #### [Bildirimler](service-fabric-reliable-services-notifications.md)
 #### [Yedekleme ve geri yükleme](service-fabric-reliable-services-backup-restore.md)
 #### [Reliable Services özelliğiyle iletişim kurma](service-fabric-reliable-services-communication.md)
-#### [Reliable Services ile güvenli iletişim](service-fabric-reliable-services-secure-communication.md)
+#### [Reliable Services - C# ile güvenli iletişim](service-fabric-reliable-services-secure-communication.md)
+#### [Reliable Services - Java ile güvenli iletişim](service-fabric-reliable-services-secure-communication-java.md)
 ##### [ASP.NET Core](service-fabric-reliable-services-communication-aspnetcore.md)
-##### [Uzaktan Hizmet Verme](service-fabric-reliable-services-communication-remoting.md)
+##### [Uzaktan Hizmet Verme - C#](service-fabric-reliable-services-communication-remoting.md)
+##### [Uzaktan Hizmet Verme - Java](service-fabric-reliable-services-communication-remoting-java.md)
 ##### [WCF](service-fabric-reliable-services-communication-wcf.md)
 ##### [Ters Proxy](service-fabric-reverseproxy.md)
 #### [Gelişmiş kullanım](service-fabric-reliable-services-advanced-usage.md)
@@ -104,6 +107,7 @@
 #### [Azure CLI kullanarak bir kümeyi yönetme](service-fabric-azure-cli.md) 
 #### [Küme güvenliğini sağlama](service-fabric-cluster-security.md)
 #### [Olağanüstü durum kurtarma](service-fabric-disaster-recovery.md)
+#### [Linux ve Windows arasındaki özellik farkları](service-fabric-linux-windows-differences.md)
 
 ### Azure’da kümeler
 #### Azure’da küme oluşturma

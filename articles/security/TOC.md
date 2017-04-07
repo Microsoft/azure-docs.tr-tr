@@ -33,6 +33,8 @@
 ### [Azure Güvenlik Merkezi](../security-center/security-center-intro.md?toc=%2fazure%2fsecurity%2ftoc.json)
 ### [Azure günlük tümleştirmesine giriş](security-azure-log-integration-overview.md)
 #### [Azure günlük tümleştirmesini kullanmaya başlama](security-azure-log-integration-get-started.md)
+#### [Azure Active Directory denetim günlüklerini tümleştirme](security-azure-log-integration-ad.md)
+#### [Güvenlik Merkezi uyarılarını tümleştirme](security-azure-log-integration-security-center.md)
 #### [SSS](security-azure-log-integration-faq.md)
 
 ## Kimlik yönetimi

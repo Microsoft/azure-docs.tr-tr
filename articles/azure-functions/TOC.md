@@ -21,13 +21,12 @@
 #### [HTTP ve web kancası bağlamaları](functions-bindings-http-webhook.md)
 #### [Mobile Apps bağlamaları](functions-bindings-mobile-apps.md)
 #### [Notification Hub’ı çıkışı bağlama](functions-bindings-notification-hubs.md)
-#### [Kuyruklar ve konular için Service Bus tetikleyicileri ve bağlamaları](functions-bindings-service-bus.md)
+#### [Service Bus bağlamaları](functions-bindings-service-bus.md)
 #### [SendGrid bağlamaları](functions-bindings-sendgrid.md)
 #### Depolama bağlamaları
 ##### [Blob bağlamaları](functions-bindings-storage-blob.md)
 ##### [Kuyruk bağlamaları](functions-bindings-storage-queue.md)
 ##### [Tablo bağlamaları](functions-bindings-storage-table.md)
-##### [SendGrid bağlamaları](functions-bindings-sendgrid.md)
 #### [Zamanlayıcı tetikleyicisi](functions-bindings-timer.md)
 #### [Twilio çıktı bağlaması](functions-bindings-twilio.md)
 ### [Azure portalından işlev uygulaması oluşturma](functions-create-function-app-portal.md) 
@@ -35,6 +34,8 @@
 ### [Yerel olarak geliştirme ve hata ayıklama](functions-run-local.md)
 ### [Azure İşlevleri için en iyi uygulamalar](functions-best-practices.md)
 ### [Planlı temizleme görevini gerçekleştirmek için Azure İşlevleri’ni kullanma](functions-scenario-database-table-cleanup.md)
+### [OpenAPI tanımı (önizleme) oluşturma](functions-api-definition-getting-started.md)
+#### [İşlevler başvurusunda OpenAPI 2.0](functions-api-definition.md)
 
 ## Yönet
 ### [Bir işlev uygulaması için ayarları yapılandırma](functions-how-to-use-azure-function-app-settings.md)

@@ -65,10 +65,11 @@
 #### [Market öğesi oluşturma ve yayımlama](azure-stack-create-and-publish-marketplace-item.md)
 #### [Özel bir sanal makine görüntüsü ekleme](azure-stack-add-vm-image.md)
 #### [Linux sanal makineleri dağıtma](azure-stack-linux.md)
-### Faturalandırma ve ücreti yansıtma
-#### [Faturalandırma ve ücreti yansıtmaya genel bakış](azure-stack-billing-and-chargeback.md)
-#### [Sağlayıcı kaynak kullanım API’si](azure-stack-provider-resource-api.md)
-#### [Kiracı kaynak kullanım API’si](azure-stack-tenant-resource-usage-api.md)
+### Kullanım ve Faturalandırma
+#### [Genel Bakış](azure-stack-billing-and-chargeback.md)
+#### [Kullanım verilerini raporlama](azure-stack-usage-reporting.md)
+#### [Sağlayıcı kullanım API’si](azure-stack-provider-resource-api.md)
+#### [Kiracı kullanım API’si](azure-stack-tenant-resource-usage-api.md)
 #### [Kullanım Hakkında SSS](azure-stack-usage-related-faq.md)
 
 # Hizmetleri kullanma

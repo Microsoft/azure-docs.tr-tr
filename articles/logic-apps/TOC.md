@@ -16,9 +16,9 @@
 ### [Azure İşlevleri ile özel kod ekleme](logic-apps-azure-functions.md)
 ### [Döngüler, kapsamlar ve veri ayırma](logic-apps-loops-and-scopes.md)
 ### [Mantıksal uygulama tanımları yazma](logic-apps-author-definitions.md)
+### [Çağrı, tetikleyici veya iç içe mantıksal uygulamalar](logic-apps-http-endpoint.md)
 ### [Mantıksal uygulamalar için özel API’ler oluşturma](logic-apps-create-api-app.md)
 ### [Mantıksal uygulamalar için özel API’ler çağırma](logic-apps-custom-hosted-api.md)
-### [Tetikleyici olarak mantıksal uygulama uç noktalarını çağırma](logic-apps-http-endpoint.md)
 ### [Hataları ve özel durumları işleme](logic-apps-exception-handling.md)
 ### [İçerik türlerini işleme](logic-apps-content-type.md)
 ### [Mantıksal uygulamanızı güvenli hale getirme](logic-apps-securing-a-logic-app.md)
@@ -47,6 +47,7 @@
 ### [X12 kurumsal tümleştirme](logic-apps-enterprise-integration-x12.md)
 ### [X12 kodlama](logic-apps-enterprise-integration-x12-encode.md)
 ### [X12 kodunu çözme](logic-apps-enterprise-integration-x12-decode.md)
+### [Olağanüstü durum kurtarma](logic-apps-enterprise-integration-b2b-business-continuity.md)
 
 ## Şirket içi verilere erişim
 ### [Şirket içi verilere bağlanma](logic-apps-gateway-connection.md)
@@ -69,6 +70,7 @@
 
 ## Örnekler, senaryolar ve kılavuzlar
 ### [Genel Bakış](logic-apps-examples-and-scenarios.md)
+### [Sunucusuz bir sosyal pano oluşturma](logic-apps-scenario-social-serverless.md)
 ### [Azure İşlevleri ile mantıksal uygulamaları çağırma](logic-apps-scenario-function-sb-trigger.md)
 ### [Hata ve özel durum işleme ekleme](logic-apps-scenario-error-and-exception-handling.md)
 ### [B2B işleme](logic-apps-enterprise-integration-b2b.md)

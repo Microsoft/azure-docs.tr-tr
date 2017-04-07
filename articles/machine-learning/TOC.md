@@ -114,7 +114,6 @@
 #### [Hive sorguları çalıştırma](machine-learning-data-science-create-features-hive.md)
 #### [TDSP özellik seçimi](machine-learning-data-science-select-features.md)
 ### Oluşturma ve eğitme modelleri
-#### [Puanlamaya dönüştürme](machine-learning-convert-training-experiment-to-scoring-experiment.md)
 #### [Deneme yaşam döngüsü yönetimi](machine-learning-version-control.md)
 #### [Yinelemelerini yönetme](machine-learning-manage-experiment-iterations.md)
 #### [PowerShell kullanarak model oluşturma](machine-learning-create-models-and-endpoints-with-powershell.md)
@@ -133,19 +132,20 @@
 ##### [Özel R modülleri yazma](machine-learning-custom-r-modules.md)
 ##### [Python betiklerini yürütme](machine-learning-execute-python-scripts.md)
 
-## Modelleri dağıtma ve kullanma
+## Modelleri kullanıma hazır hale getirin
 ### [Genel Bakış](machine-learning-deploy-consume-web-service-guide.md)
 ### Modelleri dağıtma
-#### [Nasıl çalışır?](machine-learning-model-progression-experiment-to-web-service.md)
 #### [Bir Web Hizmetini dağıtma](machine-learning-publish-a-machine-learning-web-service.md)
+#### [Nasıl çalışır?](machine-learning-model-progression-experiment-to-web-service.md)
+#### [Dağıtım için hazırlanma](machine-learning-convert-training-experiment-to-scoring-experiment.md)
 #### [Dış veri kullanma](machine-learning-web-services-that-use-import-export-modules.md)
 #### [Birden çok bölgede dağıtma](machine-learning-how-to-deploy-to-multiple-regions.md)
 #### [Web hizmeti parametrelerini kullanma](machine-learning-web-service-parameters.md)
 #### [Günlüğü etkinleştirme](machine-learning-web-services-logging.md)
 ### Web hizmetlerini yönetme
-#### [Uç noktalar oluşturma](machine-learning-create-endpoint.md)
 #### [Web Hizmetleri portalını kullanma](machine-learning-manage-new-webservice.md)
 #### [API ile yönetme](machine-learning-manage-web-service-endpoints-using-api-management.md)
+#### [Uç noktalar oluşturma](machine-learning-create-endpoint.md)
 #### [Ölçeklendirme](machine-learning-scaling-webservice.md)
 ### Modelleri yeniden eğitme
 #### [Genel Bakış](machine-learning-retrain-machine-learning-model.md)
@@ -198,12 +198,6 @@
 #### [Anormallik algılama](machine-learning-apps-anomaly-detection-api.md)
 #### [Metin analizi](machine-learning-apps-text-analytics.md)
 #### [Bilişsel Hizmetler](https://azure.microsoft.com/services/cognitive-services/)
-#### Öneriler
-##### [Genel Bakış](machine-learning-recommendation-api-sample-application.md)
-##### [Hızlı başlangıç](machine-learning-recommendation-api-quick-start-guide.md)
-##### [Başvuru](machine-learning-recommendation-api-documentation.md)
-##### [JavaScript kullanma](machine-learning-recommendation-api-javascript-integration.md)
-##### [SSS](machine-learning-recommendation-api-faq.md)
 #### Tahmine dayalı bakım
 ##### [Genel Bakış](cortana-analytics-playbook-predictive-maintenance.md)
 ##### [Mimari](cortana-analytics-architecture-predictive-maintenance.md)

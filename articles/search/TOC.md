@@ -33,8 +33,7 @@
 ### [Karmaşık veri türlerini modelleme](search-howto-complex-data-types.md)
 ## Yönet
 ### Azure Search Yönetimi
-#### [Azure Portal](search-manage.md)
-#### [REST](search-get-started-management-api.md)
+#### [Azure portal](search-manage.md)
 #### [PowerShell](search-manage-powershell.md)
 ### [Kullanımı ve istatistikleri izleme](search-monitor-usage.md)
 ### [Arama trafiği analizi](search-traffic-analytics.md)
@@ -78,15 +77,10 @@
 ## Eğitim yazılımı ve öğreticiler
 ### [Sanal akademi](https://mva.microsoft.com/training-courses/using-windows-azure-search-10540?l=ADkxnd97_9304984382)
 ### [Videolar ve öğreticiler](search-video-demo-tutorial-list.md)
-### [Azure Search Github](https://github.com/Azure-Samples/?utf8=%E2%9C%93&query=search)
+### [Azure Search GitHub](https://github.com/Azure-Samples/?utf8=%E2%9C%93&query=search)
 ## İş ortağı ve topluluk
 ### [İlişkisel verileri modelleme](http://blogs.technet.com/b/onsearch/archive/2015/09/08/modeling-the-adventureworks-inventory-database-for-azure-search.aspx)
 ### [Çok düzeyli model oluşturma](http://blogs.technet.com/b/onsearch/archive/2015/09/09/multi-level-taxonomy-facets-in-azure-search.aspx)
 ### [Forum](https://social.msdn.microsoft.com/forums/azure/en-US/home?forum=AzureSearch)
 ### [Stack Overflow](http://stackoverflow.com/questions/tagged/azure-search)
-### [Azure Search Github](https://github.com/Azure-Samples/?utf8=%E2%9C%93&query=search)
-
-
-<!--HONumber=Feb17_HO3-->
-
-
+### [Azure Search GitHub](https://github.com/Azure-Samples/?utf8=%E2%9C%93&query=search)

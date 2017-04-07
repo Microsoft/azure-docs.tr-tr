@@ -85,6 +85,7 @@
 
 
 ## Tümleştirme
+### [Spark’a bağlanma](documentdb-spark-connector.md)
 ### [Azure Uygulama Hizmeti ile web sitesi dağıtma](documentdb-create-documentdb-website.md)
 ### [Logic Apps ile uygulama günlüğü kaydı](../logic-apps/logic-apps-scenario-error-and-exception-handling.md)
 ### [Azure İşlevlerine Bağlama](../azure-functions/functions-bindings-documentdb.md)

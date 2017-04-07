@@ -128,7 +128,6 @@
 
 ## Cihazları yönetme
 ### [Cihaz kaydetme](active-directory-device-registration-overview.md)
-#### [Otomatik kaydı yönetme](active-directory-device-registration.md)
 #### [Kurulum](active-directory-conditional-access-automatic-device-registration-setup.md)
 #### [Şirket içi dağıtma](active-directory-device-registration-on-premises-setup.md)
 #### [SSS](active-directory-device-registration-faq.md)
@@ -161,7 +160,6 @@
 ##### [Azure portal](application-proxy-publish-azure-portal.md)
 ##### [Klasik portal](active-directory-application-proxy-publish.md)
 
-#### [Azure AD için PingAccess](application-proxy-ping-access.md)
 #### [Güvenlik](application-proxy-security-considerations.md)
 #### [Ağlar](application-proxy-network-topology-considerations.md)
 #### [Uzak Masaüstü](application-proxy-publish-remote-desktop.md)
@@ -173,8 +171,9 @@
 #### [Ara sunucular](application-proxy-working-with-proxy-servers.md)
 #### [Özel etki alanları](active-directory-application-proxy-custom-domains.md)
 #### [Uygulamalara erişim](active-directory-appssoaccess-whatis.md)
-##### [Azure Portal](application-proxy-sso-azure-portal.md)
-#### [Çoklu oturum açma](active-directory-application-proxy-sso-using-kcd.md)
+##### [Azure portal](application-proxy-sso-azure-portal.md)
+#### [KCD ile SSO](active-directory-application-proxy-sso-using-kcd.md)
+#### [Üst bilgi içeren SSO](application-proxy-ping-access.md)
 #### [Talep kullanan uygulamalar](active-directory-application-proxy-claims-aware-apps.md)
 #### [Native Client uygulamaları](active-directory-application-proxy-native-client.md)
 #### [Özel giriş sayfası](application-proxy-office365-app-launcher.md)

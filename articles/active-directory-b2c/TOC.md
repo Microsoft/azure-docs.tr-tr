@@ -45,6 +45,8 @@
 ## [Kimlik doğrulama protokolleri](active-directory-b2c-reference-protocols.md)
 ## [Belirteçler](active-directory-b2c-reference-tokens.md)
 
+## [Tehdit Yönetimi](active-directory-b2c-reference-threat-management.md)
+
 # İlgili
 ## [Azure Active Directory](../active-directory/active-directory-whatis.md)
 ## [Multi-Factor Authentication](../multi-factor-authentication/multi-factor-authentication.md)
@@ -55,7 +57,3 @@
 ## [Videolar](https://azure.microsoft.com/documentation/videos/index/?services=active-directory-b2c) 
 ## [Hizmet güncelleştirmeleri](https://azure.microsoft.com/updates/?product=active-directory-b2c)
 ## [Destek](active-directory-b2c-support.md)
-
-<!--HONumber=Nov16_HO4-->
-
-

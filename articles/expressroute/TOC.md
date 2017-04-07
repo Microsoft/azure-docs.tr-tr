@@ -23,18 +23,12 @@
 ## Eşleme yapılandırması oluşturma ve değiştirme
 ### [Azure portal](expressroute-howto-routing-portal-resource-manager.md)
 ### [PowerShell](expressroute-howto-routing-arm.md)
-### [PowerShell (Klasik)](expressroute-howto-routing-classic.md)
 ## ExpressRoute bağlantı hattına bir sanal ağı bağlama
 ### [Azure Portal](expressroute-howto-linkvnet-portal-resource-manager.md)
 ### [PowerShell](expressroute-howto-linkvnet-arm.md)
-### [PowerShell (Klasik)](expressroute-howto-linkvnet-classic.md)
-## ExpressRoute için sanal ağ geçidi yapılandırma
-### [PowerShell](expressroute-howto-add-gateway-resource-manager.md)
-### [PowerShell (Klasik)](expressroute-howto-add-gateway-classic.md)
-## Konumdan Konuma VPN Gateway ve ExpressRoute eşzamanlı bağlantıları oluşturma
-### [PowerShell](expressroute-howto-coexist-resource-manager.md)
-### [PowerShell (Klasik)](expressroute-howto-coexist-classic.md)
-## [Bir bağlantı hattını klasikten Resource Manager’a taşıma](expressroute-howto-move-arm.md)
+## [ExpressRoute için sanal ağ geçidi yapılandırma](expressroute-howto-add-gateway-resource-manager.md)
+## [Birlikte bulunan ExpressRoute bağlantıları ile Siteden Siteye bağlantıları yapılandırma](expressroute-howto-coexist-resource-manager.md)
+## [Bir devreyi klasikten Resource Manager’a taşıma](expressroute-howto-move-arm.md)
 ## ExpressRoute için yönlendirici yapılandırma
 ### [Yönlendirici yapılandırma](expressroute-config-samples-routing.md)
 ### [NAT için yönlendirici yapılandırma örnekleri](expressroute-config-samples-nat.md)

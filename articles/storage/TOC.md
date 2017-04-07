@@ -45,11 +45,11 @@
 
 ## Disk Depolama 
 ### [Resource Manager ve PowerShell kullanarak VM oluşturma](../virtual-machines/virtual-machines-windows-ps-create.md)
-### [Azure CLI 2.0 kullanarak bir Linux VM oluşturma](../virtual-machines/virtual-machines-linux-quick-create-cli.md)
-### [PowerShell kullanarak bir Windows VM’ye yönetilen disk ekleme](../virtual-machines/virtual-machines-windows-attach-disk-ps.md)
-### [Linux VM’ye yönetilen disk ekleme](../virtual-machines/virtual-machines-linux-add-disk.md)
-### [Windows’da Anlık Görüntüler kullanılarak Yönetilen Disk olarak depolanmış VHD kopyası oluşturma](../virtual-machines/virtual-machines-windows-snapshot-copy-managed-disk.md)
-### [Linux’ta Anlık Görüntüler kullanılarak Yönetilen Disk olarak depolanmış VHD kopyası oluşturma](../virtual-machines/linux/virtual-machines-linux-snapshot-copy-managed-disk.md)
+### [Azure CLI 2.0 kullanarak bir Linux VM oluşturma](../virtual-machines/linux/quick-create-cli.md)
+### [PowerShell kullanarak bir Windows VM’ye yönetilen disk ekleme](../virtual-machines/windows/attach-disk-ps.md)
+### [Linux VM’ye yönetilen disk ekleme](../virtual-machines/linux/add-disk.md)
+### [Windows’da Anlık Görüntüler kullanılarak Yönetilen Disk olarak depolanmış VHD kopyası oluşturma](../virtual-machines/windows/snapshot-copy-managed-disk.md)
+### [Linux’ta Anlık Görüntüler kullanılarak Yönetilen Disk olarak depolanmış VHD kopyası oluşturma](../virtual-machines/linux/snapshot-copy-managed-disk.md)
 
 # Nasıl yapılır?
 ## [Depolama hesabı oluşturma](storage-create-storage-account.md)
@@ -74,8 +74,8 @@
 ### [Windows VM’ler için diskler ve VHD’ler](storage-about-disks-and-vhds-windows.md)
 ### [Linux VM’ler için diskler ve VHD’ler](storage-about-disks-and-vhds-linux.md)
 ### [Azure Yönetilen Disklere Genel Bakış](storage-managed-disks-overview.md)
-### [Azure VM’lerini Azure Yönetilen Disklere geçirme](../virtual-machines/virtual-machines-windows-migrate-to-managed-disks.md)
-### [AWS ve diğer platformlardan Yönetilen Disklere geçirme](../virtual-machines/virtual-machines-windows-on-prem-to-azure.md)
+### [Azure VM’lerini Azure Yönetilen Disklere geçirme](../virtual-machines/windows/migrate-to-managed-disks.md)
+### [AWS ve diğer platformlardan Yönetilen Disklere geçirme](../virtual-machines/windows/on-prem-to-azure.md)
 ### [Azure IaaS VM Diskleri hakkında Sık Sorulan Sorular](storage-faq-for-disks.md)
 ### Premium Depolama
 #### [VM Diskleri için yüksek performanslı Premium Depolama](storage-premium-storage.md)
@@ -131,7 +131,7 @@
 ### [İçeri/Dışarı Aktarma Aracı’nı kullanma](storage-import-export-tool-how-to.md)
 #### [İçeri/Dışarı Aktarma Aracı’nı ayarlama](storage-import-export-tool-setup.md)
 #### [Sabit sürücüleri içeri aktarma işine hazırlama](storage-import-export-tool-preparing-hard-drives-import.md)
-##### [İçeri aktarma işlemi sırasında Özellikleri ve Meta Verileri ayarlama](storage-import-export-tool-setting-properties-metadata-import.md)
+##### [İçeri aktarma işlemi sırasında özellikleri ve meta verileri ayarlama](storage-import-export-tool-setting-properties-metadata-import.md)
 ##### [Sabit sürücüleri içeri aktarma işine hazırlamak için örnek iş akışı](storage-import-export-tool-sample-preparing-hard-drives-import-job-workflow.md)
 ##### [İçeri aktarma işlerinde sık kullanılan komutlar için hızlı başvuru](storage-import-export-tool-quick-reference.md)
 #### [Dışarı aktarma işi için sürücü kullanımının önizlemesini yapma](storage-import-export-tool-previewing-drive-usage-export-v1.md)
@@ -139,13 +139,13 @@
 #### [Bir içeri aktarma işini onarma](storage-import-export-tool-repairing-an-import-job-v1.md)
 #### [Bir dışarı aktarma işini onarma](storage-import-export-tool-repairing-an-export-job-v1.md)
 #### [İçeri/Dışarı Aktarma Aracı ile ilgili sorunları giderme](storage-import-export-tool-troubleshooting-v1.md)
-#### [İçeri/Dışarı Aktarma Hizmet Bildirimi Dosyası biçimi](storage-import-export-file-format-manifest.md)
-#### [İçeri/Dışarı Aktarma Hizmeti Meta Veriler ve Özellikler Dosyası biçimi](storage-import-export-file-format-metadata-and-properties.md)
-#### [İçeri/Dışarı Aktarma Hizmeti Günlük Dosyası biçimi](storage-import-export-file-format-log.md)
+#### [İçeri/Dışarı Aktarma hizmet bildirimi dosyası biçimi](storage-import-export-file-format-manifest.md)
+#### [İçeri/Dışarı Aktarma hizmeti meta veriler ve özellikler dosyası biçimi](storage-import-export-file-format-metadata-and-properties.md)
+#### [İçeri/Dışarı Aktarma hizmeti günlük dosyası biçimi](storage-import-export-file-format-log.md)
 ### [İçeri/Dışarı Aktarma Aracı’nı (v1) kullanma](storage-import-export-tool-how-to-v1.md)
 #### [İçeri/Dışarı Aktarma Aracı’nı ayarlama](storage-import-export-tool-setup-v1.md)
 #### [Sabit sürücüleri içeri aktarma işine hazırlama](storage-import-export-tool-preparing-hard-drives-import-v1.md)
-##### [İçeri aktarma işlemi sırasında Özellikleri ve Meta Verileri ayarlama](storage-import-export-tool-setting-properties-metadata-import-v1.md)
+##### [İçeri aktarma işlemi sırasında özellikleri ve meta verileri ayarlama](storage-import-export-tool-setting-properties-metadata-import-v1.md)
 ##### [Sabit sürücüleri içeri aktarma işine hazırlamak için örnek iş akışı](storage-import-export-tool-sample-preparing-hard-drives-import-job-workflow-v1.md)
 ##### [İçeri aktarma işlerinde sık kullanılan komutlar için hızlı başvuru](storage-import-export-tool-quick-reference-v1.md)
 #### [Dışarı aktarma işi için sürücü kullanımının önizlemesini yapma](storage-import-export-tool-previewing-drive-usage-export-v1.md)
@@ -153,17 +153,17 @@
 #### [Bir içeri aktarma işini onarma](storage-import-export-tool-repairing-an-import-job-v1.md)
 #### [Bir dışarı aktarma işini onarma](storage-import-export-tool-repairing-an-export-job-v1.md)
 #### [İçeri/Dışarı Aktarma Aracı ile ilgili sorunları giderme](storage-import-export-tool-troubleshooting-v1.md)
-#### [İçeri/Dışarı Aktarma Hizmet Bildirimi Dosyası biçimi](storage-import-export-file-format-manifest.md)
-#### [İçeri/Dışarı Aktarma Hizmeti Meta Veriler ve Özellikler Dosyası biçimi](storage-import-export-file-format-metadata-and-properties.md)
-#### [İçeri/Dışarı Aktarma Hizmeti Günlük Dosyası biçimi](storage-import-export-file-format-log.md)
-### [Azure İçeri/Dışarı Aktarma Hizmeti REST API’sini kullanma](storage-import-export-using-the-rest-api.md)
+#### [İçeri/Dışarı Aktarma hizmet bildirimi dosyası biçimi](storage-import-export-file-format-manifest.md)
+#### [İçeri/Dışarı Aktarma hizmeti meta veriler ve özellikler dosyası biçimi](storage-import-export-file-format-metadata-and-properties.md)
+#### [İçeri/Dışarı Aktarma hizmeti günlük dosyası biçimi](storage-import-export-file-format-log.md)
+### [Azure İçeri/Dışarı Aktarma hizmeti REST API’sini kullanma](storage-import-export-using-the-rest-api.md)
 #### [İçeri aktarma işi oluşturma](storage-import-export-creating-an-import-job.md)
 #### [Dışarı aktarma işi oluşturma](storage-import-export-creating-an-export-job.md)
 #### [Bir iş için durum bilgilerini alma](storage-import-export-retrieving-state-info-for-a-job.md)
 #### [İşleri numaralandırma](storage-import-export-enumerating-jobs.md)
 #### [İşleri iptal etme ve silme](storage-import-export-cancelling-and-deleting-jobs.md)
-#### [Sürücü Bildirimlerini yedekleme](storage-import-export-backing-up-drive-manifests.md)
-#### [İçeri/Dışarı Aktarma işleri için Tanılama ve Hata Kurtarma](storage-import-export-diagnostics-and-error-recovery.md)
+#### [Sürücü bildirimlerini yedekleme](storage-import-export-backing-up-drive-manifests.md)
+#### [İçeri/Dışarı Aktarma işleri için tanılama ve hata kurtarma](storage-import-export-diagnostics-and-error-recovery.md)
 # Başvuru
 ## [PowerShell](/powershell/storage)
 ## [Azure CLI](/cli/azure/storage)
@@ -181,7 +181,7 @@
 ## REST
 ### [Bloblar, Kuyruklar, Tablolar ve Dosyalar](/rest/api/storageservices/fileservices/azure-storage-services-rest-api-reference)
 ### [Kaynak sağlayıcısı](/rest/api/storagerp)
-### [İçeri/dışarı aktarma](/rest/api/storageimportexport)
+### [İçeri/Dışarı Aktarma](/rest/api/storageimportexport)
 
 # İlgili
 ## Klasik Portal
@@ -201,6 +201,7 @@
 ## Azure Depolama Gezgini
 ### [Depolama Gezgini (Önizleme)](../vs-azure-tools-storage-manage-with-storage-explorer.md)
 ### [Depolama Gezgini (Önizleme) ile blob’ları yönetme](../vs-azure-tools-storage-explorer-blobs.md)
+### [Depolama Gezgini’ni (Önizleme) Azure dosya depolama ile kullanma](../vs-azure-tools-storage-explorer-files.md)
 
 ## NuGet paketleri
 ### [.NET için Azure Depolama İstemcisi](https://www.nuget.org/packages/WindowsAzure.Storage/)

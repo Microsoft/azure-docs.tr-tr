@@ -46,6 +46,9 @@
 ### [Scheduler](active-directory-aadconnectsync-feature-scheduler.md)
 ### [Dizin genişletmeleri](active-directory-aadconnectsync-feature-directory-extensions.md)
 
+### [Azure AD Eşitleme hizmeti hesabı parolasını değiştirme](active-directory-aadconnectsync-change-serviceacct-pass.md)
+### [AD geri dönüşüm kutusunu etkinleştirme](active-directory-aadconnectsync-recycle-bin.md)
+
 ### [Eşitleme Hizmeti Yöneticisi](active-directory-aadconnectsync-service-manager-ui.md)
 #### [İşlemler](active-directory-aadconnectsync-service-manager-ui-operations.md)
 #### [Bağlayıcılar](active-directory-aadconnectsync-service-manager-ui-connectors.md)

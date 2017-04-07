@@ -196,7 +196,7 @@ Bu bölümde, IoT Hub'a cihazdan buluta iletiler gönderen bir cihaza benzetim y
                 await deviceClient.SendEventAsync(message);
                 Console.WriteLine("{0} > Sending message: {1}", DateTime.Now, messageString);
    
-                Task.Delay(1000).Wait();
+                await Task.Delay(1000);
             }
         }
    
