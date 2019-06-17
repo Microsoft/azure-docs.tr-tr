@@ -80,7 +80,7 @@ Azure Disk şifrelemesi, erişim için Active Directory, Key Vault, depolama ve 
 | Ad | Değer / örnek | Veri Türü |
 | ---- | ---- | ---- |
 | apiVersion | 2015-06-15 | date |
-| Yayımcı | Microsoft.Azure.Security | string |
+| publisher | Microsoft.Azure.Security | string |
 | type | AzureDiskEncryptionForWindows| string |
 | typeHandlerVersion | 1.0, 1.1, 2.2 (VMSS) | int |
 | (isteğe bağlı) Aadclientıd | xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx | GUID | 
@@ -92,8 +92,9 @@ Azure Disk şifrelemesi, erişim için Active Directory, Key Vault, depolama ve 
 | KeyVaultResourceId | Kaynak Uri'si | string |
 | KekVaultResourceId | Kaynak Uri'si | string |
 | KeyVaultURL | url | string |
+| (isteğe bağlı) Passphrase | password | string | 
 | SequenceVersion | uniqueidentifier | string |
-| VolumeType | İşletim sistemi, veri, tüm | string |
+| VolumeType | OS, Data, All | string |
 
 ## <a name="template-deployment"></a>Şablon dağıtımı
 Şablonu dağıtım örneği için bkz: [ galeri görüntüsünden yeni şifrelenmiş bir Windows VM oluşturma](https://github.com/Azure/azure-quickstart-templates/tree/master/201-encrypt-create-new-vm-gallery-image).
