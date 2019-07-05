@@ -1,5 +1,5 @@
 ---
-title: Bağlantı kimliği ortağına Azure hesabı | Microsoft Docs
+title: Azure hesaplarınızı bir iş ortağı kimliği ile bağla | Microsoft Docs
 description: Müşteri'nin kaynakları yönetmek için kullandığınız kullanıcı hesabı için iş ortağı kimliği bağlayarak katılımlar Azure müşteri ile izleyebilirsiniz.
 services: billing
 author: dhirajgandhi
