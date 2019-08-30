@@ -65,7 +65,7 @@ Bir Azure SQL kullanarak Azure SQL veritabanına veri fabrikanıza bağlı hizme
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| türü |Type özelliği ayarlanmalıdır: **AzureSqlDatabase** |Evet |
+| type |Type özelliği ayarlanmalıdır: **AzureSqlDatabase** |Evet |
 | connectionString |ConnectionString özelliği için Azure SQL veritabanı örneğine bağlanmak için gereken bilgileri belirtin. Temel kimlik doğrulaması desteklenir. |Evet |
 
 > [!IMPORTANT]
