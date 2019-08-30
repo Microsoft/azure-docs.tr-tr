@@ -71,7 +71,7 @@ Aşağıdaki tabloda, Azure SQL veri ambarı bağlı hizmete özgü JSON öğele
 
 | Özellik | Açıklama | Gerekli |
 | --- | --- | --- |
-| türü |Type özelliği ayarlanmalıdır: **AzureSqlDW** |Evet |
+| type |Type özelliği ayarlanmalıdır: **AzureSqlDW** |Evet |
 | connectionString |ConnectionString özelliği için Azure SQL veri ambarı örneğine bağlanmak için gereken bilgileri belirtin. Temel kimlik doğrulaması desteklenir. |Evet |
 
 > [!IMPORTANT]
