@@ -87,7 +87,7 @@ HubSpot veri kopyalamak için dataset öğesinin type özelliği ayarlamak **Hub
 
 | Özellik | Açıklama | Gerekli |
 |:--- |:--- |:--- |
-| türü | Veri kümesinin Type özelliği şu şekilde ayarlanmalıdır: **HubspotObject** | Evet |
+| type | Veri kümesinin Type özelliği şu şekilde ayarlanmalıdır: **HubspotObject** | Evet |
 | tableName | Tablonun adı. | Hayır (etkinlik kaynağı "sorgu" belirtilmişse) |
 
 **Örnek**
