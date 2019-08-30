@@ -55,7 +55,7 @@ Windows için:
 | consumerınterval | TimeSpan | Olay tüketicisi çalışan aralığı. |
 | highPriorityQueueSizePercentage | 0 < numarası < 1 | Yüksek öncelikli iletiler için ayrılan toplam önbelleğin bölümü. |
 | logLevel | "Off", "önemli", "Error", "Warning", "Information", "Debug"  | Bu önem derecesine sahip ve yukarıdaki günlük iletileri hata ayıklama konsolunda günlüğe kaydedilir (Linux 'ta syslog). |
-| Dosya LogLevel |  "Off", "önemli", "Error", "Warning", "Information", "Debug"| Bu önem derecesine sahip olan ve yukarıdaki günlük iletileri, dosyaya (Linux 'ta syslog) kaydedilir. |
+| fileLogLevel |  "Off", "önemli", "Error", "Warning", "Information", "Debug"| Bu önem derecesine sahip olan ve yukarıdaki günlük iletileri, dosyaya (Linux 'ta syslog) kaydedilir. |
 | diagnosticVerbosityLevel | "None", "Some", "tümü", | Tanılama olaylarının ayrıntı düzeyi. Hiçbiri-tanılama olayları gönderilmez, yüksek önem taşıyan bazı tanılama olayları gönderilir, tüm Günlükler de tanılama olayları olarak gönderilir. |
 | logFilePath | Dosya yolu | FileLogLevel > kapalıysa Günlükler bu dosyaya yazılır. |
 | defaultEventPriority | "Yüksek", "düşük", "kapalı" | Varsayılan olay önceliği. |
@@ -86,7 +86,7 @@ Windows için:
 | deviceId | dize | Cihazın KIMLIĞI (Azure IoT Hub kayıtlı olarak). || schedulerInterval | TimeSpan dizesi | İç Zamanlayıcı aralığı. |
 | gatewayHostname | dize | Azure IoT Hub 'ının konak adı. Genellikle <-Hub >. Azure-devices.net |
 | filePath | dize-dosyanın yolu | Kimlik doğrulama parolasını içeren dosyanın yolu.|
-| türü | "SymmetricKey", "SelfSignedCertificate" | Kimlik doğrulaması için Kullanıcı parolası. *SymmetricKey* ' i seçin Kullanıcı parolası bir simetrik anahtaralıysa, gizli dizi otomatik olarak imzalanan bir sertifikadır, *otomatik olarak imzalanan sertifika* seçeneğini belirleyin. |
+| type | "SymmetricKey", "SelfSignedCertificate" | Kimlik doğrulaması için Kullanıcı parolası. *SymmetricKey* ' i seçin Kullanıcı parolası bir simetrik anahtaralıysa, gizli dizi otomatik olarak imzalanan bir sertifikadır, *otomatik olarak imzalanan sertifika* seçeneğini belirleyin. |
 | identity | "DPS", "Module", "cihaz" | Kimlik doğrulaması kimliği-kimlik doğrulama, DPS aracılığıyla yapılırsa, modül kimlik bilgileri kullanılarak kimlik doğrulaması yapıldığında modül veya cihaz kimlik bilgileri kullanılarak kimlik doğrulaması yapılmışsa kullanılır.
 | certificateLocationKind |  "YerelDosya", "Mağaza" | YerelDosya sertifika bir dosyada depolanıyorsa, sertifika bir sertifika deposunda bulunuyorsa mağaza. |
 | idScope | dize | DPS KIMLIK kapsamı |
